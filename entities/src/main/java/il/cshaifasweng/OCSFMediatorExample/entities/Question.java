@@ -10,6 +10,16 @@ public class Question implements Serializable {
     private int correct;
     private String subject;
     private int points;
+
+    public Question(String id, String text, String[] answers, int correct, String subject, int points) {
+        this.id = id;
+        this.text = text;
+        this.answers = answers;
+        this.correct = correct;
+        this.subject = subject;
+        this.points = points;
+    }
+
     public String getId() {
         return id;
     }
