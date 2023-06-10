@@ -29,6 +29,7 @@ public class SimpleServer extends AbstractServer {
 	private static SessionFactory getSessionFactory() throws HibernateException {
 		Configuration configuration = new Configuration();
 		configuration.addAnnotatedClass(Student.class);
+		configuration.addAnnotatedClass(Question.class);
 		//configuration.addAnnotatedClass(Message.class);
 		ServiceRegistry serviceRegistry = (new StandardServiceRegistryBuilder()).applySettings(configuration.getProperties()).build();
 		return configuration.buildSessionFactory(serviceRegistry);
