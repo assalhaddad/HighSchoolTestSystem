@@ -13,6 +13,14 @@ public class Question implements Serializable {
     public String getId() {
         return id;
     }
+    public Question(String id, String text, String[] answers, int correct, String subject, int points){
+        this.id = id;
+        this.text = text;
+        this.answers = answers;
+        this.correct = correct;
+        this.subject = subject;
+        this.points = points;
+    }
 
     public void setId(String id) {
         this.id = id;
