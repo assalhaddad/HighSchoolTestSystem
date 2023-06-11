@@ -37,7 +37,7 @@ public class SimpleServer extends AbstractServer {
 
 		configuration.addAnnotatedClass(Question.class);
 		configuration.addAnnotatedClass(Student.class);
-		//configuration.addAnnotatedClass(Message.class);
+		configuration.addAnnotatedClass(Message.class);
 
 		ServiceRegistry serviceRegistry = (new StandardServiceRegistryBuilder()).applySettings(configuration.getProperties()).build();
 		return configuration.buildSessionFactory(serviceRegistry);
@@ -287,6 +287,17 @@ public class SimpleServer extends AbstractServer {
 
 	}
 
+	//ArrayList<String> subjectList = new ArrayList<String>();
+	//public void generateSubjects(){
+		//String subject;
+		//subject = "Math";
+		//subjectList.add(subject);
+		//subject = "English";
+		//subjectList.add(subject);
+		//session.save(subject);
+		//session.flush();
+	//}
+
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		Message message = (Message)msg;
@@ -299,10 +310,6 @@ public class SimpleServer extends AbstractServer {
 				if(request.equals("get list of subjects")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					ArrayList<String> subjects = new ArrayList(subjectList.size());
-
-					for(int i=0; i<subjectList.size(); i++)
-						subjects.add(i, subjectList.get(i));
 					client.sendToClient(new Message("subjects list is ready", subjects));
 					session.close();
 				}
@@ -313,6 +320,27 @@ public class SimpleServer extends AbstractServer {
 			}
 		} catch (IOException var13) {
 			var13.printStackTrace();
+		}
+
+	}
+
+	public void connectToDate() {
+		try {
+			SessionFactory sessionFactory = getSessionFactory();
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			generateSubjects();
+			session.close();
+		} catch (Exception var5) {
+			if (session != null) {
+				session.getTransaction().rollback();
+			}
+
+			System.err.println("An error occured, changes have been rolled back.");
+			var5.printStackTrace();
+		} finally {
+			session.close();
+			session.getSessionFactory().close();
 		}
 
 	}
