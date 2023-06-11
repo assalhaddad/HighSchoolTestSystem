@@ -113,7 +113,7 @@ public class AddQuestion {
     @Subscribe
     public void handleMessage(Message message){
         String request = message.getMessage();
-        //System.out.println(request);
+        System.out.println(request);
         Object obj = message.getObject();
         if(request.equals("subjects list is ready"))
             getSubjectsRequest(obj);
@@ -130,7 +130,6 @@ public class AddQuestion {
     private void getSubjectsRequest(Object obj){
         ObservableList<String> subjectList = FXCollections.observableArrayList((ArrayList)obj);
         this.subjectCMB.setItems(subjectList);
-        //this.errorMessage.setText("list is ready");
     }
 
 }

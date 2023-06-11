@@ -8,13 +8,10 @@ import il.cshaifasweng.OCSFMediatorExample.entities.*;
 
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
-import il.cshaifasweng.OCSFMediatorExample.entities.Question;
-import il.cshaifasweng.OCSFMediatorExample.entities.Student;
-import il.cshaifasweng.OCSFMediatorExample.entities.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,7 +26,6 @@ public class SimpleServer extends AbstractServer {
 
 	public SimpleServer(int port) {
 		super(port);
-		
 	}
 
 	private static SessionFactory getSessionFactory() throws HibernateException {
@@ -37,6 +33,7 @@ public class SimpleServer extends AbstractServer {
 
 		configuration.addAnnotatedClass(Question.class);
 		configuration.addAnnotatedClass(Student.class);
+		configuration.addAnnotatedClass(Subject.class);
 		configuration.addAnnotatedClass(Message.class);
 
 		ServiceRegistry serviceRegistry = (new StandardServiceRegistryBuilder()).applySettings(configuration.getProperties()).build();
@@ -46,7 +43,7 @@ public class SimpleServer extends AbstractServer {
 	ArrayList<Student> studentsList = new ArrayList();
 	ArrayList<Teacher> teachersList = new ArrayList();
 	ArrayList<Question> questions = new ArrayList();
-	ArrayList<String> subjects = new ArrayList();
+	ArrayList<Subject> subjects = new ArrayList();
 	public void generateStudents(){
 		Student student=new Student("Assal Haddad", "assalHaddad","assal123");
 		studentsList.add(student);
@@ -147,8 +144,8 @@ public class SimpleServer extends AbstractServer {
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
-		Principle principle = new Principle("Malki Grosman","malkiGrosman","thePrinciple1");
-		session.save(principle);
+		Principal principal = new Principal("Malki Grosman","malkiGrosman","thePrinciple1");
+		session.save(principal);
 		session.flush();
 	}
 
@@ -245,19 +242,19 @@ public class SimpleServer extends AbstractServer {
 		session.flush();
 	}
 	public void generateSubjects(){
-		String subject = "Math";
+		Subject subject = new Subject("Math");
 		subjects.add(subject);
 		session.save(subject);
 		session.flush();
-		subject = "English";
+		subject = new Subject("English");
 		subjects.add(subject);
 		session.save(subject);
 		session.flush();
-		subject = "Science";
+		subject = new Subject("Science");
 		subjects.add(subject);
 		session.save(subject);
 		session.flush();
-		subject = "Geography";
+		subject = new Subject("Geography");
 		subjects.add(subject);
 		session.save(subject);
 		session.flush();
@@ -287,17 +284,6 @@ public class SimpleServer extends AbstractServer {
 
 	}
 
-	//ArrayList<String> subjectList = new ArrayList<String>();
-	//public void generateSubjects(){
-		//String subject;
-		//subject = "Math";
-		//subjectList.add(subject);
-		//subject = "English";
-		//subjectList.add(subject);
-		//session.save(subject);
-		//session.flush();
-	//}
-
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		Message message = (Message)msg;
@@ -310,7 +296,11 @@ public class SimpleServer extends AbstractServer {
 				if(request.equals("get list of subjects")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					client.sendToClient(new Message("subjects list is ready", subjects));
+					ArrayList<String> subjectList = new ArrayList(subjects.size());
+
+					for(int i=0; i<studentsList.size(); i++)
+						subjectList.add(i, subjects.get(i).getName());
+					client.sendToClient(new Message("subjects list is ready", subjectList));
 					session.close();
 				}
 				else if(request.equals("get student")){
