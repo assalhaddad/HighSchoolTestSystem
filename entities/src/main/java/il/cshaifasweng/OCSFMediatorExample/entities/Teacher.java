@@ -2,6 +2,7 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -10,15 +11,18 @@ import javax.persistence.*;
 public class Teacher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
     private String name;
     private String username;
     private String password;
-    private ArrayList<String> subjects;
+    private ArrayList<Subject> subjects;
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="author")
     private ArrayList<Exam> exams;
 
     public Teacher(){}
 
     public Teacher(String name ,String username, String password) {
+        super();
         this.name = name;
         this.username = username;
         this.password = password;
@@ -50,11 +54,11 @@ public class Teacher implements Serializable {
         this.password = password;
     }
 
-    public ArrayList<String> getSubjects(){
+    public ArrayList<Subject> getSubjects(){
         return this.subjects;
     }
 
-    public void setSubjects(ArrayList<String> subjects){
+    public void setSubjects(ArrayList<Subject> subjects){
         this.subjects = subjects;
     }
     public void addExam(Exam exam) {
@@ -68,7 +72,7 @@ public class Teacher implements Serializable {
     public boolean containsExam(Exam exam) {
         return exams.contains(exam);
     }
-    public void addSubject(String newSubject) {
+    public void addSubject(Subject newSubject) {
         subjects.add(newSubject);
     }
 

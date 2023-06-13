@@ -1,8 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -15,11 +13,13 @@ public class Exam implements Serializable {
     private int time;
     private String freeTextStudent;
     private String freeTextTeacher;
-    private String author;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id")
+    private Teacher author;
     private int moreTime;
     private ArrayList<Integer> correctAnswers;
 
-    public Exam(String id_exam, ArrayList<Question> questions, int time, String freeTextStudent, String freeTextTeacher, String author, int moreTime, ArrayList<Integer> correctAnswers) {
+    public Exam(String id_exam, ArrayList<Question> questions, int time, String freeTextStudent, String freeTextTeacher, Teacher author, int moreTime, ArrayList<Integer> correctAnswers) {
         this.id_exam = id_exam;
         this.questions = questions;
         this.time = time;
@@ -78,11 +78,11 @@ public class Exam implements Serializable {
         this.freeTextTeacher = freeTextTeacher;
     }
 
-    public String getAuthor() {
+    public Teacher getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Teacher author) {
         this.author = author;
     }
 
