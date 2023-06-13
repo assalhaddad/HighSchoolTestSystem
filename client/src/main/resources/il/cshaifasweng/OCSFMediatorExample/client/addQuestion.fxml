@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.66666666667" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.AddQuestion">
    <children>
       <VBox layoutX="115.0" layoutY="25.0" prefHeight="308.0" prefWidth="304.0" spacing="7.0">
@@ -20,7 +19,7 @@
                </VBox.margin>
             </ComboBox>
             <TextField fx:id="idTF" onAction="#setQuestion" prefHeight="25.0" prefWidth="171.0" />
-            <TextField fx:id="questionTF" layoutX="10.0" layoutY="254.0" onAction="#setSubject" />
+            <TextField fx:id="questionTF" layoutX="10.0" layoutY="254.0" onAction="#setText" />
             <TextField fx:id="firstTF" onAction="#setAnswer1" promptText="1">
                <VBox.margin>
                   <Insets />
