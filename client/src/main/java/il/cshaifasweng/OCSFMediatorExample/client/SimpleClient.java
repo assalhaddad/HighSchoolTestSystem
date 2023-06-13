@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import org.greenrobot.eventbus.EventBus;
 
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
@@ -15,9 +16,9 @@ public class SimpleClient extends AbstractClient {
 
 	@Override
 	protected void handleMessageFromServer(Object msg) {
-		if (msg.getClass().equals(Warning.class)) {
-			EventBus.getDefault().post(new WarningEvent((Warning) msg));
-		}
+		System.out.println("inside handleMessageFromServer:");
+		System.out.println(((Message)msg).getMessage());
+		EventBus.getDefault().post((Message)msg);
 
 	}
 	

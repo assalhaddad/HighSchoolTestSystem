@@ -50,8 +50,10 @@ public class AddQuestion {
     @FXML // fx:id="thirdTF"
     private TextField thirdTF; // Value injected by FXMLLoader
 
+    @FXML
     void initialize() {
         EventBus.getDefault().register(this);
+        System.out.println("inside initialize addQuestion");
         sendMessage("get list of subjects", (Object)null);
     }
 
@@ -113,7 +115,7 @@ public class AddQuestion {
     @Subscribe
     public void handleMessage(Message message){
         String request = message.getMessage();
-        System.out.println(request);
+        System.out.println("inside handleMessage");
         Object obj = message.getObject();
         if(request.equals("subjects list is ready"))
             getSubjectsRequest(obj);
@@ -129,7 +131,7 @@ public class AddQuestion {
 
     private void getSubjectsRequest(Object obj){
         ObservableList<String> subjectList = FXCollections.observableArrayList((ArrayList)obj);
-        this.subjectCMB.setItems(subjectList);
+        subjectCMB.setItems(subjectList);
     }
 
 }

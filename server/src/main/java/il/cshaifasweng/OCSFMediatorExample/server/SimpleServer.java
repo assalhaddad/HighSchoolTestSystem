@@ -45,67 +45,67 @@ public class SimpleServer extends AbstractServer {
 	ArrayList<Question> questions = new ArrayList();
 	ArrayList<Subject> subjects = new ArrayList();
 	public void generateStudents(){
-		Student student=new Student("Assal Haddad", "assalHaddad","assal123");
+		Student student=new Student("123456781","Assal Haddad", "assalHaddad","assal123");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
-		student=new Student("Ayleen Monayer","ayleenMonayer","ayleen55");
+		student=new Student("123456782","Ayleen Monayer","ayleenMonayer","ayleen55");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
-		student=new Student("Aseel Nahhas","aseelNahhas","aseelN34");
+		student=new Student("123456783","Aseel Nahhas","aseelNahhas","aseelN34");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
-		student=new Student("Nawal Khoury","nawalKhoury","nawal09");
+		student=new Student("123456784","Nawal Khoury","nawalKhoury","nawal09");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
-		student=new Student("Tony Hayek","tonyHayek","tonyH4");
+		student=new Student("123456785","Tony Hayek","tonyHayek","tonyH4");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
-		student=new Student("Bshara Khoury","bsharaKhoury","bshara88");
+		student=new Student("123456786","Bshara Khoury","bsharaKhoury","bshara88");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
-		student=new Student("Aseel Shaheen","aseelShaheen","aseelS7");
+		student=new Student("123456787","Aseel Shaheen","aseelShaheen","aseelS7");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
-		student=new Student("Victor Hanhan","victorHanhan","victor33");
+		student=new Student("123456788","Victor Hanhan","victorHanhan","victor33");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
-		student=new Student("Amal Sharif","amalSharif","amal92");
+		student=new Student("123456789","Amal Sharif","amalSharif","amal92");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
-		student=new Student("Leen Salman","leenSalman","leen8822");
+		student=new Student("123456790","Leen Salman","leenSalman","leen8822");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
-		student=new Student("Elie Monayer","elieMonayer","elie88");
+		student=new Student("123456791","Elie Monayer","elieMonayer","elie88");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
-		student=new Student("Adam Levi","adamLevi","adam111");
+		student=new Student("123456792","Adam Levi","adamLevi","adam111");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
-		student=new Student("Inbar Kakon","inbarKakon","inbar83");
+		student=new Student("123456793","Inbar Kakon","inbarKakon","inbar83");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
-		student=new Student("Yair Lapid","yairLapid","yair92");
+		student=new Student("123456794","Yair Lapid","yairLapid","yair92");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
-		student=new Student("Fadi Zahra","fadiZahra","fadi67");
+		student=new Student("123456795","Fadi Zahra","fadiZahra","fadi67");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
-		student=new Student("Rojeh Tannous","rojehTannous","rojeh81");
+		student=new Student("123456796","Rojeh Tannous","rojehTannous","rojeh81");
 		studentsList.add(student);
 		session.save(student);
 		session.flush();
@@ -264,12 +264,12 @@ public class SimpleServer extends AbstractServer {
 			SessionFactory sessionFactory = getSessionFactory();
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-			generateStudents();
-			generateStaff();
-			generateQuestions();
-			/**generateExams();**/
 			generateSubjects();
-			session.close();
+			generateStudents();
+			session.getTransaction().commit();
+//			generateStaff();
+//			generateQuestions();
+			/**generateExams();**/
 		} catch (Exception var5) {
 			if (session != null) {
 				session.getTransaction().rollback();
@@ -288,17 +288,19 @@ public class SimpleServer extends AbstractServer {
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		Message message = (Message)msg;
 		String request = message.getMessage();
+		System.out.println("insidehandleMessageFromClient");
 		try {
 			if (request.isBlank()) {
 				message.setMessage("Error! we got an empty message");
 				client.sendToClient(message);
 			} else {
 				if(request.equals("get list of subjects")){
+					System.out.println("inside get list of subjects");
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					ArrayList<String> subjectList = new ArrayList(subjects.size());
+					ArrayList<String> subjectList = new ArrayList<String>(subjects.size());
 
-					for(int i=0; i<studentsList.size(); i++)
+					for(int i=0; i<subjects.size(); i++)
 						subjectList.add(i, subjects.get(i).getName());
 					client.sendToClient(new Message("subjects list is ready", subjectList));
 					session.close();
