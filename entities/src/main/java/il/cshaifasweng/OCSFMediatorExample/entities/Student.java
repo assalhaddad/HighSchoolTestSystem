@@ -10,36 +10,45 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "students")
-
 public class Student implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private int id;
+    private String id_student;
     private String name;
     private String username;
     private String password;
 
     public Student(){}
 
-    public Student(String name, String username, String password){
+    public Student(String id_student, String name, String username, String password){
         super();
+        this.id_student=id_student;
         this.name=name;
         this.password=password;
         this.username=username;
     }
 
     public Student(Student s){
-        this.id = s.getId();
+        this.id_student = s.getId_student();
         this.name = s.getName();
         this.username = s.getUsername();
         this.password = s.getPassword();
     }
 
-    public String getId() {
+    public String getId_student() {
+        return id_student;
+    }
+
+    public void setId_student(String id_student) {
+        this.id_student = id_student;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
