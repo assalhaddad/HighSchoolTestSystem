@@ -66,51 +66,43 @@ public class AddQuestion {
         }
     }
 
+    String id;
+    String subject;
+    String text;
+    int points;
+    String[] answers = new String[4];
+    int correct;
+
     @FXML
     void done(ActionEvent event) {
 
     }
 
     @FXML
-    void setAnswer1(ActionEvent event) {
-
-    }
+    void setAnswer1(ActionEvent event) {answers[0] = firstTF.getText().toString();}
 
     @FXML
-    void setAnswer2(ActionEvent event) {
-
-    }
+    void setAnswer2(ActionEvent event) {answers[1] = secondTF.getText().toString();}
 
     @FXML
-    void setAnswer3(ActionEvent event) {
-
-    }
+    void setAnswer3(ActionEvent event) {answers[2] = thirdTF.getText().toString();}
 
     @FXML
-    void setAnswer4(ActionEvent event) {
-
-    }
+    void setAnswer4(ActionEvent event) {answers[3] = fourthTF.getText().toString();}
 
     @FXML
-    void setCorrectAnswer(ActionEvent event) {
-
-    }
+    void setCorrectAnswer(ActionEvent event) {correct = Integer.parseInt(correctTF.getText());}
 
     @FXML
-    void setPoints(ActionEvent event) {
-
-    }
+    void setPoints(ActionEvent event) {points = Integer.parseInt(pointsTF.getText());}
 
     @FXML
-    void setQuestion(ActionEvent event) {
-
-    }
+    void setQuestion(ActionEvent event) {id = this.idTF.getText().toString();}
 
     @FXML
-    void setSubject(ActionEvent event) {
-
-    }
-
+    void setSubject(ActionEvent event) {subject = this.subjectCMB.getValue().toString();}
+    @FXML
+    void setText(ActionEvent event){text = questionTF.getText().toString();}
 
     @Subscribe
     public void handleMessage(Message message){
