@@ -299,7 +299,6 @@ public class SimpleServer extends AbstractServer {
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					ArrayList<String> subjectList = new ArrayList<String>(subjects.size());
-
 					for(int i=0; i<subjects.size(); i++)
 						subjectList.add(i, subjects.get(i).getName());
 					client.sendToClient(new Message("subjects list is ready", subjectList));
