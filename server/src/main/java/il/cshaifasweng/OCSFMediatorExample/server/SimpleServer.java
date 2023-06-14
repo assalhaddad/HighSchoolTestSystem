@@ -35,6 +35,11 @@ public class SimpleServer extends AbstractServer {
 		configuration.addAnnotatedClass(Student.class);
 		configuration.addAnnotatedClass(Subject.class);
 		configuration.addAnnotatedClass(Message.class);
+		configuration.addAnnotatedClass(Teacher.class);
+		configuration.addAnnotatedClass(Principal.class);
+    configuration.addAnnotatedClass(Course.class);
+    configuration.addAnnotatedClass(Exam.class);
+
 
 		ServiceRegistry serviceRegistry = (new StandardServiceRegistryBuilder()).applySettings(configuration.getProperties()).build();
 		return configuration.buildSessionFactory(serviceRegistry);
@@ -44,6 +49,7 @@ public class SimpleServer extends AbstractServer {
 	ArrayList<Teacher> teachersList = new ArrayList();
 	ArrayList<Question> questions = new ArrayList();
 	ArrayList<Subject> subjects = new ArrayList();
+	Principal principal;
 	public void generateStudents(){
 		Student student=new Student("123456781","Assal Haddad", "assalHaddad","assal123");
 		studentsList.add(student);
@@ -111,7 +117,7 @@ public class SimpleServer extends AbstractServer {
 		session.flush();
 	}
 
-	public void generateStaff(){
+	public void generateTeachers(){
 		Teacher teacher = new Teacher("Shir Sneh","shirSneh","shir132");
 		teachersList.add(teacher);
 		session.save(teacher);
@@ -144,81 +150,78 @@ public class SimpleServer extends AbstractServer {
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
-		Principal principal = new Principal("Malki Grosman","malkiGrosman","thePrinciple1");
-		session.save(principal);
-		session.flush();
 	}
 
 	public void generateQuestions() {
-		Question question = new Question("38754","How much is 3*1?","4","19","3","9",3,"Math",20);
+		Question question = new Question("38754","How much is 3*1?","4","19","3","9",3,new Subject("Math"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("83668","How much is 27+13?","40","42","67","80",1,"Math",20);
+		question = new Question("83668","How much is 27+13?","40","42","67","80",1,new Subject("Math"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("13794","Complete the sentence:"+"\n"+"Where ____ the dog?","are","it","is","does",3,"English",15);
+		question = new Question("13794","Complete the sentence:"+"\n"+"Where ____ the dog?","are","it","is","does",3,new Subject("English"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("82640","Complete the sentence:"+"\n"+"I want ___ help you","not","at","on","to",4,"English",15);
+		question = new Question("82640","Complete the sentence:"+"\n"+"I want ___ help you","not","at","on","to",4,new Subject("English"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("86490","Complete the sentence:"+"\n"+"I am going to play soccer ___ my friends","with","on","in","are",1,"English",15);
+		question = new Question("86490","Complete the sentence:"+"\n"+"I am going to play soccer ___ my friends","with","on","in","are",1,new Subject("English"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("73956","How much is 90-12?","78","88","65","79",1,"Math",20);
+		question = new Question("73956","How much is 90-12?","78","88","65","79",1,new Subject("Math"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("92745","Which animal lays eggs?","Dog","Cat","Duck","Sheep",3,"Science",25);
+		question = new Question("92745","Which animal lays eggs?","Dog","Cat","Duck","Sheep",3,new Subject("Science"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("85614","A male cow is called?","Ox","Monkey","Lion","Sheep",1,"Science",25);
+		question = new Question("85614","A male cow is called?","Ox","Monkey","Lion","Sheep",1,new Subject("Science"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("12946","Complete the sentence:"+"\n"+"All animals need food, air and ___ to survive","candy","phone","water","fruits",3,"Science",25);
+		question = new Question("12946","Complete the sentence:"+"\n"+"All animals need food, air and ___ to survive","candy","phone","water","fruits",3,new Subject("Science"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("92748","What part of the body helps you move?","Eyes","Lungs","Muscles","Fingers",3,"Science",25);
+		question = new Question("92748","What part of the body helps you move?","Eyes","Lungs","Muscles","Fingers",3,new Subject("Science"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("34509","Complete the sentence:"+"\n"+"She is coming ___","yesterday","tomorrow","not","last week",2,"English",15);
+		question = new Question("34509","Complete the sentence:"+"\n"+"She is coming ___","yesterday","tomorrow","not","last week",2,new Subject("English"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("13975","How much is 27/9?","2","5","6","3",4,"Math",20);
+		question = new Question("13975","How much is 27/9?","2","5","6","3",4,new Subject("Math"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("98723","The two holes of the nose are called?","Eyelids","Nostrils","Nails","Hair",2,"Science",25);
+		question = new Question("98723","The two holes of the nose are called?","Eyelids","Nostrils","Nails","Hair",2,new Subject("Science"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("72640","Which is the largest country in the world?","Russia","Canada","Ukraine","Mexico",1,"Geography",20);
+		question = new Question("72640","Which is the largest country in the world?","Russia","Canada","Ukraine","Mexico",1,new Subject("Geography"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("67824","Which country has the largest population in the world?","Russia","America","China","Brazil",3,"Geography",20);
+		question = new Question("67824","Which country has the largest population in the world?","Russia","America","China","Brazil",3,new Subject("Geography"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("12987","How many states of India share its border with Bhutan?","1","2","3","4",4,"Geography",20);
+		question = new Question("12987","How many states of India share its border with Bhutan?","1","2","3","4",4,new Subject("Geography"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("35600","What is the capital city of India?","Chennai","New Delhi","Mumbai","Bangalore",2,"Geography",20);
+		question = new Question("35600","What is the capital city of India?","Chennai","New Delhi","Mumbai","Bangalore",2,new Subject("Geography"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("56091","In which country would you find the Leaning Tower of Pisa?","Italy","Amsterdam","Israel","France",1,"Geography",20);
+		question = new Question("56091","In which country would you find the Leaning Tower of Pisa?","Italy","Amsterdam","Israel","France",1,new Subject("Geography"));
 		questions.add(question);
 		session.save(question);
 		session.flush();
@@ -241,6 +244,11 @@ public class SimpleServer extends AbstractServer {
 		session.save(subject);
 		session.flush();
 	}
+	public void generatePrincipal(){
+		principal = new Principal("Malki Grosman","malkiGrosman","theprincipal1");
+		session.save(principal);
+		session.flush();
+	}
 	public void connectToData() {
 		try {
 			SessionFactory sessionFactory = getSessionFactory();
@@ -248,10 +256,11 @@ public class SimpleServer extends AbstractServer {
 			session.beginTransaction();
 			generateSubjects();
 			generateStudents();
-//			generateStaff();
+			generateTeachers();
 			generateQuestions();
+			generatePrincipal();
 			session.getTransaction().commit();
-			/**generateExams();**/
+			//generateExams();
 		} catch (Exception var5) {
 			if (session != null) {
 				session.getTransaction().rollback();
@@ -265,12 +274,12 @@ public class SimpleServer extends AbstractServer {
 		}
 
 	}
+	Question question = new Question();
 
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		Message message = (Message)msg;
 		String request = message.getMessage();
-		System.out.println("insidehandleMessageFromClient");
 		try {
 			if (request.isBlank()) {
 				message.setMessage("Error! we got an empty message");
@@ -288,11 +297,36 @@ public class SimpleServer extends AbstractServer {
 				else if(request.equals("new question")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					Question question = (Question)message.getObject();
+					question.copy((Question)message.getObject());
+					System.out.println(question.getText());
 					questions.add(question);
 					session.save(question);
 					session.flush();
 					client.sendToClient(new Message("question added successfully",(Object)null));
+					session.close();
+				}
+				else if(request.equals("get list of students")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					ArrayList<Student> students = new ArrayList<Student>(studentsList.size());
+					for(int i=0; i<studentsList.size(); i++)
+						students.add(i, studentsList.get(i));
+					client.sendToClient(new Message("students list is ready", students));
+					session.close();
+				}
+				else if(request.equals("get list of teachers")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					ArrayList<Teacher> teachers = new ArrayList<Teacher>(teachersList.size());
+					for(int i=0; i<teachersList.size(); i++)
+						teachers.add(i, teachersList.get(i));
+					client.sendToClient(new Message("teachers list is ready", teachers));
+					session.close();
+				}
+				else if(request.equals("get the principal")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					client.sendToClient(new Message("principal is ready", principal));
 					session.close();
 				}
 				session.flush();

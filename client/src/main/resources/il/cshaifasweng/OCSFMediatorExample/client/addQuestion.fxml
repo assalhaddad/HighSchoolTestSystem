@@ -13,39 +13,39 @@
    <children>
       <VBox layoutX="115.0" layoutY="25.0" prefHeight="308.0" prefWidth="304.0" spacing="7.0">
          <children>
-            <ComboBox fx:id="subjectCMB" onAction="#setSubject" prefWidth="150.0">
+            <ComboBox fx:id="subjectCMB" prefWidth="150.0">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </ComboBox>
-            <TextField fx:id="idTF" onAction="#setQuestion" prefHeight="25.0" prefWidth="171.0" />
-            <TextField fx:id="questionTF" layoutX="10.0" layoutY="254.0" onAction="#setText" />
-            <TextField fx:id="firstTF" onAction="#setAnswer1" promptText="1">
+            <TextField fx:id="idTF" prefHeight="25.0" prefWidth="171.0" />
+            <TextField fx:id="questionTF" layoutX="10.0" layoutY="254.0" />
+            <TextField fx:id="firstTF" promptText="1">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="secondTF" onAction="#setAnswer2" promptText="2">
+            <TextField fx:id="secondTF" promptText="2">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="thirdTF" onAction="#setAnswer3" promptText="3">
+            <TextField fx:id="thirdTF" promptText="3">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="fourthTF" onAction="#setAnswer4" promptText="4">
+            <TextField fx:id="fourthTF" promptText="4">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="correctTF" onAction="#setCorrectAnswer" promptText="1/2/3/4">
+            <TextField fx:id="correctTF" promptText="1/2/3/4">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="pointsTF" layoutX="10.0" layoutY="233.0" onAction="#setPoints">
+            <TextField fx:id="pointsTF" layoutX="10.0" layoutY="233.0" >
                <VBox.margin>
                   <Insets />
                </VBox.margin>

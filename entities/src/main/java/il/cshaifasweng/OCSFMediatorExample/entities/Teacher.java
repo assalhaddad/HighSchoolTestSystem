@@ -7,17 +7,28 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "teachers")
-
 public class Teacher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+
+    private int id;
     private String name;
     private String username;
     private String password;
-    private ArrayList<Subject> subjects;
+
     @OneToMany(fetch=FetchType.LAZY,mappedBy="author")
-    private ArrayList<Exam> exams;
+    private List<Exam> exams;
+    @ManyToMany(
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            targetEntity = Subject.class
+    )
+    @JoinTable(
+            name="subjects_teachers",
+            joinColumns = @JoinColumn(name = "teacher_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id")
+    )
+    private List<Subject> subjects;
+
 
     public Teacher(){}
 
@@ -26,8 +37,17 @@ public class Teacher implements Serializable {
         this.name = name;
         this.username = username;
         this.password = password;
-        this.exams = new ArrayList<>();
-        this.subjects = new ArrayList<>();
+
+        this.exams = new ArrayList<Exam>();
+        this.subjects = new ArrayList<Subject>();
+    }
+
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
     }
 
     public String getName() {
@@ -54,11 +74,11 @@ public class Teacher implements Serializable {
         this.password = password;
     }
 
-    public ArrayList<Subject> getSubjects(){
+    public List<Subject> getSubjects(){
         return this.subjects;
     }
 
-    public void setSubjects(ArrayList<Subject> subjects){
+    public void setSubjects(List<Subject> subjects){
         this.subjects = subjects;
     }
     public void addExam(Exam exam) {

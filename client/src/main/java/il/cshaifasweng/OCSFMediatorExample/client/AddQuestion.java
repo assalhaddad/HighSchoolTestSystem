@@ -1,11 +1,9 @@
-/**
- * Sample Skeleton for 'addQuestion.fxml' Controller Class
- */
-
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import il.cshaifasweng.OCSFMediatorExample.entities.Question;
+import il.cshaifasweng.OCSFMediatorExample.entities.Subject;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -68,7 +66,7 @@ public class AddQuestion {
     }
 
     String id;
-    String subject;
+    Subject subject;
     String text;
     int points;
     int correct;
@@ -77,38 +75,19 @@ public class AddQuestion {
     String answer3;
     String answer4;
 
-
     @FXML
     void done(ActionEvent event) {
-        Question newQuestion = new Question(id,text,answer1,answer2,answer3,answer4,correct,subject,points);
+        answer1 = firstTF.getText();
+        answer2 = secondTF.getText();
+        answer3 = thirdTF.getText();
+        answer4 = fourthTF.getText();
+        correct = Integer.parseInt(correctTF.getText());
+        points = Integer.parseInt(pointsTF.getText());
+        id = this.idTF.getText();
+        text = questionTF.getText();
+        Question newQuestion = new Question(id,text,answer1,answer2,answer3,answer4,correct,subject);
         sendMessage("new question",newQuestion);
     }
-
-    @FXML
-    void setAnswer1(ActionEvent event) {answer1 = firstTF.getText().toString();}
-
-    @FXML
-    void setAnswer2(ActionEvent event) {answer2 = secondTF.getText().toString();}
-
-    @FXML
-    void setAnswer3(ActionEvent event) {answer3 = thirdTF.getText().toString();}
-
-    @FXML
-    void setAnswer4(ActionEvent event) {answer4 = fourthTF.getText().toString();}
-
-    @FXML
-    void setCorrectAnswer(ActionEvent event) {correct = Integer.parseInt(correctTF.getText());}
-
-    @FXML
-    void setPoints(ActionEvent event) {points = Integer.parseInt(pointsTF.getText());}
-
-    @FXML
-    void setQuestion(ActionEvent event) {id = this.idTF.getText().toString();}
-
-    @FXML
-    void setSubject(ActionEvent event) {subject = this.subjectCMB.getValue();}
-    @FXML
-    void setText(ActionEvent event){text = questionTF.getText().toString();}
 
     @Subscribe
     public void handleMessage(Message message){
