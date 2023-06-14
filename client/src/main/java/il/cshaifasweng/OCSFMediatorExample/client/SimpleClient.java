@@ -18,13 +18,13 @@ public class SimpleClient extends AbstractClient {
 	protected void handleMessageFromServer(Object msg) {
 		System.out.println("inside handleMessageFromServer:");
 		System.out.println(((Message)msg).getMessage());
-		EventBus.getDefault().post((Message)msg);
+		EventBus.getDefault().post(msg);
 
 	}
 	
 	public static SimpleClient getClient() {
 		if (client == null) {
-			client = new SimpleClient("localhost", 3000);
+			client = new SimpleClient("localhost", 3003);
 		}
 		return client;
 	}

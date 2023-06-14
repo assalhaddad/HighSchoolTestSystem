@@ -37,8 +37,9 @@ public class SimpleServer extends AbstractServer {
 		configuration.addAnnotatedClass(Message.class);
 		configuration.addAnnotatedClass(Teacher.class);
 		configuration.addAnnotatedClass(Principal.class);
-		configuration.addAnnotatedClass(Exam.class);
-		configuration.addAnnotatedClass(Course.class);
+    configuration.addAnnotatedClass(Course.class);
+    configuration.addAnnotatedClass(Exam.class);
+
 
 		ServiceRegistry serviceRegistry = (new StandardServiceRegistryBuilder()).applySettings(configuration.getProperties()).build();
 		return configuration.buildSessionFactory(serviceRegistry);
@@ -48,6 +49,7 @@ public class SimpleServer extends AbstractServer {
 	ArrayList<Teacher> teachersList = new ArrayList();
 	ArrayList<Question> questions = new ArrayList();
 	ArrayList<Subject> subjects = new ArrayList();
+	Principal principal;
 	public void generateStudents(){
 		Student student=new Student("123456781","Assal Haddad", "assalHaddad","assal123");
 		studentsList.add(student);
@@ -115,7 +117,7 @@ public class SimpleServer extends AbstractServer {
 		session.flush();
 	}
 
-	public void generateStaff(){
+	public void generateTeachers(){
 		Teacher teacher = new Teacher("Shir Sneh","shirSneh","shir132");
 		teachersList.add(teacher);
 		session.save(teacher);
@@ -148,9 +150,6 @@ public class SimpleServer extends AbstractServer {
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
-		//Principal principal = new Principal("Malki Grosman","malkiGrosman","thePrinciple1");
-		//session.save(principal);
-		//session.flush();
 	}
 
 	public void generateQuestions() {
@@ -245,6 +244,11 @@ public class SimpleServer extends AbstractServer {
 		session.save(subject);
 		session.flush();
 	}
+	public void generatePrincipal(){
+		principal = new Principal("Malki Grosman","malkiGrosman","theprincipal1");
+		session.save(principal);
+		session.flush();
+	}
 	public void connectToData() {
 		try {
 			SessionFactory sessionFactory = getSessionFactory();
@@ -252,10 +256,11 @@ public class SimpleServer extends AbstractServer {
 			session.beginTransaction();
 			generateSubjects();
 			generateStudents();
-			//generateStaff();
-			//generateQuestions();
+			generateTeachers();
+			generateQuestions();
+			generatePrincipal();
 			session.getTransaction().commit();
-			/**generateExams();**/
+			//generateExams();
 		} catch (Exception var5) {
 			if (session != null) {
 				session.getTransaction().rollback();
@@ -275,14 +280,12 @@ public class SimpleServer extends AbstractServer {
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		Message message = (Message)msg;
 		String request = message.getMessage();
-		System.out.println("insidehandleMessageFromClient");
 		try {
 			if (request.isBlank()) {
 				message.setMessage("Error! we got an empty message");
 				client.sendToClient(message);
 			} else {
 				if(request.equals("get list of subjects")){
-					System.out.println("inside get list of subjects");
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					ArrayList<String> subjectList = new ArrayList<String>(subjects.size());
@@ -302,12 +305,35 @@ public class SimpleServer extends AbstractServer {
 					client.sendToClient(new Message("question added successfully",(Object)null));
 					session.close();
 				}
+				else if(request.equals("get list of students")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					ArrayList<Student> students = new ArrayList<Student>(studentsList.size());
+					for(int i=0; i<studentsList.size(); i++)
+						students.add(i, studentsList.get(i));
+					client.sendToClient(new Message("students list is ready", students));
+					session.close();
+				}
+				else if(request.equals("get list of teachers")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					ArrayList<Teacher> teachers = new ArrayList<Teacher>(teachersList.size());
+					for(int i=0; i<teachersList.size(); i++)
+						teachers.add(i, teachersList.get(i));
+					client.sendToClient(new Message("teachers list is ready", teachers));
+					session.close();
+				}
+				else if(request.equals("get the principal")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					client.sendToClient(new Message("principal is ready", principal));
+					session.close();
+				}
 				session.flush();
 				session.close();
 			}
 		} catch (IOException var13) {
 			var13.printStackTrace();
 		}
-
 	}
 }

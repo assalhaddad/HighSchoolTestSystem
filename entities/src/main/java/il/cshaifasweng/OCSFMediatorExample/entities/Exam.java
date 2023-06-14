@@ -25,7 +25,8 @@ public class Exam implements Serializable {
     private Teacher author;
     private int moreTime;
 
-    public Exam(String id_exam, ArrayList<Question> questions, int time, String freeTextStudent, String freeTextTeacher, Teacher author) {
+
+    public Exam(String id_exam, ArrayList<Question> questions, int time, String freeTextStudent, String freeTextTeacher, Teacher author, int moreTime, ArrayList<Integer> correctAnswers) {
         this.id_exam = id_exam;
         this.questions = questions;
         this.time = time;
@@ -90,12 +91,13 @@ public class Exam implements Serializable {
     public Teacher getAuthor() {
         return author;
     }
+
     public void setAuthor(Teacher author) {
         if(author!=null) {
             this.author = author;
             author.getExams().add(this);
         }
-    }
+
     public int getMoreTime() {
         return moreTime;
     }

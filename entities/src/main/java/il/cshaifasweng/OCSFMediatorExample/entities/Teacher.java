@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class Teacher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id;
     private String name;
     private String username;
@@ -27,6 +28,7 @@ public class Teacher implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "subject_id")
     )
     private List<Subject> subjects;
+
 
     public Teacher(){}
 

@@ -4,6 +4,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "questions")
@@ -32,6 +39,7 @@ public class Question implements Serializable {
     )
     private List<Course> courses;
     private int points;
+    public Question(){}
 
     public Question(String id, String text, String answer1,String answer2,String answer3,String answer4, int correct, Subject subject){
         super();
@@ -61,6 +69,7 @@ public class Question implements Serializable {
 
     }
 
+
     public int getId() {
         return id;
     }
@@ -84,6 +93,7 @@ public class Question implements Serializable {
     public void setText(String text) {
         this.text = text;
     }
+
 
     public String getAnswer1() {
         return answer1;
@@ -140,5 +150,5 @@ public class Question implements Serializable {
         for(Course course : courses){
             course.getQuestions().add(this);
         }
-    }
+
 }
