@@ -10,7 +10,6 @@ import javax.persistence.*;
 public class Teacher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id;
     private String name;
     private String username;
@@ -37,7 +36,6 @@ public class Teacher implements Serializable {
         this.name = name;
         this.username = username;
         this.password = password;
-
         this.exams = new ArrayList<Exam>();
         this.subjects = new ArrayList<Subject>();
     }

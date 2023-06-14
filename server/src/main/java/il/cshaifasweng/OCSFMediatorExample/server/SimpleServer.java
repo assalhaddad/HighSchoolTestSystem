@@ -257,7 +257,7 @@ public class SimpleServer extends AbstractServer {
 			generateSubjects();
 			generateStudents();
 			generateTeachers();
-			generateQuestions();
+			//generateQuestions();
 			generatePrincipal();
 			session.getTransaction().commit();
 			//generateExams();
@@ -274,8 +274,8 @@ public class SimpleServer extends AbstractServer {
 		}
 
 	}
-	Question question = new Question();
 
+	Question question1 = new Question();
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		Message message = (Message)msg;
@@ -297,10 +297,10 @@ public class SimpleServer extends AbstractServer {
 				else if(request.equals("new question")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					question.copy((Question)message.getObject());
-					System.out.println(question.getText());
-					questions.add(question);
-					session.save(question);
+					question1.copy((Question)message.getObject());
+					System.out.println(question1.getText());
+					questions.add(question1);
+					session.save(question1);
 					session.flush();
 					client.sendToClient(new Message("question added successfully",(Object)null));
 					session.close();

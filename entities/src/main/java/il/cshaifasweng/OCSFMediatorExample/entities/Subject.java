@@ -35,6 +35,9 @@ public class Subject implements Serializable {
         this.teachers = new ArrayList<Teacher>();
         this.courses = new ArrayList<Course>();
     }
+    public int getId() {
+        return id;
+    }
 
     public List<Question> getQuestions() {
         return questions;

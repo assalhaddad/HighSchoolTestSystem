@@ -93,10 +93,11 @@ public class Exam implements Serializable {
     }
 
     public void setAuthor(Teacher author) {
-        if(author!=null) {
+        if (author != null) {
             this.author = author;
             author.getExams().add(this);
         }
+    }
 
     public int getMoreTime() {
         return moreTime;

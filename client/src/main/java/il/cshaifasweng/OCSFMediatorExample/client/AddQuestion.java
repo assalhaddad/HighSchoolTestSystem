@@ -68,7 +68,6 @@ public class AddQuestion {
     String id;
     Subject subject;
     String text;
-    int points;
     int correct;
     String answer1;
     String answer2;
@@ -82,9 +81,9 @@ public class AddQuestion {
         answer3 = thirdTF.getText();
         answer4 = fourthTF.getText();
         correct = Integer.parseInt(correctTF.getText());
-        points = Integer.parseInt(pointsTF.getText());
         id = this.idTF.getText();
         text = questionTF.getText();
+        subject = new Subject(subjectCMB.getSelectionModel().getSelectedItem().toString());
         Question newQuestion = new Question(id,text,answer1,answer2,answer3,answer4,correct,subject);
         sendMessage("new question",newQuestion);
     }
