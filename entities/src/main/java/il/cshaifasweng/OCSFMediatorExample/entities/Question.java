@@ -1,31 +1,69 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+@Entity
+@Table(name = "questions")
 public class Question implements Serializable {
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String id_question;
     private String text;
-    private String[] answers;
+    private String answer1;
+    private String answer2;
+    private String answer3;
+    private String answer4;
     private int correct;
-    private String subject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
     private int points;
 
-    public Question(String id, String text, String[] answers, int correct, String subject, int points) {
-        this.id = id;
+    public Question(String id, String text, String answer1,String answer2,String answer3,String answer4, int correct, Subject subject){
+        super();
+        this.id_question = id;
         this.text = text;
-        this.answers = answers;
+        this.answer1 = answer1;
+        this.answer2 = answer2;
+        this.answer3 = answer3;
+        this.answer4 = answer4;
         this.correct = correct;
-        this.subject = subject;
-        this.points = points;
+        this.points = 0;
+        setSubject(subject);
+    }
+    public void copy(Question q){
+        this.id = q.getId();
+        this.id_question = q.getId_question();
+        this.text = q.getText();
+        this.answer1 = q.getAnswer1();
+        this.answer2 = q.getAnswer2();
+        this.answer3 = q.getAnswer3();
+        this.answer4 = q.getAnswer4();
+        this.correct = q.getCorrect();
+        this.points = q.getPoints();
+        this.subject = q.getSubject();
+    }
+    public Question() {
+
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public String getId_question() {
+        return id_question;
+    }
+
+    public void setId_question(String id_question) {
+        this.id_question = id_question;
     }
 
     public String getText() {
@@ -36,12 +74,23 @@ public class Question implements Serializable {
         this.text = text;
     }
 
-    public String[] getAnswers() {
-        return answers;
+    public String getAnswer1() {
+        return answer1;
     }
 
-    public void setAnswers(String[] answers) {
-        this.answers = answers;
+
+    public String getAnswer2() {
+        return answer2;
+    }
+
+
+    public String getAnswer3() {
+        return answer3;
+    }
+
+
+    public String getAnswer4() {
+        return answer4;
     }
 
     public int getCorrect() {
@@ -52,12 +101,15 @@ public class Question implements Serializable {
         this.correct = correct;
     }
 
-    public String getSubject() {
+    public Subject getSubject() {
         return subject;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setSubject(Subject subject) {
+        if(subject!=null) {
+            this.subject = subject;
+            subject.getQuestions().add(this);
+        }
     }
 
     public int getPoints() {

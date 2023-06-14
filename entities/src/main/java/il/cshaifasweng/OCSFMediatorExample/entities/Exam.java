@@ -1,33 +1,42 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
+@Table(name = "exams")
 public class Exam implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String id_exam;
-    private ArrayList<Question> questions;
+    @ManyToMany(
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            targetEntity = Question.class
+    )
+    private List<Question> questions;
     private int time;
     private String freeTextStudent;
     private String freeTextTeacher;
-    private String author;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id")
+    private Teacher author;
     private int moreTime;
-    private ArrayList<Integer> correctAnswers;
 
-    public Exam(String id_exam, ArrayList<Question> questions, int time, String freeTextStudent, String freeTextTeacher, String author, int moreTime, ArrayList<Integer> correctAnswers) {
+    public Exam(String id_exam, ArrayList<Question> questions, int time, String freeTextStudent, String freeTextTeacher, Teacher author) {
         this.id_exam = id_exam;
         this.questions = questions;
         this.time = time;
         this.freeTextStudent = freeTextStudent;
         this.freeTextTeacher = freeTextTeacher;
         this.author = author;
-        this.moreTime = moreTime;
-        this.correctAnswers = correctAnswers;
+        this.moreTime = 0;
+    }
+
+    public Exam() {
+
     }
 
     public int getId() {
@@ -46,11 +55,11 @@ public class Exam implements Serializable {
         this.id_exam = id_exam;
     }
 
-    public ArrayList<Question> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(ArrayList<Question> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
 
@@ -78,11 +87,11 @@ public class Exam implements Serializable {
         this.freeTextTeacher = freeTextTeacher;
     }
 
-    public String getAuthor() {
+    public Teacher getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Teacher author) {
         this.author = author;
     }
 
@@ -94,11 +103,5 @@ public class Exam implements Serializable {
         this.moreTime = moreTime;
     }
 
-    public ArrayList<Integer> getCorrectAnswers() {
-        return correctAnswers;
-    }
 
-    public void setCorrectAnswers(ArrayList<Integer> correctAnswers) {
-        this.correctAnswers = correctAnswers;
-    }
 }

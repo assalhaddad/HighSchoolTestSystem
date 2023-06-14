@@ -1,17 +1,14 @@
-/**
- * Sample Skeleton for 'addQuestion.fxml' Controller Class
- */
-
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
+import il.cshaifasweng.OCSFMediatorExample.entities.Question;
+import il.cshaifasweng.OCSFMediatorExample.entities.Subject;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -49,11 +46,12 @@ public class AddQuestion {
 
     @FXML // fx:id="thirdTF"
     private TextField thirdTF; // Value injected by FXMLLoader
+    @FXML
+    private Button doneBTN;
 
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
-        System.out.println("inside initialize addQuestion");
         sendMessage("get list of subjects", (Object)null);
     }
 
@@ -67,63 +65,62 @@ public class AddQuestion {
     }
 
     String id;
-    String subject;
+    Subject subject;
     String text;
     int points;
-    String[] answers = new String[4];
     int correct;
+    String answer1;
+    String answer2;
+    String answer3;
+    String answer4;
 
     @FXML
     void done(ActionEvent event) {
-
+        answer1 = firstTF.getText();
+        answer2 = secondTF.getText();
+        answer3 = thirdTF.getText();
+        answer4 = fourthTF.getText();
+        correct = Integer.parseInt(correctTF.getText());
+        points = Integer.parseInt(pointsTF.getText());
+        id = this.idTF.getText();
+        text = questionTF.getText();
+        Question newQuestion = new Question(id,text,answer1,answer2,answer3,answer4,correct,subject);
+        sendMessage("new question",newQuestion);
     }
-
-    @FXML
-    void setAnswer1(ActionEvent event) {answers[0] = firstTF.getText().toString();}
-
-    @FXML
-    void setAnswer2(ActionEvent event) {answers[1] = secondTF.getText().toString();}
-
-    @FXML
-    void setAnswer3(ActionEvent event) {answers[2] = thirdTF.getText().toString();}
-
-    @FXML
-    void setAnswer4(ActionEvent event) {answers[3] = fourthTF.getText().toString();}
-
-    @FXML
-    void setCorrectAnswer(ActionEvent event) {correct = Integer.parseInt(correctTF.getText());}
-
-    @FXML
-    void setPoints(ActionEvent event) {points = Integer.parseInt(pointsTF.getText());}
-
-    @FXML
-    void setQuestion(ActionEvent event) {id = this.idTF.getText().toString();}
-
-    @FXML
-    void setSubject(ActionEvent event) {subject = this.subjectCMB.getValue().toString();}
-    @FXML
-    void setText(ActionEvent event){text = questionTF.getText().toString();}
 
     @Subscribe
     public void handleMessage(Message message){
         String request = message.getMessage();
-        System.out.println("inside handleMessage");
         Object obj = message.getObject();
         if(request.equals("subjects list is ready"))
             getSubjectsRequest(obj);
-        else if(request.equals("found student")) {
-            System.out.println("hi2");
-            //getStudentRequest(obj);
+        else if(request.equals("question added successfully")) {
+            addedNewQuestion();
         }
-        //else if(request.equals("grade1 updated successfully"))
-        //updateGrade1(obj);
-        //else if(request.equals("grade2 updated successfully"))
-        //updateGrade2(obj);
     }
 
     private void getSubjectsRequest(Object obj){
         ObservableList<String> subjectList = FXCollections.observableArrayList((ArrayList)obj);
         subjectCMB.setItems(subjectList);
     }
-
+    private void addedNewQuestion(){
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success!");
+                alert.setHeaderText("Question added successfully");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
+        subjectCMB.getSelectionModel().clearSelection();
+        idTF.clear();
+        questionTF.clear();
+        firstTF.clear();
+        secondTF.clear();
+        thirdTF.clear();
+        fourthTF.clear();
+        correctTF.clear();
+        pointsTF.clear();
+    }
 }
