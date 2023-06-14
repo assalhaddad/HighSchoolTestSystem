@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "questions")
@@ -20,6 +21,16 @@ public class Question implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id")
     private Subject subject;
+    @ManyToMany(
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            targetEntity = Course.class
+    )
+    @JoinTable(
+            name="courses_questions",
+            joinColumns = @JoinColumn(name = "question_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<Course> courses;
     private int points;
 
     public Question(String id, String text, String answer1,String answer2,String answer3,String answer4, int correct, Subject subject){
@@ -118,5 +129,16 @@ public class Question implements Serializable {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+        for(Course course : courses){
+            course.getQuestions().add(this);
+        }
     }
 }

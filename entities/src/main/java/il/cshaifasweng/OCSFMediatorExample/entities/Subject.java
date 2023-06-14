@@ -19,29 +19,21 @@ public class Subject implements Serializable {
     @OneToMany(fetch=FetchType.LAZY,mappedBy="subject")
     private List<Question> questions;
 
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="subject")
+    private List<Course> courses;
+
     @ManyToMany( mappedBy = "subjects",
             cascade = { CascadeType.PERSIST, CascadeType.MERGE},
             targetEntity = Teacher.class
     )
     private List<Teacher> teachers;
 
-    public List<Teacher> getTeachers() {
-        return teachers;
-    }
-
-
-    public void setTeachers(List<Teacher> teachers) {
-        this.teachers = teachers;
-            for(Teacher teacher : teachers){
-                teacher.getSubjects().add(this);
-            }
-        }
-
     public Subject(String name) {
         super();
         this.name = name;
         this.questions=new ArrayList<Question>();
         this.teachers = new ArrayList<Teacher>();
+        this.courses = new ArrayList<Course>();
     }
 
     public List<Question> getQuestions() {
@@ -51,16 +43,31 @@ public class Subject implements Serializable {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
-
     public Subject() {
 
     }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+    public List<Teacher> getTeachers() {
+        return teachers;
+    }
+    public void setTeachers(List<Teacher> teachers) {
+        this.teachers = teachers;
+        for(Teacher teacher : teachers){
+            teacher.getSubjects().add(this);
+        }
     }
 }
