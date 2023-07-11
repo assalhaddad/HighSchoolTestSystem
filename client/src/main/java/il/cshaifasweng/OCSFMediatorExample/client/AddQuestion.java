@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.Course;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import il.cshaifasweng.OCSFMediatorExample.entities.Question;
 import il.cshaifasweng.OCSFMediatorExample.entities.Subject;
@@ -54,7 +55,7 @@ public class AddQuestion {
     void initialize() {
         EventBus.getDefault().register(this);
         sendMessage("get list of subjects", (Object)null);
-        //sendMessage("get list of courses", (Object)null);
+        courseCMB.setDisable(true);
     }
 
     private void sendMessage(String op, Object obj) {
@@ -75,12 +76,15 @@ public class AddQuestion {
     String answer2;
     String answer3;
     String answer4;
-
-    Subject chosenSubject=new Subject();
+    Subject chosenSubject = new Subject();
+    ArrayList<Course> chosenCourses = new ArrayList();
     @FXML
     void selectSubject(ActionEvent event) {
         String subject = this.subjectCMB.getValue().toString();
+        courseCMB.getItems().clear();
         sendMessage("get subject", subject);
+        //sendMessage("get list of courses", subject);
+        //courseCMB.setDisable(false);
     }
 
     @FXML
@@ -103,7 +107,7 @@ public class AddQuestion {
         id = this.idTF.getText();
         text = questionTF.getText();
         subject = chosenSubject;
-        Question newQuestion = new Question(id,text,answer1,answer2,answer3,answer4,correct,subject);
+        Question newQuestion = new Question(id,text,answer1,answer2,answer3,answer4,correct,subject,chosenCourses);
         sendMessage("new question",newQuestion);
     }
 
@@ -113,9 +117,10 @@ public class AddQuestion {
         Object obj = message.getObject();
         if(request.equals("subjects list is ready"))
             getSubjectsRequest(obj);
-        else if(request.equals("question added successfully")) {
+        else if(request.equals("courses list is ready"))
+            getCoursesRequest(obj);
+        else if(request.equals("question added successfully"))
             addedNewQuestion();
-        }
         else if(request.equals("found subject")) {
             getChosenSubjectRequest(obj);
         }
@@ -123,12 +128,19 @@ public class AddQuestion {
 
     private void getChosenSubjectRequest(Object obj){
         chosenSubject.copy((Subject) obj);
+        sendMessage("get list of courses", chosenSubject.getName());
+        //courseCMB.setDisable(false);
     }
 
     private void getSubjectsRequest(Object obj){
         ObservableList<String> subjectList = FXCollections.observableArrayList((ArrayList)obj);
         subjectCMB.setItems(subjectList);
-        courseCMB.getItems().addAll(subjectList);//delete later
+        //courseCMB.getItems().addAll(subjectList);//delete later
+    }
+    private void getCoursesRequest(Object obj){
+        courseCMB.setDisable(false);
+        ObservableList<String> courseList = FXCollections.observableArrayList((ArrayList)obj);
+        courseCMB.getItems().addAll(courseList);
     }
     private void addedNewQuestion(){
         Platform.runLater(new Runnable() {

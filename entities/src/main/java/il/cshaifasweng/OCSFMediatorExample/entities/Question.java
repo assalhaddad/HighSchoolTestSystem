@@ -33,7 +33,7 @@ public class Question implements Serializable {
     private List<Course> courses;
     private int points;
 
-    public Question(String id, String text, String answer1,String answer2,String answer3,String answer4, int correct, Subject subject){
+    public Question(String id, String text, String answer1,String answer2,String answer3,String answer4, int correct, Subject subject, List<Course> courses){
         super();
         this.id_question = id;
         this.text = text;
@@ -44,6 +44,7 @@ public class Question implements Serializable {
         this.correct = correct;
         this.points = 0;
         setSubject(subject);
+        setCourses(courses);
     }
     public void copy(Question q){
         this.id = q.getId();
@@ -136,9 +137,11 @@ public class Question implements Serializable {
     }
 
     public void setCourses(List<Course> courses) {
-        this.courses = courses;
-        for(Course course : courses){
-            course.getQuestions().add(this);
+        if(courses!=null){
+            this.courses = courses;
+            for(Course course : courses){
+                course.getQuestions().add(this);
+            }
         }
     }
 }

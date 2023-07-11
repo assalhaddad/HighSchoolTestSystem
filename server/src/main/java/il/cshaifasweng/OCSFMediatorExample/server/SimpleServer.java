@@ -155,151 +155,168 @@ public class SimpleServer extends AbstractServer {
 	}
 
 	public void generateQuestions() {
-		Question question = new Question("14601","How much is 3*1?","4","19","3","9",3,subjects.get(0));
+		ArrayList<Course> list = new ArrayList();
+		list.add(courses.get(0)); // Basic Math
+		Question question = new Question("14601","How much is 3*1?","4","19","3","9",3,subjects.get(0),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("83601","How much is 27+13?","40","42","67","80",1,subjects.get(0));
+		question = new Question("13901","How much is 27/9?","2","5","6","3",4,subjects.get(0),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("78601","Which of the following is the equivalent of 13/25?","0.38","0.4","0.48","0.52",4,subjects.get(0));
+		question = new Question("83601","How much is 27+13?","40","42","67","80",1,subjects.get(0),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("93601","What is the square root of 121?","12","8","11","10",3,subjects.get(0));
+		question = new Question("73901","How much is 90-12?","78","88","65","79",1,subjects.get(0),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("74201","Solve for x: -2(x+3)=8","x=0","x=-7","x=6","x=-4",2,subjects.get(0));
+		list.add(courses.get(1));	// Advanced + Basic Math
+		question = new Question("93601","What is the square root of 121?","12","8","11","10",3,subjects.get(0),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("64301","Solve for x: 3x+90=180","x=40","x=10","x=30","x=25",3,subjects.get(0));
+		list.clear();
+		list.add(courses.get(1));	// Advanced Math
+		question = new Question("78601","Which of the following is the equivalent of 13/25?","0.38","0.4","0.48","0.52",4,subjects.get(0),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("13702","Complete the sentence:"+"\n"+"Where ____ the dog?","are","it","is","does",3,subjects.get(1));
+		question = new Question("74201","Solve for x: -2(x+3)=8","x=0","x=-7","x=6","x=-4",2,subjects.get(0),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("66602","George is doing an additional ____ in graphic design.","research","practice","course","study",3,subjects.get(1));
+		question = new Question("64301","Solve for x: 3x+90=180","x=40","x=10","x=30","x=25",3,subjects.get(0),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("64302","Janet and James had a blazing ____ last night.","quarrel","debate","row","disagreement",3,subjects.get(1));
+		list.add(courses.get(2)); // Basic English
+		question = new Question("13702","Complete the sentence:"+"\n"+"Where ____ the dog?","are","it","is","does",3,subjects.get(1),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("64302","All conference participants wore ____ with their names.","badges","stickers","labels","signs",1,subjects.get(1));
+		question = new Question("34502","Complete the sentence:"+"\n"+"She is coming ___","yesterday","tomorrow","not","last week",2,subjects.get(1),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("68302","When we saw a policeman we cleared ____ as fast as we could.","out","off","away","up",2,subjects.get(1));
+		question = new Question("82602","Complete the sentence:"+"\n"+"I want ___ help you","not","at","on","to",4,subjects.get(1),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("68302"," A deluge is the same as a ____.","downpour","blizzard","hailstorm","meltdown",1,subjects.get(1));
+		question = new Question("86402","Complete the sentence:"+"\n"+"I am going to play soccer ___ my friends","with","on","in","are",1,subjects.get(1),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("82602","Complete the sentence:"+"\n"+"I want ___ help you","not","at","on","to",4,subjects.get(1));
+		list.add(courses.get(3));	// Advanced + Basic English
+		question = new Question("66602","George is doing an additional ____ in graphic design.","research","practice","course","study",3,subjects.get(1),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("86402","Complete the sentence:"+"\n"+"I am going to play soccer ___ my friends","with","on","in","are",1,subjects.get(1));
+		list.clear();
+		list.add(courses.get(3)); // Advanced English
+		question = new Question("64302","Janet and James had a blazing ____ last night.","quarrel","debate","row","disagreement",3,subjects.get(1),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("73901","How much is 90-12?","78","88","65","79",1,subjects.get(0));
+		question = new Question("64302","All conference participants wore ____ with their names.","badges","stickers","labels","signs",1,subjects.get(1),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("92703","Which animal lays eggs?","Dog","Cat","Duck","Sheep",3,subjects.get(2));
+		question = new Question("68302","When we saw a policeman we cleared ____ as fast as we could.","out","off","away","up",2,subjects.get(1),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("85603","A male cow is called?","Ox","Monkey","Lion","Sheep",1,subjects.get(2));
+		question = new Question("68302"," A deluge is the same as a ____.","downpour","blizzard","hailstorm","meltdown",1,subjects.get(1),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("12902","Complete the sentence:"+"\n"+"All animals need food, air and ___ to survive","candy","phone","water","fruits",3,subjects.get(2));
+		list.add(courses.get(4)); // Basic Science
+		question = new Question("92703","Which animal lays eggs?","Dog","Cat","Duck","Sheep",3,subjects.get(2),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("92703","What part of the body helps you move?","Eyes","Lungs","Muscles","Fingers",3,subjects.get(2));
+		question = new Question("85603","A male cow is called?","Ox","Monkey","Lion","Sheep",1,subjects.get(2),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("34502","Complete the sentence:"+"\n"+"She is coming ___","yesterday","tomorrow","not","last week",2,subjects.get(1));
+		question = new Question("12903","Complete the sentence:"+"\n"+"All animals need food, air and ___ to survive","candy","phone","water","fruits",3,subjects.get(2),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("13901","How much is 27/9?","2","5","6","3",4,subjects.get(0));
+		question = new Question("92703","What part of the body helps you move?","Eyes","Lungs","Muscles","Fingers",3,subjects.get(2),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("98703","The two holes of the nose are called?","Eyelids","Nostrils","Nails","Hair",2,subjects.get(2));
+		question = new Question("98703","The two holes of the nose are called?","Eyelids","Nostrils","Nails","Hair",2,subjects.get(2),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("93103","Which plastic cannot be breakable?","Thermo","Thermosetting","Heated","Pasteurized",2,subjects.get(2));
+		list.add(courses.get(5)); // Advanced + Basic Science
+		question = new Question("37103","What planet is closest to Earth?","Venus","Mars","Saturn","Jupiter",1,subjects.get(2),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("72303","What is the chemical name of sulphuric acid?","NaCl","H2O","H2SO4","CO2",3,subjects.get(2));
+		list.clear();
+		list.add(courses.get(5)); // Advanced Science
+		question = new Question("93103","Which plastic cannot be breakable?","Thermo","Thermosetting","Heated","Pasteurized",2,subjects.get(2),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("14503","Which metal can be cut easily with a knife?","Sodium","Gold","Argentium","Ferrous",1,subjects.get(2));
+		question = new Question("72303","What is the chemical name of sulphuric acid?","NaCl","H2O","H2SO4","CO2",3,subjects.get(2),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("38503","Which non metal is very reactive on room temperature?","Phosporus","Carbon","Porus","Oxygen",1,subjects.get(2));
+		question = new Question("14503","Which metal can be cut easily with a knife?","Sodium","Gold","Argentium","Ferrous",1,subjects.get(2),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("72604","Which is the largest country in the world?","Russia","Canada","Ukraine","Mexico",1,subjects.get(3));
+		question = new Question("38503","Which non metal is very reactive on room temperature?","Phosporus","Carbon","Porus","Oxygen",1,subjects.get(2),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("67804","Which country has the largest population in the world?","Russia","America","China","Brazil",3,subjects.get(3));
+		list.add(courses.get(6)); // Basic Geography
+		question = new Question("72604","Which is the largest country in the world?","Russia","Canada","Ukraine","Mexico",1,subjects.get(3),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("12904","How many states of India share its border with Bhutan?","1","2","3","4",4,subjects.get(3));
+		question = new Question("67804","Which country has the largest population in the world?","Russia","America","China","Brazil",3,subjects.get(3),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("35604","What is the capital city of India?","Chennai","New Delhi","Mumbai","Bangalore",2,subjects.get(3));
+		question = new Question("12904","How many states of India share its border with Bhutan?","1","2","3","4",4,subjects.get(3),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("21704","In which country would you find the Leaning Tower of Pisa?","Italy","Amsterdam","Israel","France",1,subjects.get(3));
+		question = new Question("35604","What is the capital city of India?","Chennai","New Delhi","Mumbai","Bangalore",2,subjects.get(3),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("73404","What is the name of the tallest mountain in the world?","Mount Carmel","Mount Logan","Mount Everest","Mount Elbrus",3,subjects.get(3));
+		question = new Question("21704","In which country would you find the Leaning Tower of Pisa?","Italy","Amsterdam","Israel","France",1,subjects.get(3),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("45704","What is the name of the longest river in the world?","Amazon","Yellow","Congo","Nile",4,subjects.get(3));
+		list.add(courses.get(7));	// Advanced + Basic Geography
+		question = new Question("16304","How many States does the United States consist of?","48","49","50","51",3,subjects.get(3),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("64204","What is the capital of Canada?","Montreal","Toronto","Ottawa","Vancouver",3,subjects.get(3));
+		list.clear();
+		list.add(courses.get(7)); // Advanced Geography
+		question = new Question("73404","What is the name of the tallest mountain in the world?","Mount Carmel","Mount Logan","Mount Everest","Mount Elbrus",3,subjects.get(3),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("46404","What is the name of the smallest country in the world?","Monaco","The Vatican City","Tuvalu","Maldives",2,subjects.get(3));
+		question = new Question("45704","What is the name of the longest river in the world?","Amazon","Yellow","Congo","Nile",4,subjects.get(3),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("37103","What planet is closest to Earth?","Venus","Mars","Saturn","Jupiter",1,subjects.get(2));
+		question = new Question("64204","What is the capital of Canada?","Montreal","Toronto","Ottawa","Vancouver",3,subjects.get(3),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("16304","How many States does the United States consist of?","48","49","50","51",3,subjects.get(3));
+		question = new Question("46404","What is the name of the smallest country in the world?","Monaco","The Vatican City","Tuvalu","Maldives",2,subjects.get(3),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
@@ -328,7 +345,7 @@ public class SimpleServer extends AbstractServer {
 		courses.add(course);
 		session.save(course);
 		session.flush();
-		course = new Course("Advanced English", subjects.get(0));
+		course = new Course("Advanced Math", subjects.get(0));
 		courses.add(course);
 		session.save(course);
 		session.flush();
@@ -395,13 +412,29 @@ public class SimpleServer extends AbstractServer {
 				client.sendToClient(message);
 			} else {
 				if(request.equals("get list of subjects")){
-					System.out.println("inside get list of subjects");
+					//System.out.println("inside get list of subjects");
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					ArrayList<String> subjectList = new ArrayList<String>(subjects.size());
+					ArrayList<String> subjectList = new ArrayList(subjects.size());
 					for(int i=0; i<subjects.size(); i++)
 						subjectList.add(i, subjects.get(i).getName());
 					client.sendToClient(new Message("subjects list is ready", subjectList));
+					session.close();
+				}
+				else if(request.equals("get list of courses")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					String subject = (String)message.getObject();
+					ArrayList<String> courseList = new ArrayList();
+					int count = 0;
+					for(int i=0; i<courses.size(); i++) {
+						if (courses.get(i).getSubject().getName().equals(subject)) {
+							courseList.add(count, courses.get(i).getName());
+							count++;
+						}
+					}
+					System.out.println("courses list is ready");
+					client.sendToClient(new Message("courses list is ready", courseList));
 					session.close();
 				}
 				else if(request.equals("new question")){
@@ -421,7 +454,7 @@ public class SimpleServer extends AbstractServer {
 					String name = (String)message.getObject();
 					for(int i=0; i<subjects.size(); i++){
 						if(subjects.get(i).getName().equals(name)){
-							Subject chosenSubject= subjects.get(i); //check
+							Subject chosenSubject= subjects.get(i);
 							client.sendToClient(new Message("found subject", chosenSubject));
 							session.close();
 							break;

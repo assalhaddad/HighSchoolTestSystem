@@ -20,7 +20,7 @@
                </VBox.margin>
             </ComboBox>
             <CheckComboBox fx:id="courseCMB" onDragDetected="#selectCourse" prefHeight="25.0" prefWidth="151.0" />
-            <TextField fx:id="idTF" prefHeight="25.0" prefWidth="171.0" />
+            <TextField fx:id="idTF" prefHeight="25.0" prefWidth="171.0" promptText="3 digits" />
             <TextField fx:id="questionTF" layoutX="10.0" layoutY="254.0" />
             <TextField fx:id="firstTF" promptText="1">
                <VBox.margin>
