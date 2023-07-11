@@ -2,7 +2,6 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import il.cshaifasweng.OCSFMediatorExample.entities.Question;
-import il.cshaifasweng.OCSFMediatorExample.entities.Student;
 import il.cshaifasweng.OCSFMediatorExample.entities.Subject;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -10,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.controlsfx.control.CheckComboBox;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -30,9 +30,6 @@ public class AddQuestion {
     @FXML // fx:id="idTF"
     private TextField idTF; // Value injected by FXMLLoader
 
-    @FXML // fx:id="pointsTF"
-    private TextField pointsTF; // Value injected by FXMLLoader
-
     @FXML // fx:id="questionTF"
     private TextField questionTF; // Value injected by FXMLLoader
 
@@ -41,6 +38,9 @@ public class AddQuestion {
 
     @FXML // fx:id="subjectCMB"
     private ComboBox<String> subjectCMB; // Value injected by FXMLLoader
+
+    @FXML
+    private CheckComboBox<String> courseCMB;
 
     @FXML // fx:id="subjectTF1"
     private Label subjectTF1; // Value injected by FXMLLoader
@@ -54,6 +54,7 @@ public class AddQuestion {
     void initialize() {
         EventBus.getDefault().register(this);
         sendMessage("get list of subjects", (Object)null);
+        //sendMessage("get list of courses", (Object)null);
     }
 
     private void sendMessage(String op, Object obj) {
@@ -83,13 +84,22 @@ public class AddQuestion {
     }
 
     @FXML
+    void selectCourse(ActionEvent event) {
+        ObservableList<String> list = courseCMB.getCheckModel().getCheckedItems();
+        for(Object obj : list){
+            System.out.println(obj.toString());
+        }
+        //String course = this.courseCMB.getValue().toString();
+        //sendMessage("get course", course);
+    }
+
+    @FXML
     void done(ActionEvent event) {
         answer1 = firstTF.getText();
         answer2 = secondTF.getText();
         answer3 = thirdTF.getText();
         answer4 = fourthTF.getText();
         correct = Integer.parseInt(correctTF.getText());
-        points = Integer.parseInt(pointsTF.getText());
         id = this.idTF.getText();
         text = questionTF.getText();
         subject = chosenSubject;
@@ -118,6 +128,7 @@ public class AddQuestion {
     private void getSubjectsRequest(Object obj){
         ObservableList<String> subjectList = FXCollections.observableArrayList((ArrayList)obj);
         subjectCMB.setItems(subjectList);
+        courseCMB.getItems().addAll(subjectList);//delete later
     }
     private void addedNewQuestion(){
         Platform.runLater(new Runnable() {
@@ -130,6 +141,7 @@ public class AddQuestion {
             }
         });
         subjectCMB.getSelectionModel().clearSelection();
+        courseCMB.getCheckModel().clearChecks();
         idTF.clear();
         questionTF.clear();
         firstTF.clear();
@@ -137,6 +149,5 @@ public class AddQuestion {
         thirdTF.clear();
         fourthTF.clear();
         correctTF.clear();
-        pointsTF.clear();
     }
 }
