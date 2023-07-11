@@ -83,18 +83,16 @@ public class AddQuestion {
         String subject = this.subjectCMB.getValue().toString();
         courseCMB.getItems().clear();
         sendMessage("get subject", subject);
-        //sendMessage("get list of courses", subject);
-        //courseCMB.setDisable(false);
     }
 
     @FXML
     void selectCourse(ActionEvent event) {
         ObservableList<String> list = courseCMB.getCheckModel().getCheckedItems();
+        int i = 0;
         for(Object obj : list){
-            System.out.println(obj.toString());
+            sendMessage("get course",list.get(i).toString());
+            i++;
         }
-        //String course = this.courseCMB.getValue().toString();
-        //sendMessage("get course", course);
     }
 
     @FXML
@@ -104,11 +102,23 @@ public class AddQuestion {
         answer3 = thirdTF.getText();
         answer4 = fourthTF.getText();
         correct = Integer.parseInt(correctTF.getText());
-        id = this.idTF.getText();
+        setID();
         text = questionTF.getText();
         subject = chosenSubject;
         Question newQuestion = new Question(id,text,answer1,answer2,answer3,answer4,correct,subject,chosenCourses);
         sendMessage("new question",newQuestion);
+    }
+
+    void setID(){
+        id = idTF.getText();
+        if(chosenSubject.getName().equals("Math"))
+            id+="01";
+        if(chosenSubject.getName().equals("English"))
+            id+="02";
+        if(chosenSubject.getName().equals("Science"))
+            id+="03";
+        if(chosenSubject.getName().equals("Geography"))
+            id+="04";
     }
 
     @Subscribe
@@ -121,21 +131,25 @@ public class AddQuestion {
             getCoursesRequest(obj);
         else if(request.equals("question added successfully"))
             addedNewQuestion();
-        else if(request.equals("found subject")) {
+        else if(request.equals("found subject"))
             getChosenSubjectRequest(obj);
+        else if(request.equals("found course")){
+            getChosenCourseRequest(obj);
         }
     }
 
     private void getChosenSubjectRequest(Object obj){
         chosenSubject.copy((Subject) obj);
         sendMessage("get list of courses", chosenSubject.getName());
-        //courseCMB.setDisable(false);
+    }
+
+    private void getChosenCourseRequest(Object obj){
+        chosenCourses.add((Course) obj);
     }
 
     private void getSubjectsRequest(Object obj){
         ObservableList<String> subjectList = FXCollections.observableArrayList((ArrayList)obj);
         subjectCMB.setItems(subjectList);
-        //courseCMB.getItems().addAll(subjectList);//delete later
     }
     private void getCoursesRequest(Object obj){
         courseCMB.setDisable(false);
@@ -153,7 +167,7 @@ public class AddQuestion {
             }
         });
         subjectCMB.getSelectionModel().clearSelection();
-        courseCMB.getCheckModel().clearChecks();
+        courseCMB.getItems().clear();
         idTF.clear();
         questionTF.clear();
         firstTF.clear();

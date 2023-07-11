@@ -405,14 +405,13 @@ public class SimpleServer extends AbstractServer {
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		Message message = (Message)msg;
 		String request = message.getMessage();
-		System.out.println("insidehandleMessageFromClient");
+		//System.out.println("insidehandleMessageFromClient");
 		try {
 			if (request.isBlank()) {
 				message.setMessage("Error! we got an empty message");
 				client.sendToClient(message);
 			} else {
 				if(request.equals("get list of subjects")){
-					//System.out.println("inside get list of subjects");
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					ArrayList<String> subjectList = new ArrayList(subjects.size());
@@ -441,7 +440,6 @@ public class SimpleServer extends AbstractServer {
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					question.copy((Question)message.getObject());
-					System.out.println(question.getText());
 					questions.add(question);
 					session.save(question);
 					session.flush();
@@ -456,6 +454,19 @@ public class SimpleServer extends AbstractServer {
 						if(subjects.get(i).getName().equals(name)){
 							Subject chosenSubject= subjects.get(i);
 							client.sendToClient(new Message("found subject", chosenSubject));
+							session.close();
+							break;
+						}
+					}
+				}
+				else if(request.equals("get course")){
+					session = sessionFactory.openSession();
+					session.beginTransaction();
+					String name = (String)message.getObject();
+					for(int i=0; i<courses.size(); i++){
+						if(courses.get(i).getName().equals(name)){
+							Course chosenCourse= courses.get(i);
+							client.sendToClient(new Message("found course", chosenCourse));
 							session.close();
 							break;
 						}
