@@ -2,6 +2,7 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import il.cshaifasweng.OCSFMediatorExample.entities.Question;
+import il.cshaifasweng.OCSFMediatorExample.entities.Student;
 import il.cshaifasweng.OCSFMediatorExample.entities.Subject;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -74,6 +75,13 @@ public class AddQuestion {
     String answer3;
     String answer4;
 
+    Subject chosenSubject=new Subject();
+    @FXML
+    void selectSubject(ActionEvent event) {
+        String subject = this.subjectCMB.getValue().toString();
+        sendMessage("get subject", subject);
+    }
+
     @FXML
     void done(ActionEvent event) {
         answer1 = firstTF.getText();
@@ -84,6 +92,7 @@ public class AddQuestion {
         points = Integer.parseInt(pointsTF.getText());
         id = this.idTF.getText();
         text = questionTF.getText();
+        subject = chosenSubject;
         Question newQuestion = new Question(id,text,answer1,answer2,answer3,answer4,correct,subject);
         sendMessage("new question",newQuestion);
     }
@@ -97,6 +106,13 @@ public class AddQuestion {
         else if(request.equals("question added successfully")) {
             addedNewQuestion();
         }
+        else if(request.equals("found subject")) {
+            getChosenSubjectRequest(obj);
+        }
+    }
+
+    private void getChosenSubjectRequest(Object obj){
+        chosenSubject.copy((Subject) obj);
     }
 
     private void getSubjectsRequest(Object obj){

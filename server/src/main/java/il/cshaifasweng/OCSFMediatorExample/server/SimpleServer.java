@@ -302,6 +302,19 @@ public class SimpleServer extends AbstractServer {
 					client.sendToClient(new Message("question added successfully",(Object)null));
 					session.close();
 				}
+				else if(request.equals("get subject")){
+					session = sessionFactory.openSession();
+					session.beginTransaction();
+					String name = (String)message.getObject();
+					for(int i=0; i<subjects.size(); i++){
+						if(subjects.get(i).getName().equals(name)){
+							Subject chosenSubject= subjects.get(i); //check
+							client.sendToClient(new Message("found subject", chosenSubject));
+							session.close();
+							break;
+						}
+					}
+				}
 				session.flush();
 				session.close();
 			}

@@ -46,6 +46,18 @@ public class Subject implements Serializable {
     public Subject() {
 
     }
+    public void copy(Subject s){
+        this.id=s.getId();
+        this.courses=s.getCourses();
+        this.name=s.getName();
+        this.questions=s.getQuestions();
+        this.teachers=s.getTeachers();
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }

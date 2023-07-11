@@ -13,7 +13,7 @@
    <children>
       <VBox layoutX="115.0" layoutY="25.0" prefHeight="308.0" prefWidth="304.0" spacing="7.0">
          <children>
-            <ComboBox fx:id="subjectCMB" prefWidth="150.0">
+            <ComboBox fx:id="subjectCMB" onAction="#selectSubject" prefWidth="150.0">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
@@ -45,7 +45,7 @@
                   <Insets />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="pointsTF" layoutX="10.0" layoutY="233.0" >
+            <TextField fx:id="pointsTF" layoutX="10.0" layoutY="233.0">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
