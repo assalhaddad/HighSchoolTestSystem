@@ -35,7 +35,6 @@ public class Teacher implements Serializable {
         this.name = name;
         this.username = username;
         this.password = password;
-
         this.exams = new ArrayList<Exam>();
         this.subjects = new ArrayList<Subject>();
     }

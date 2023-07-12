@@ -65,7 +65,7 @@ public class BuildExam {
     @FXML
     void selectCourse(ActionEvent event) {
         String course = this.courseCMB.getValue().toString();
-            sendMessage("get course", course);
+        sendMessage("get course", course);
     }
 
     @FXML
@@ -80,7 +80,7 @@ public class BuildExam {
 
     @FXML
     void addQuestion(ActionEvent event) {
-        if(pointsTF.getText().isEmpty()||pointsTF.getText().equals("0"))
+        if(pointsTF.getText().isEmpty()||Integer.parseInt(pointsTF.getText())<=0)
             pointsError();
         else{
             totalPoints-= Integer.parseInt(pointsTF.getText().toString());
@@ -102,7 +102,6 @@ public class BuildExam {
     @FXML
     void selectQuestion(MouseEvent event) {
         String string = questionsList.getSelectionModel().getSelectedItem().toString();
-        System.out.println("string= "+string);
         if(checkDuplicates(string)==true)
             duplicateError();
         else {
@@ -185,7 +184,7 @@ public class BuildExam {
         ObservableList<String> subjectList = FXCollections.observableArrayList((ArrayList)obj);
         subjectCMB.setItems(subjectList);
     }
-    
+
     private void missingInfo(){
         Platform.runLater(new Runnable() {
             public void run() {

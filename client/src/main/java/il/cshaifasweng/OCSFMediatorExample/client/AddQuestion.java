@@ -169,7 +169,6 @@ public class AddQuestion {
         subjectCMB.getSelectionModel().clearSelection();
         courseCMB.getItems().clear();
         courseCMB.setDisable(true);
-        //courseCMB.getCheckModel().clearChecks();
         idTF.clear();
         questionTF.clear();
         firstTF.clear();
