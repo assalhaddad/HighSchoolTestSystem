@@ -193,19 +193,19 @@ public class SimpleServer extends AbstractServer {
 		session.save(question);
 		session.flush();
 		list.add(courses.get(2)); // Basic English
-		question = new Question("13702","Complete the sentence:"+"\n"+"Where ____ the dog?","are","it","is","does",3,subjects.get(1),list);
+		question = new Question("13702","Where ____ the dog?","are","it","is","does",3,subjects.get(1),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("34502","Complete the sentence:"+"\n"+"She is coming ___","yesterday","tomorrow","not","last week",2,subjects.get(1),list);
+		question = new Question("34502","She is coming ___","yesterday","tomorrow","not","last week",2,subjects.get(1),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("82602","Complete the sentence:"+"\n"+"I want ___ help you","not","at","on","to",4,subjects.get(1),list);
+		question = new Question("82602","I want ___ help you","not","at","on","to",4,subjects.get(1),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("86402","Complete the sentence:"+"\n"+"I am going to play soccer ___ my friends","with","on","in","are",1,subjects.get(1),list);
+		question = new Question("86402","I am going to play soccer ___ my friends","with","on","in","are",1,subjects.get(1),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
@@ -241,7 +241,7 @@ public class SimpleServer extends AbstractServer {
 		questions.add(question);
 		session.save(question);
 		session.flush();
-		question = new Question("12903","Complete the sentence:"+"\n"+"All animals need food, air and ___ to survive","candy","phone","water","fruits",3,subjects.get(2),list);
+		question = new Question("12903","All animals need food, air and ___ to survive","candy","phone","water","fruits",3,subjects.get(2),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
@@ -467,6 +467,19 @@ public class SimpleServer extends AbstractServer {
 						if(courses.get(i).getName().equals(name)){
 							Course chosenCourse= courses.get(i);
 							client.sendToClient(new Message("found course", chosenCourse));
+							session.close();
+							break;
+						}
+					}
+				}
+				else if(request.equals("get question")){
+					session = sessionFactory.openSession();
+					session.beginTransaction();
+					String name = (String)message.getObject();
+					for(int i=0; i<questions.size(); i++){
+						if(questions.get(i).getText().equals(name)){
+							Question chosenQuestion= questions.get(i);
+							client.sendToClient(new Message("found question", chosenQuestion));
 							session.close();
 							break;
 						}

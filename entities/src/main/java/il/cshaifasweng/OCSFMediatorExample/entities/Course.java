@@ -32,6 +32,17 @@ public class Course implements Serializable {
     public Course() {
 
     }
+    public void copy(Course c){
+        this.id = c.getId();
+        this.name = c.getName();
+        this.questions = c.getQuestions();
+        this.subject = c.getSubject();
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }

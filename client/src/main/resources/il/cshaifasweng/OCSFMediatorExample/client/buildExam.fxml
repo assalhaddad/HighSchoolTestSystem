@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.666666667" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.BuildExam">
    <children>
       <Label alignment="CENTER" prefHeight="26.0" prefWidth="500.0" style="-fx-background-color: #70879d;" text="Build Exam" textFill="WHITE">
@@ -16,14 +15,28 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <ComboBox fx:id="subjectsCMB" layoutX="14.0" layoutY="52.0" onAction="#getSubjects" prefWidth="150.0" promptText="Subject" />
-      <ListView fx:id="questionsList" accessibleRole="CHECK_BOX" layoutX="175.0" layoutY="38.0" prefHeight="287.0" prefWidth="200.0" />
-      <Button fx:id="doneBTN" layoutX="415.0" layoutY="52.0" mnemonicParsing="false" onAction="#done" style="-fx-background-color: #70879d;" text="Done" textFill="WHITE">
+      <ComboBox fx:id="subjectCMB" layoutX="14.0" layoutY="34.0" onAction="#selectSubject" prefHeight="25.0" prefWidth="118.0" promptText="Subject" />
+      <ListView fx:id="questionsList" accessibleRole="CHECK_BOX" layoutX="140.0" layoutY="34.0" onMouseClicked="#selectQuestion" prefHeight="291.0" prefWidth="293.0" />
+      <Button fx:id="doneBTN" layoutX="440.0" layoutY="167.0" mnemonicParsing="false" onAction="#done" style="-fx-background-color: #70879d;" text="Done" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TextField fx:id="idTF" layoutX="14.0" layoutY="87.0" onAction="#setID" promptText="Exam ID" />
-      <TextField fx:id="timeTF" layoutX="14.0" layoutY="120.0" onAction="#setTime" promptText="Time" />
+      <TextField fx:id="idTF" layoutX="14.0" layoutY="99.0" onAction="#setID" prefHeight="25.0" prefWidth="118.0" promptText="Exam ID (2 digits)" />
+      <TextField fx:id="timeTF" layoutX="14.0" layoutY="131.0" onAction="#setTime" prefHeight="25.0" prefWidth="118.0" promptText="Time" />
+      <ComboBox fx:id="courseCMB" layoutX="14.0" layoutY="66.0" onAction="#selectCourse" prefHeight="25.0" prefWidth="118.0" promptText="Course" />
+      <TextField fx:id="pointsTF" layoutX="38.0" layoutY="213.0" onAction="#points" prefHeight="25.0" prefWidth="52.0" promptText="Points" />
+      <Button fx:id="addBTN" layoutX="48.0" layoutY="245.0" mnemonicParsing="false" onAction="#addQuestion" style="-fx-background-color: #70879d;" text="ADD" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="9.0" />
+         </font>
+      </Button>
+      <TextField fx:id="totalTF" editable="false" layoutX="86.0" layoutY="293.0" prefHeight="25.0" prefWidth="46.0" />
+      <Button fx:id="clearBTN" layoutX="16.0" layoutY="167.0" mnemonicParsing="false" onAction="#clearPressed" style="-fx-background-color: #70879d;" text="Clear" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="19.0" layoutY="297.0" text="Points Left:" />
    </children>
 </AnchorPane>

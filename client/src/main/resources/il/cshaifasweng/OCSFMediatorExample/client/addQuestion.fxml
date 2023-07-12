@@ -102,7 +102,7 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <Button layoutX="351.0" layoutY="67.0" mnemonicParsing="false" onAction="#selectCourse" prefHeight="25.0" prefWidth="35.0" style="-fx-background-color: #70879d;" text="OK" textFill="WHITE">
+      <Button layoutX="351.0" layoutY="67.0" mnemonicParsing="false" onAction="#selectCourse" prefHeight="25.0" prefWidth="42.0" style="-fx-background-color: #70879d;" text="Update" textFill="WHITE">
          <font>
             <Font size="9.0" />
          </font>
