@@ -49,6 +49,7 @@ public class SimpleServer extends AbstractServer {
 	ArrayList<Question> questions = new ArrayList();
 	ArrayList<Subject> subjects = new ArrayList();
 	ArrayList<Course> courses = new ArrayList();
+	ArrayList<Exam> exams = new ArrayList();
 	public void generateStudents(){
 		Student student=new Student("123456781","Assal Haddad", "assalHaddad","assal123");
 		studentsList.add(student);
@@ -374,6 +375,131 @@ public class SimpleServer extends AbstractServer {
 		session.save(course);
 		session.flush();
 	}
+
+	public void generateExams(){
+		ArrayList<Question> list = new ArrayList();
+		list.add(questions.get(0));	//exam for Basic Math
+		list.add(questions.get(1));
+		list.add(questions.get(3));
+		list.add(questions.get(4));
+		Exam exam = new Exam("24",list,90,"","",teachersList.get(0),courses.get(0));
+		for(int i=0; i<4; i++)
+			exam.setPoints(exam.getQuestions().get(i),25 );
+		exams.add(exam);
+		session.save(exam);
+		session.flush();
+		list.clear();
+		list.add(questions.get(0));	//exam for Basic Math
+		list.add(questions.get(2));
+		list.add(questions.get(4));
+		exam = new Exam("93",list,90,"","",teachersList.get(0),courses.get(0));
+		exam.setPoints(exam.getQuestions().get(0),40 );
+		exam.setPoints(exam.getQuestions().get(1),40 );
+		exam.setPoints(exam.getQuestions().get(2),20 );
+		exams.add(exam);
+		session.save(exam);
+		session.flush();
+		list.clear();
+		list.add(questions.get(6));	//exam for Advanced Math
+		list.add(questions.get(5));
+		list.add(questions.get(7));
+		exam = new Exam("68",list,60,"","",teachersList.get(1),courses.get(1));
+		exam.setPoints(exam.getQuestions().get(0),30 );
+		exam.setPoints(exam.getQuestions().get(1),40 );
+		exam.setPoints(exam.getQuestions().get(2),30 );
+		exams.add(exam);
+		session.save(exam);
+		session.flush();
+		list.clear();
+		list.add(questions.get(8));	//exam for Basic English
+		list.add(questions.get(9));
+		list.add(questions.get(10));
+		list.add(questions.get(11));
+		exam = new Exam("84",list,75,"","",teachersList.get(2),courses.get(2));
+		for(int i=0; i<4; i++)
+			exam.setPoints(exam.getQuestions().get(i),25 );
+		exams.add(exam);
+		session.save(exam);
+		session.flush();
+		list.clear();
+		list.add(questions.get(13));	//exam for Advanced English
+		list.add(questions.get(14));
+		list.add(questions.get(15));
+		list.add(questions.get(16));
+		exam = new Exam("52",list,60,"","",teachersList.get(2),courses.get(3));
+		for(int i=0; i<4; i++)
+			exam.setPoints(exam.getQuestions().get(i),25 );
+		exams.add(exam);
+		session.save(exam);
+		session.flush();
+		list.clear();
+		list.add(questions.get(17));	//exam for Basic Science
+		list.add(questions.get(18));
+		list.add(questions.get(19));
+		list.add(questions.get(20));
+		exam = new Exam("73",list,60,"","",teachersList.get(3),courses.get(4));
+		for(int i=0; i<4; i++)
+			exam.setPoints(exam.getQuestions().get(i),25 );
+		exams.add(exam);
+		session.save(exam);
+		session.flush();
+		list.clear();
+		list.add(questions.get(17));	//exam for Basic Science
+		list.add(questions.get(18));
+		list.add(questions.get(21));
+		list.add(questions.get(22));
+		exam = new Exam("64",list,70,"","",teachersList.get(4),courses.get(4));
+		for(int i=0; i<4; i++)
+			exam.setPoints(exam.getQuestions().get(i),25 );
+		exams.add(exam);
+		session.save(exam);
+		session.flush();
+		list.clear();
+		list.add(questions.get(22));	//exam for Advanced Science
+		list.add(questions.get(23));
+		list.add(questions.get(24));
+		list.add(questions.get(25));
+		exam = new Exam("51",list,70,"","",teachersList.get(4),courses.get(5));
+		for(int i=0; i<4; i++)
+			exam.setPoints(exam.getQuestions().get(i),25 );
+		exams.add(exam);
+		session.save(exam);
+		session.flush();
+		list.clear();
+		list.add(questions.get(27));	//exam for Basic Geography
+		list.add(questions.get(29));
+		list.add(questions.get(30));
+		list.add(questions.get(31));
+		exam = new Exam("03",list,80,"","",teachersList.get(5),courses.get(6));
+		for(int i=0; i<4; i++)
+			exam.setPoints(exam.getQuestions().get(i),25 );
+		exams.add(exam);
+		session.save(exam);
+		session.flush();
+		list.clear();
+		list.add(questions.get(28));	//exam for Basic Geography
+		list.add(questions.get(29));
+		list.add(questions.get(31));
+		list.add(questions.get(32));
+		exam = new Exam("37",list,80,"","",teachersList.get(5),courses.get(6));
+		for(int i=0; i<4; i++)
+			exam.setPoints(exam.getQuestions().get(i),25 );
+		exams.add(exam);
+		session.save(exam);
+		session.flush();
+		list.clear();
+		list.add(questions.get(32));	//exam for Advanced Geography
+		list.add(questions.get(33));
+		list.add(questions.get(34));
+		list.add(questions.get(36));
+		exam = new Exam("81",list,60,"","",teachersList.get(6),courses.get(7));
+		for(int i=0; i<4; i++)
+			exam.setPoints(exam.getQuestions().get(i),25 );
+		exams.add(exam);
+		session.save(exam);
+		session.flush();
+		list.clear();
+	}
 	public void connectToData() {
 		try {
 			SessionFactory sessionFactory = getSessionFactory();
@@ -384,8 +510,8 @@ public class SimpleServer extends AbstractServer {
 			generateStudents();
 			generateStaff();
 			generateQuestions();
+			generateExams();
 			session.getTransaction().commit();
-			/**generateExams();**/
 		} catch (Exception var5) {
 			if (session != null) {
 				session.getTransaction().rollback();

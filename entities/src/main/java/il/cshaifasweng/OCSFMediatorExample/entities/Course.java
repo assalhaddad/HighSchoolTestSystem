@@ -16,6 +16,8 @@ public class Course implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id")
     private Subject subject;
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="course")
+    private List<Exam> exams;
     @ManyToMany(mappedBy = "courses",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             targetEntity = Question.class
@@ -27,6 +29,7 @@ public class Course implements Serializable {
         this.name = name;
         setSubject(subject);
         this.questions = new ArrayList<Question>();
+        this.exams = new ArrayList<Exam>();
     }
 
     public Course() {
@@ -69,5 +72,13 @@ public class Course implements Serializable {
         for(Question question : questions){
             question.getCourses().add(this);
         }
+    }
+
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
     }
 }

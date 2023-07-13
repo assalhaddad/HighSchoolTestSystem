@@ -23,15 +23,20 @@ public class Exam implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")
     private Teacher author;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id")
+    private Course course;
     private int moreTime;
 
-    public Exam(String id_exam, ArrayList<Question> questions, int time, String freeTextStudent, String freeTextTeacher, Teacher author) {
-        this.id_exam = id_exam;
-        this.questions = questions;
+    public Exam(String id_exam, ArrayList<Question> questions, int time, String freeTextStudent, String freeTextTeacher, Teacher author, Course course) {
+        super();
+        setCourse(course);
+        setAuthor(author);
+        setId_exam(id_exam);
+        this.questions = new ArrayList<Question>(questions);
         this.time = time;
         this.freeTextStudent = freeTextStudent;
         this.freeTextTeacher = freeTextTeacher;
-        this.author = author;
         this.moreTime = 0;
     }
 
@@ -52,7 +57,23 @@ public class Exam implements Serializable {
     }
 
     public void setId_exam(String id_exam) {
-        this.id_exam = id_exam;
+        this.id_exam=id_exam;
+        if(this.course.getName().equals("Basic Math"))
+            this.id_exam+="0101";
+        if(this.course.getName().equals("Advanced Math"))
+            this.id_exam+="0201";
+        if(this.course.getName().equals("Basic English"))
+            this.id_exam+="0302";
+        if(this.course.getName().equals("Advanced English"))
+            this.id_exam+="0402";
+        if(this.course.getName().equals("Basic Science"))
+            this.id_exam+="0503";
+        if(this.course.getName().equals("Advanced Science"))
+            this.id_exam+="0603";
+        if(this.course.getName().equals("Basic Geography"))
+            this.id_exam+="0704";
+        if(this.course.getName().equals("Advanced Geography"))
+            this.id_exam+="0804";
     }
 
     public List<Question> getQuestions() {
@@ -62,7 +83,9 @@ public class Exam implements Serializable {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
-
+    public void setPoints(Question q, int points){
+        q.setPoints(points);
+    }
     public int getTime() {
         return time;
     }
@@ -96,6 +119,18 @@ public class Exam implements Serializable {
             author.getExams().add(this);
         }
     }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        if(course!=null) {
+            this.course = course;
+            course.getExams().add(this);
+        }
+    }
+
     public int getMoreTime() {
         return moreTime;
     }

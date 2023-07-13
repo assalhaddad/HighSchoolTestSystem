@@ -89,6 +89,15 @@ public class Teacher implements Serializable {
     public boolean containsExam(Exam exam) {
         return exams.contains(exam);
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void addSubject(Subject newSubject) {
         subjects.add(newSubject);
     }
