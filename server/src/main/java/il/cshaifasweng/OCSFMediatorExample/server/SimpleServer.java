@@ -526,6 +526,7 @@ public class SimpleServer extends AbstractServer {
 
 	}
 	Question question = new Question();
+	Exam exam = new Exam();
 
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
@@ -570,6 +571,19 @@ public class SimpleServer extends AbstractServer {
 					session.save(question);
 					session.flush();
 					client.sendToClient(new Message("question added successfully",(Object)null));
+					session.close();
+				}
+				else if(request.equals("new exam")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					exam.copy((Exam)message.getObject());
+					exams.add(exam);
+					session.save(exam);
+					System.out.println("here4");
+					session.flush();
+					System.out.println("here5");
+					client.sendToClient(new Message("exam added successfully",(Object)null));
+					System.out.println("here6");
 					session.close();
 				}
 				else if(request.equals("get subject")){

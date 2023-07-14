@@ -40,6 +40,7 @@ public class Course implements Serializable {
         this.name = c.getName();
         this.questions = c.getQuestions();
         this.subject = c.getSubject();
+        this.exams = c.getExams();
     }
 
     public int getId() {

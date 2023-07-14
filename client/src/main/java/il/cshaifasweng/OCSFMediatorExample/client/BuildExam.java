@@ -1,9 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.Course;
-import il.cshaifasweng.OCSFMediatorExample.entities.Message;
-import il.cshaifasweng.OCSFMediatorExample.entities.Question;
-import il.cshaifasweng.OCSFMediatorExample.entities.Subject;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,8 +45,12 @@ public class BuildExam {
             pointsError();
         else if(idTF.getText().isEmpty()||timeTF.getText().isEmpty())
             missingInfo();
-        else
-            buildExam();
+        else {
+            Teacher teacher = new Teacher("assal","stam","stam");
+            Exam newExam = new Exam(idTF.getText(),questions,Integer.parseInt(timeTF.getText()),"","",teacher,chosenCourse);
+            //System.out.println("exam object has been built");
+            sendMessage("new exam",newExam);
+        }
     }
 
     @FXML
@@ -147,15 +148,16 @@ public class BuildExam {
         Object obj = message.getObject();
         if(request.equals("subjects list is ready"))
             getSubjectsRequest(obj);
-        else if(request.equals("found subject")) {
+        else if(request.equals("found subject"))
             getChosenSubjectRequest(obj);
-        }
         else if(request.equals("courses list is ready"))
             getCoursesRequest(obj);
         else if(request.equals("found course"))
             getChosenCourseRequest(obj);
         else if(request.equals("found question"))
             getChosenQuestionRequest(obj);
+        else if(request.equals("exam added successfully"))
+            buildExam();
     }
 
     private void getChosenQuestionRequest(Object obj){
