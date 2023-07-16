@@ -60,13 +60,13 @@ public class BuildExam {
         questionsList.getItems().clear();
         pointsTF.setVisible(false);
         addBTN.setVisible(false);
-        sendMessage("get subject", subject);
+        sendMessage("get subject for build exam", subject);
     }
 
     @FXML
     void selectCourse(ActionEvent event) {
         String course = this.courseCMB.getValue().toString();
-        sendMessage("get course", course);
+        sendMessage("get course for build exam", course);
     }
 
     @FXML
@@ -122,7 +122,7 @@ public class BuildExam {
         EventBus.getDefault().register(this);
         courseCMB.setDisable(true);
         totalTF.setText(String.valueOf(totalPoints));
-        sendMessage("get list of subjects", (Object)null);
+        sendMessage("get list of subjects for build exam", (Object)null);
         pointsTF.setVisible(false);
         addBTN.setVisible(false);
     }
@@ -146,13 +146,13 @@ public class BuildExam {
     public void handleMessage(Message message){
         String request = message.getMessage();
         Object obj = message.getObject();
-        if(request.equals("subjects list is ready"))
+        if(request.equals("subjects list is ready for build exam"))
             getSubjectsRequest(obj);
-        else if(request.equals("found subject"))
+        else if(request.equals("found subject for build exam"))
             getChosenSubjectRequest(obj);
-        else if(request.equals("courses list is ready"))
+        else if(request.equals("courses list is ready for build exam"))
             getCoursesRequest(obj);
-        else if(request.equals("found course"))
+        else if(request.equals("found course for build exam"))
             getChosenCourseRequest(obj);
         else if(request.equals("found question"))
             getChosenQuestionRequest(obj);
@@ -173,13 +173,14 @@ public class BuildExam {
     }
     private void getChosenSubjectRequest(Object obj){
         chosenSubject.copy((Subject) obj);
-        sendMessage("get list of courses", chosenSubject.getName());
+        sendMessage("get list of courses for build exam", chosenSubject.getName());
     }
 
     private void getCoursesRequest(Object obj){
         courseCMB.setDisable(false);
         ObservableList<String> courseList = FXCollections.observableArrayList((ArrayList)obj);
         courseCMB.setItems(courseList);
+        System.out.println("setting courses in build exam");
     }
 
     private void getSubjectsRequest(Object obj){

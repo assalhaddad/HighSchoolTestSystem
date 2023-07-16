@@ -553,16 +553,25 @@ public class SimpleServer extends AbstractServer {
 				message.setMessage("Error! we got an empty message");
 				client.sendToClient(message);
 			} else {
-				if(request.equals("get list of subjects")){
+				if(request.equals("get list of subjects for add question")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					ArrayList<String> subjectList = new ArrayList(subjects.size());
 					for(int i=0; i<subjects.size(); i++)
 						subjectList.add(i, subjects.get(i).getName());
-					client.sendToClient(new Message("subjects list is ready", subjectList));
+					client.sendToClient(new Message("subjects list is ready for add question", subjectList));
 					session.close();
 				}
-				else if(request.equals("get list of courses")){
+				else if(request.equals("get list of subjects for build exam")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					ArrayList<String> subjectList = new ArrayList(subjects.size());
+					for(int i=0; i<subjects.size(); i++)
+						subjectList.add(i, subjects.get(i).getName());
+					client.sendToClient(new Message("subjects list is ready for build exam", subjectList));
+					session.close();
+				}
+				else if(request.equals("get list of courses for add question")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					String subject = (String)message.getObject();
@@ -575,7 +584,23 @@ public class SimpleServer extends AbstractServer {
 						}
 					}
 					System.out.println("courses list is ready");
-					client.sendToClient(new Message("courses list is ready", courseList));
+					client.sendToClient(new Message("courses list is ready for add question", courseList));
+					session.close();
+				}
+				else if(request.equals("get list of courses for build exam")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					String subject = (String)message.getObject();
+					ArrayList<String> courseList = new ArrayList();
+					int count = 0;
+					for(int i=0; i<courses.size(); i++) {
+						if (courses.get(i).getSubject().getName().equals(subject)) {
+							courseList.add(count, courses.get(i).getName());
+							count++;
+						}
+					}
+					System.out.println("courses list is ready");
+					client.sendToClient(new Message("courses list is ready for build exam", courseList));
 					session.close();
 				}
 				else if(request.equals("new question")){
@@ -601,27 +626,53 @@ public class SimpleServer extends AbstractServer {
 					System.out.println("here6");
 					session.close();
 				}
-				else if(request.equals("get subject")){
+				else if(request.equals("get subject for add question")){
 					session = sessionFactory.openSession();
 					session.beginTransaction();
 					String name = (String)message.getObject();
 					for(int i=0; i<subjects.size(); i++){
 						if(subjects.get(i).getName().equals(name)){
 							Subject chosenSubject= subjects.get(i);
-							client.sendToClient(new Message("found subject", chosenSubject));
+							client.sendToClient(new Message("found subject for add question", chosenSubject));
 							session.close();
 							break;
 						}
 					}
 				}
-				else if(request.equals("get course")){
+				else if(request.equals("get subject for build exam")){
+					session = sessionFactory.openSession();
+					session.beginTransaction();
+					String name = (String)message.getObject();
+					for(int i=0; i<subjects.size(); i++){
+						if(subjects.get(i).getName().equals(name)){
+							Subject chosenSubject= subjects.get(i);
+							client.sendToClient(new Message("found subject for build exam", chosenSubject));
+							session.close();
+							break;
+						}
+					}
+				}
+				else if(request.equals("get course for add question")){
 					session = sessionFactory.openSession();
 					session.beginTransaction();
 					String name = (String)message.getObject();
 					for(int i=0; i<courses.size(); i++){
 						if(courses.get(i).getName().equals(name)){
 							Course chosenCourse= courses.get(i);
-							client.sendToClient(new Message("found course", chosenCourse));
+							client.sendToClient(new Message("found course for add question", chosenCourse));
+							session.close();
+							break;
+						}
+					}
+				}
+				else if(request.equals("get course for build exam")){
+					session = sessionFactory.openSession();
+					session.beginTransaction();
+					String name = (String)message.getObject();
+					for(int i=0; i<courses.size(); i++){
+						if(courses.get(i).getName().equals(name)){
+							Course chosenCourse= courses.get(i);
+							client.sendToClient(new Message("found course for build exam", chosenCourse));
 							session.close();
 							break;
 						}

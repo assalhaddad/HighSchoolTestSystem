@@ -54,7 +54,7 @@ public class AddQuestion {
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
-        sendMessage("get list of subjects", (Object)null);
+        sendMessage("get list of subjects for add question", (Object)null);
         courseCMB.setDisable(true);
     }
 
@@ -82,7 +82,7 @@ public class AddQuestion {
     void selectSubject(ActionEvent event) {
         String subject = this.subjectCMB.getValue().toString();
         courseCMB.getItems().clear();
-        sendMessage("get subject", subject);
+        sendMessage("get subject for add question", subject);
     }
 
     @FXML
@@ -90,7 +90,7 @@ public class AddQuestion {
         ObservableList<String> list = courseCMB.getCheckModel().getCheckedItems();
         int i = 0;
         for(Object obj : list){
-            sendMessage("get course",list.get(i).toString());
+            sendMessage("get course for add question",list.get(i).toString());
             i++;
         }
     }
@@ -125,22 +125,22 @@ public class AddQuestion {
     public void handleMessage(Message message){
         String request = message.getMessage();
         Object obj = message.getObject();
-        if(request.equals("subjects list is ready"))
+        if(request.equals("subjects list is ready for add question"))
             getSubjectsRequest(obj);
-        else if(request.equals("courses list is ready"))
+        else if(request.equals("courses list is ready for add question"))
             getCoursesRequest(obj);
         else if(request.equals("question added successfully"))
             addedNewQuestion();
-        else if(request.equals("found subject"))
+        else if(request.equals("found subject for add question"))
             getChosenSubjectRequest(obj);
-        else if(request.equals("found course")){
+        else if(request.equals("found course for add question")){
             getChosenCourseRequest(obj);
         }
     }
 
     private void getChosenSubjectRequest(Object obj){
         chosenSubject.copy((Subject) obj);
-        sendMessage("get list of courses", chosenSubject.getName());
+        sendMessage("get list of courses for add question", chosenSubject.getName());
     }
 
     private void getChosenCourseRequest(Object obj){
@@ -156,6 +156,7 @@ public class AddQuestion {
         ObservableList<String> courseList = FXCollections.observableArrayList((ArrayList)obj);
         //courseCMB.getItems().addAll(courseList);
         courseCMB.getItems().setAll(courseList);
+        System.out.println("setting courses in add question");
     }
     private void addedNewQuestion(){
         Platform.runLater(new Runnable() {
