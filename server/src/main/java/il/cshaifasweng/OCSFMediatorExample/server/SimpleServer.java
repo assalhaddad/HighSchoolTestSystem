@@ -207,6 +207,7 @@ public class SimpleServer extends AbstractServer {
 		questions.add(question);
 		session.save(question);
 		session.flush();
+		list.clear();
 		list.add(courses.get(2)); // Basic English
 		question = new Question("13702","Where ____ the dog?","are","it","is","does",3,subjects.get(1),list);
 		questions.add(question);
@@ -247,6 +248,7 @@ public class SimpleServer extends AbstractServer {
 		questions.add(question);
 		session.save(question);
 		session.flush();
+		list.clear();
 		list.add(courses.get(4)); // Basic Science
 		question = new Question("92703","Which animal lays eggs?","Dog","Cat","Duck","Sheep",3,subjects.get(2),list);
 		questions.add(question);
@@ -291,6 +293,7 @@ public class SimpleServer extends AbstractServer {
 		questions.add(question);
 		session.save(question);
 		session.flush();
+		list.clear();
 		list.add(courses.get(6)); // Basic Geography
 		question = new Question("72604","Which is the largest country in the world?","Russia","Canada","Ukraine","Mexico",1,subjects.get(3),list);
 		questions.add(question);

@@ -167,7 +167,7 @@ public class BuildExam {
     private void getChosenCourseRequest(Object obj){
         chosenCourse.copy((Course) obj);
         ArrayList<String> list = new ArrayList();
-        for(int i = 0; i<chosenCourse.getQuestions().size();i++)
+        for(int i = 0; i<chosenCourse.getQuestions().size(); i++)
             list.add(chosenCourse.getQuestions().get(i).getText());
         questionsList.getItems().setAll(list);
     }
