@@ -548,7 +548,6 @@ public class SimpleServer extends AbstractServer {
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		Message message = (Message)msg;
 		String request = message.getMessage();
-		//System.out.println("insidehandleMessageFromClient");
 		try {
 			if (request.isBlank()) {
 				message.setMessage("Error! we got an empty message");
