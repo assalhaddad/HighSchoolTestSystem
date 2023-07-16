@@ -55,8 +55,8 @@ public class TeacherPage {
     }
 
     @FXML
-    void CheckGradesBtn(ActionEvent event) {
-
+    void CheckGradesEvent(ActionEvent event) {
+        loadSceneForButton("checkGradesTeacher.fxml");
     }
 
     @FXML

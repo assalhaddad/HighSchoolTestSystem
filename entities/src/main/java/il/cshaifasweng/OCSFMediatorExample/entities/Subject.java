@@ -77,9 +77,11 @@ public class Subject implements Serializable {
         return teachers;
     }
     public void setTeachers(List<Teacher> teachers) {
-        this.teachers = teachers;
-        for(Teacher teacher : teachers){
-            teacher.getSubjects().add(this);
+        if(teachers!=null) {
+            this.teachers = teachers;
+            for (Teacher teacher : teachers) {
+                teacher.getSubjects().add(this);
+            }
         }
     }
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.666666667" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.BuildExam">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.666666667" prefWidth="500.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.BuildExam">
    <children>
       <Label alignment="CENTER" prefHeight="26.0" prefWidth="500.0" style="-fx-background-color: #70879d;" text="Build Exam" textFill="WHITE">
          <font>

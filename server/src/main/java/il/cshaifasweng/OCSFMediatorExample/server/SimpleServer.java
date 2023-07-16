@@ -118,35 +118,49 @@ public class SimpleServer extends AbstractServer {
 	}
 
 	public void generateStaff(){
+		ArrayList<Subject> list = new ArrayList();
+		list.add(subjects.get(0)); // Math
+		list.add(subjects.get(1)); // English
+		list.add(subjects.get(2)); // Science
+		list.add(subjects.get(3)); // Geography
 		Teacher teacher = new Teacher("Shir Sneh","shirSneh","shir132");
+		teacher.setSubjects(list);
 		teachersList.add(teacher);
+		currentTeacher.copy(teachersList.get(0)); // for example
 		session.save(teacher);
 		session.flush();
 		teacher = new Teacher("Nataly Monayer","natalyMonayer","nataly78");
+		teacher.setSubjects(list);
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
 		teacher = new Teacher("Or Meir","orMeir","or88");
+		teacher.setSubjects(list);
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
 		teacher = new Teacher("Moran Feldman","moranFeldman","moran2");
+		teacher.setSubjects(list);
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
 		teacher = new Teacher("Norit Cohen","noritCohen","norit77");
+		teacher.setSubjects(list);
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
 		teacher = new Teacher("Bill Gates","billGates","bill5");
+		teacher.setSubjects(list);
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
 		teacher = new Teacher("Taylor Swift","taylorSwift","taylor66");
+		teacher.setSubjects(list);
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
 		teacher = new Teacher("Merav Michaeli","meravMichaeli","merav46");
+		teacher.setSubjects(list);
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
@@ -527,6 +541,8 @@ public class SimpleServer extends AbstractServer {
 	}
 	Question question = new Question();
 	Exam exam = new Exam();
+	Teacher currentTeacher = new Teacher();
+	//currentTeacher.copy(teachersList.get(0)); // for example
 
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
@@ -618,8 +634,27 @@ public class SimpleServer extends AbstractServer {
 					String name = (String)message.getObject();
 					for(int i=0; i<questions.size(); i++){
 						if(questions.get(i).getText().equals(name)){
-							Question chosenQuestion= questions.get(i);
+							Question chosenQuestion = questions.get(i);
 							client.sendToClient(new Message("found question", chosenQuestion));
+							session.close();
+							break;
+						}
+					}
+				}
+				else if(request.equals("get teacher")){
+					session = sessionFactory.openSession();
+					session.beginTransaction();
+					client.sendToClient(new Message("found teacher", currentTeacher));
+					session.close();
+				}
+				else if(request.equals("get exam")){
+					session = sessionFactory.openSession();
+					session.beginTransaction();
+					String name = (String)message.getObject();
+					for(int i=0; i<exams.size(); i++){
+						if(exams.get(i).getId_exam().equals(name)) {
+							Exam chosenExam = exams.get(i);
+							client.sendToClient(new Message("found exam", chosenExam));
 							session.close();
 							break;
 						}
