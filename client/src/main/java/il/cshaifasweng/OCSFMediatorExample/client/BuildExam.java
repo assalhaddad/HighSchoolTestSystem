@@ -46,9 +46,9 @@ public class BuildExam {
         else if(idTF.getText().isEmpty()||timeTF.getText().isEmpty())
             missingInfo();
         else {
-            Teacher teacher = new Teacher("assal","stam","stam");
-            Exam newExam = new Exam(idTF.getText(),questions,Integer.parseInt(timeTF.getText()),"","",teacher,chosenCourse);
-            //System.out.println("exam object has been built");
+            Exam newExam = new Exam(idTF.getText(),questions,Integer.parseInt(timeTF.getText()),"","",chosenTeacher,chosenCourse);
+            System.out.println("exam object has been built");
+            questions.clear();
             sendMessage("new exam",newExam);
         }
     }
@@ -125,11 +125,13 @@ public class BuildExam {
         sendMessage("get list of subjects for build exam", (Object)null);
         pointsTF.setVisible(false);
         addBTN.setVisible(false);
+        sendMessage("get teacher for build exam", (Object) null);
     }
 
     Subject chosenSubject = new Subject();
     Course chosenCourse = new Course();
     Question chosenQuestion = new Question();
+    Teacher chosenTeacher = new Teacher();
     int totalPoints = 100;
     ArrayList<Question> questions= new ArrayList();
 
@@ -158,8 +160,13 @@ public class BuildExam {
             getChosenQuestionRequest(obj);
         else if(request.equals("exam added successfully"))
             buildExam();
-    }
+        else if(request.equals("found teacher for build exam"))
+            getTeacherRequest(obj);
 
+    }
+    private void getTeacherRequest(Object obj){
+        chosenTeacher.copy((Teacher) obj);
+    }
     private void getChosenQuestionRequest(Object obj){
         chosenQuestion.copy((Question) obj);
     }

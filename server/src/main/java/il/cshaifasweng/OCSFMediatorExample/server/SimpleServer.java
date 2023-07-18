@@ -517,6 +517,20 @@ public class SimpleServer extends AbstractServer {
 		session.flush();
 		list.clear();
 	}
+
+	public void generateSolutions(){
+		ArrayList<StudentData> data = new ArrayList();
+		ArrayList<Integer> list = new ArrayList();
+		list.add(3);
+		list.add(4);
+		list.add(1);
+		list.add(3);
+		StudentData s1= new StudentData(studentsList.get(0),90,0,list);
+		data.add(s1);
+		StudentData s2= new StudentData(studentsList.get(1),90,0,list);
+		data.add(s2);
+		SolvedExam solvedExam = new SolvedExam(data, "16.7.23", 90, exams.get(0));
+	}
 	public void connectToData() {
 		try {
 			SessionFactory sessionFactory = getSessionFactory();
@@ -698,6 +712,12 @@ public class SimpleServer extends AbstractServer {
 					session = sessionFactory.openSession();
 					session.beginTransaction();
 					client.sendToClient(new Message("found teacher", currentTeacher));
+					session.close();
+				}
+				else if(request.equals("get teacher for build exam")){
+					session = sessionFactory.openSession();
+					session.beginTransaction();
+					client.sendToClient(new Message("found teacher for build exam", currentTeacher));
 					session.close();
 				}
 				else if(request.equals("get exam")){
