@@ -57,6 +57,9 @@ public class Question implements Serializable {
         this.correct = q.getCorrect();
         this.points = q.getPoints();
         this.subject = q.getSubject();
+        this.courses = q.getCourses();
+        //setSubject(q.getSubject());
+        //setCourses(q.getCourses());
     }
     public Question() {
 

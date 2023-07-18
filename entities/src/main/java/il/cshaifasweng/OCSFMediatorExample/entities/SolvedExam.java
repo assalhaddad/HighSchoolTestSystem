@@ -1,31 +1,47 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
+@Table(name = "solvedExam")
 public class SolvedExam implements Serializable {
-    private ArrayList<StudentData>data;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @OneToMany (mappedBy = "solvedExam")
+    private List<StudentData> data;
     private String date;
     private int updatedTime;
-    Exam exam;
+    @OneToOne
+    @JoinColumn(name="exam_id")
+    private Exam exam;
     public SolvedExam(){}
-    public SolvedExam(ArrayList<StudentData> data, String date, int updatedTime, Exam exam){
+    public SolvedExam(String date, int updatedTime, Exam exam){
+        super();
         this.date = date;
         this.updatedTime = updatedTime;
-        this.data=data;
+        this.data=new ArrayList();
         this.exam=exam;
-        calculateGrades();
     }
 
     public void calculateGrades(){
         for(int i=0; i<this.data.size(); i++){
-            for(int j=0; j<this.exam.getQuestions().size();j++){
-                if(this.exam.getQuestions().get(j).getCorrect() == this.data.get(i).getStudentSolution().get(j))
-                    this.data.get(i).addToGrade(this.exam.getQuestions().get(j).getPoints());
+            if(this.data.get(i).getGrade()==0) {
+                for (int j = 0; j < this.exam.getQuestions().size(); j++) {
+                    //System.out.println("answer for ques "+j+": "+this.data.get(i).getStudentSolution().get(j));
+                    //System.out.println("the correct answer is: "+this.exam.getQuestions().get(j).getCorrect());
+                    if (this.exam.getQuestions().get(j).getCorrect() == this.data.get(i).getStudentSolution().get(j)) {
+                        //System.out.println("adding "+this.exam.getQuestions().get(j).getPoints()+" for question num "+j);
+                        this.data.get(i).addToGrade(this.exam.getQuestions().get(j).getPoints());
+                    }
+                }
             }
         }
     }
-    public ArrayList<StudentData> getData() {
+    public List<StudentData> getData() {
         return data;
     }
 

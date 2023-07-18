@@ -27,17 +27,26 @@ public class Exam implements Serializable {
     @JoinColumn(name = "course_id")
     private Course course;
     private int moreTime;
+    @OneToOne(mappedBy = "exam")
+    private SolvedExam solvedExam;
 
     public Exam(String id_exam, ArrayList<Question> questions, int time, String freeTextStudent, String freeTextTeacher, Teacher author, Course course) {
         super();
         setCourse(course);
         setAuthor(author);
         setId_exam(id_exam);
-        this.questions = new ArrayList<Question>(questions);
+        //this.questions = new ArrayList<Question>(questions);
+        this.questions = new ArrayList();
+        for(Question question : questions){
+            Question temp = new Question();
+            temp.copy(question);
+            this.questions.add(temp);
+        }
         this.time = time;
         this.freeTextStudent = freeTextStudent;
         this.freeTextTeacher = freeTextTeacher;
         this.moreTime = 0;
+        this.solvedExam = new SolvedExam();
     }
 
     public Exam() {
@@ -53,6 +62,7 @@ public class Exam implements Serializable {
         this.moreTime = e.getMoreTime();
         this.freeTextStudent = e.getFreeTextStudent();
         this.freeTextTeacher = e.getFreeTextTeacher();
+        this.solvedExam = e.getSolvedExam();
     }
 
     public int getId() {
@@ -65,6 +75,14 @@ public class Exam implements Serializable {
 
     public String getId_exam() {
         return id_exam;
+    }
+
+    public SolvedExam getSolvedExam() {
+        return solvedExam;
+    }
+
+    public void setSolvedExam(SolvedExam solvedExam) {
+        this.solvedExam = solvedExam;
     }
 
     public void setId_exam(String id_exam) {

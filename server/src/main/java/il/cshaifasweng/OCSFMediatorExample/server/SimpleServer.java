@@ -39,6 +39,9 @@ public class SimpleServer extends AbstractServer {
 		configuration.addAnnotatedClass(Principal.class);
 		configuration.addAnnotatedClass(Exam.class);
 		configuration.addAnnotatedClass(Course.class);
+		configuration.addAnnotatedClass(StudentData.class);
+		configuration.addAnnotatedClass(SolvedExam.class);
+
 
 		ServiceRegistry serviceRegistry = (new StandardServiceRegistryBuilder()).applySettings(configuration.getProperties()).build();
 		return configuration.buildSessionFactory(serviceRegistry);
@@ -519,17 +522,21 @@ public class SimpleServer extends AbstractServer {
 	}
 
 	public void generateSolutions(){
-		ArrayList<StudentData> data = new ArrayList();
+		SolvedExam solvedExam = new SolvedExam("16.7.23", 90, exams.get(0));
+		session.save(solvedExam);
+		session.flush();
 		ArrayList<Integer> list = new ArrayList();
 		list.add(3);
 		list.add(4);
 		list.add(1);
 		list.add(3);
-		StudentData s1= new StudentData(studentsList.get(0),90,0,list);
-		data.add(s1);
-		StudentData s2= new StudentData(studentsList.get(1),90,0,list);
-		data.add(s2);
-		SolvedExam solvedExam = new SolvedExam(data, "16.7.23", 90, exams.get(0));
+		StudentData s1= new StudentData(studentsList.get(0),90,0,list, solvedExam);
+		session.save(s1);
+		session.flush();
+		StudentData s2= new StudentData(studentsList.get(1),90,0,list, solvedExam);
+		session.save(s2);
+		session.flush();
+		solvedExam.calculateGrades();
 	}
 	public void connectToData() {
 		try {
@@ -542,6 +549,7 @@ public class SimpleServer extends AbstractServer {
 			generateStaff();
 			generateQuestions();
 			generateExams();
+			generateSolutions();
 			session.getTransaction().commit();
 		} catch (Exception var5) {
 			if (session != null) {
