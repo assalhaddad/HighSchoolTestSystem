@@ -1067,8 +1067,8 @@ public class SimpleServer extends AbstractServer {
 					ArrayList<String> subjectList = new ArrayList(subjects.size());
 					for(int i=0; i<subjects.size(); i++)
 						subjectList.add(i, subjects.get(i).getName());
-					client.sendToClient(new Message("subjects list is ready for add question", subjectList));
 					session.close();
+					client.sendToClient(new Message("subjects list is ready for add question", subjectList));
 				}
 				else if(request.equals("get list of subjects for build exam")){
 					session=sessionFactory.openSession();
@@ -1076,8 +1076,8 @@ public class SimpleServer extends AbstractServer {
 					ArrayList<String> subjectList = new ArrayList(subjects.size());
 					for(int i=0; i<subjects.size(); i++)
 						subjectList.add(i, subjects.get(i).getName());
-					client.sendToClient(new Message("subjects list is ready for build exam", subjectList));
 					session.close();
+					client.sendToClient(new Message("subjects list is ready for build exam", subjectList));
 				}
 				else if(request.equals("get list of courses for add question")){
 					session=sessionFactory.openSession();
@@ -1091,9 +1091,9 @@ public class SimpleServer extends AbstractServer {
 							count++;
 						}
 					}
-					System.out.println("courses list is ready");
-					client.sendToClient(new Message("courses list is ready for add question", courseList));
+					//System.out.println("courses list is ready");
 					session.close();
+					client.sendToClient(new Message("courses list is ready for add question", courseList));
 				}
 				else if(request.equals("get list of courses for build exam")){
 					session=sessionFactory.openSession();
@@ -1107,9 +1107,9 @@ public class SimpleServer extends AbstractServer {
 							count++;
 						}
 					}
-					System.out.println("courses list is ready");
-					client.sendToClient(new Message("courses list is ready for build exam", courseList));
+					//System.out.println("courses list is ready");
 					session.close();
+					client.sendToClient(new Message("courses list is ready for build exam", courseList));
 				}
 				else if(request.equals("new question")){
 					session=sessionFactory.openSession();
@@ -1118,21 +1118,24 @@ public class SimpleServer extends AbstractServer {
 					questions.add(question);
 					session.save(question);
 					session.flush();
-					client.sendToClient(new Message("question added successfully",(Object)null));
+					session.getTransaction().commit();
 					session.close();
+					client.sendToClient(new Message("question added successfully",(Object)null));
 				}
 				else if(request.equals("new exam")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					exam.copy((Exam)message.getObject());
 					exams.add(exam);
+					System.out.println("here3");
 					session.save(exam);
-					System.out.println("here4");
 					session.flush();
+					session.getTransaction().commit(); //just added
+					System.out.println("here4");
+					session.close();
 					System.out.println("here5");
 					client.sendToClient(new Message("exam added successfully",(Object)null));
 					System.out.println("here6");
-					session.close();
 				}
 				else if(request.equals("get subject for add question")){
 					session = sessionFactory.openSession();
@@ -1234,6 +1237,7 @@ public class SimpleServer extends AbstractServer {
 							studentDataList.get(i).setGrade(newGrade);
 							session.update(studentDataList.get(i));
 							session.getTransaction().commit();
+							session.close();
 							break;
 						}
 					client.sendToClient(new Message("grade updated successfully"));

@@ -80,7 +80,8 @@ public class AddQuestion {
     ArrayList<Course> chosenCourses = new ArrayList();
     @FXML
     void selectSubject(ActionEvent event) {
-        String subject = this.subjectCMB.getValue().toString();
+        //String subject = this.subjectCMB.getValue().toString();
+        String subject = this.subjectCMB.getSelectionModel().getSelectedItem();
         courseCMB.getItems().clear();
         sendMessage("get subject for add question", subject);
     }
@@ -169,6 +170,7 @@ public class AddQuestion {
             }
         });
         subjectCMB.getSelectionModel().clearSelection();
+        courseCMB.getCheckModel().clearChecks();
         courseCMB.getItems().clear();
         courseCMB.setDisable(true);
         idTF.clear();
