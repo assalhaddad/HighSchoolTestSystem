@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -66,7 +67,11 @@ public class CheckGradesTeacher {
 
     @FXML
     void changeGrade(ActionEvent event) {
-        hide();
+        if(changeTF.getText().isEmpty()||explainTF.getText().isEmpty())
+            missingInfo();
+        else if(Integer.parseInt(changeTF.getText()) > 100 || Integer.parseInt(changeTF.getText()) < 0)
+            invalidError();
+        else updateGrade();
     }
 
     @FXML
@@ -92,6 +97,8 @@ public class CheckGradesTeacher {
             getTeacherRequest(obj);
         else if(request.equals("found exam"))
             getExamRequest(obj);
+        else if(request.equals("grade updated successfully"))
+            success();
     }
     public void getTeacherRequest(Object obj){
         currentTeacher.copy((Teacher)obj);
@@ -111,6 +118,13 @@ public class CheckGradesTeacher {
         gradeCol.setCellValueFactory(new PropertyValueFactory<StudentData, Integer>("grade"));
         tableView.setItems(data);
     }
+    public void updateGrade(){
+        //String chosenStudent = tableView.getSelectionModel().getSelectedItem().getName();
+        StudentData chosenStudent = tableView.getSelectionModel().getSelectedItem();
+        int newGrade = Integer.parseInt(changeTF.getText());
+        chosenStudent.setGrade(newGrade);
+        sendMessage("update grade", chosenStudent);
+    }
     public void hide(){
         changeLBL.setVisible(false);
         changeTF.setVisible(false);
@@ -126,6 +140,46 @@ public class CheckGradesTeacher {
         explainLBL.setVisible(true);
         submitBTN.setVisible(true);
         rectangle.setVisible(true);
+    }
+    private void missingInfo(){
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error!");
+                alert.setHeaderText("Some information is missing");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
+    }
+    private void invalidError(){
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error!");
+                alert.setHeaderText("Illegal grade");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
+    }
+
+    private void success(){
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success!");
+                alert.setHeaderText("Grade updated successfully");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
+        String exam = idCMB.getValue().toString();
+        sendMessage("get exam", exam);
+
+        changeTF.clear();
+        explainTF.clear();
+        hide();
     }
 
 }

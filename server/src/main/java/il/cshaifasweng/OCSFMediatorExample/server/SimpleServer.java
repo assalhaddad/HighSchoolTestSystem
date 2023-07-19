@@ -53,6 +53,8 @@ public class SimpleServer extends AbstractServer {
 	ArrayList<Subject> subjects = new ArrayList();
 	ArrayList<Course> courses = new ArrayList();
 	ArrayList<Exam> exams = new ArrayList();
+	ArrayList<StudentData> studentDataList = new ArrayList();
+	ArrayList<SolvedExam> solvedExamList = new ArrayList();
 	public void generateStudents(){
 		Student student=new Student("123456781","Assal Haddad", "assalHaddad","assal123");
 		studentsList.add(student);
@@ -523,6 +525,7 @@ public class SimpleServer extends AbstractServer {
 
 	public void generateSolutions(){
 		SolvedExam solvedExam = new SolvedExam("16.7.23", 90, exams.get(0));
+		solvedExamList.add(solvedExam);
 		session.save(solvedExam);
 		session.flush();
 		ArrayList<Integer> list = new ArrayList();
@@ -531,9 +534,11 @@ public class SimpleServer extends AbstractServer {
 		list.add(1);
 		list.add(3);
 		StudentData s1= new StudentData(studentsList.get(0),90,0,list, solvedExam);
+		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
 		StudentData s2= new StudentData(studentsList.get(1),90,0,list, solvedExam);
+		studentDataList.add(s2);
 		session.save(s2);
 		session.flush();
 		solvedExam.calculateGrades();
@@ -740,6 +745,20 @@ public class SimpleServer extends AbstractServer {
 							break;
 						}
 					}
+				}
+				else if(request.equals("update grade")){
+					session = sessionFactory.openSession();
+					session.beginTransaction();
+					StudentData s = (StudentData) message.getObject();
+					int newGrade = s.getGrade();
+					for(int i =0; i<studentDataList.size(); i++)
+						if(studentDataList.get(i).getId() == s.getId()){
+							studentDataList.get(i).setGrade(newGrade);
+							session.update(studentDataList.get(i));
+							session.getTransaction().commit();
+							break;
+						}
+					client.sendToClient(new Message("grade updated successfully"));
 				}
 				session.flush();
 				session.close();

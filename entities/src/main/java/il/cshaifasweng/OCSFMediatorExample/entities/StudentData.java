@@ -43,6 +43,10 @@ public class StudentData implements Serializable {
 
    }
 
+   public int getId() {
+      return id;
+   }
+
    public int getGrade() {
       return grade;
    }
