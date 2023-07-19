@@ -24,7 +24,7 @@ public class SolvedExam implements Serializable {
         this.date = date;
         this.updatedTime = updatedTime;
         this.data=new ArrayList();
-        this.exam=exam;
+        setExam(exam);
     }
 
     public void calculateGrades(){
@@ -54,7 +54,10 @@ public class SolvedExam implements Serializable {
     }
 
     public void setExam(Exam exam) {
-        this.exam = exam;
+        if(exam!=null) {
+            this.exam = exam;
+            exam.setSolvedExam(this);
+        }
     }
 
     public String getDate() {

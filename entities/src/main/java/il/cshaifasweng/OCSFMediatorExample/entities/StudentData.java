@@ -18,6 +18,7 @@ public class StudentData implements Serializable {
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "student_id")
    private Student student;
+   private String name;
    private int timePassed;
    private int end;
    private int grade;
@@ -35,6 +36,7 @@ public class StudentData implements Serializable {
       this.studentSolution= new ArrayList<Integer>(studentSolution);
       this.grade=0;
       setSolvedExam(solvedExam);
+      this.name = student.getName();
    }
 
    public StudentData() {
@@ -81,5 +83,13 @@ public class StudentData implements Serializable {
          this.solvedExam = solvedExam;
          solvedExam.getData().add(this);
       }
+   }
+
+   public String getName() {
+      return name;
+   }
+
+   public void setName(String name) {
+      this.name = name;
    }
 }

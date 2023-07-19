@@ -1,14 +1,17 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.Exam;
-import il.cshaifasweng.OCSFMediatorExample.entities.Message;
-import il.cshaifasweng.OCSFMediatorExample.entities.Teacher;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -17,10 +20,19 @@ import java.io.IOException;
 public class CheckGradesTeacher {
 
     @FXML
-    private Button changeBTN;
+    private Button submitBTN;
 
     @FXML
     private Label changeLBL;
+
+    @FXML
+    private Label explainLBL;
+
+    @FXML
+    private TextField explainTF;
+
+    @FXML
+    private Rectangle rectangle;
 
     @FXML
     private TextField changeTF;
@@ -34,12 +46,16 @@ public class CheckGradesTeacher {
     @FXML
     private TextField subjectTF;
     @FXML
+    private TableView<StudentData> tableView;
+    @FXML
+    private TableColumn<StudentData, Integer> gradeCol;
+    @FXML
+    private TableColumn<StudentData, String> nameCol;
+    @FXML
     void initialize() {
         EventBus.getDefault().register(this);
         sendMessage("get teacher", (Object)null);
-        changeLBL.setVisible(false);
-        changeTF.setVisible(false);
-        changeBTN.setVisible(false);
+        hide();
     }
 
     @FXML
@@ -49,8 +65,13 @@ public class CheckGradesTeacher {
     }
 
     @FXML
-    void explainTF(ActionEvent event) {
+    void changeGrade(ActionEvent event) {
+        hide();
+    }
 
+    @FXML
+    void makeVisible(MouseEvent event) {
+        show();
     }
 
     private void sendMessage(String op, Object obj) {
@@ -82,6 +103,29 @@ public class CheckGradesTeacher {
         chosenExam.copy((Exam)obj);
         subjectTF.setText(chosenExam.getCourse().getSubject().getName());
         courseTF.setText((chosenExam.getCourse().getName()));
+        displayInfo();
+    }
+    public void displayInfo(){
+        ObservableList<StudentData> data = FXCollections.observableArrayList(chosenExam.getSolvedExam().getData());
+        nameCol.setCellValueFactory(new PropertyValueFactory<StudentData, String>("name"));
+        gradeCol.setCellValueFactory(new PropertyValueFactory<StudentData, Integer>("grade"));
+        tableView.setItems(data);
+    }
+    public void hide(){
+        changeLBL.setVisible(false);
+        changeTF.setVisible(false);
+        explainTF.setVisible(false);
+        explainLBL.setVisible(false);
+        submitBTN.setVisible(false);
+        rectangle.setVisible(false);
+    }
+    public void show(){
+        changeLBL.setVisible(true);
+        changeTF.setVisible(true);
+        explainTF.setVisible(true);
+        explainLBL.setVisible(true);
+        submitBTN.setVisible(true);
+        rectangle.setVisible(true);
     }
 
 }
