@@ -277,7 +277,8 @@ public class BuildExam {
         });
         Question temp = new Question();
         temp.copy(chosenQuestion);
-        //System.out.println("Adding "+temp.getText());
+        temp.setPoints(Integer.parseInt(pointsTF.getText()));
+        //System.out.println("Adding "+temp.getText() +" from course: " + temp.getCourses().get(0).getName());
         questions.add(temp);
         pointsTF.setVisible(false);
         addBTN.setVisible(false);

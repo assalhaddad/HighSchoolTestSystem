@@ -141,8 +141,11 @@ public class Question implements Serializable {
 
     public void setCourses(List<Course> courses) {
         if(courses!=null){
-            this.courses = courses;
+            this.courses = new ArrayList();
             for(Course course : courses){
+                Course temp = new Course();
+                temp.copy(course);
+                this.courses.add(temp);
                 course.getQuestions().add(this);
             }
         }
