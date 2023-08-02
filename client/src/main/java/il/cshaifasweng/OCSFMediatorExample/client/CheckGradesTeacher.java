@@ -55,7 +55,9 @@ public class CheckGradesTeacher {
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
-        sendMessage("get teacher", (Object)null);
+        currentTeacher.copy(Login.teacher);
+        getTeacherRequest();
+        //sendMessage("get teacher", (Object)null);
         hide();
     }
 
@@ -93,15 +95,15 @@ public class CheckGradesTeacher {
     public void handleMessage(Message message){
         String request = message.getMessage();
         Object obj = message.getObject();
-        if(request.equals("found teacher"))
-            getTeacherRequest(obj);
-        else if(request.equals("found exam"))
+       // if(request.equals("found teacher"))
+           // getTeacherRequest(obj);
+        if(request.equals("found exam"))
             getExamRequest(obj);
         else if(request.equals("grade updated successfully"))
             success();
     }
-    public void getTeacherRequest(Object obj){
-        currentTeacher.copy((Teacher)obj);
+    public void getTeacherRequest(){
+        //currentTeacher.copy((Teacher)obj);
         for(int i = 0; i<currentTeacher.getExams().size(); i++){
             idCMB.getItems().add(currentTeacher.getExams().get(i).getId_exam());
         }

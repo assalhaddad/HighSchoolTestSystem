@@ -125,7 +125,8 @@ public class BuildExam {
         sendMessage("get list of subjects for build exam", (Object)null);
         pointsTF.setVisible(false);
         addBTN.setVisible(false);
-        sendMessage("get teacher for build exam", (Object) null);
+        chosenTeacher.copy(Login.teacher);
+        //sendMessage("get teacher for build exam", (Object) null);
     }
 
     Subject chosenSubject = new Subject();
@@ -160,8 +161,8 @@ public class BuildExam {
             getChosenQuestionRequest(obj);
         else if(request.equals("exam added successfully"))
             buildExam();
-        else if(request.equals("found teacher for build exam"))
-            getTeacherRequest(obj);
+        //else if(request.equals("found teacher for build exam"))
+            //getTeacherRequest(obj);
 
     }
     private void getTeacherRequest(Object obj){

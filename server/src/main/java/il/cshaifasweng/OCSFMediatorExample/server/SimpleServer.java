@@ -41,6 +41,7 @@ public class SimpleServer extends AbstractServer {
 		configuration.addAnnotatedClass(Course.class);
 		configuration.addAnnotatedClass(StudentData.class);
 		configuration.addAnnotatedClass(SolvedExam.class);
+		configuration.addAnnotatedClass(Request.class);
 
 
 		ServiceRegistry serviceRegistry = (new StandardServiceRegistryBuilder()).applySettings(configuration.getProperties()).build();
@@ -55,6 +56,8 @@ public class SimpleServer extends AbstractServer {
 	ArrayList<Exam> exams = new ArrayList();
 	ArrayList<StudentData> studentDataList = new ArrayList();
 	ArrayList<SolvedExam> solvedExamList = new ArrayList();
+	ArrayList<Request> requests = new ArrayList();
+	Principal principal;
 	public void generateStudents(){
 		Student student=new Student("123456781","Assal Haddad", "assalHaddad","assal123");
 		studentsList.add(student);
@@ -169,9 +172,9 @@ public class SimpleServer extends AbstractServer {
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
-		//Principal principal = new Principal("Malki Grosman","malkiGrosman","thePrinciple1");
-		//session.save(principal);
-		//session.flush();
+		principal = new Principal("Malki Grosman","malkiGrosman","thePrincipal1");
+		session.save(principal);
+		session.flush();
 	}
 
 	public void generateQuestions() {
@@ -1050,7 +1053,7 @@ public class SimpleServer extends AbstractServer {
 	Question question = new Question();
 	Exam exam = new Exam();
 	Teacher currentTeacher = new Teacher();
-	//currentTeacher.copy(teachersList.get(0)); // for example
+	Request requestExtraTime = new Request();
 
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
@@ -1129,6 +1132,7 @@ public class SimpleServer extends AbstractServer {
 					exams.add(exam);
 					System.out.println("here3");
 					session.save(exam);
+					System.out.println("hereeee");
 					session.flush();
 					session.getTransaction().commit(); //just added
 					System.out.println("here4");
@@ -1241,6 +1245,65 @@ public class SimpleServer extends AbstractServer {
 							break;
 						}
 					client.sendToClient(new Message("grade updated successfully"));
+				}
+				else if(request.equals("get list of students")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					ArrayList<Student> students = new ArrayList<Student>(studentsList.size());
+					for(int i=0; i<studentsList.size(); i++)
+						students.add(i, studentsList.get(i));
+					client.sendToClient(new Message("students list is ready", students));
+					session.close();
+				}
+				else if(request.equals("get list of teachers")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					ArrayList<Teacher> teachers = new ArrayList<Teacher>(teachersList.size());
+					for(int i=0; i<teachersList.size(); i++)
+						teachers.add(i, teachersList.get(i));
+					client.sendToClient(new Message("teachers list is ready", teachers));
+					session.close();
+				}
+				else if(request.equals("get the principal")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					client.sendToClient(new Message("principal is ready", principal));
+					session.close();
+				}
+				else if(request.equals("new extra time request")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					requestExtraTime.copy((Request)message.getObject());
+					requests.add(requestExtraTime);
+					session.save(requestExtraTime);
+					session.flush();
+					client.sendToClient(new Message("request added successfully",(Object)null));
+					session.close();
+				}
+				else if(request.equals("get list of requests")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					ArrayList<Request> requests1 = new ArrayList<Request>();
+					for(int i=0; i<requests.size(); i++){
+						if(!requests.get(i).getIsDone())
+							requests1.add(i, requests.get(i));
+					}
+					client.sendToClient(new Message("requests list is ready", requests1));
+					session.close();
+				}
+				else if(request.equals("approve this request")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					requestExtraTime.copy((Request)message.getObject());
+					requests.remove(requestExtraTime);
+					session.remove(requestExtraTime);
+					requestExtraTime.copy((Request)message.getObject());
+					requestExtraTime.setIsDone();
+					requests.add(requestExtraTime);
+					session.save(requestExtraTime);
+					session.flush();
+					client.sendToClient(new Message("request approved successfully",(Object)null));
+					session.close();
 				}
 				session.flush();
 				session.close();
