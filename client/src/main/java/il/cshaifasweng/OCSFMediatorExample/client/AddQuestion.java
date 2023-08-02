@@ -85,6 +85,7 @@ public class AddQuestion {
         points = Integer.parseInt(pointsTF.getText());
         id = this.idTF.getText();
         text = questionTF.getText();
+        subject = new Subject(subjectCMB.getSelectionModel().getSelectedItem());
         Question newQuestion = new Question(id,text,answer1,answer2,answer3,answer4,correct,subject);
         sendMessage("new question",newQuestion);
     }

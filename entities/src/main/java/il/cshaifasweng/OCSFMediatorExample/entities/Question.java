@@ -4,8 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
-import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,15 +31,15 @@ public class Question implements Serializable {
             targetEntity = Course.class
     )
     @JoinTable(
-            name="courses_questions",
+            name = "courses_questions",
             joinColumns = @JoinColumn(name = "question_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id")
     )
     private List<Course> courses;
     private int points;
-    public Question(){}
 
-    public Question(String id, String text, String answer1,String answer2,String answer3,String answer4, int correct, Subject subject){
+
+    public Question(String id, String text, String answer1, String answer2, String answer3, String answer4, int correct, Subject subject) {
         super();
         this.id_question = id;
         this.text = text;
@@ -53,7 +51,10 @@ public class Question implements Serializable {
         this.points = 0;
         setSubject(subject);
     }
-    public void copy(Question q){
+
+    public Question() {}
+
+    public void copy(Question q) {
         this.id = q.getId();
         this.id_question = q.getId_question();
         this.text = q.getText();
@@ -64,11 +65,8 @@ public class Question implements Serializable {
         this.correct = q.getCorrect();
         this.points = q.getPoints();
         this.subject = q.getSubject();
+        this.courses = q.getCourses();
     }
-    public Question() {
-
-    }
-
 
     public int getId() {
         return id;
@@ -127,7 +125,7 @@ public class Question implements Serializable {
     }
 
     public void setSubject(Subject subject) {
-        if(subject!=null) {
+        if (subject != null) {
             this.subject = subject;
             subject.getQuestions().add(this);
         }
@@ -147,8 +145,8 @@ public class Question implements Serializable {
 
     public void setCourses(List<Course> courses) {
         this.courses = courses;
-        for(Course course : courses){
+        for (Course course : courses) {
             course.getQuestions().add(this);
         }
-
+    }
 }

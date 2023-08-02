@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -21,10 +22,14 @@ import org.greenrobot.eventbus.Subscribe;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
+
 public class TeacherPage {
 
     @FXML // fx:id="detailVBox"
     private VBox detailVBox; // Value injected by FXMLLoader
+    @FXML
+    private AnchorPane teacherPage;
     @FXML // fx:id="BorderPane"
     private BorderPane BorderPane; // Value injected by FXMLLoader
 
@@ -65,9 +70,9 @@ public class TeacherPage {
     }
 
     @FXML
-    void RequestTimeEvent(ActionEvent event) {
-
-    }
+    void RequestTimeEvent(ActionEvent event) {loadSceneForButton("requestExtraTime.fxml");}
+    @FXML
+    void LogOut(ActionEvent event) {switchScreen("Login");}
 
     private void loadSceneForButton(String fxmlPath) {
         try {

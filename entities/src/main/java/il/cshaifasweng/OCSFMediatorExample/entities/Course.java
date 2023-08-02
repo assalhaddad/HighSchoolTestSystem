@@ -28,9 +28,7 @@ public class Course {
         this.questions = new ArrayList<Question>();
     }
 
-    public Course() {
-
-    }
+    public Course() {}
     public String getName() {
         return name;
     }
