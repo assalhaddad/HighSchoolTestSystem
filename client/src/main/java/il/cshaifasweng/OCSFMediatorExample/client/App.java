@@ -90,11 +90,11 @@ public class App extends Application {
                     }
                 });
                 break;
-            case "StudentPage":
+            case "StudentsPage":
                 Platform.runLater(() -> {
-                    setWindowTitle("StudentPage");
+                    setWindowTitle("StudentsPage");
                     try {
-                        setContent("StudentPage");
+                        setContent("StudentsPage");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

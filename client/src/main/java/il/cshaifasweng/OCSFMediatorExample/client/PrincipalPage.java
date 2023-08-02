@@ -57,7 +57,8 @@ public class PrincipalPage {
     @FXML
     void ApproveRequestsEvent(ActionEvent event) {loadSceneForButton("approveRequests.fxml");}
     @FXML
-    void LogOut(ActionEvent event) {switchScreen("Login");}
+    void LogOut(ActionEvent event) {
+        switchScreen("Login");}
 
     @FXML
     void initialize() {

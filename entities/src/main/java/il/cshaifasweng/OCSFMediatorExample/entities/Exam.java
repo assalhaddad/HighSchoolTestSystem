@@ -18,8 +18,8 @@ public class Exam implements Serializable {
     )
     private List<Question> questions;
     private int time;
-    private String freeTextStudent;
-    private String freeTextTeacher;
+    private String freeTextStudent="";
+    private String freeTextTeacher="";
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")
     private Teacher author;
@@ -30,7 +30,11 @@ public class Exam implements Serializable {
     @OneToOne(mappedBy = "exam")
     private SolvedExam solvedExam;
 
-    public Exam(String id_exam, ArrayList<Question> questions, int time, String freeTextStudent, String freeTextTeacher, Teacher author, Course course) {
+    private String code4Digits;
+
+
+
+    public Exam(String id_exam, ArrayList<Question> questions, int time, String freeTextStudent, String freeTextTeacher, Teacher author, Course course,String code4Digits) {
         super();
         setCourse(course);
         setAuthor(author);
@@ -47,6 +51,7 @@ public class Exam implements Serializable {
         this.freeTextTeacher = freeTextTeacher;
         this.moreTime = 0;
         this.solvedExam = new SolvedExam();
+        this.code4Digits=code4Digits;
     }
 
     public Exam() {
@@ -63,6 +68,7 @@ public class Exam implements Serializable {
         this.freeTextStudent = e.getFreeTextStudent();
         this.freeTextTeacher = e.getFreeTextTeacher();
         this.solvedExam = e.getSolvedExam();
+        this.code4Digits=e.getCode4Digits();
     }
 
     public int getId() {
@@ -166,6 +172,14 @@ public class Exam implements Serializable {
 
     public void setMoreTime(int moreTime) {
         this.moreTime = moreTime;
+    }
+
+    public String getCode4Digits() {
+        return code4Digits;
+    }
+
+    public void setCode4Digits(String code4Digits) {
+        this.code4Digits = code4Digits;
     }
 
 

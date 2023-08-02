@@ -71,7 +71,8 @@ public class TeacherPage {
         loadSceneForButton("requestExtraTime.fxml");
     }
     @FXML
-    void LogOut(ActionEvent event) {switchScreen("Login");}
+    void LogOut(ActionEvent event) {
+        switchScreen("Login");}
 
     private void loadSceneForButton(String fxmlPath) {
         try {

@@ -46,7 +46,7 @@ public class BuildExam {
         else if(idTF.getText().isEmpty()||timeTF.getText().isEmpty())
             missingInfo();
         else {
-            Exam newExam = new Exam(idTF.getText(),questions,Integer.parseInt(timeTF.getText()),"","",chosenTeacher,chosenCourse);
+            Exam newExam = new Exam(idTF.getText(),questions,Integer.parseInt(timeTF.getText()),"","",chosenTeacher,chosenCourse,"0000");
             System.out.println("exam object has been built");
             questions.clear();
             sendMessage("new exam",newExam);

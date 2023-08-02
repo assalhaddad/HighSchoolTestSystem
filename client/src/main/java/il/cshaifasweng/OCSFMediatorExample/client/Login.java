@@ -16,10 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -51,7 +48,7 @@ public class Login {
     private Label passwordLbl;
 
     @FXML
-    private TextField passwordTxt;
+    private PasswordField passwordTxt;
 
     @FXML
     private Label usernameLbl;
@@ -60,17 +57,21 @@ public class Login {
     private TextField usernameTxt;
     String username;
     String password;
-    public Student student = new Student();
-    public Principal principal = new Principal();
+    public static Student student = new Student();
+    public static Principal principal = new Principal();
     public static Teacher teacher = new Teacher();
-    String flag = "";
-    private static Scene scene;
-    private static Stage stage;
+    public  static String flag = "";
+
 
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
-        //flag = "";
+        flag = "";
+        username="";
+        password="";
+        student = new Student();
+        principal = new Principal();
+        teacher = new Teacher();
         assert loginBtn != null : "fx:id=\"loginBtn\" was not injected: check your FXML file 'login.fxml'.";
         assert loginHbox != null : "fx:id=\"loginHbox\" was not injected: check your FXML file 'login.fxml'.";
         assert loginLbl != null : "fx:id=\"loginLbl\" was not injected: check your FXML file 'login.fxml'.";
@@ -145,6 +146,19 @@ public class Login {
                 alert.showAndWait();
             }
         });
+        switchScreen("Login");
+    }
+
+    private void missingInformation(){
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error!");
+                alert.setHeaderText("Missing information!");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
     }
 
     private void checkPosition(String position) {
@@ -154,7 +168,7 @@ public class Login {
                 switchScreen("TeacherPage");
                 break;
             case "student":
-                switchScreen("StudentPage");
+                switchScreen("StudentsPage");
                 break;
             case "principal":
                 switchScreen("Principal");
@@ -166,9 +180,12 @@ public class Login {
 
     @FXML
     void checkLogin(ActionEvent event) {
-        username = usernameTxt.getText();
-        password = passwordTxt.getText();
-        //System.out.println("flag = "+flag);
-        sendMessage("get list of students",(Object)null);
+        if(usernameTxt.getText().isEmpty()||passwordTxt.getText().isEmpty())
+            missingInformation();
+        else {
+            username = usernameTxt.getText();
+            password = passwordTxt.getText();
+            sendMessage("get list of students", (Object) null);
+        }
     }
 }
