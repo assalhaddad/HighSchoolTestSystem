@@ -29,7 +29,6 @@ public class Exam implements Serializable {
     private int moreTime;
     @OneToOne(mappedBy = "exam")
     private SolvedExam solvedExam;
-
     private String code4Digits;
 
 

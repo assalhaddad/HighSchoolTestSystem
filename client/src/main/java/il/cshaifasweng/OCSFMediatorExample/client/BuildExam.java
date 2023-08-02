@@ -38,15 +38,17 @@ public class BuildExam {
 
     @FXML
     private TextField totalTF;
+    @FXML
+    private TextField digitcode;
 
     @FXML
     void done(ActionEvent event) {
         if(totalPoints!=0)
             pointsError();
-        else if(idTF.getText().isEmpty()||timeTF.getText().isEmpty())
+        else if(idTF.getText().isEmpty()||timeTF.getText().isEmpty()||digitcode.getText().isEmpty())
             missingInfo();
         else {
-            Exam newExam = new Exam(idTF.getText(),questions,Integer.parseInt(timeTF.getText()),"","",chosenTeacher,chosenCourse,"0000");
+            Exam newExam = new Exam(idTF.getText(),questions,Integer.parseInt(timeTF.getText()),"","",chosenTeacher,chosenCourse,digitcode.getText());
             System.out.println("exam object has been built");
             questions.clear();
             sendMessage("new exam",newExam);
@@ -224,6 +226,7 @@ public class BuildExam {
         courseCMB.setDisable(true);
         idTF.clear();
         timeTF.clear();
+        digitcode.clear();
         pointsTF.setVisible(false);
         addBTN.setVisible(false);
         questionsList.getItems().clear();
