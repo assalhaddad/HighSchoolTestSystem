@@ -203,8 +203,8 @@ public class ExamPage extends DoExam{
     void done(ActionEvent event) {
 
 
-        StudentData studentD = new StudentData(DoExam.student,LocalDateTime.now().toString(), 10, true, chosenAnswers, solvedExam);
-
+        StudentData studentD = new StudentData(student,LocalDateTime.now().toString(), 10, true, chosenAnswers, solvedExam);
+        System.out.println("From ExamPage: "+studentD.getSolvedExam().getId());
         solvedExam.calculateGrades();
         sendMessage("new studentData", studentD);
 

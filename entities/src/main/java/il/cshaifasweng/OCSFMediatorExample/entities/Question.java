@@ -31,7 +31,16 @@ public class Question implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "course_id")
     )
     private List<Course> courses;
-
+    @ManyToMany(
+            //cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            targetEntity = Exam.class
+    )
+    @JoinTable(
+            name="exams_questions",
+            joinColumns = @JoinColumn(name = "question_id"),
+            inverseJoinColumns = @JoinColumn(name = "exam_id")
+    )
+    private List<Exam> exams;
 
     private int points;
 
@@ -47,6 +56,7 @@ public class Question implements Serializable {
         this.points = 0;
         setSubject(subject);
         setCourses(courses);
+        this.exams = new ArrayList();
     }
     public void copy(Question q){
         this.id = q.getId();
@@ -60,6 +70,7 @@ public class Question implements Serializable {
         this.points = q.getPoints();
         this.subject = q.getSubject();
         this.courses = q.getCourses();
+        this.exams = q.getExams();
         //setSubject(q.getSubject());
         //setCourses(q.getCourses());
     }
@@ -153,4 +164,11 @@ public class Question implements Serializable {
         }
     }
 
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
+    }
 }

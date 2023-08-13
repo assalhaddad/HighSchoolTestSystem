@@ -12,6 +12,7 @@ import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import jdk.swing.interop.SwingInterOpUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -42,6 +43,7 @@ public class SimpleServer extends AbstractServer {
 		configuration.addAnnotatedClass(StudentData.class);
 		configuration.addAnnotatedClass(SolvedExam.class);
 		configuration.addAnnotatedClass(Request.class);
+		configuration.addAnnotatedClass(LoginInfo.class);
 
 
 		ServiceRegistry serviceRegistry = (new StandardServiceRegistryBuilder()).applySettings(configuration.getProperties()).build();
@@ -57,6 +59,7 @@ public class SimpleServer extends AbstractServer {
 	ArrayList<StudentData> studentDataList = new ArrayList();
 	ArrayList<SolvedExam> solvedExamList = new ArrayList();
 	ArrayList<Request> requests = new ArrayList();
+	ArrayList<LoginInfo> loginInfo = new ArrayList();
 	Principal principal;
 	public void generateStudents(){
 		Student student=new Student("123456781","Assal Haddad", "assalHaddad","assal123");
@@ -217,7 +220,7 @@ public class SimpleServer extends AbstractServer {
 		session.flush();
 		list.clear();
 		list.add(courses.get(2)); // Basic English
-		question = new Question("13702","Where ____ the dog?","are","it","is","does",3,subjects.get(1),list);
+		question = new Question("13702","Wne ____ the dog?","are","it","is","does",3,subjects.get(1),list);
 		questions.add(question);
 		session.save(question);
 		session.flush();
@@ -1039,6 +1042,25 @@ public class SimpleServer extends AbstractServer {
 		list.clear();
 		solvedExam.calculateGrades();
 	}
+
+	public void generateLoginInfo(){
+		for(int i = 0; i<studentsList.size(); i++){
+			LoginInfo newInfo =new LoginInfo(studentsList.get(i).getUsername(),studentsList.get(i).getPassword(),"student");
+			loginInfo.add(newInfo);
+			session.save(newInfo);
+			session.flush();
+		}
+		for(int i = 0; i<teachersList.size();i++){
+			LoginInfo newInfo =new LoginInfo(teachersList.get(i).getUsername(),teachersList.get(i).getPassword(),"teacher");
+			loginInfo.add(newInfo);
+			session.save(newInfo);
+			session.flush();
+		}
+		LoginInfo newInfo =new LoginInfo("malkiGrosman","thePrincipal1","principal");
+		loginInfo.add(newInfo);
+		session.save(newInfo);
+		session.flush();
+	}
 	public void connectToData() {
 		try {
 			SessionFactory sessionFactory = getSessionFactory();
@@ -1051,6 +1073,7 @@ public class SimpleServer extends AbstractServer {
 			generateQuestions();
 			generateExams();
 			generateSolutions();
+			generateLoginInfo();
 			session.getTransaction().commit();
 		} catch (Exception var5) {
 			if (session != null) {
@@ -1148,7 +1171,10 @@ public class SimpleServer extends AbstractServer {
 					studentData.copy((StudentData)message.getObject());
 					studentDataList.add(studentData);
 					session.save(studentData);
+					System.out.println(studentData.getSolvedExam().getId());
+					System.out.println("before flush");
 					session.flush();
+					System.out.println("after flush");
 					session.getTransaction().commit();
 					session.close();
 					client.sendToClient(new Message("studentData added successfully",(Object)null));
@@ -1159,12 +1185,13 @@ public class SimpleServer extends AbstractServer {
 					solvedExam.copy((SolvedExam) message.getObject());
 					solvedExamList.add(solvedExam);
 					session.save(solvedExam);
+					//System.out.println("here "+solvedExam.getId());
 					System.out.println("before flush");
 					session.flush();
 					System.out.println("after flush");
 					session.getTransaction().commit();
 					session.close();
-					client.sendToClient(new Message("solvedExam added successfully",(Object)null));
+					client.sendToClient(new Message("solvedExam added successfully",solvedExam));
 				}
 				else if(request.equals("new exam")){
 					session=sessionFactory.openSession();
@@ -1317,24 +1344,36 @@ public class SimpleServer extends AbstractServer {
 						}
 					client.sendToClient(new Message("grade updated successfully"));
 				}
-				else if(request.equals("get list of students")){
+				else if(request.equals("get this student to login")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					ArrayList<Student> students = new ArrayList<Student>(studentsList.size());
-					for(int i=0; i<studentsList.size(); i++)
-						students.add(i, studentsList.get(i));
-					client.sendToClient(new Message("students list is ready", students));
+					Student current = new Student();
+					LoginInfo currentLog = new LoginInfo();
+					currentLog.copy((LoginInfo)message.getObject());
+					for(int i=0; i<studentsList.size();i++){
+						if(studentsList.get(i).getUsername().equals(currentLog.getUsername()) && studentsList.get(i).getPassword().equals(currentLog.getPassword()))
+						{
+							current.copy(studentsList.get(i));
+							break;
+						}
+					}
+					client.sendToClient(new Message("found the student to login", current));
 					session.close();
 				}
-
-
-				else if(request.equals("get list of teachers")){
+				else if(request.equals("get this teacher to login")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					ArrayList<Teacher> teachers = new ArrayList<Teacher>(teachersList.size());
-					for(int i=0; i<teachersList.size(); i++)
-						teachers.add(i, teachersList.get(i));
-					client.sendToClient(new Message("teachers list is ready", teachers));
+					Teacher current = new Teacher();
+					LoginInfo currentLog = new LoginInfo();
+					currentLog.copy((LoginInfo)message.getObject());
+					for(int i=0; i<teachersList.size();i++){
+						if(teachersList.get(i).getUsername().equals(currentLog.getUsername()) && teachersList.get(i).getPassword().equals(currentLog.getPassword()))
+						{
+							current.copy(teachersList.get(i));
+							break;
+						}
+					}
+					client.sendToClient(new Message("found the teacher to login", current));
 					session.close();
 				}
 				else if(request.equals("get the principal")){
@@ -1377,6 +1416,42 @@ public class SimpleServer extends AbstractServer {
 					session.flush();
 					client.sendToClient(new Message("request approved successfully",(Object)null));
 					session.close();
+				}
+				else if(request.equals("get questions for principal")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					ArrayList<Question> questions1 = new ArrayList(questions.size());
+					for(int i=0; i<questions.size(); i++)
+						questions1.add(i, questions.get(i));
+					session.close();
+					client.sendToClient(new Message("questions list is ready for principal", questions1));
+				}
+				else if(request.equals("get exams for grades principal")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					ArrayList<Exam> exams1 = new ArrayList(exams.size());
+					for(int i=0; i<exams.size(); i++)
+						exams1.add(i, exams.get(i));
+					session.close();
+					client.sendToClient(new Message("exams list is ready for grades principal", exams1));
+				}
+				else if(request.equals("get lists of usernames and passwords")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					ArrayList<LoginInfo> loginInfos = new ArrayList(loginInfo.size());
+					for(int i=0; i<loginInfo.size(); i++)
+						loginInfos.add(i, loginInfo.get(i));
+					session.close();
+					client.sendToClient(new Message("login list is ready", loginInfos));
+				}
+				else if(request.equals("get exams for exam page principal")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					ArrayList<Exam> exams1 = new ArrayList(exams.size());
+					for(int i=0; i<exams.size(); i++)
+						exams1.add(i, exams.get(i));
+					session.close();
+					client.sendToClient(new Message("exams list is ready for exam principal", exams1));
 				}
 				session.flush();
 				session.close();

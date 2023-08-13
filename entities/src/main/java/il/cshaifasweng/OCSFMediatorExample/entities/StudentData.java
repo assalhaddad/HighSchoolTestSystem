@@ -129,6 +129,7 @@ public class StudentData implements Serializable {
    }
 
    public void copy(StudentData object) {
+      this.id= object.getId();
       this.student=object.getStudent();
       this.date=object.getDate();
       this.timePassed= object.getTimePassed();

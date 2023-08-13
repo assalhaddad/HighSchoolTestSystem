@@ -25,11 +25,13 @@ public class SolvedExam implements Serializable {
     private boolean isBuild=false;
     public SolvedExam()
     {
+        //super();
+        this.exam=new Exam();
     }
     public SolvedExam( int updatedTime, Exam exam){
         super();
         this.updatedTime = updatedTime;
-        isBuild=true;
+        this.isBuild=true;
         this.data=new ArrayList();
         setExam(exam);
     }
@@ -79,7 +81,7 @@ public class SolvedExam implements Serializable {
         this.data = data;
     }
 
-    public boolean isBuild() {
+    public boolean GetIsBuild() {
         return isBuild;
     }
 
@@ -87,10 +89,21 @@ public class SolvedExam implements Serializable {
         isBuild = build;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void copy(SolvedExam solvedExam) {
         this.exam=solvedExam.getExam();
+        this.id = solvedExam.getId();
+        //this.exam.copy(solvedExam.getExam());
+        this.data = solvedExam.getData();
         this.updatedTime=solvedExam.getUpdatedTime();
-        this.isBuild= solvedExam.isBuild;
+        this.isBuild= solvedExam.GetIsBuild();
     }
 
 }

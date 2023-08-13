@@ -42,6 +42,15 @@ public class Student implements Serializable {
         this.data = s.getData();
     }
 
+    public void copy(Student s){
+        this.id = s.getId();
+        this.id_student = s.getId_student();
+        this.name = s.getName();
+        this.username = s.getUsername();
+        this.password = s.getPassword();
+        this.data = s.getData();
+    }
+
     public List<StudentData> getData() {
         return data;
     }

@@ -23,17 +23,17 @@
                                 <Insets top="5.0" />
                             </VBox.margin>
                         </Button>
-                        <Button fx:id="ViewGradesBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: #9dbcdb;" text="View Grades" textFill="WHITE">
+                        <Button fx:id="ViewGradesBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ViewGradesEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: #9dbcdb;" text="View Grades" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font>
                         </Button>
-                        <Button fx:id="ViewExamsBtn" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: #9dbcdb;" text="View Exams" textFill="WHITE">
+                        <Button fx:id="ViewExamsBtn" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" onAction="#ViewExamsEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: #9dbcdb;" text="View Exams" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font>
                         </Button>
-                        <Button fx:id="ViewQuestionsBtn" layoutX="10.0" layoutY="81.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="100.0" style="-fx-background-color: #9dbcdb;" text="View Questions" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                        <Button fx:id="ViewQuestionsBtn" layoutX="10.0" layoutY="81.0" mnemonicParsing="false" onAction="#ViewQuestionsEvent" prefHeight="52.0" prefWidth="100.0" style="-fx-background-color: #9dbcdb;" text="View Questions" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font>

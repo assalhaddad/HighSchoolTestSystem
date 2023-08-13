@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.666666667" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ViewExamsPrincipal">
+    <children>
+        <Label alignment="CENTER" prefHeight="26.0" prefWidth="500.0" style="-fx-background-color: #70879d;" text="View Exams" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Label>
+        <ComboBox fx:id="idCMB" layoutX="14.0" layoutY="42.0" onAction="#chooseExam" prefHeight="25.0" prefWidth="89.0" promptText="Exam ID" />
+        <Label layoutX="122.0" layoutY="44.0" text="Subject:">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <Label layoutX="281.0" layoutY="44.0" text="Course:">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <TextField fx:id="subjectTF" editable="false" layoutX="182.0" layoutY="42.0" prefHeight="25.0" prefWidth="83.0" />
+        <TextField fx:id="courseTF" editable="false" layoutX="340.0" layoutY="42.0" prefHeight="25.0" prefWidth="83.0" />
+        <TableView fx:id="tableView" layoutX="5.0" layoutY="86.0" onMouseClicked="#makeVisible" prefHeight="214.0" prefWidth="239.0">
+            <columns>
+                <TableColumn fx:id="questionCol" editable="false" prefWidth="190.0" text="Question" />
+                <TableColumn fx:id="pointsCol" editable="false" prefWidth="48.666656494140625" text="Points" />
+            </columns>
+        </TableView>
+        <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="#d4e0eb" height="181.0" layoutX="250.0" layoutY="95.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="239.0" />
+        <Label fx:id="answersLbl" layoutX="256.0" layoutY="98.0" text="Answers:">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <TextField fx:id="answer4TF" editable="false" layoutX="326.0" layoutY="196.0" prefHeight="25.0" prefWidth="98.0" />
+        <TextField fx:id="answer3TF" editable="false" layoutX="326.0" layoutY="162.0" prefHeight="25.0" prefWidth="98.0" />
+        <TextField fx:id="answer2TF" editable="false" layoutX="326.0" layoutY="129.0" prefHeight="25.0" prefWidth="98.0" />
+        <TextField fx:id="answer1TF" editable="false" layoutX="326.0" layoutY="96.0" prefHeight="25.0" prefWidth="98.0" />
+        <Label fx:id="correctLbl" layoutX="256.0" layoutY="229.0" prefHeight="45.0" prefWidth="112.0" text="Correct answer:">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <TextField fx:id="correctTF" editable="false" layoutX="364.0" layoutY="239.0" prefHeight="25.0" prefWidth="120.0" />
+    </children>
+</AnchorPane>

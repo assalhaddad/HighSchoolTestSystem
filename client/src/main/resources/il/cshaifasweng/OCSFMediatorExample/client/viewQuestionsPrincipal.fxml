@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.66666666667" prefWidth="500.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ViewQuestionsPrincipal">
+    <children>
+        <Label alignment="CENTER" prefHeight="26.0" prefWidth="500.0" style="-fx-background-color: #70879d;" text="View Questions" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Label>
+        <ComboBox fx:id="idCMB" layoutX="14.0" layoutY="39.0" onAction="#IdChosen" prefHeight="25.0" prefWidth="112.0" promptText="Question ID" />
+        <Label layoutX="153.0" layoutY="41.0" text="Subject:">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <TextField fx:id="subjectTF" editable="false" layoutX="213.0" layoutY="39.0" prefHeight="25.0" prefWidth="83.0" />
+        <Label layoutX="14.0" layoutY="74.0" text="Question:">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <TextArea fx:id="textTF" layoutX="82.0" layoutY="74.0" prefHeight="55.0" prefWidth="273.0" />
+        <Label layoutX="14.0" layoutY="148.0" text="Answers:">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <TextField fx:id="answer4TF" editable="false" layoutX="84.0" layoutY="258.0" prefHeight="25.0" prefWidth="120.0" />
+        <TextField fx:id="answer3TF" editable="false" layoutX="84.0" layoutY="220.0" prefHeight="25.0" prefWidth="120.0" />
+        <TextField fx:id="answer2TF" editable="false" layoutX="84.0" layoutY="183.0" prefHeight="25.0" prefWidth="120.0" />
+        <TextField fx:id="answer1TF" editable="false" layoutX="84.0" layoutY="146.0" prefHeight="25.0" prefWidth="120.0" />
+        <Label layoutX="14.0" layoutY="286.0" prefHeight="45.0" prefWidth="112.0" text="Correct answer:">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <TextField fx:id="correctTF" editable="false" layoutX="122.0" layoutY="296.0" prefHeight="25.0" prefWidth="120.0" />
+        <TableView fx:id="tableView" layoutX="377.0" layoutY="39.0" prefHeight="200.0" prefWidth="94.0">
+            <columns>
+                <TableColumn fx:id="courseCol" prefWidth="75.0" text="Courses" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

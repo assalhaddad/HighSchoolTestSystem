@@ -43,10 +43,10 @@ public class DoExam {
     @FXML
     private Button startBtn;
 
-    protected static Exam exam;
+    protected static Exam exam=new Exam();
     protected static Student student;
     public static boolean isOn=false;
-    protected static SolvedExam solvedExam;
+    protected static SolvedExam solvedExam=new SolvedExam();
 
 
     @FXML
@@ -90,7 +90,7 @@ public class DoExam {
 
             if (request.equals("found exam"))
             {
-                exam=new Exam();
+                //exam=new Exam();
                 exam.copy((Exam)obj);
                 if(isOn)
                 {
@@ -114,6 +114,8 @@ public class DoExam {
             }
             else if (request.equals("didn't find student"))
                 wrongId();
+            else if( request.equals("solvedExam added successfully"))
+                updateSolvedExam(obj);
         }
 
 
@@ -134,14 +136,18 @@ public class DoExam {
     @FXML
     void startExamPressed(ActionEvent event)
     {
-        if(!(exam.getSolvedExam().isBuild()))
+        if(!(exam.getSolvedExam().GetIsBuild()))
         {
-            System.out.println("before");
-             solvedExam=new SolvedExam(exam.getTime(), exam);
+
+            SolvedExam temp =new SolvedExam(exam.getTime(), exam);
+            solvedExam.copy(temp);
+            //System.out.println("exam id: "+exam.getId_exam());
+            System.out.println("temp id " + temp.getId());
             sendMessage("new solvedExam",solvedExam);
+            //System.out.println(solvedExam.getId());
         }
         else
-            solvedExam=exam.getSolvedExam();
+            solvedExam.copy(exam.getSolvedExam());
 
         switchScreen("ExamPage");
     }
@@ -182,6 +188,9 @@ public class DoExam {
                 alert.showAndWait();
             }
         });
+    }
+    private void updateSolvedExam(Object obj){
+        solvedExam.copy((SolvedExam) obj);
     }
 
 }

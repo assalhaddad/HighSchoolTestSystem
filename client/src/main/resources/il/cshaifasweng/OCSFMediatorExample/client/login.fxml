@@ -43,6 +43,6 @@
                 <Font name="System Bold Italic" size="14.0" />
             </font>
         </Button>
-      <PasswordField fx:id="passwordTxt" layoutX="212.0" layoutY="227.0" prefHeight="43.0" prefWidth="249.0" />
+        <PasswordField fx:id="passwordTxt" layoutX="212.0" layoutY="227.0" prefHeight="43.0" prefWidth="249.0" />
     </children>
 </AnchorPane>

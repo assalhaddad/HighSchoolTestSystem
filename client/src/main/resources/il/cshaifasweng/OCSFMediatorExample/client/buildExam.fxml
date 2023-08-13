@@ -16,7 +16,7 @@
          </font>
       </Label>
       <ComboBox fx:id="subjectCMB" layoutX="14.0" layoutY="34.0" onAction="#selectSubject" prefHeight="25.0" prefWidth="118.0" promptText="Subject" />
-      <ListView fx:id="questionsList" accessibleRole="CHECK_BOX" layoutX="140.0" layoutY="34.0" onMouseClicked="#selectQuestion" prefHeight="291.0" prefWidth="293.0" />
+      <ListView fx:id="questionsList" accessibleRole="CHECK_BOX" layoutX="140.0" layoutY="34.0" onMouseClicked="#selectQuestion" prefHeight="211.0" prefWidth="293.0" />
       <Button fx:id="doneBTN" layoutX="440.0" layoutY="167.0" mnemonicParsing="false" onAction="#done" style="-fx-background-color: #70879d;" text="Done" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -39,5 +39,7 @@
       </Button>
       <Label layoutX="19.0" layoutY="297.0" text="Points Left:" />
       <TextField fx:id="digitcode" layoutX="14.0" layoutY="162.0" onAction="#setTime" prefHeight="25.0" prefWidth="118.0" promptText="4-digit code" />
+      <TextField fx:id="freeText1" layoutX="161.0" layoutY="257.0" prefHeight="25.0" prefWidth="273.0" promptText="Free Text For Teacher" />
+      <TextField fx:id="freeText2" layoutX="161.0" layoutY="289.0" prefHeight="25.0" prefWidth="273.0" promptText="Free Text For Student" />
    </children>
 </AnchorPane>

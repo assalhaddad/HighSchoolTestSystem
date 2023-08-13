@@ -5,10 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.Message;
-import il.cshaifasweng.OCSFMediatorExample.entities.Principal;
-import il.cshaifasweng.OCSFMediatorExample.entities.Student;
-import il.cshaifasweng.OCSFMediatorExample.entities.Teacher;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,29 +54,20 @@ public class Login {
     private TextField usernameTxt;
     String username;
     String password;
-    public static Student student;
-    public static Principal principal;
-    public static Teacher teacher;
-    public  static String flag = "";
-
+    public static Student student = new Student();
+    public static Principal principal = new Principal();
+    public static Teacher teacher = new Teacher();
+    ObservableList<LoginInfo> loginInfos;
 
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
-        flag = "";
         username="";
         password="";
         student = new Student();
         principal = new Principal();
         teacher = new Teacher();
-        assert loginBtn != null : "fx:id=\"loginBtn\" was not injected: check your FXML file 'login.fxml'.";
-        assert loginHbox != null : "fx:id=\"loginHbox\" was not injected: check your FXML file 'login.fxml'.";
-        assert loginLbl != null : "fx:id=\"loginLbl\" was not injected: check your FXML file 'login.fxml'.";
-        assert passwordLbl != null : "fx:id=\"passwordLbl\" was not injected: check your FXML file 'login.fxml'.";
-        assert passwordTxt != null : "fx:id=\"passwordTxt\" was not injected: check your FXML file 'login.fxml'.";
-        assert usernameLbl != null : "fx:id=\"usernameLbl\" was not injected: check your FXML file 'login.fxml'.";
-        assert usernameTxt != null : "fx:id=\"usernameTxt\" was not injected: check your FXML file 'login.fxml'.";
-
+        sendMessage("get lists of usernames and passwords",null);
     }
     private void sendMessage(String op, Object obj) {
         try {
@@ -94,45 +82,21 @@ public class Login {
     public void handleMessage(Message message) {
         String request = message.getMessage();
         Object obj = message.getObject();
-        System.out.println("the message is: "+request);
-        if (request.equals("students list is ready"))
-            getStudentsRequest(obj);
-        else if (request.equals("teachers list is ready"))
-            getTeachersRequest(obj);
-        else if(request.equals("principal is ready")) {
+        if(request.equals("login list is ready")){
+            loginInfos = FXCollections.observableArrayList((ArrayList)obj);
+        }
+        else if(request.equals("found the student to login")){
+            student.copy((Student)obj);
+            checkPosition("student");
+        }
+        else if(request.equals("found the teacher to login")){
+            teacher.copy((Teacher)obj);
+            checkPosition("teacher");
+        }
+        else if(request.equals("principal is ready")){
             principal.copy((Principal)obj);
-            if((principal.getUsername().equals(username)) && (principal.getPassword().equals(password))){
-                flag = "principal";
-                checkPosition(flag);
-            }
-            else
-                wrongInformation();
+            checkPosition("principal");
         }
-    }
-
-    private void getStudentsRequest(Object obj){
-        ObservableList<Student> studentsList = FXCollections.observableArrayList((ArrayList)obj);
-        for(int i=0; i<studentsList.size(); i++){
-            if((studentsList.get(i).getUsername().equals(username)) && (studentsList.get(i).getPassword().equals(password))){
-                student = studentsList.get(i);
-                flag = "student";
-                checkPosition(flag);
-            }
-        }
-        if(flag == "")
-            sendMessage("get list of teachers",(Object)null);
-    }
-    private void getTeachersRequest(Object obj){
-        ObservableList<Teacher> teachersList = FXCollections.observableArrayList((ArrayList)obj);
-        for(int i=0; i<teachersList.size(); i++){
-            if((teachersList.get(i).getUsername().equals(username)) && (teachersList.get(i).getPassword().equals(password))){
-                teacher = teachersList.get(i);
-                flag = "teacher";
-                checkPosition(flag);
-            }
-        }
-        if(flag == "")
-            sendMessage("get the principal",(Object)null);
     }
 
     private void wrongInformation(){
@@ -147,7 +111,7 @@ public class Login {
                 alert.showAndWait();
             }
         });
-        //switchScreen("Login");
+        switchScreen("Login");
     }
 
     private void missingInformation(){
@@ -181,15 +145,30 @@ public class Login {
 
     @FXML
     void checkLogin(ActionEvent event) {
-        flag="";
-        username="";
-        password="";
+        int flag=0;
         if(usernameTxt.getText().isEmpty()||passwordTxt.getText().isEmpty())
             missingInformation();
         else {
             username = usernameTxt.getText();
             password = passwordTxt.getText();
-            sendMessage("get list of students", (Object) null);
+            for(int i =0; i<loginInfos.size(); i++){
+                if(loginInfos.get(i).getUsername().equals(username) && loginInfos.get(i).getPassword().equals(password)){
+                    if(loginInfos.get(i).getType().equals("teacher")){
+                        flag=1;
+                        sendMessage("get this teacher to login",loginInfos.get(i));
+                    }
+                    else if(loginInfos.get(i).getType().equals("student")){
+                        flag=1;
+                        sendMessage("get this student to login",loginInfos.get(i));
+                    }
+                    else {
+                        flag=1;
+                        sendMessage("get the principal", null);
+                    }
+                }
+            }
+            if(flag == 0)
+                wrongInformation();
         }
     }
 }
