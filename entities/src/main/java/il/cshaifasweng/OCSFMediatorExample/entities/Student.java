@@ -2,6 +2,8 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +20,8 @@ public class Student implements Serializable {
     private String name;
     private String username;
     private String password;
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="student")
+    private List<StudentData> data;
 
     public Student(){}
 
@@ -27,6 +31,7 @@ public class Student implements Serializable {
         this.name=name;
         this.password=password;
         this.username=username;
+        this.data=new ArrayList<StudentData>();
     }
 
     public Student(Student s){
@@ -34,6 +39,24 @@ public class Student implements Serializable {
         this.name = s.getName();
         this.username = s.getUsername();
         this.password = s.getPassword();
+        this.data = s.getData();
+    }
+
+    public void copy(Student s){
+        this.id = s.getId();
+        this.id_student = s.getId_student();
+        this.name = s.getName();
+        this.username = s.getUsername();
+        this.password = s.getPassword();
+        this.data = s.getData();
+    }
+
+    public List<StudentData> getData() {
+        return data;
+    }
+
+    public void setData(List<StudentData> data) {
+        this.data = data;
     }
 
     public String getId_student() {

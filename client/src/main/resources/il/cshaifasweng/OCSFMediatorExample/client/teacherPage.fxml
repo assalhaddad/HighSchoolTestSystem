@@ -28,7 +28,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="checkGradesBtn" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" onAction="#CheckGradesBtn" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: #9dbcdb;" text="Check Grades" textFill="WHITE">
+                  <Button fx:id="checkGradesBtn" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" onAction="#CheckGradesEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: #9dbcdb;" text="Check Grades" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

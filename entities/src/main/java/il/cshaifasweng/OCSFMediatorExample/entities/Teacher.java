@@ -28,7 +28,6 @@ public class Teacher implements Serializable {
     )
     private List<Subject> subjects;
 
-
     public Teacher(){}
 
     public Teacher(String name ,String username, String password) {
@@ -36,9 +35,16 @@ public class Teacher implements Serializable {
         this.name = name;
         this.username = username;
         this.password = password;
-
         this.exams = new ArrayList<Exam>();
         this.subjects = new ArrayList<Subject>();
+    }
+    public void copy(Teacher t){
+        this.id = t.getId();
+        this.name = t.getName();
+        this.password = t.getPassword();
+        this.exams = t.getExams();
+        this.username = t.getUsername();
+        this.subjects = t.getSubjects();
     }
 
     public List<Exam> getExams() {
@@ -78,7 +84,12 @@ public class Teacher implements Serializable {
     }
 
     public void setSubjects(List<Subject> subjects){
-        this.subjects = subjects;
+        if(subjects!=null){
+            this.subjects = subjects;
+            for(Subject subject : subjects){
+                subject.getTeachers().add(this);
+            }
+        }
     }
     public void addExam(Exam exam) {
         exams.add(exam);
@@ -91,6 +102,15 @@ public class Teacher implements Serializable {
     public boolean containsExam(Exam exam) {
         return exams.contains(exam);
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void addSubject(Subject newSubject) {
         subjects.add(newSubject);
     }

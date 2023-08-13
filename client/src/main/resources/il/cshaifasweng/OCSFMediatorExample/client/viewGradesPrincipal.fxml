@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.666666667" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ViewGradesPrincipal">
+   <children>
+      <Label alignment="CENTER" prefHeight="26.0" prefWidth="500.0" style="-fx-background-color: #70879d;" text="View Grades" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="idCMB" layoutX="14.0" layoutY="42.0" onAction="#chooseExam" prefHeight="25.0" prefWidth="89.0" promptText="Exam ID" />
+      <Label layoutX="122.0" layoutY="44.0" text="Subject:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="281.0" layoutY="44.0" text="Course:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="subjectTF" editable="false" layoutX="182.0" layoutY="42.0" prefHeight="25.0" prefWidth="83.0" />
+      <TextField fx:id="courseTF" editable="false" layoutX="340.0" layoutY="42.0" prefHeight="25.0" prefWidth="83.0" />
+      <TableView fx:id="tableView" layoutX="175.0" layoutY="93.0" prefHeight="214.0" prefWidth="149.0">
+         <columns>
+            <TableColumn fx:id="nameCol" editable="false" prefWidth="102.0" text="Student Name" />
+            <TableColumn fx:id="gradeCol" editable="false" prefWidth="48.666656494140625" text="Grade" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

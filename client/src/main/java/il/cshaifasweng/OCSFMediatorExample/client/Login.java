@@ -5,10 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.Message;
-import il.cshaifasweng.OCSFMediatorExample.entities.Principal;
-import il.cshaifasweng.OCSFMediatorExample.entities.Student;
-import il.cshaifasweng.OCSFMediatorExample.entities.Teacher;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,17 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.App.loadFXML;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
 
 public class Login {
@@ -52,7 +45,7 @@ public class Login {
     private Label passwordLbl;
 
     @FXML
-    private TextField passwordTxt;
+    private PasswordField passwordTxt;
 
     @FXML
     private Label usernameLbl;
@@ -61,24 +54,20 @@ public class Login {
     private TextField usernameTxt;
     String username;
     String password;
-    public Student student = new Student();
-    public Principal principal = new Principal();
+    public static Student student = new Student();
+    public static Principal principal = new Principal();
     public static Teacher teacher = new Teacher();
-    String flag = "";
-    private static Scene scene;
-    private static Stage stage;
+    ObservableList<LoginInfo> loginInfos;
 
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
-        assert loginBtn != null : "fx:id=\"loginBtn\" was not injected: check your FXML file 'login.fxml'.";
-        assert loginHbox != null : "fx:id=\"loginHbox\" was not injected: check your FXML file 'login.fxml'.";
-        assert loginLbl != null : "fx:id=\"loginLbl\" was not injected: check your FXML file 'login.fxml'.";
-        assert passwordLbl != null : "fx:id=\"passwordLbl\" was not injected: check your FXML file 'login.fxml'.";
-        assert passwordTxt != null : "fx:id=\"passwordTxt\" was not injected: check your FXML file 'login.fxml'.";
-        assert usernameLbl != null : "fx:id=\"usernameLbl\" was not injected: check your FXML file 'login.fxml'.";
-        assert usernameTxt != null : "fx:id=\"usernameTxt\" was not injected: check your FXML file 'login.fxml'.";
-
+        username="";
+        password="";
+        student = new Student();
+        principal = new Principal();
+        teacher = new Teacher();
+        sendMessage("get lists of usernames and passwords",null);
     }
     private void sendMessage(String op, Object obj) {
         try {
@@ -93,44 +82,21 @@ public class Login {
     public void handleMessage(Message message) {
         String request = message.getMessage();
         Object obj = message.getObject();
-        if (request.equals("students list is ready"))
-            getStudentsRequest(obj);
-        else if (request.equals("teachers list is ready"))
-            getTeachersRequest(obj);
-        else if(request.equals("principal is ready")) {
+        if(request.equals("login list is ready")){
+            loginInfos = FXCollections.observableArrayList((ArrayList)obj);
+        }
+        else if(request.equals("found the student to login")){
+            student.copy((Student)obj);
+            checkPosition("student");
+        }
+        else if(request.equals("found the teacher to login")){
+           teacher.copy((Teacher)obj);
+           checkPosition("teacher");
+        }
+        else if(request.equals("principal is ready")){
             principal.copy((Principal)obj);
-            if((principal.getUsername().equals(username)) && (principal.getPassword().equals(password))){
-                flag = "principal";
-                checkPosition(flag);
-            }
-            else
-                wrongInformation();
+            checkPosition("principal");
         }
-    }
-
-    private void getStudentsRequest(Object obj){
-        ObservableList<Student> studentsList = FXCollections.observableArrayList((ArrayList)obj);
-        for(int i=0; i<studentsList.size(); i++){
-            if((studentsList.get(i).getUsername().equals(username)) && (studentsList.get(i).getPassword().equals(password))){
-                student = studentsList.get(i);
-                flag = "student";
-                checkPosition(flag);
-            }
-        }
-        if(flag == "")
-            sendMessage("get list of teachers",(Object)null);
-    }
-    private void getTeachersRequest(Object obj){
-        ObservableList<Teacher> teachersList = FXCollections.observableArrayList((ArrayList)obj);
-        for(int i=0; i<teachersList.size(); i++){
-            if((teachersList.get(i).getUsername().equals(username)) && (teachersList.get(i).getPassword().equals(password))){
-                teacher = teachersList.get(i);
-                flag = "teacher";
-                checkPosition(flag);
-            }
-        }
-        if(flag == "")
-            sendMessage("get the principal",(Object)null);
     }
 
     private void wrongInformation(){
@@ -145,15 +111,29 @@ public class Login {
                 alert.showAndWait();
             }
         });
+        switchScreen("Login");
+    }
+
+    private void missingInformation(){
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error!");
+                alert.setHeaderText("Missing information!");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
     }
 
     private void checkPosition(String position) {
+        System.out.println("flag = "+position);
         switch (position){
             case "teacher":
                 switchScreen("TeacherPage");
                 break;
             case "student":
-                switchScreen("StudentPage");
+                switchScreen("StudentsPage");
                 break;
             case "principal":
                 switchScreen("Principal");
@@ -165,8 +145,30 @@ public class Login {
 
     @FXML
     void checkLogin(ActionEvent event) {
-        username = usernameTxt.getText();
-        password = passwordTxt.getText();
-        sendMessage("get list of students",(Object)null);
+        int flag=0;
+        if(usernameTxt.getText().isEmpty()||passwordTxt.getText().isEmpty())
+            missingInformation();
+        else {
+            username = usernameTxt.getText();
+            password = passwordTxt.getText();
+            for(int i =0; i<loginInfos.size(); i++){
+                if(loginInfos.get(i).getUsername().equals(username) && loginInfos.get(i).getPassword().equals(password)){
+                    if(loginInfos.get(i).getType().equals("teacher")){
+                        flag=1;
+                        sendMessage("get this teacher to login",loginInfos.get(i));
+                    }
+                    else if(loginInfos.get(i).getType().equals("student")){
+                        flag=1;
+                        sendMessage("get this student to login",loginInfos.get(i));
+                    }
+                    else {
+                        flag=1;
+                        sendMessage("get the principal", null);
+                    }
+                }
+            }
+            if(flag == 0)
+                wrongInformation();
+        }
     }
 }

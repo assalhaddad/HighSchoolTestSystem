@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.greenrobot.eventbus.EventBus;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
 
@@ -57,22 +58,20 @@ public class PrincipalPage {
     @FXML
     void ApproveRequestsEvent(ActionEvent event) {loadSceneForButton("approveRequests.fxml");}
     @FXML
-    void LogOut(ActionEvent event) {switchScreen("Login");}
+    void LogOut(ActionEvent event) {
+        switchScreen("Login");}
 
     @FXML
     void initialize() {
-        assert ApproveBtn != null : "fx:id=\"ApproveBtn\" was not injected: check your FXML file 'principalPage.fxml'.";
-        assert BorderPane != null : "fx:id=\"BorderPane\" was not injected: check your FXML file 'principalPage.fxml'.";
-        assert Menu != null : "fx:id=\"Menu\" was not injected: check your FXML file 'principalPage.fxml'.";
-        assert Title != null : "fx:id=\"Title\" was not injected: check your FXML file 'principalPage.fxml'.";
-        assert ViewExamsBtn != null : "fx:id=\"ViewExamsBtn\" was not injected: check your FXML file 'principalPage.fxml'.";
-        assert ViewGradesBtn != null : "fx:id=\"ViewGradesBtn\" was not injected: check your FXML file 'principalPage.fxml'.";
-        assert ViewQuestionsBtn != null : "fx:id=\"ViewQuestionsBtn\" was not injected: check your FXML file 'principalPage.fxml'.";
-        assert detailVBox != null : "fx:id=\"detailVBox\" was not injected: check your FXML file 'principalPage.fxml'.";
-        assert pageLbl != null : "fx:id=\"pageLbl\" was not injected: check your FXML file 'principalPage.fxml'.";
-        assert teacherPage != null : "fx:id=\"teacherPage\" was not injected: check your FXML file 'principalPage.fxml'.";
-
     }
+    @FXML
+    void ViewQuestionsEvent(ActionEvent event) {loadSceneForButton("viewQuestionsPrincipal.fxml");}
+
+    @FXML
+    void ViewGradesEvent(ActionEvent event) {loadSceneForButton("viewGradesPrincipal.fxml");}
+
+    @FXML
+    void ViewExamsEvent(ActionEvent event) {loadSceneForButton("viewExamsPrincipal.fxml");}
 
     private void loadSceneForButton(String fxmlPath) {
         try {
@@ -90,4 +89,3 @@ public class PrincipalPage {
     }
 
 }
-

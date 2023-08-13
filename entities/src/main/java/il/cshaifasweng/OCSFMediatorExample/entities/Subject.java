@@ -36,8 +36,6 @@ public class Subject implements Serializable {
         this.courses = new ArrayList<Course>();
     }
 
-    public int getId(){return this.id;}
-
     public List<Question> getQuestions() {
         return questions;
     }
@@ -48,6 +46,18 @@ public class Subject implements Serializable {
     public Subject() {
 
     }
+    public void copy(Subject s){
+        this.id=s.getId();
+        this.courses=s.getCourses();
+        this.name=s.getName();
+        this.questions=s.getQuestions();
+        this.teachers=s.getTeachers();
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
@@ -67,9 +77,11 @@ public class Subject implements Serializable {
         return teachers;
     }
     public void setTeachers(List<Teacher> teachers) {
-        this.teachers = teachers;
-        for(Teacher teacher : teachers){
-            teacher.getSubjects().add(this);
+        if(teachers!=null) {
+            this.teachers = teachers;
+            for (Teacher teacher : teachers) {
+                teacher.getSubjects().add(this);
+            }
         }
     }
 }

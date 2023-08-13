@@ -13,7 +13,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -28,8 +27,6 @@ public class TeacherPage {
 
     @FXML // fx:id="detailVBox"
     private VBox detailVBox; // Value injected by FXMLLoader
-    @FXML
-    private AnchorPane teacherPage;
     @FXML // fx:id="BorderPane"
     private BorderPane BorderPane; // Value injected by FXMLLoader
 
@@ -60,8 +57,8 @@ public class TeacherPage {
     }
 
     @FXML
-    void CheckGradesBtn(ActionEvent event) {
-
+    void CheckGradesEvent(ActionEvent event) {
+        loadSceneForButton("checkGradesTeacher.fxml");
     }
 
     @FXML
@@ -70,9 +67,12 @@ public class TeacherPage {
     }
 
     @FXML
-    void RequestTimeEvent(ActionEvent event) {loadSceneForButton("requestExtraTime.fxml");}
+    void RequestTimeEvent(ActionEvent event) {
+        loadSceneForButton("requestExtraTime.fxml");
+    }
     @FXML
-    void LogOut(ActionEvent event) {switchScreen("Login");}
+    void LogOut(ActionEvent event) {
+        switchScreen("Login");}
 
     private void loadSceneForButton(String fxmlPath) {
         try {

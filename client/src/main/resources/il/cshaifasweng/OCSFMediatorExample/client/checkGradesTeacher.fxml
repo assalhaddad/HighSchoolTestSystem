@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.666666667" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.CheckGradesTeacher">
+    <children>
+        <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="#d4e0eb" height="134.0" layoutX="210.0" layoutY="129.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="276.0" />
+        <Label alignment="CENTER" prefHeight="26.0" prefWidth="500.0" style="-fx-background-color: #70879d;" text="Check Grades" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Label>
+        <ComboBox fx:id="idCMB" layoutX="14.0" layoutY="42.0" onAction="#chooseExam" prefHeight="25.0" prefWidth="89.0" promptText="Exam ID" />
+        <Label layoutX="122.0" layoutY="44.0" text="Subject:">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <Label layoutX="281.0" layoutY="44.0" text="Course:">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <TextField fx:id="subjectTF" editable="false" layoutX="182.0" layoutY="42.0" prefHeight="25.0" prefWidth="83.0" />
+        <TextField fx:id="courseTF" editable="false" layoutX="340.0" layoutY="42.0" prefHeight="25.0" prefWidth="83.0" />
+        <TableView fx:id="tableView" layoutX="47.0" layoutY="105.0" onMouseClicked="#makeVisible" prefHeight="182.0" prefWidth="149.0">
+            <columns>
+                <TableColumn fx:id="nameCol" editable="false" prefWidth="102.0" text="Student Name" />
+                <TableColumn fx:id="gradeCol" editable="false" prefWidth="48.666656494140625" text="Grade" />
+            </columns>
+        </TableView>
+        <TextField fx:id="explainTF" layoutX="231.0" layoutY="188.0" prefHeight="25.0" prefWidth="243.0" />
+        <Label fx:id="explainLBL" layoutX="231.0" layoutY="165.0" prefHeight="21.0" prefWidth="149.0" text="Explain why:" />
+        <Button fx:id="submitBTN" layoutX="320.0" layoutY="227.0" mnemonicParsing="false" onAction="#changeGrade" style="-fx-background-color: #70879d;" text="Submit" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Button>
+        <Label fx:id="changeLBL" layoutX="231.0" layoutY="142.0" text="Change grade to:" />
+        <TextField fx:id="changeTF" layoutX="331.0" layoutY="138.0" prefHeight="11.0" prefWidth="49.0" />
+    </children>
+</AnchorPane>
