@@ -13,7 +13,7 @@ public class Exam implements Serializable {
     private int id;
     private String id_exam;
     @ManyToMany(
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+           // cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             targetEntity = Question.class
     )
     private List<Question> questions;
@@ -30,6 +30,7 @@ public class Exam implements Serializable {
     @OneToOne(mappedBy = "exam")
     private SolvedExam solvedExam;
     private String code4Digits;
+
 
 
 

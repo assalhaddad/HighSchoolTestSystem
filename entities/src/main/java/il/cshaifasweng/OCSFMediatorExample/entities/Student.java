@@ -20,7 +20,7 @@ public class Student implements Serializable {
     private String name;
     private String username;
     private String password;
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="student")
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="student",cascade = CascadeType.ALL)
     private List<StudentData> data;
 
     public Student(){}
@@ -89,4 +89,6 @@ public class Student implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 }

@@ -72,6 +72,9 @@ public class TeacherPage {
     }
     @FXML
     void LogOut(ActionEvent event) {
+        Login.teacher=null;
+        Login.student=null;
+        Login.principal=null;
         switchScreen("Login");}
 
     private void loadSceneForButton(String fxmlPath) {

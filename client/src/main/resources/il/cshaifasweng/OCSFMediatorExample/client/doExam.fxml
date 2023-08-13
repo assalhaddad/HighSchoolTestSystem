@@ -20,10 +20,16 @@
                         <Insets />
                     </VBox.margin>
                 </Label>
-                <TextField fx:id="forthDCode" layoutX="10.0" layoutY="254.0" onAction="#changeForthDcode" prefHeight="6.0" prefWidth="259.0" />
+                <TextField fx:id="forthDCode" layoutX="10.0" layoutY="254.0" minWidth="43.333333333333" prefHeight="21.0" prefWidth="306.0" />
+            <Label alignment="CENTER" prefHeight="21.0" prefWidth="82.0" text="Insert ID:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="idStudent" disable="true" minWidth="43.3333333333333" prefHeight="21.0" prefWidth="306.0" />
             </children>
         </VBox>
-        <Button fx:id="doneBTN" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="410.0" layoutY="101.0" mnemonicParsing="false" onAction="#donePressed" style="-fx-background-color: #70879d;" text="Done" textFill="WHITE">
+        <Button fx:id="nextBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="411.0" layoutY="100.0" mnemonicParsing="false" onAction="#nextPressed" prefHeight="21.0" prefWidth="43.0" style="-fx-background-color: #70879d;" text="Next" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
@@ -33,10 +39,15 @@
                 <Font name="System Bold" size="17.0" />
             </font>
         </Label>
-        <Button fx:id="startBtn" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="411.0" layoutY="166.0" mnemonicParsing="false" onAction="#startPressed" style="-fx-background-color: #70879d;" text="Next" textFill="WHITE">
+        <Button fx:id="doneBTN" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="410.0" layoutY="163.0" mnemonicParsing="false" onAction="#donePressed" prefHeight="25.0" prefWidth="46.0" style="-fx-background-color: #70879d;" text="Done" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Button>
+      <Button fx:id="startBtn" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="394.0" layoutY="230.0" mnemonicParsing="false" onAction="#startExamPressed" style="-fx-background-color: #70879d;" text="Start Exam" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

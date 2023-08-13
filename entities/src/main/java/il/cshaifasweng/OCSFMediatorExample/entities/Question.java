@@ -22,7 +22,7 @@ public class Question implements Serializable {
     @JoinColumn(name = "subject_id")
     private Subject subject;
     @ManyToMany(
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            //cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             targetEntity = Course.class
     )
     @JoinTable(
@@ -31,6 +31,8 @@ public class Question implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "course_id")
     )
     private List<Course> courses;
+
+
     private int points;
 
     public Question(String id, String text, String answer1,String answer2,String answer3,String answer4, int correct, Subject subject, List<Course> courses){
@@ -150,4 +152,5 @@ public class Question implements Serializable {
             }
         }
     }
+
 }

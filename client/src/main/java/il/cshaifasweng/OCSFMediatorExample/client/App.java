@@ -90,6 +90,7 @@ public class App extends Application {
                     }
                 });
                 break;
+
             case "StudentsPage":
                 Platform.runLater(() -> {
                     setWindowTitle("StudentsPage");
@@ -100,7 +101,30 @@ public class App extends Application {
                     }
                 });
                 break;
+            case "ExamPage":
+                Platform.runLater(() -> {
+                    setWindowTitle("ExamPage");
+                    try {
+                        setContent("ExamPage");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                break;
+
+            case "FreeText":
+                Platform.runLater(() -> {
+                    setWindowTitle("FreeText");
+                    try {
+                        setContent("FreeText");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                break;
         }
+
+
     }
 
     public static void displayError(String error){

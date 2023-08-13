@@ -42,6 +42,9 @@ public class StudentsPage {
 
     @FXML
     void LogOutEvent(ActionEvent event) {
+        Login.teacher=null;
+        Login.student=null;
+        Login.principal=null;
         switchScreen("Login");}
 
 

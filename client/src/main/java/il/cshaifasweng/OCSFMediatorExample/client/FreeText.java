@@ -11,6 +11,8 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 
+import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
+
 public class FreeText extends ExamPage {
 
     @FXML
@@ -22,29 +24,18 @@ public class FreeText extends ExamPage {
 
     @FXML
     void initialize() {
-        EventBus.getDefault().register(this);
+        //EventBus.getDefault().register(this);
         assert doneBTN != null : "fx:id=\"doneBTN\" was not injected: check your FXML file 'freeText.fxml'.";
         assert freeTextTeacher != null : "fx:id=\"freeTextTeacher\" was not injected: check your FXML file 'freeText.fxml'.";
 
-        if(exam.getFreeTextStudent()!="")
-            freeTextTeacher.setText(exam.getFreeTextStudent());
+        if(DoExam.exam.getFreeTextStudent()!="")
+            freeTextTeacher.setText(DoExam.exam.getFreeTextStudent());
     }
 
 
     @FXML
-    void done(ActionEvent event) {loadSceneForButton("examPage");}
+    void done(ActionEvent event) {switchScreen("ExamPage");}
 
-    private void loadSceneForButton(String fxmlPath) {
-        try {
-            // Load the FXML file for the scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Node sceneRoot = loader.load();
 
-            // Clear the detail VBox and add the loaded scene
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle the exception as needed
-        }
-    }
 
 }

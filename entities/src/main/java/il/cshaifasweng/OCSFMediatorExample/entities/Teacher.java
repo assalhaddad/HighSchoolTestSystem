@@ -15,10 +15,10 @@ public class Teacher implements Serializable {
     private String username;
     private String password;
 
-    @OneToMany(fetch=FetchType.LAZY,mappedBy="author")
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="author",cascade = CascadeType.ALL)
     private List<Exam> exams;
     @ManyToMany(
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            //cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             targetEntity = Subject.class
     )
     @JoinTable(

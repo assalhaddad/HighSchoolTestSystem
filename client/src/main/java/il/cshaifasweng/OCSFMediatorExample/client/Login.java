@@ -57,9 +57,9 @@ public class Login {
     private TextField usernameTxt;
     String username;
     String password;
-    public static Student student = new Student();
-    public static Principal principal = new Principal();
-    public static Teacher teacher = new Teacher();
+    public static Student student;
+    public static Principal principal;
+    public static Teacher teacher;
     public  static String flag = "";
 
 
@@ -94,6 +94,7 @@ public class Login {
     public void handleMessage(Message message) {
         String request = message.getMessage();
         Object obj = message.getObject();
+        System.out.println("the message is: "+request);
         if (request.equals("students list is ready"))
             getStudentsRequest(obj);
         else if (request.equals("teachers list is ready"))
@@ -146,7 +147,7 @@ public class Login {
                 alert.showAndWait();
             }
         });
-        switchScreen("Login");
+        //switchScreen("Login");
     }
 
     private void missingInformation(){
@@ -180,6 +181,9 @@ public class Login {
 
     @FXML
     void checkLogin(ActionEvent event) {
+        flag="";
+        username="";
+        password="";
         if(usernameTxt.getText().isEmpty()||passwordTxt.getText().isEmpty())
             missingInformation();
         else {
