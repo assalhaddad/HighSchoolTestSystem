@@ -175,6 +175,7 @@ public class AddQuestion {
         Platform.runLater(() -> {
             courseCMB.getCheckModel().clearChecks();
         });
+        chosenCourses.clear(); // just added
         courseCMB.setDisable(true);
         idTF.clear();
         questionTF.clear();

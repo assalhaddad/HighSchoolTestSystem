@@ -1155,11 +1155,25 @@ public class SimpleServer extends AbstractServer {
 					client.sendToClient(new Message("courses list is ready for build exam", courseList));
 				}
 				else if(request.equals("new question")){
+					Question temp = new Question();
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					question.copy((Question)message.getObject());
-					questions.add(question);
-					session.save(question);
+					temp.copy(question);
+					for(int i=0; i<subjects.size(); i++)
+						if(subjects.get(i).getName().equals(question.getSubject().getName())) {
+							subjects.get(i).getQuestions().add(temp);
+							session.update(subjects.get(i));
+						}
+					for(int i=0; i<courses.size(); i++){
+						for(int j=0; j<question.getCourses().size(); j++)
+							if(courses.get(i).getName().equals(question.getCourses().get(j).getName())) {
+								courses.get(i).getQuestions().add(temp);
+								session.update(courses.get(i));
+							}
+					}
+					questions.add(temp);
+					session.save(temp);
 					session.flush();
 					session.getTransaction().commit();
 					session.close();
@@ -1171,10 +1185,7 @@ public class SimpleServer extends AbstractServer {
 					studentData.copy((StudentData)message.getObject());
 					studentDataList.add(studentData);
 					session.save(studentData);
-					System.out.println(studentData.getSolvedExam().getId());
-					System.out.println("before flush");
 					session.flush();
-					System.out.println("after flush");
 					session.getTransaction().commit();
 					session.close();
 					client.sendToClient(new Message("studentData added successfully",(Object)null));
@@ -1185,10 +1196,7 @@ public class SimpleServer extends AbstractServer {
 					solvedExam.copy((SolvedExam) message.getObject());
 					solvedExamList.add(solvedExam);
 					session.save(solvedExam);
-					//System.out.println("here "+solvedExam.getId());
-					System.out.println("before flush");
 					session.flush();
-					System.out.println("after flush");
 					session.getTransaction().commit();
 					session.close();
 					client.sendToClient(new Message("solvedExam added successfully",solvedExam));

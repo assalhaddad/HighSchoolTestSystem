@@ -135,6 +135,7 @@ public class BuildExam {
         clear1();
     }
 
+    ObservableList<String> temp = FXCollections.observableArrayList();
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
@@ -145,6 +146,7 @@ public class BuildExam {
         addBTN.setVisible(false);
         chosenTeacher.copy(Login.teacher);
         questionsList.setItems(temp);
+        courseCMB.setItems(courseList);
         //sendMessage("get teacher for build exam", (Object) null);
     }
 
@@ -191,7 +193,7 @@ public class BuildExam {
         chosenQuestion.copy((Question) obj);
     }
 
-    ObservableList<String> temp = FXCollections.observableArrayList();
+
     private void getChosenCourseRequest(Object obj){
         chosenCourse.copy((Course) obj);
         ArrayList<String> list = new ArrayList();
@@ -208,10 +210,14 @@ public class BuildExam {
         sendMessage("get list of courses for build exam", chosenSubject.getName());
     }
 
+    ObservableList<String> courseList = FXCollections.observableArrayList();
     private void getCoursesRequest(Object obj){
         courseCMB.setDisable(false);
-        ObservableList<String> courseList = FXCollections.observableArrayList((ArrayList)obj);
-        courseCMB.setItems(courseList);
+        //ObservableList<String> courseList = FXCollections.observableArrayList((ArrayList)obj);
+        Platform.runLater(() -> {
+                courseList.setAll((ArrayList) obj);
+                });
+        //courseCMB.setItems(courseList);
         System.out.println("setting courses in build exam");
     }
 
