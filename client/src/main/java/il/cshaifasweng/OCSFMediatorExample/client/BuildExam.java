@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import com.sun.javafx.collections.ObservableListWrapper;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -67,18 +68,23 @@ public class BuildExam {
 
     @FXML
     void selectSubject(ActionEvent event) {
-        String subject = this.subjectCMB.getValue().toString();
-        courseCMB.getItems().clear();
-        questionsList.getItems().clear();
-        pointsTF.setVisible(false);
-        addBTN.setVisible(false);
-        sendMessage("get subject for build exam", subject);
+        if(subjectCMB.getValue()!=null) {
+            String subject = this.subjectCMB.getValue().toString();
+            //courseCMB.getItems().clear();
+            //questionsList.getItems().clear();
+            temp.clear();
+            pointsTF.setVisible(false);
+            addBTN.setVisible(false);
+            sendMessage("get subject for build exam", subject);
+        }
     }
 
     @FXML
     void selectCourse(ActionEvent event) {
-        String course = this.courseCMB.getValue().toString();
-        sendMessage("get course for build exam", course);
+        if(courseCMB.getValue()!=null) {
+            String course = this.courseCMB.getValue().toString();
+            sendMessage("get course for build exam", course);
+        }
     }
 
     @FXML
@@ -126,7 +132,7 @@ public class BuildExam {
 
     @FXML
     void clearPressed(ActionEvent event) {
-        clear();
+        clear1();
     }
 
     @FXML
@@ -138,6 +144,7 @@ public class BuildExam {
         pointsTF.setVisible(false);
         addBTN.setVisible(false);
         chosenTeacher.copy(Login.teacher);
+        questionsList.setItems(temp);
         //sendMessage("get teacher for build exam", (Object) null);
     }
 
@@ -184,12 +191,17 @@ public class BuildExam {
         chosenQuestion.copy((Question) obj);
     }
 
+    ObservableList<String> temp = FXCollections.observableArrayList();
     private void getChosenCourseRequest(Object obj){
         chosenCourse.copy((Course) obj);
         ArrayList<String> list = new ArrayList();
         for(int i = 0; i<chosenCourse.getQuestions().size(); i++)
             list.add(chosenCourse.getQuestions().get(i).getText());
-        questionsList.getItems().setAll(list);
+        Platform.runLater(() -> {
+            temp.setAll(list);
+        });
+        //questionsList.getItems().setAll(list);
+        //questionsList.setItems(temp);
     }
     private void getChosenSubjectRequest(Object obj){
         chosenSubject.copy((Subject) obj);
@@ -228,18 +240,26 @@ public class BuildExam {
         return false;
     }
 
-    private void clear(){
+    private void clear1(){
         totalPoints = 100;
         totalTF.setText(String.valueOf(totalPoints));
-        subjectCMB.getSelectionModel().clearSelection();
-        courseCMB.getItems().clear();
+        Platform.runLater(() -> {
+            subjectCMB.getSelectionModel().clearSelection();
+        });
+        Platform.runLater(() -> {
+            courseCMB.getSelectionModel().clearSelection();
+        });
+        //subjectCMB.getSelectionModel().select(-1);
+        //courseCMB.getSelectionModel().select(-1);
         courseCMB.setDisable(true);
         idTF.clear();
         timeTF.clear();
         digitcode.clear();
         pointsTF.setVisible(false);
         addBTN.setVisible(false);
-        questionsList.getItems().clear();
+        Platform.runLater(() -> {
+            temp.clear(); // Clear the ObservableList using clear()
+        });
         questions.clear();
         freeText1.clear();
         freeText2.clear();
@@ -278,7 +298,7 @@ public class BuildExam {
                 alert.showAndWait();
             }
         });
-        clear();
+        clear1();
     }
 
     private void addedNewQuestion(){

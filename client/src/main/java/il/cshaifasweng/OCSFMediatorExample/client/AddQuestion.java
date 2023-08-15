@@ -169,9 +169,12 @@ public class AddQuestion {
                 alert.showAndWait();
             }
         });
-        subjectCMB.getSelectionModel().clearSelection();
-        courseCMB.getCheckModel().clearChecks();
-        courseCMB.getItems().clear();
+        Platform.runLater(() -> {
+            subjectCMB.getSelectionModel().clearSelection();
+        });
+        Platform.runLater(() -> {
+            courseCMB.getCheckModel().clearChecks();
+        });
         courseCMB.setDisable(true);
         idTF.clear();
         questionTF.clear();

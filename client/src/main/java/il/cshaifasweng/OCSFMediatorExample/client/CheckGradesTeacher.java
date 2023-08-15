@@ -115,10 +115,14 @@ public class CheckGradesTeacher {
         displayInfo();
     }
     public void displayInfo(){
-        ObservableList<StudentData> data = FXCollections.observableArrayList(chosenExam.getSolvedExam().getData());
-        nameCol.setCellValueFactory(new PropertyValueFactory<StudentData, String>("name"));
-        gradeCol.setCellValueFactory(new PropertyValueFactory<StudentData, Integer>("grade"));
-        tableView.setItems(data);
+        if(!(chosenExam.getSolvedExam().getData() == null)) {
+            ObservableList<StudentData> data = FXCollections.observableArrayList(chosenExam.getSolvedExam().getData());
+            nameCol.setCellValueFactory(new PropertyValueFactory<StudentData, String>("name"));
+            gradeCol.setCellValueFactory(new PropertyValueFactory<StudentData, Integer>("grade"));
+            tableView.setItems(data);
+        }
+        else
+            tableView.getItems().clear();
     }
     public void updateGrade(){
         //String chosenStudent = tableView.getSelectionModel().getSelectedItem().getName();

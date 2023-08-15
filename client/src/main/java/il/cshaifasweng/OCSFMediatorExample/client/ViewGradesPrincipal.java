@@ -60,11 +60,14 @@ public class ViewGradesPrincipal {
         }
         subjectTF.setText(chosenExam.getCourse().getSubject().getName());
         courseTF.setText(chosenExam.getCourse().getName());
-
-        ObservableList<StudentData> data = FXCollections.observableArrayList(chosenExam.getSolvedExam().getData());
-        nameCol.setCellValueFactory(new PropertyValueFactory<StudentData, String>("name"));
-        gradeCol.setCellValueFactory(new PropertyValueFactory<StudentData, Integer>("grade"));
-        tableView.setItems(data);
+        if(!(chosenExam.getSolvedExam().getData() == null)) {
+            ObservableList<StudentData> data = FXCollections.observableArrayList(chosenExam.getSolvedExam().getData());
+            nameCol.setCellValueFactory(new PropertyValueFactory<StudentData, String>("name"));
+            gradeCol.setCellValueFactory(new PropertyValueFactory<StudentData, Integer>("grade"));
+            tableView.setItems(data);
+        }
+        else
+            tableView.getItems().clear();
     }
 
     @FXML
