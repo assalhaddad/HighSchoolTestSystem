@@ -64,6 +64,7 @@ public class ConnectionToClient extends Thread
    * A reference to the Server that created this instance.
    */
   private AbstractServer server;
+  private List<ConnectionToClient> clients;
 
   /**
    * Sockets are used in the operating system as channels
@@ -161,6 +162,15 @@ public class ConnectionToClient extends Thread
 
     output.reset();
     output.writeObject(msg);
+  }
+  public void sendToAllClients(Object object) {
+    for (ConnectionToClient client : clients) {
+      try {
+        client.sendToClient(object);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   /**

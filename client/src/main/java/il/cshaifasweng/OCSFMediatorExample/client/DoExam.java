@@ -3,6 +3,8 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Exam;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
@@ -76,7 +78,6 @@ public class DoExam {
                 else
                     wrongId();
 
-            //sendMessage("get list of students ids", theCode);
         }
 
 
@@ -109,7 +110,7 @@ public class DoExam {
 
             else if (request.equals("found student"))
             {
-                student=new Student((Student)obj);
+                student=((Student)obj);
                 startBtn.setDisable(false);
             }
             else if (request.equals("didn't find student"))
@@ -141,13 +142,13 @@ public class DoExam {
 
             SolvedExam temp =new SolvedExam(exam.getTime(), exam);
             solvedExam.copy(temp);
-            //System.out.println("exam id: "+exam.getId_exam());
             System.out.println("temp id " + temp.getId());
             sendMessage("new solvedExam",solvedExam);
-            //System.out.println(solvedExam.getId());
+
         }
         else
             solvedExam.copy(exam.getSolvedExam());
+
 
         switchScreen("ExamPage");
     }

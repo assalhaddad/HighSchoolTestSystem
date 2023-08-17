@@ -1179,6 +1179,22 @@ public class SimpleServer extends AbstractServer {
 					session.close();
 					client.sendToClient(new Message("studentData added successfully",(Object)null));
 				}
+				else if(request.equals("new studentData 2.0")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					studentData.copy((StudentData)message.getObject());
+					studentDataList.add(studentData);
+					session.save(studentData);
+					System.out.println(studentData.getSolvedExam().getId());
+					System.out.println("before flush");
+					session.flush();
+					System.out.println("after flush");
+					session.getTransaction().commit();
+					session.close();
+					client.sendToClient(new Message("studentData added successfully 2.0",(Object)null));
+
+				}
+
 				else if(request.equals("new solvedExam")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
@@ -1403,19 +1419,28 @@ public class SimpleServer extends AbstractServer {
 					client.sendToClient(new Message("requests list is ready", requests1));
 					session.close();
 				}
-				else if(request.equals("approve this request")){
-					session=sessionFactory.openSession();
+				else if(request.equals("approve this request")) {
+					session = sessionFactory.openSession();
 					session.beginTransaction();
-					requestExtraTime.copy((Request)message.getObject());
+					requestExtraTime.copy((Request) message.getObject());
 					requests.remove(requestExtraTime);
 					session.remove(requestExtraTime);
-					requestExtraTime.copy((Request)message.getObject());
+					requestExtraTime.copy((Request) message.getObject());
 					requestExtraTime.setIsDone();
 					requests.add(requestExtraTime);
 					session.save(requestExtraTime);
 					session.flush();
-					client.sendToClient(new Message("request approved successfully",(Object)null));
-					session.close();
+
+					for (int i = 0; i < exams.size(); i++) {
+						if (exams.get(i).getId_exam().equals(requestExtraTime.getExamId())) {
+							exams.get(i).getSolvedExam().setUpdatedTime(requestExtraTime.getMinutes());
+							session.save(exams.get(i).getSolvedExam());
+							session.flush();
+						}
+					}
+						client.sendToAllClients(new Message("request approved successfully", null));
+						session.close();
+
 				}
 				else if(request.equals("get questions for principal")){
 					session=sessionFactory.openSession();
