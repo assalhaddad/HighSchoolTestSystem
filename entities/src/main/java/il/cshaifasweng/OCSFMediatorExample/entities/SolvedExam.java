@@ -2,6 +2,8 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,18 +13,25 @@ public class SolvedExam implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToMany (mappedBy = "solvedExam")
+    @OneToMany (mappedBy = "solvedExam",cascade = CascadeType.ALL)
     private List<StudentData> data;
-    private String date;
+
     private int updatedTime;
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="exam_id")
     private Exam exam;
-    public SolvedExam(){}
-    public SolvedExam(String date, int updatedTime, Exam exam){
+
+    private boolean isBuild=false;
+    public SolvedExam()
+    {
+        //super();
+        this.exam=new Exam();
+    }
+    public SolvedExam( int updatedTime, Exam exam){
         super();
-        this.date = date;
         this.updatedTime = updatedTime;
+        this.isBuild=true;
         this.data=new ArrayList();
         setExam(exam);
     }
@@ -31,10 +40,7 @@ public class SolvedExam implements Serializable {
         for(int i=0; i<this.data.size(); i++){
             if(this.data.get(i).getGrade()==0) {
                 for (int j = 0; j < this.exam.getQuestions().size(); j++) {
-                    //System.out.println("answer for ques "+j+": "+this.data.get(i).getStudentSolution().get(j));
-                    //System.out.println("the correct answer is: "+this.exam.getQuestions().get(j).getCorrect());
                     if (this.exam.getQuestions().get(j).getCorrect() == this.data.get(i).getStudentSolution().get(j)) {
-                        //System.out.println("adding "+this.exam.getQuestions().get(j).getPoints()+" for question num "+j);
                         this.data.get(i).addToGrade(this.exam.getQuestions().get(j).getPoints());
                     }
                 }
@@ -49,6 +55,7 @@ public class SolvedExam implements Serializable {
         this.data = data;
     }
 
+
     public Exam getExam() {
         return exam;
     }
@@ -60,13 +67,7 @@ public class SolvedExam implements Serializable {
         }
     }
 
-    public String getDate() {
-        return date;
-    }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
 
     public int getUpdatedTime() {
         return updatedTime;
@@ -75,4 +76,34 @@ public class SolvedExam implements Serializable {
     public void setUpdatedTime(int updatedTime) {
         this.updatedTime = updatedTime;
     }
+
+    public void setData(List<StudentData> data) {
+        this.data = data;
+    }
+
+    public boolean GetIsBuild() {
+        return isBuild;
+    }
+
+    public void setBuild(boolean build) {
+        isBuild = build;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void copy(SolvedExam solvedExam) {
+        this.exam=solvedExam.getExam();
+        this.id = solvedExam.getId();
+        //this.exam.copy(solvedExam.getExam());
+        this.data = solvedExam.getData();
+        this.updatedTime=solvedExam.getUpdatedTime();
+        this.isBuild= solvedExam.GetIsBuild();
+    }
+
 }

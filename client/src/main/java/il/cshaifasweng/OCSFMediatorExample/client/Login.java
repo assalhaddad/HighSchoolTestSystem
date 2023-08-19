@@ -90,8 +90,8 @@ public class Login {
             checkPosition("student");
         }
         else if(request.equals("found the teacher to login")){
-           teacher.copy((Teacher)obj);
-           checkPosition("teacher");
+            teacher.copy((Teacher)obj);
+            checkPosition("teacher");
         }
         else if(request.equals("principal is ready")){
             principal.copy((Principal)obj);

@@ -24,6 +24,11 @@ public class BuildExam {
     private TextField pointsTF;
     @FXML
     private TextField idTF;
+    @FXML
+    private TextField freeText1;
+
+    @FXML
+    private TextField freeText2;
 
     @FXML
     private ListView<String> questionsList;
@@ -48,7 +53,12 @@ public class BuildExam {
         else if(idTF.getText().isEmpty()||timeTF.getText().isEmpty()||digitcode.getText().isEmpty())
             missingInfo();
         else {
-            Exam newExam = new Exam(idTF.getText(),questions,Integer.parseInt(timeTF.getText()),"","",chosenTeacher,chosenCourse,digitcode.getText());
+            String free1 = "", free2 = "";
+            if(!freeText1.getText().isEmpty())
+                free1 = freeText1.getText();
+            if(!freeText2.getText().isEmpty())
+                free2 = freeText2.getText();
+            Exam newExam = new Exam(idTF.getText(),questions,Integer.parseInt(timeTF.getText()),free2,free1,chosenTeacher,chosenCourse,digitcode.getText());
             System.out.println("exam object has been built");
             questions.clear();
             sendMessage("new exam",newExam);
@@ -231,6 +241,8 @@ public class BuildExam {
         addBTN.setVisible(false);
         questionsList.getItems().clear();
         questions.clear();
+        freeText1.clear();
+        freeText2.clear();
     }
 
     private void duplicateError(){

@@ -16,10 +16,10 @@ public class Course implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id")
     private Subject subject;
-    @OneToMany(fetch=FetchType.LAZY,mappedBy="course")
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="course",cascade = CascadeType.ALL)
     private List<Exam> exams;
     @ManyToMany(mappedBy = "courses",
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            //cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             targetEntity = Question.class
     )
     private List<Question> questions;

@@ -50,13 +50,17 @@ public class PrincipalPage {
     private VBox detailVBox;
 
     @FXML
-    private Label pageLbl;
-
-    @FXML
     private AnchorPane teacherPage;
 
     @FXML
-    void ApproveRequestsEvent(ActionEvent event) {loadSceneForButton("approveRequests.fxml");}
+    private Button menuBtn;
+
+    @FXML
+    void ApproveRequestsEvent(ActionEvent event) {
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        loadSceneForButton("approveRequests.fxml");
+    }
     @FXML
     void LogOut(ActionEvent event) {
         switchScreen("Login");}
@@ -65,13 +69,25 @@ public class PrincipalPage {
     void initialize() {
     }
     @FXML
-    void ViewQuestionsEvent(ActionEvent event) {loadSceneForButton("viewQuestionsPrincipal.fxml");}
+    void ViewQuestionsEvent(ActionEvent event) {
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        loadSceneForButton("viewQuestionsPrincipal.fxml");
+    }
 
     @FXML
-    void ViewGradesEvent(ActionEvent event) {loadSceneForButton("viewGradesPrincipal.fxml");}
+    void ViewGradesEvent(ActionEvent event) {
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        loadSceneForButton("viewGradesPrincipal.fxml");
+    }
 
     @FXML
-    void ViewExamsEvent(ActionEvent event) {loadSceneForButton("viewExamsPrincipal.fxml");}
+    void ViewExamsEvent(ActionEvent event) {
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        loadSceneForButton("viewExamsPrincipal.fxml");
+    }
 
     private void loadSceneForButton(String fxmlPath) {
         try {
@@ -86,6 +102,12 @@ public class PrincipalPage {
             e.printStackTrace();
             // Handle the exception as needed
         }
+    }
+
+    @FXML
+    void OpenMenu(ActionEvent event) {
+        menuBtn.setVisible(false);
+        Menu.setVisible(true);
     }
 
 }

@@ -10,41 +10,32 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.666666667" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.CheckGradesTeacher">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.CheckGradesTeacher">
     <children>
-        <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="#d4e0eb" height="134.0" layoutX="210.0" layoutY="129.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="276.0" />
-        <Label alignment="CENTER" prefHeight="26.0" prefWidth="500.0" style="-fx-background-color: #70879d;" text="Check Grades" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="17.0" />
-            </font>
-        </Label>
-        <ComboBox fx:id="idCMB" layoutX="14.0" layoutY="42.0" onAction="#chooseExam" prefHeight="25.0" prefWidth="89.0" promptText="Exam ID" />
-        <Label layoutX="122.0" layoutY="44.0" text="Subject:">
-            <font>
-                <Font size="15.0" />
-            </font>
-        </Label>
-        <Label layoutX="281.0" layoutY="44.0" text="Course:">
-            <font>
-                <Font size="15.0" />
-            </font>
-        </Label>
-        <TextField fx:id="subjectTF" editable="false" layoutX="182.0" layoutY="42.0" prefHeight="25.0" prefWidth="83.0" />
-        <TextField fx:id="courseTF" editable="false" layoutX="340.0" layoutY="42.0" prefHeight="25.0" prefWidth="83.0" />
-        <TableView fx:id="tableView" layoutX="47.0" layoutY="105.0" onMouseClicked="#makeVisible" prefHeight="182.0" prefWidth="149.0">
+        <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="#d4e0eb" height="143.0" layoutX="294.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="276.0" />
+        <ComboBox fx:id="idCMB" layoutX="14.0" layoutY="42.0" onAction="#chooseExam" prefHeight="25.0" prefWidth="103.0" promptText="Exam ID" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="subjectTF" editable="false" layoutX="139.0" layoutY="42.0" prefHeight="25.0" prefWidth="83.0" promptText="Subject" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="courseTF" editable="false" layoutX="235.0" layoutY="42.0" prefHeight="25.0" prefWidth="103.0" promptText="Course" style="-fx-font-family: 'Arial Black';" />
+        <TableView fx:id="tableView" layoutX="47.0" layoutY="105.0" onMouseClicked="#makeVisible" prefHeight="182.0" prefWidth="212.0" style="-fx-font-family: 'Arial Black';">
             <columns>
-                <TableColumn fx:id="nameCol" editable="false" prefWidth="102.0" text="Student Name" />
-                <TableColumn fx:id="gradeCol" editable="false" prefWidth="48.666656494140625" text="Grade" />
+                <TableColumn fx:id="nameCol" editable="false" prefWidth="150.0" text="Student Name" />
+                <TableColumn fx:id="gradeCol" editable="false" prefWidth="60.0" text="Grade" />
             </columns>
         </TableView>
-        <TextField fx:id="explainTF" layoutX="231.0" layoutY="188.0" prefHeight="25.0" prefWidth="243.0" />
-        <Label fx:id="explainLBL" layoutX="231.0" layoutY="165.0" prefHeight="21.0" prefWidth="149.0" text="Explain why:" />
-        <Button fx:id="submitBTN" layoutX="320.0" layoutY="227.0" mnemonicParsing="false" onAction="#changeGrade" style="-fx-background-color: #70879d;" text="Submit" textFill="WHITE">
+        <TextField fx:id="explainTF" layoutX="310.0" layoutY="192.0" prefHeight="25.0" prefWidth="243.0" style="-fx-font-family: 'Arial Black';" />
+        <Label fx:id="explainLBL" layoutX="309.0" layoutY="172.0" prefHeight="21.0" prefWidth="149.0" text="Explain why:">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font></Label>
+        <Button fx:id="submitBTN" layoutX="403.0" layoutY="230.0" mnemonicParsing="false" onAction="#changeGrade" style="-fx-background-color: #70879d;" text="Submit" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Button>
-        <Label fx:id="changeLBL" layoutX="231.0" layoutY="142.0" text="Change grade to:" />
-        <TextField fx:id="changeTF" layoutX="331.0" layoutY="138.0" prefHeight="11.0" prefWidth="49.0" />
+        <Label fx:id="changeLBL" layoutX="315.0" layoutY="138.0" text="Change grade to:">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font></Label>
+        <TextField fx:id="changeTF" layoutX="439.0" layoutY="136.0" prefHeight="11.0" prefWidth="49.0" style="-fx-font-family: 'Arial Black';" />
     </children>
 </AnchorPane>

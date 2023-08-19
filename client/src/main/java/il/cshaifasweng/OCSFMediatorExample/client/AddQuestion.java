@@ -43,9 +43,6 @@ public class AddQuestion {
     @FXML
     private CheckComboBox<String> courseCMB;
 
-    @FXML // fx:id="subjectTF1"
-    private Label subjectTF1; // Value injected by FXMLLoader
-
     @FXML // fx:id="thirdTF"
     private TextField thirdTF; // Value injected by FXMLLoader
     @FXML

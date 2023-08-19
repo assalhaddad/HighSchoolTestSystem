@@ -3,76 +3,35 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.66666666667" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ApproveRequests">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.66666666667" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ApproveRequests">
    <children>
-      <VBox layoutX="126.0" layoutY="25.0" prefHeight="308.0" prefWidth="293.0" spacing="7.0">
+      <VBox layoutX="126.0" layoutY="25.0" prefHeight="260.0" prefWidth="293.0" spacing="7.0">
          <children>
-            <ComboBox fx:id="requestCmb" onAction="#ChooseRequest" prefWidth="150.0">
+            <ComboBox fx:id="requestCmb" onAction="#ChooseRequest" prefHeight="25.0" prefWidth="167.0" promptText="Request number" style="-fx-font-family: 'Arial Black';">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </ComboBox>
-            <TextField fx:id="fromTF" editable="false" prefHeight="27.0" prefWidth="293.0" />
-            <TextField fx:id="testIdTF" editable="false" layoutX="10.0" layoutY="254.0" prefHeight="27.0" prefWidth="293.0" />
-            <TextField fx:id="extraTimeTF" editable="false" prefHeight="27.0" prefWidth="293.0" promptText="minutes">
+            <TextField fx:id="fromTF" editable="false" prefHeight="27.0" prefWidth="293.0" promptText="From" style="-fx-font-family: 'Arial Black';" />
+            <TextField fx:id="testIdTF" editable="false" layoutX="10.0" layoutY="254.0" prefHeight="27.0" prefWidth="293.0" promptText="Exam ID" style="-fx-font-family: 'Arial Black';" />
+            <TextField fx:id="extraTimeTF" editable="false" prefHeight="27.0" prefWidth="293.0" promptText="Extra time (minutes)" style="-fx-font-family: 'Arial Black';">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </TextField>
-            <TextArea fx:id="explanationTA" editable="false" prefHeight="96.0" prefWidth="293.0" />
+            <TextArea fx:id="explanationTA" editable="false" prefHeight="96.0" prefWidth="293.0" promptText="Explanation" style="-fx-font-family: 'Arial Black';" />
          </children>
       </VBox>
-      <VBox layoutY="25.0" prefHeight="308.0" prefWidth="119.0" spacing="7.0">
-         <children>
-            <Label alignment="CENTER" layoutX="10.0" layoutY="253.0" prefHeight="25.0" prefWidth="127.0" text="Request number">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Label>
-            <Label alignment="CENTER" prefHeight="25.0" prefWidth="135.0" text="From">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Label>
-            <Label alignment="CENTER" prefHeight="25.0" prefWidth="135.0" text="Exam Id">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" prefHeight="25.0" prefWidth="135.0" text="Extra Time">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="10.0" layoutY="225.0" prefHeight="25.0" prefWidth="135.0" text="Explanation">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-      <Button fx:id="approveBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="421.0" layoutY="284.0" mnemonicParsing="false" onAction="#Approve" style="-fx-background-color: #70879d;" text="Approve" textFill="WHITE">
+      <Button fx:id="approveBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="240.0" layoutY="285.0" mnemonicParsing="false" onAction="#Approve" style="-fx-background-color: #70879d;" text="Approve" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" prefHeight="26.0" prefWidth="500.0" style="-fx-background-color: #70879d;" text="Approve Extra Time Requests" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="17.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

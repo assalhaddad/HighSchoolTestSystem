@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -39,39 +40,54 @@ public class TeacherPage {
     @FXML // fx:id="addQuestionBtn"
     private Button addQuestionBtn; // Value injected by FXMLLoader
 
+    @FXML
+    private ImageView back;
+
     @FXML // fx:id="checkGradesBtn"
     private Button checkGradesBtn; // Value injected by FXMLLoader
 
     @FXML // fx:id="createExamBtn"
     private Button buildExamBtn; // Value injected by FXMLLoader
 
-    @FXML // fx:id="pageLbl"
-    private Label pageLbl; // Value injected by FXMLLoader
-
     @FXML // fx:id="requestTimeBtn"
     private Button requestTimeBtn; // Value injected by FXMLLoader
 
     @FXML
+    private Button menuBtn;
+
+    @FXML
     void AddQuestionEvent(ActionEvent event) {
+
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
         loadSceneForButton("addQuestion.fxml");
     }
 
     @FXML
     void CheckGradesEvent(ActionEvent event) {
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
         loadSceneForButton("checkGradesTeacher.fxml");
     }
 
     @FXML
     void CreateExamEvent(ActionEvent event) {
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
         loadSceneForButton("buildExam.fxml");
     }
 
     @FXML
     void RequestTimeEvent(ActionEvent event) {
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
         loadSceneForButton("requestExtraTime.fxml");
     }
     @FXML
     void LogOut(ActionEvent event) {
+        Login.teacher=null;
+        Login.student=null;
+        Login.principal=null;
         switchScreen("Login");}
 
     private void loadSceneForButton(String fxmlPath) {
@@ -87,6 +103,12 @@ public class TeacherPage {
             e.printStackTrace();
             // Handle the exception as needed
         }
+    }
+
+    @FXML
+    void OpenMenu(ActionEvent event) {
+        menuBtn.setVisible(false);
+        Menu.setVisible(true);
     }
 
 }

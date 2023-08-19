@@ -20,19 +20,21 @@ public class StudentData implements Serializable {
    private Student student;
    private String name;
    private int timePassed;
-   private int end;
+   private boolean isFinished;
    private int grade;
+   private String date;
    @ElementCollection
    private List<Integer> studentSolution;
    @ManyToOne
    @JoinColumn(name = "solvedExam_id")
    private SolvedExam solvedExam;
 
-   public StudentData(Student student, int timePassed, int end, List<Integer> studentSolution, SolvedExam solvedExam){
+   public StudentData(Student student,String date ,int timePassed, boolean isFinished, List<Integer> studentSolution, SolvedExam solvedExam){
       super();
       setStudent(student);
+      this.date=date;
       this.timePassed=timePassed;
-      this.end=end;
+      this.isFinished=isFinished;
       this.studentSolution= new ArrayList<Integer>(studentSolution);
       this.grade=0;
       setSolvedExam(solvedExam);
@@ -87,6 +89,7 @@ public class StudentData implements Serializable {
          this.solvedExam = solvedExam;
          solvedExam.getData().add(this);
       }
+      else System.out.println("Error!!!!!!!!!!");
    }
 
    public String getName() {
@@ -95,5 +98,45 @@ public class StudentData implements Serializable {
 
    public void setName(String name) {
       this.name = name;
+   }
+
+   public int getTimePassed() {
+      return timePassed;
+   }
+
+   public boolean isFinished() {
+      return isFinished;
+   }
+
+   public String getDate() {
+      return date;
+   }
+
+   public void setDate(String date) {
+      this.date = date;
+   }
+
+   public void setTimePassed(int timePassed) {
+      this.timePassed = timePassed;
+   }
+
+   public boolean getIsFinished() {
+      return isFinished;
+   }
+
+   public void setFinished(boolean finished) {
+      isFinished = finished;
+   }
+
+   public void copy(StudentData object) {
+      this.id= object.getId();
+      this.student=object.getStudent();
+      this.date=object.getDate();
+      this.timePassed= object.getTimePassed();
+      this.isFinished=object.getIsFinished();
+      this.studentSolution=object.getStudentSolution();
+      this.solvedExam=object.getSolvedExam();
+      this.name=object.getName();
+      this.grade= object.getGrade();
    }
 }

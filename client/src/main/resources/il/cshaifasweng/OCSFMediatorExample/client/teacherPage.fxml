@@ -2,20 +2,18 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="teacherPage" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.TeacherPage">
+<AnchorPane fx:id="teacherPage" prefHeight="420.0" prefWidth="700.0" style="-fx-background-image: url('images/back.jpg')" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.TeacherPage">
    <children>
-      <BorderPane fx:id="BorderPane" prefHeight="400.0" prefWidth="600.0">
+      <BorderPane fx:id="BorderPane" prefHeight="420.0" prefWidth="700.0">
          <left>
-            <VBox fx:id="Menu" prefHeight="200.0" prefWidth="100.0" spacing="15.0" style="-fx-background-color: #9dbcdb;" BorderPane.alignment="CENTER">
+            <VBox fx:id="Menu" prefHeight="420.0" prefWidth="127.0" spacing="15.0" style="-fx-border-color: white; -fx-border-width: 5px;" visible="false" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="addQuestionBtn" mnemonicParsing="false" onAction="#AddQuestionEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: #9dbcdb;" text="Add Question" textFill="WHITE">
+                  <Button fx:id="addQuestionBtn" mnemonicParsing="false" onAction="#AddQuestionEvent" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: transparent;" text="Add Question" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -23,22 +21,22 @@
                         <Insets top="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="buildExamBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#CreateExamEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: #9dbcdb;" text="Build Exam" textFill="WHITE">
+                  <Button fx:id="buildExamBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#CreateExamEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: transparent;" text="Build Exam" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="checkGradesBtn" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" onAction="#CheckGradesEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: #9dbcdb;" text="Check Grades" textFill="WHITE">
+                  <Button fx:id="checkGradesBtn" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" onAction="#CheckGradesEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: transparent;" text="Check Grades" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="requestTimeBtn" layoutX="10.0" layoutY="81.0" mnemonicParsing="false" onAction="#RequestTimeEvent" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #9dbcdb;" text="Request Extra Time" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Button fx:id="requestTimeBtn" layoutX="10.0" layoutY="81.0" mnemonicParsing="false" onAction="#RequestTimeEvent" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Request Extra Time" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="logOutBtn" layoutX="10.0" layoutY="167.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #9dbcdb;" text="Log Out" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Button fx:id="logOutBtn" layoutX="10.0" layoutY="167.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Log Out" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -46,23 +44,14 @@
                </children>
             </VBox>
          </left>
-         <top>
-            <HBox fx:id="Title" prefHeight="67.0" prefWidth="600.0" style="-fx-background-color: #8DA9C5;" BorderPane.alignment="CENTER">
-               <children>
-                  <Label fx:id="pageLbl" text="Teacher's Page" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="31.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="200.0" top="10.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-            </HBox>
-         </top>
          <center>
             <VBox fx:id="detailVBox" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
+      <Button fx:id="menuBtn" mnemonicParsing="false" onAction="#OpenMenu" style="-fx-background-color: transparent; -fx-border-color: white;" text="Menu" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

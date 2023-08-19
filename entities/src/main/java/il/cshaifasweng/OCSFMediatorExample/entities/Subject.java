@@ -16,14 +16,14 @@ public class Subject implements Serializable {
     private int id;
 
     private String name;
-    @OneToMany(fetch=FetchType.LAZY,mappedBy="subject")
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="subject",cascade = CascadeType.ALL)
     private List<Question> questions;
 
-    @OneToMany(fetch=FetchType.LAZY,mappedBy="subject")
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="subject",cascade = CascadeType.ALL)
     private List<Course> courses;
 
     @ManyToMany( mappedBy = "subjects",
-            cascade = { CascadeType.PERSIST, CascadeType.MERGE},
+            // cascade = { CascadeType.PERSIST, CascadeType.MERGE},
             targetEntity = Teacher.class
     )
     private List<Teacher> teachers;

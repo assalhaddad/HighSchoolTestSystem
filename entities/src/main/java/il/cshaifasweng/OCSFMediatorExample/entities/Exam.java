@@ -12,8 +12,8 @@ public class Exam implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String id_exam;
-    @ManyToMany(
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+    @ManyToMany(mappedBy = "exams",
+            // cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             targetEntity = Question.class
     )
     private List<Question> questions;
@@ -33,6 +33,7 @@ public class Exam implements Serializable {
 
 
 
+
     public Exam(String id_exam, ArrayList<Question> questions, int time, String freeTextStudent, String freeTextTeacher, Teacher author, Course course,String code4Digits) {
         super();
         setCourse(course);
@@ -45,6 +46,8 @@ public class Exam implements Serializable {
             temp.copy(question);
             this.questions.add(temp);
         }
+        for(int i = 0; i<questions.size(); i++)
+            this.questions.get(i).getExams().add(this);
         this.time = time;
         this.freeTextStudent = freeTextStudent;
         this.freeTextTeacher = freeTextTeacher;

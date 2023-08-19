@@ -3,108 +3,59 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.66666666667" prefWidth="500.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.AddQuestion">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.AddQuestion">
    <children>
-      <VBox layoutX="115.0" layoutY="25.0" prefHeight="308.0" prefWidth="229.0" spacing="7.0">
+      <VBox layoutX="14.0" layoutY="22.0" prefHeight="316.0" prefWidth="229.0" spacing="7.0">
          <children>
-            <ComboBox fx:id="subjectCMB" onAction="#selectSubject" prefWidth="150.0">
+            <ComboBox fx:id="subjectCMB" onAction="#selectSubject" prefWidth="150.0" promptText="Subject" style="-fx-font-family: 'Arial Black';">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </ComboBox>
-            <CheckComboBox fx:id="courseCMB" prefHeight="25.0" prefWidth="233.0" />
-            <TextField fx:id="idTF" prefHeight="25.0" prefWidth="171.0" promptText="3 digits" />
-            <TextField fx:id="questionTF" layoutX="10.0" layoutY="254.0" />
-            <TextField fx:id="firstTF" promptText="1">
+            <CheckComboBox fx:id="courseCMB" prefHeight="25.0" prefWidth="233.0" style="-fx-font-family: 'Arial Black';" />
+            <TextField fx:id="idTF" prefHeight="25.0" prefWidth="171.0" promptText="3 digits" style="-fx-font-family: 'Arial Black';" />
+            <TextField fx:id="questionTF" layoutX="10.0" layoutY="254.0" promptText="Question" style="-fx-font-family: 'Arial Black';" />
+            <TextField fx:id="firstTF" prefHeight="25.0" prefWidth="129.0" promptText="answer 1" style="-fx-font-family: 'Arial Black';">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="secondTF" promptText="2">
+            <TextField fx:id="secondTF" promptText="answer 2" style="-fx-font-family: 'Arial Black';">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="thirdTF" promptText="3">
+            <TextField fx:id="thirdTF" promptText="answer 3" style="-fx-font-family: 'Arial Black';">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="fourthTF" promptText="4">
+            <TextField fx:id="fourthTF" promptText="answer 4" style="-fx-font-family: 'Arial Black';">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="correctTF" promptText="1/2/3/4">
+            <TextField fx:id="correctTF" promptText="correct answer" style="-fx-font-family: 'Arial Black';">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </TextField>
          </children>
       </VBox>
-      <VBox layoutY="25.0" prefHeight="308.0" prefWidth="119.0" spacing="7.0">
-         <children>
-            <Label fx:id="subjectTF1" alignment="CENTER" layoutX="10.0" layoutY="253.0" prefHeight="25.0" prefWidth="135.0" text="Subject">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Label>
-            <Label alignment="CENTER" layoutX="10.0" layoutY="225.0" prefHeight="25.0" prefWidth="135.0" text="Course">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" prefHeight="25.0" prefWidth="135.0" text="Question ID">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Label>
-            <Label alignment="CENTER" prefHeight="25.0" prefWidth="135.0" text="Question ">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" prefHeight="25.0" prefWidth="135.0" text="Answers">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" prefHeight="25.0" prefWidth="135.0" text="Correct Answer">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="97.0" />
-               </VBox.margin>
-            </Label>
-         </children>
-      </VBox>
-      <Button fx:id="doneBTN" alignment="CENTER" contentDisplay="CENTER" layoutX="392.0" layoutY="284.0" mnemonicParsing="false" onAction="#done" prefWidth="94.0" style="-fx-background-color: #70879d;" text="Add Question" textFill="WHITE">
+      <Button layoutX="252.0" layoutY="99.0" mnemonicParsing="false" onAction="#selectCourse" prefHeight="25.0" prefWidth="56.0" style="-fx-background-color: #70879d;" text="Update" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold Italic" size="9.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" prefHeight="26.0" prefWidth="500.0" style="-fx-background-color: #70879d;" text="Add Question" textFill="WHITE">
+      <Button fx:id="doneBTN" alignment="CENTER" contentDisplay="CENTER" layoutX="82.0" layoutY="338.0" mnemonicParsing="false" onAction="#done" prefWidth="94.0" style="-fx-background-color: #70879d;" text="Add Question" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="17.0" />
-         </font>
-      </Label>
-      <Button layoutX="351.0" layoutY="67.0" mnemonicParsing="false" onAction="#selectCourse" prefHeight="25.0" prefWidth="42.0" style="-fx-background-color: #70879d;" text="Update" textFill="WHITE">
-         <font>
-            <Font size="9.0" />
+            <Font name="System Bold Italic" size="12.0" />
          </font>
       </Button>
    </children>

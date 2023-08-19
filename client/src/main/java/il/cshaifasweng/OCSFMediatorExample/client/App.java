@@ -28,7 +28,7 @@ public class App extends Application {
         EventBus.getDefault().register(this);
         client = SimpleClient.getClient();
         client.openConnection();
-        scene = new Scene(loadFXML("Login"), 600, 400);
+        scene = new Scene(loadFXML("Login"), 700, 420);
         stage.setScene(scene);
         stage.show();
         appStage = stage;
@@ -54,7 +54,7 @@ public class App extends Application {
     }
     public static void setContent(String pageName) throws IOException {
         Parent root = loadFXML(pageName);
-        scene = new Scene(root);
+        scene = new Scene(root,700,420);
         appStage.setScene(scene);
         appStage.show();
     }
@@ -90,6 +90,7 @@ public class App extends Application {
                     }
                 });
                 break;
+
             case "StudentsPage":
                 Platform.runLater(() -> {
                     setWindowTitle("StudentsPage");
@@ -100,7 +101,30 @@ public class App extends Application {
                     }
                 });
                 break;
+            case "ExamPage":
+                Platform.runLater(() -> {
+                    setWindowTitle("ExamPage");
+                    try {
+                        setContent("ExamPage");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                break;
+
+            case "FreeText":
+                Platform.runLater(() -> {
+                    setWindowTitle("FreeText");
+                    try {
+                        setContent("FreeText");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                break;
         }
+
+
     }
 
     public static void displayError(String error){
