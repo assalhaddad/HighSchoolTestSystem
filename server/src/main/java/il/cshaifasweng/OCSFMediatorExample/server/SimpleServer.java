@@ -1107,18 +1107,18 @@ public class SimpleServer extends AbstractServer {
 				if(request.equals("get list of subjects for add question")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					ArrayList<String> subjectList = new ArrayList(subjects.size());
-					for(int i=0; i<subjects.size(); i++)
-						subjectList.add(i, subjects.get(i).getName());
+					ArrayList<String> subjectList = new ArrayList(currentTeacher.getSubjects().size());
+					for(int i=0; i<currentTeacher.getSubjects().size(); i++)
+						subjectList.add(i, currentTeacher.getSubjects().get(i).getName());
 					session.close();
 					client.sendToClient(new Message("subjects list is ready for add question", subjectList));
 				}
 				else if(request.equals("get list of subjects for build exam")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					ArrayList<String> subjectList = new ArrayList(subjects.size());
-					for(int i=0; i<subjects.size(); i++)
-						subjectList.add(i, subjects.get(i).getName());
+					ArrayList<String> subjectList = new ArrayList(currentTeacher.getSubjects().size());
+					for(int i=0; i<currentTeacher.getSubjects().size(); i++)
+						subjectList.add(i, currentTeacher.getSubjects().get(i).getName());
 					session.close();
 					client.sendToClient(new Message("subjects list is ready for build exam", subjectList));
 				}
@@ -1377,6 +1377,7 @@ public class SimpleServer extends AbstractServer {
 					for(int i=0; i<teachersList.size();i++){
 						if(teachersList.get(i).getUsername().equals(currentLog.getUsername()) && teachersList.get(i).getPassword().equals(currentLog.getPassword()))
 						{
+							//currentTeacher.copy(teachersList.get(i)); // just added assal
 							current.copy(teachersList.get(i));
 							break;
 						}
