@@ -4,10 +4,6 @@
 
 package il.cshaifasweng.OCSFMediatorExample.server.ocsf;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
-
 /**
 * The <code> AdaptableServer </code> is an adapter class
 * that extends the <code> AbstractServer </code> class in place of
@@ -32,7 +28,7 @@ class AdaptableServer extends AbstractServer
   /**
    * Constructs the server adapter.
    *
-   * @param  host  the server's host name.
+   * @param  server  the server's host name.
    * @param  port  the port number.
    */
   public AdaptableServer(int port, ObservableServer server)
@@ -117,12 +113,12 @@ class AdaptableServer extends AbstractServer
   /**
    * Handles a command sent from the client to the server.
    *
-   * @param msg   the message sent.
+   * @param msg    the message sent.
    * @param client the connection connected to the client that
-   *  sent the message.
+   *               sent the message.
    */
   final protected void handleMessageFromClient(Object msg,
-                                         ConnectionToClient client)
+                                               ConnectionToClient client)
   {
     server.handleMessageFromClient(msg, client);
   }

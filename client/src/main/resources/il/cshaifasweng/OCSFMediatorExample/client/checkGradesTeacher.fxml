@@ -46,5 +46,6 @@
       </Button>
       <Label fx:id="changeLBL" layoutX="231.0" layoutY="142.0" text="Change grade to:" />
       <TextField fx:id="changeTF" layoutX="331.0" layoutY="138.0" prefHeight="11.0" prefWidth="49.0" />
+      <TextField fx:id="freeText" editable="false" layoutX="340.0" layoutY="79.0" prefHeight="25.0" prefWidth="140.0" promptText="Text From Author" />
    </children>
 </AnchorPane>

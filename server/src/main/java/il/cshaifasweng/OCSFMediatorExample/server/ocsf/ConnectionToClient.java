@@ -65,6 +65,9 @@ public class ConnectionToClient extends Thread
    */
   private AbstractServer server;
 
+
+
+
   /**
    * Sockets are used in the operating system as channels
    * of communication between two processes.
@@ -254,7 +257,7 @@ public class ConnectionToClient extends Thread
 
           if (!readyToStop && handleMessageFromClient(msg)) // Added in version 2.2
           {
-            server.receiveMessageFromClient(msg, this);
+            server.receiveMessageFromClient(msg, this,null);
           }
 
         } catch(ClassNotFoundException ex) { // when an unknown class is received

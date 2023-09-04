@@ -5,7 +5,6 @@
 package il.cshaifasweng.OCSFMediatorExample.server.ocsf;
 
 import java.net.*;
-import java.util.*;
 import java.io.*;
 
 public abstract class AbstractServer implements Runnable
@@ -445,19 +444,7 @@ public abstract class AbstractServer implements Runnable
    */
   protected void serverClosed() {}
 
-  /**
-   * Handles a command sent from one client to the server.
-   * This MUST be implemented by subclasses, who should respond to
-   * messages.
-   * This method is called by a synchronized method so it is also
-   * implcitly synchronized.
-   *
-   * @param msg   the message sent.
-   * @param client the connection connected to the client that
-   *  sent the message.
-   */
-  protected abstract void handleMessageFromClient(
-          Object msg, ConnectionToClient client);
+  protected abstract void handleMessageFromClient(Object msg, ConnectionToClient client);
 
 
 // METHODS TO BE USED FROM WITHIN THE FRAMEWORK ONLY ----------------
@@ -474,10 +461,12 @@ public abstract class AbstractServer implements Runnable
    * @param client the connection connected to the client that
    *  sent the message.
    */
-  final synchronized void receiveMessageFromClient(
-          Object msg, ConnectionToClient client)
+  synchronized void receiveMessageFromClient(
+          Object msg, ConnectionToClient client, ChatServer clients)
   {
     this.handleMessageFromClient(msg, client);
   }
+
+
 }
 // End of AbstractServer Class

@@ -17,6 +17,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.hibernate.sql.Update;
 
+import javax.xml.bind.SchemaOutputResolver;
+
 public class ApproveRequests {
 
     @FXML
@@ -55,7 +57,7 @@ public class ApproveRequests {
     void ChooseRequest(ActionEvent event) {
         String requestCmbValue = this.requestCmb.getValue();
         for(int i=0; i<requestsList.size(); i++){
-            if(requestsList.get(i).getId() == Integer.parseInt(requestCmbValue)){
+            if(requestCmbValue!=null && requestsList.get(i).getId() == Integer.parseInt(requestCmbValue)){
                 currentRequest.copy(requestsList.get(i));
                 fromTF.setText(currentRequest.getTeacherName());
                 testIdTF.setText(currentRequest.getExamId());
@@ -89,6 +91,7 @@ public class ApproveRequests {
             getRequests(obj);
         else if(request.equals("request approved successfully"))
             UpdateAll();
+
     }
     private void getRequests(Object obj){
         requestsList = FXCollections.observableArrayList((ArrayList)obj);
@@ -97,7 +100,10 @@ public class ApproveRequests {
     }
 
     private void UpdateAll(){
-        requestCmb.getSelectionModel().clearSelection();
+
+        Platform.runLater(() -> {
+            requestCmb.getSelectionModel().clearSelection();
+        });
         fromTF.clear();
         testIdTF.clear();
         extraTimeTF.clear();

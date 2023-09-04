@@ -44,7 +44,7 @@ public class ObservableOriginatorServer extends ObservableServer
    * client who sent the message.
    *
    * @param message The message received from the client.
-   * @param client The connection to the client.
+   * @param client  The connection to the client.
    */
   protected synchronized void handleMessageFromClient
     (Object message, ConnectionToClient client)

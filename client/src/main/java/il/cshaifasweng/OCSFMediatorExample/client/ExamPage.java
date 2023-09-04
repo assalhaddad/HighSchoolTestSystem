@@ -2,22 +2,14 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-
-import java.awt.*;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,18 +47,21 @@ public class ExamPage extends DoExam{
     private Label questionText;
 
     public static int i = 0;
-    protected static int extraTime = 0;
+
 
     public static List<Integer> chosenAnswers;
 
-
+    private static Runnable task;
+    private static Thread timerThread;
+    private static long startTimeMillis;
+    private static long remainingDelayMillis;
 
     @FXML
     void initialize() {
 
         if (!DoExam.isOn) {
             chosenAnswers = new ArrayList<Integer>(Collections.nCopies(DoExam.exam.getQuestions().size(), 0));
-
+            scheduleTask();
             EventBus.getDefault().register(this);
         }
 
@@ -202,16 +197,17 @@ public class ExamPage extends DoExam{
     @FXML
     void done(ActionEvent event) {
 
-
-        StudentData studentD = new StudentData(student,LocalDateTime.now().toString(), 10, true, chosenAnswers, solvedExam);
-        System.out.println("From ExamPage: "+studentD.getSolvedExam().getId());
+        long endTimeMillis = System.currentTimeMillis();
+        long totalTimeMillis = endTimeMillis - startTimeMillis;
+        long totalTimeSeconds = totalTimeMillis / 1000;
+        StudentData studentD = new StudentData(student,LocalDateTime.now().toString(), (int) (totalTimeSeconds/60), true, chosenAnswers, solvedExam);
         solvedExam.calculateGrades();
         sendMessage("new studentData", studentD);
 
         switchScreen("StudentsPage");
     }
 
-    private void sendMessage(String op, Object obj) {
+    private static void sendMessage(String op, Object obj) {
         try {
             Message message = new Message(op, obj);
             SimpleClient.getClient().sendToServer(message);
@@ -225,8 +221,10 @@ public class ExamPage extends DoExam{
         String request = message.getMessage();
         if (request.equals("studentData added successfully"))
             addedNewStudentData();
-        if(request.equals("solvedExam added successfully"))
-            System.out.println("done");
+        else if(request.equals("studentData added successfully 2.0"))
+            addedNewStudentData2();
+        else if(request.equals("request approved successfully"))
+            extendDelay();
     }
 
     @FXML
@@ -263,5 +261,73 @@ public class ExamPage extends DoExam{
                 alert.showAndWait();
             }
         });
+    }
+    private void addedNewStudentData2() {
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Time is up!");
+                alert.setHeaderText("The exam is done");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
+    }
+
+    private static void addedTime() {
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Extra Time!");
+                alert.setHeaderText("Another "+solvedExam.getUpdatedTime()+" minutes were added!");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
+    }
+
+    private static void scheduleTask() {
+        task = () -> {
+            StudentData studentD = new StudentData(student,LocalDateTime.now().toString(), solvedExam.getUpdatedTime(), false, chosenAnswers, solvedExam);
+            solvedExam.calculateGrades();
+            sendMessage("new studentData 2.0", studentD);
+
+            switchScreen("StudentsPage");
+            timerThread.interrupt(); // Interrupt the timer thread after the task is executed
+        };
+
+        timerThread = new Thread(() -> {
+            try {
+                Thread.sleep((long) exam.getTime() *60*1000); // Delay for the time of the exam
+                task.run();
+            } catch (InterruptedException e) {
+                // Timer interrupted, do nothing
+            }
+        });
+
+        startTimeMillis = System.currentTimeMillis();
+        remainingDelayMillis = (long) exam.getTime() *60*1000; // Initial delay in millis
+
+        timerThread.start();
+    }
+    private static void extendDelay() {
+        timerThread.interrupt();
+
+        // Calculate new remaining delay with an additional 5 seconds
+        remainingDelayMillis += (long)(solvedExam.getUpdatedTime())*60*1000;
+
+        timerThread = new Thread(() -> {
+            try {
+                Thread.sleep(remainingDelayMillis);
+                task.run();
+            } catch (InterruptedException e) {
+                // Timer interrupted, do nothing
+            }
+        });
+
+        timerThread.start();
+        addedTime();
+
+        System.out.println("Delay extended.");
     }
 }

@@ -6,7 +6,6 @@ package il.cshaifasweng.OCSFMediatorExample.server.ocsf;
 
 import java.util.*;
 import java.io.*;
-import java.net.*;
 
 /**
  * This class acts as a subclass of <code>AbstractServer</code>
@@ -113,10 +112,7 @@ public class ObservableServer extends Observable
    *
    * @param msg   The message to be sent
    */
-  public void sendToAllClients(Object msg)
-  {
-    service.sendToAllClients(msg);
-  }
+
 
 // ACCESSING METHODS ------------------------------------------------
 
@@ -297,7 +293,7 @@ public class ObservableServer extends Observable
    * It can be overriden, but is still expected to call notifyObservers().
    *
    * @param message The message received from the client.
-   * @param client The connection to the client.
+   * @param client  The connection to the client.
    * @see com.lloseng.ocsf.server.ObservableOriginatorServer
    */
   protected synchronized void handleMessageFromClient

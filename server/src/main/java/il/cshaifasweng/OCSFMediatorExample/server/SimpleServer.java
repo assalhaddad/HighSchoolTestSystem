@@ -12,7 +12,6 @@ import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import jdk.swing.interop.SwingInterOpUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -1179,6 +1178,21 @@ public class SimpleServer extends AbstractServer {
 					session.close();
 					client.sendToClient(new Message("question added successfully",(Object)null));
 				}
+				else if(request.equals("new studentData 2.0")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					studentData.copy((StudentData)message.getObject());
+					studentDataList.add(studentData);
+					session.save(studentData);
+					System.out.println(studentData.getSolvedExam().getId());
+					System.out.println("before flush");
+					session.flush();
+					System.out.println("after flush");
+					session.getTransaction().commit();
+					session.close();
+					client.sendToClient(new Message("studentData added successfully 2.0",(Object)null));
+
+				}
 				else if(request.equals("new studentData")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
@@ -1413,18 +1427,41 @@ public class SimpleServer extends AbstractServer {
 					session.close();
 				}
 				else if(request.equals("approve this request")){
+					System.out.println("1");
 					session=sessionFactory.openSession();
+					System.out.println("2");
 					session.beginTransaction();
+					System.out.println("3");
 					requestExtraTime.copy((Request)message.getObject());
+					System.out.println("4");
 					requests.remove(requestExtraTime);
+					System.out.println("5");
 					session.remove(requestExtraTime);
+					System.out.println("6");
 					requestExtraTime.copy((Request)message.getObject());
+					System.out.println("7");
 					requestExtraTime.setIsDone();
+					System.out.println("8");
 					requests.add(requestExtraTime);
+					System.out.println("9");
 					session.save(requestExtraTime);
+					System.out.println("10");
 					session.flush();
-					client.sendToClient(new Message("request approved successfully",(Object)null));
+					System.out.println("11");
+
+					for (int i = 0; i < exams.size(); i++) {
+						if (exams.get(i).getId_exam().equals(requestExtraTime.getExamId())) {
+							exams.get(i).getSolvedExam().setUpdatedTime(requestExtraTime.getMinutes()+exams.get(i).getTime());
+							session.save(exams.get(i).getSolvedExam());
+							session.flush();
+						}
+					}
+					System.out.println("12");
+					client.sendToClient(new Message("request approved successfully", null));
+					System.out.println("13");
 					session.close();
+
+
 				}
 				else if(request.equals("get questions for principal")){
 					session=sessionFactory.openSession();

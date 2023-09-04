@@ -1,8 +1,9 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Exam;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
@@ -16,39 +17,26 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-
-
 import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
-
 public class DoExam {
-
     @FXML
     private ResourceBundle resources;
-
     @FXML
     private URL location;
-
     @FXML
     private Button doneBTN;
-
     @FXML
     private TextField forthDCode;
-
     @FXML
     private TextField idStudent;
-
     @FXML
     private Button nextBtn;
-
     @FXML
     private Button startBtn;
-
     protected static Exam exam=new Exam();
     protected static Student student;
     public static boolean isOn=false;
     protected static SolvedExam solvedExam=new SolvedExam();
-
-
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
@@ -57,14 +45,11 @@ public class DoExam {
         assert idStudent != null : "fx:id=\"idStudent\" was not injected: check your FXML file 'doExam.fxml'.";
         assert nextBtn != null : "fx:id=\"nextBtn\" was not injected: check your FXML file 'doExam.fxml'.";
         assert startBtn != null : "fx:id=\"startBtn\" was not injected: check your FXML file 'doExam.fxml'.";
-
     }
-
     @FXML
     void donePressed(ActionEvent event) {
         if (idStudent.getText().length() == 0)
             wrongId();
-
         else {
             if (Login.student.getId_student().equals(idStudent.getText()) )
             {
@@ -72,67 +57,59 @@ public class DoExam {
                 startBtn.setDisable(false);
                 idStudent.setDisable(true);
                 doneBTN.setDisable(true);
-             }
-                else
-                    wrongId();
+            }
+            else
+                wrongId();
 
             //sendMessage("get list of students ids", theCode);
         }
 
 
     }
-
-        @Subscribe
-        public void handleMessage(Message message) {
-            String request = message.getMessage();
-            Object obj = message.getObject();
-            System.out.println(request);
-
-            if (request.equals("found exam"))
+    @Subscribe
+    public void handleMessage(Message message) {
+        String request = message.getMessage();
+        Object obj = message.getObject();
+        System.out.println(request);
+        if (request.equals("found exam"))
+        {
+            //exam=new Exam();
+            exam.copy((Exam)obj);
+            if(isOn)
             {
-                //exam=new Exam();
-                exam.copy((Exam)obj);
-                if(isOn)
-                {
-                    ExamPage.chosenAnswers.clear();
-                    ExamPage.i=0;
-                    isOn=false;
-                }
-                idStudent.setDisable(false);
-                doneBTN.setDisable(false);
-                forthDCode.setDisable(true);
-                nextBtn.setDisable(true);
-
+                ExamPage.chosenAnswers.clear();
+                ExamPage.i=0;
+                isOn=false;
             }
-            else if (request.equals("didn't find exam"))
-                wrongFourDigitsCode();
-
-            else if (request.equals("found student"))
-            {
-                student=new Student((Student)obj);
-                startBtn.setDisable(false);
-            }
-            else if (request.equals("didn't find student"))
-                wrongId();
-            else if( request.equals("solvedExam added successfully"))
-                updateSolvedExam(obj);
+            idStudent.setDisable(false);
+            doneBTN.setDisable(false);
+            forthDCode.setDisable(true);
+            nextBtn.setDisable(true);
         }
+        else if (request.equals("didn't find exam"))
+            wrongFourDigitsCode();
 
-
-
+        else if (request.equals("found student"))
+        {
+            student=new Student((Student)obj);
+            student=((Student)obj);
+            startBtn.setDisable(false);
+        }
+        else if (request.equals("didn't find student"))
+            wrongId();
+        else if( request.equals("solvedExam added successfully"))
+            updateSolvedExam(obj);
+    }
     @FXML
     void nextPressed(ActionEvent event) {
         //exam=null;
         if (forthDCode.getText().length() != 4)
             wrongFourDigitsCode();
-
         else {
             String theCode = forthDCode.getText();
             sendMessage("get list of codes", theCode);
         }
-
     }
-
     @FXML
     void startExamPressed(ActionEvent event)
     {
@@ -145,14 +122,14 @@ public class DoExam {
             System.out.println("temp id " + temp.getId());
             sendMessage("new solvedExam",solvedExam);
             //System.out.println(solvedExam.getId());
+
         }
         else
             solvedExam.copy(exam.getSolvedExam());
 
+
         switchScreen("ExamPage");
     }
-
-
 
     private void sendMessage(String op, Object obj) {
         try {
@@ -162,8 +139,6 @@ public class DoExam {
             var4.printStackTrace();
         }
     }
-
-
     private void wrongFourDigitsCode() {
         forthDCode.clear();
         Platform.runLater(new Runnable() {
@@ -177,7 +152,6 @@ public class DoExam {
         });
     }
     private void wrongId(){
-
         idStudent.clear();
         Platform.runLater(new Runnable() {
             public void run() {
@@ -192,5 +166,4 @@ public class DoExam {
     private void updateSolvedExam(Object obj){
         solvedExam.copy((SolvedExam) obj);
     }
-
 }

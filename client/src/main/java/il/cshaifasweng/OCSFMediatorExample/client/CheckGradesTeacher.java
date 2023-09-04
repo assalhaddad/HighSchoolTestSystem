@@ -47,6 +47,8 @@ public class CheckGradesTeacher {
     @FXML
     private TextField subjectTF;
     @FXML
+    private TextField freeText;
+    @FXML
     private TableView<StudentData> tableView;
     @FXML
     private TableColumn<StudentData, Integer> gradeCol;
@@ -59,11 +61,13 @@ public class CheckGradesTeacher {
         getTeacherRequest();
         //sendMessage("get teacher", (Object)null);
         hide();
+        freeText.setVisible(false);
     }
 
     @FXML
     void chooseExam(ActionEvent event) {
         String exam = idCMB.getValue().toString();
+        freeText.setVisible(false);
         sendMessage("get exam", exam);
     }
 
@@ -80,6 +84,7 @@ public class CheckGradesTeacher {
     void makeVisible(MouseEvent event) {
         show();
     }
+
 
     private void sendMessage(String op, Object obj) {
         try {
@@ -120,6 +125,10 @@ public class CheckGradesTeacher {
             nameCol.setCellValueFactory(new PropertyValueFactory<StudentData, String>("name"));
             gradeCol.setCellValueFactory(new PropertyValueFactory<StudentData, Integer>("grade"));
             tableView.setItems(data);
+            if(!chosenExam.getFreeTextTeacher().equals("")) {
+                freeText.setText(chosenExam.getFreeTextTeacher());
+                freeText.setVisible(true);
+            }
         }
         else
             tableView.getItems().clear();
