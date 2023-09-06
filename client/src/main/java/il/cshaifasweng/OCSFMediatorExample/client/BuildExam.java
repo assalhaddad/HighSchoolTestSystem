@@ -53,16 +53,12 @@ public class BuildExam {
             pointsError();
         else if(idTF.getText().isEmpty()||timeTF.getText().isEmpty()||digitcode.getText().isEmpty())
             missingInfo();
-        else {
-            String free1 = "", free2 = "";
-            if(!freeText1.getText().isEmpty())
-                free1 = freeText1.getText();
-            if(!freeText2.getText().isEmpty())
-                free2 = freeText2.getText();
-            Exam newExam = new Exam(idTF.getText(),questions,Integer.parseInt(timeTF.getText()),free2,free1,chosenTeacher,chosenCourse,digitcode.getText());
-            System.out.println("exam object has been built");
-            questions.clear();
-            sendMessage("new exam",newExam);
+        else
+        {
+            String temp=idTF.getText();
+            temp = setId_exam(temp);
+            System.out.println(temp);
+            sendMessage("check exam id",temp);
         }
     }
 
@@ -180,6 +176,25 @@ public class BuildExam {
             getChosenCourseRequest(obj);
         else if(request.equals("found question"))
             getChosenQuestionRequest(obj);
+        else if(request.equals("found duplicate exam id"))
+            duplicateIDError();
+
+        else if(request.equals("didnt find duplicate exam id"))
+            sendMessage("get list of codes 2.0",digitcode.getText());
+        else if(request.equals("found exam 2.0"))
+            duplicate4DigitsError();
+        else if(request.equals("didn't find exam"))
+        {
+            String free1 = "", free2 = "";
+            if(!freeText1.getText().isEmpty())
+                free1 = freeText1.getText();
+            if(!freeText2.getText().isEmpty())
+                free2 = freeText2.getText();
+            Exam newExam = new Exam(idTF.getText(),questions,Integer.parseInt(timeTF.getText()),free2,free1,chosenTeacher,chosenCourse,digitcode.getText());
+            System.out.println("exam object has been built");
+            questions.clear();
+            sendMessage("new exam",newExam);
+        }
         else if(request.equals("exam added successfully"))
             buildExam();
         //else if(request.equals("found teacher for build exam"))
@@ -226,6 +241,26 @@ public class BuildExam {
         subjectCMB.setItems(subjectList);
     }
 
+    public String setId_exam(String id_exam) {
+        if(chosenCourse.getName().equals("Basic Math"))
+            id_exam+="0101";
+        if(chosenCourse.getName().equals("Advanced Math"))
+            id_exam+="0201";
+        if(chosenCourse.getName().equals("Basic English"))
+            id_exam+="0302";
+        if(chosenCourse.getName().equals("Advanced English"))
+            id_exam+="0402";
+        if(chosenCourse.getName().equals("Basic Science"))
+            id_exam+="0503";
+        if(chosenCourse.getName().equals("Advanced Science"))
+            id_exam+="0603";
+        if(chosenCourse.getName().equals("Basic Geography"))
+            id_exam+="0704";
+        if(chosenCourse.getName().equals("Advanced Geography"))
+            id_exam+="0804";
+        return id_exam;
+    }
+
     private void missingInfo(){
         Platform.runLater(new Runnable() {
             public void run() {
@@ -245,6 +280,8 @@ public class BuildExam {
         }
         return false;
     }
+
+
 
     private void clear1(){
         totalPoints = 100;
@@ -277,6 +314,29 @@ public class BuildExam {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error!");
                 alert.setHeaderText("This question has already been added");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
+    }
+
+    private void duplicateIDError(){
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error!");
+                alert.setHeaderText("This ID has already been used!");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
+    }
+    private void duplicate4DigitsError(){
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error!");
+                alert.setHeaderText("This 4 digit code has already been used!");
                 alert.setContentText(null);
                 alert.showAndWait();
             }

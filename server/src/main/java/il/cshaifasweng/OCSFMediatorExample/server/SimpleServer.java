@@ -7,10 +7,12 @@ import il.cshaifasweng.OCSFMediatorExample.entities.Student;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
+import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ChatServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -1093,6 +1095,13 @@ public class SimpleServer extends AbstractServer {
 	Request requestExtraTime = new Request();
 	StudentData studentData=new StudentData();
 	SolvedExam solvedExam=new SolvedExam();
+	ChatServer clients=new ChatServer(3000) {
+		@Override
+		protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
+
+		}
+	};
+
 
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
@@ -1197,6 +1206,22 @@ public class SimpleServer extends AbstractServer {
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					studentData.copy((StudentData)message.getObject());
+					for(int i=0; i<solvedExamList.size(); i++){
+						if(solvedExamList.get(i).getId() == studentData.getSolvedExam().getId())
+							for(int k=0; k<solvedExamList.get(i).getData().size(); k++){
+								if(solvedExamList.get(i).getData().get(k).getStudent().getId_student().equals(studentData.getStudent().getId_student())){
+									session.remove(solvedExamList.get(i).getData().get(k));
+									solvedExamList.get(i).getData().remove(k);
+									break;
+								}
+							}
+					}
+					for(int i=0; i<solvedExamList.size(); i++){
+						if(solvedExamList.get(i).getId() == studentData.getSolvedExam().getId()){
+							solvedExamList.get(i).getData().add(studentData);
+							break;
+						}
+					}
 					studentDataList.add(studentData);
 					session.save(studentData);
 					session.flush();
@@ -1304,18 +1329,32 @@ public class SimpleServer extends AbstractServer {
 					client.sendToClient(new Message("found teacher for build exam", currentTeacher));
 					session.close();
 				}
-				else if(request.equals("get exam")){
+				else if(request.equals("get exam")) {
 					session = sessionFactory.openSession();
 					session.beginTransaction();
-					String name = (String)message.getObject();
-					for(int i=0; i<exams.size(); i++){
-						if(exams.get(i).getId_exam().equals(name)) {
+					String name = (String) message.getObject();
+					for (int i = 0; i < exams.size(); i++) {
+						if (exams.get(i).getId_exam().equals(name)) {
 							Exam chosenExam = exams.get(i);
 							client.sendToClient(new Message("found exam", chosenExam));
 							session.close();
 							break;
 						}
 					}
+				}
+					else if(request.equals("check exam id")){
+						session = sessionFactory.openSession();
+						session.beginTransaction();
+						String name = (String)message.getObject();
+						for(int i=0; i<exams.size(); i++){
+							if(exams.get(i).getId_exam().equals(name)) {
+								client.sendToClient(new Message("found duplicate exam id", null));
+								session.close();
+								return;
+							}
+						}
+					client.sendToClient(new Message("didnt find duplicate exam id", null));
+					session.close();
 				}
 				else if(request.equals("get list of students ids")){
 					session=sessionFactory.openSession();
@@ -1342,7 +1381,25 @@ public class SimpleServer extends AbstractServer {
 						if(exams.get(i).getCode4Digits().equals(examMessage)) {
 							Exam chosenExam = exams.get(i);
 							System.out.println(chosenExam.getId_exam());
-							client.sendToClient(new Message("found exam", chosenExam));
+							client.sendToClient(new Message("found exam for do exam", chosenExam));
+							session.close();
+							return;
+						}
+					}
+					client.sendToClient(new Message("didn't find exam", null));
+					session.close();
+				}
+
+				else if(request.equals("get list of codes 2.0")){
+
+					session = sessionFactory.openSession();
+					session.beginTransaction();
+					String examMessage = (String)message.getObject();
+					for(int i=0; i<exams.size(); i++){
+						if(exams.get(i).getCode4Digits().equals(examMessage)) {
+							Exam chosenExam = exams.get(i);
+							System.out.println(chosenExam.getId_exam());
+							client.sendToClient(new Message("found exam 2.0", chosenExam));
 							session.close();
 							return;
 						}

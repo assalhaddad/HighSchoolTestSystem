@@ -202,6 +202,7 @@ public class ExamPage extends DoExam{
         long totalTimeSeconds = totalTimeMillis / 1000;
         StudentData studentD = new StudentData(student,LocalDateTime.now().toString(), (int) (totalTimeSeconds/60), true, chosenAnswers, solvedExam);
         solvedExam.calculateGrades();
+        timerThread.interrupt();
         sendMessage("new studentData", studentD);
 
         switchScreen("StudentsPage");
@@ -223,8 +224,10 @@ public class ExamPage extends DoExam{
             addedNewStudentData();
         else if(request.equals("studentData added successfully 2.0"))
             addedNewStudentData2();
-        else if(request.equals("request approved successfully"))
+        else if(request.equals("request approved successfully")) {
+            System.out.println("hereeeeeeeeee12");
             extendDelay();
+        }
     }
 
     @FXML

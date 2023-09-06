@@ -2,10 +2,8 @@ package il.cshaifasweng.OCSFMediatorExample.server.ocsf;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
-import il.cshaifasweng.OCSFMediatorExample.entities.Request;
 
 
 public abstract class ChatServer extends AbstractServer {
@@ -17,7 +15,7 @@ public abstract class ChatServer extends AbstractServer {
     }
 
     @Override
-    protected void receiveMessageFromClient(Object message, ConnectionToClient client,ChatServer clients) {
+    protected void receiveMessageFromClient(Object message, ConnectionToClient client) {
         // Handle the message received from a client
         System.out.println("Received from " + client + ": " + message);
 

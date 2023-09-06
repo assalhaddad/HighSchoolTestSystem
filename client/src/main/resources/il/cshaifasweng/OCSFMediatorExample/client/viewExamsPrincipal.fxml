@@ -51,5 +51,11 @@
             </font>
         </Label>
         <TextField fx:id="correctTF" editable="false" layoutX="364.0" layoutY="239.0" prefHeight="25.0" prefWidth="120.0" />
+      <Label layoutX="256.0" layoutY="292.0" text="Author:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="authorTF" editable="false" layoutX="315.0" layoutY="290.0" prefHeight="25.0" prefWidth="83.0" />
     </children>
 </AnchorPane>

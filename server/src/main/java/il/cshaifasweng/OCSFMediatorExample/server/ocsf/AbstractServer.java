@@ -457,12 +457,12 @@ public abstract class AbstractServer implements Runnable
    * do not conflict with work being done by other threads. The method
    * simply calls the <code>handleMessageFromClient</code> slot method.
    *
-   * @param msg   the message sent.
+   * @param msg    the message sent.
    * @param client the connection connected to the client that
-   *  sent the message.
+   *               sent the message.
    */
   synchronized void receiveMessageFromClient(
-          Object msg, ConnectionToClient client, ChatServer clients)
+          Object msg, ConnectionToClient client)
   {
     this.handleMessageFromClient(msg, client);
   }

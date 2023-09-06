@@ -71,7 +71,7 @@ public class DoExam {
         String request = message.getMessage();
         Object obj = message.getObject();
         System.out.println(request);
-        if (request.equals("found exam"))
+        if (request.equals("found exam for do exam"))
         {
             //exam=new Exam();
             exam.copy((Exam)obj);

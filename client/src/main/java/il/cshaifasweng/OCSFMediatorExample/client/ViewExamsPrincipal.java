@@ -25,6 +25,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 public class ViewExamsPrincipal {
+    @FXML
+    private TextField authorTF;
 
     @FXML
     private ResourceBundle resources;
@@ -115,6 +117,7 @@ public class ViewExamsPrincipal {
         }
         subjectTF.setText(chosenExam.getCourse().getSubject().getName());
         courseTF.setText(chosenExam.getCourse().getName());
+        authorTF.setText(chosenExam.getAuthor().getName());
 
         ObservableList<Question> data = FXCollections.observableArrayList(chosenExam.getQuestions());
         questionCol.setCellValueFactory(new PropertyValueFactory<Exam, String>("text"));
