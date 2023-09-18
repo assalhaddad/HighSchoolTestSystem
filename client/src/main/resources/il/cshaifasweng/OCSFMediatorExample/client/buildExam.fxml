@@ -8,38 +8,36 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.666666667" prefWidth="500.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.BuildExam">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.BuildExam">
    <children>
-      <Label alignment="CENTER" prefHeight="26.0" prefWidth="500.0" style="-fx-background-color: #70879d;" text="Build Exam" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="17.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="subjectCMB" layoutX="14.0" layoutY="34.0" onAction="#selectSubject" prefHeight="25.0" prefWidth="118.0" promptText="Subject" />
-      <ListView fx:id="questionsList" accessibleRole="CHECK_BOX" layoutX="140.0" layoutY="34.0" onMouseClicked="#selectQuestion" prefHeight="211.0" prefWidth="293.0" />
-      <Button fx:id="doneBTN" layoutX="440.0" layoutY="167.0" mnemonicParsing="false" onAction="#done" style="-fx-background-color: #70879d;" text="Done" textFill="WHITE">
+      <ComboBox fx:id="subjectCMB" layoutX="14.0" layoutY="34.0" onAction="#selectSubject" prefHeight="25.0" prefWidth="143.0" promptText="Subject" style="-fx-font-family: 'Arial Black';" />
+      <ListView fx:id="questionsList" accessibleRole="CHECK_BOX" layoutX="208.0" layoutY="34.0" onMouseClicked="#selectQuestion" prefHeight="211.0" prefWidth="315.0" style="-fx-font-family: 'Arial Black';" />
+      <Button fx:id="doneBTN" layoutX="530.0" layoutY="127.0" mnemonicParsing="false" onAction="#done" style="-fx-background-color: #70879d;" text="Done" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TextField fx:id="idTF" layoutX="14.0" layoutY="99.0" onAction="#setID" prefHeight="25.0" prefWidth="118.0" promptText="Exam ID (2 digits)" />
-      <TextField fx:id="timeTF" layoutX="14.0" layoutY="131.0" onAction="#setTime" prefHeight="25.0" prefWidth="118.0" promptText="Time" />
-      <ComboBox fx:id="courseCMB" layoutX="14.0" layoutY="66.0" onAction="#selectCourse" prefHeight="25.0" prefWidth="118.0" promptText="Course" />
-      <TextField fx:id="pointsTF" layoutX="38.0" layoutY="234.0" onAction="#points" prefHeight="25.0" prefWidth="52.0" promptText="Points" />
-      <Button fx:id="addBTN" layoutX="48.0" layoutY="266.0" mnemonicParsing="false" onAction="#addQuestion" style="-fx-background-color: #70879d;" text="ADD" textFill="WHITE">
+      <TextField fx:id="idTF" layoutX="14.0" layoutY="99.0" onAction="#setID" prefHeight="25.0" prefWidth="143.0" promptText="Exam ID (2 digits)" style="-fx-font-family: 'Arial Black';" />
+      <TextField fx:id="timeTF" layoutX="14.0" layoutY="131.0" onAction="#setTime" prefHeight="25.0" prefWidth="143.0" promptText="Time" style="-fx-font-family: 'Arial Black';" />
+      <ComboBox fx:id="courseCMB" layoutX="14.0" layoutY="66.0" onAction="#selectCourse" prefHeight="25.0" prefWidth="170.0" promptText="Course" style="-fx-font-family: 'Arial Black';" />
+      <TextField fx:id="pointsTF" layoutX="54.0" layoutY="232.0" onAction="#points" prefHeight="25.0" prefWidth="63.0" promptText="Points" style="-fx-font-family: 'Arial Black';" />
+      <Button fx:id="addBTN" layoutX="64.0" layoutY="270.0" mnemonicParsing="false" onAction="#addQuestion" style="-fx-background-color: #70879d;" text="ADD" textFill="WHITE">
          <font>
             <Font name="System Bold" size="9.0" />
          </font>
       </Button>
-      <TextField fx:id="totalTF" editable="false" layoutX="86.0" layoutY="293.0" prefHeight="25.0" prefWidth="46.0" />
-      <Button fx:id="clearBTN" layoutX="42.0" layoutY="192.0" mnemonicParsing="false" onAction="#clearPressed" style="-fx-background-color: #70879d;" text="Clear" textFill="WHITE">
+      <TextField fx:id="totalTF" editable="false" layoutX="91.0" layoutY="301.0" prefHeight="25.0" prefWidth="46.0" style="-fx-font-family: 'Arial Black';" />
+      <Button fx:id="clearBTN" layoutX="58.0" layoutY="195.0" mnemonicParsing="false" onAction="#clearPressed" style="-fx-background-color: #70879d;" text="Clear" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Label layoutX="19.0" layoutY="297.0" text="Points Left:" />
-      <TextField fx:id="digitcode" layoutX="14.0" layoutY="162.0" onAction="#setTime" prefHeight="25.0" prefWidth="118.0" promptText="4-digit code" />
-      <TextField fx:id="freeText1" layoutX="161.0" layoutY="257.0" prefHeight="25.0" prefWidth="273.0" promptText="Free Text For Teacher" />
-      <TextField fx:id="freeText2" layoutX="161.0" layoutY="289.0" prefHeight="25.0" prefWidth="273.0" promptText="Free Text For Student" />
+      <Label layoutX="24.0" layoutY="305.0" text="Points Left:" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></Label>
+      <TextField fx:id="digitcode" layoutX="14.0" layoutY="162.0" onAction="#setTime" prefHeight="25.0" prefWidth="143.0" promptText="4-digit code" style="-fx-font-family: 'Arial Black';" />
+      <TextField fx:id="freeText1" layoutX="229.0" layoutY="257.0" prefHeight="25.0" prefWidth="273.0" promptText="Free Text For Teacher" style="-fx-font-family: 'Arial Black';" />
+      <TextField fx:id="freeText2" layoutX="229.0" layoutY="289.0" prefHeight="25.0" prefWidth="273.0" promptText="Free Text For Student" style="-fx-font-family: 'Arial Black';" />
    </children>
 </AnchorPane>

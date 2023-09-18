@@ -35,10 +35,20 @@ public class StudentsPage {
     private Button logOutBtn;
 
     @FXML
-    private Label pageStudentLbl;
+    private Button menuBtn;
 
     @FXML
-    void DoExamAction(ActionEvent event)  { loadSceneForButton("doExam.fxml"); }
+    void initialize() {
+        Menu.setVisible(true);
+        menuBtn.setVisible(false);
+    }
+
+    @FXML
+    void DoExamAction(ActionEvent event)  {
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        loadSceneForButton("doExam.fxml");
+    }
 
     @FXML
     void LogOutEvent(ActionEvent event) {
@@ -61,6 +71,12 @@ public class StudentsPage {
             e.printStackTrace();
             // Handle the exception as needed
         }
+    }
+
+    @FXML
+    void OpenMenu(ActionEvent event) {
+        menuBtn.setVisible(false);
+        Menu.setVisible(true);
     }
 
 }

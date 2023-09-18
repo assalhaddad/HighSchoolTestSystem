@@ -29,8 +29,6 @@ public class ViewGradesPrincipal {
 
     @FXML
     private URL location;
-    @FXML
-    private TextField authorTF;
 
     @FXML
     private TextField courseTF;
@@ -62,16 +60,11 @@ public class ViewGradesPrincipal {
         }
         subjectTF.setText(chosenExam.getCourse().getSubject().getName());
         courseTF.setText(chosenExam.getCourse().getName());
-        authorTF.setText(chosenExam.getAuthor().getName());
-        if(chosenExam.getSolvedExam().getData()!=null) {
-            ObservableList<StudentData> data = FXCollections.observableArrayList(chosenExam.getSolvedExam().getData());
-            nameCol.setCellValueFactory(new PropertyValueFactory<StudentData, String>("name"));
-            gradeCol.setCellValueFactory(new PropertyValueFactory<StudentData, Integer>("grade"));
-            tableView.setItems(data);
-            System.out.println("i am here");
-        }
-        else
-            tableView.getItems().clear();
+
+        ObservableList<StudentData> data = FXCollections.observableArrayList(chosenExam.getSolvedExam().getData());
+        nameCol.setCellValueFactory(new PropertyValueFactory<StudentData, String>("name"));
+        gradeCol.setCellValueFactory(new PropertyValueFactory<StudentData, Integer>("grade"));
+        tableView.setItems(data);
     }
 
     @FXML

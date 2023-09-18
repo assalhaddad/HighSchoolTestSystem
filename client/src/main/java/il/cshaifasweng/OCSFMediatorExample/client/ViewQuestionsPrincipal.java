@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -38,8 +39,6 @@ public class ViewQuestionsPrincipal {
     private TextField answer4TF;
 
     @FXML
-    private TextField correctTF;
-    @FXML
     private TableColumn<Course, String> courseCol;
 
     @FXML
@@ -54,11 +53,28 @@ public class ViewQuestionsPrincipal {
     @FXML
     private TextArea textTF;
 
+    @FXML
+    private ImageView v1;
+
+    @FXML
+    private ImageView v2;
+
+    @FXML
+    private ImageView v3;
+
+    @FXML
+    private ImageView v4;
+
+
     ObservableList<Question> questions;
 
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
+        v1.setVisible(false);
+        v2.setVisible(false);
+        v3.setVisible(false);
+        v4.setVisible(false);
         sendMessage("get questions for principal",(Object)null);
     }
     private void sendMessage(String op, Object obj) {
@@ -72,6 +88,10 @@ public class ViewQuestionsPrincipal {
 
     @FXML
     void IdChosen(ActionEvent event) {
+        v1.setVisible(false);
+        v2.setVisible(false);
+        v3.setVisible(false);
+        v4.setVisible(false);
         for(int i=0; i<questions.size(); i++){
             if(questions.get(i).getId_question().equals(idCMB.getValue())){
                 subjectTF.setText(questions.get(i).getSubject().getName());
@@ -84,13 +104,13 @@ public class ViewQuestionsPrincipal {
                 courseCol.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
                 tableView.setItems(data);
                 if(questions.get(i).getCorrect() == 1)
-                    correctTF.setText(answer1TF.getText());
+                    v1.setVisible(true);
                 else if(questions.get(i).getCorrect() == 2)
-                    correctTF.setText(answer2TF.getText());
+                    v2.setVisible(true);
                 else if(questions.get(i).getCorrect() == 3)
-                    correctTF.setText(answer3TF.getText());
+                    v3.setVisible(true);
                 else
-                    correctTF.setText(answer4TF.getText());
+                    v4.setVisible(true);
             }
         }
     }

@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
+import javafx.scene.input.KeyEvent;
 public class DoExam {
     @FXML
     private ResourceBundle resources;
@@ -33,18 +34,57 @@ public class DoExam {
     private Button nextBtn;
     @FXML
     private Button startBtn;
+
+    @FXML
+    private TextField first;
+
+    @FXML
+    private TextField second;
+    @FXML
+    private TextField third;
+    @FXML
+    private TextField forth;
+
     protected static Exam exam=new Exam();
     protected static Student student;
     public static boolean isOn=false;
     protected static SolvedExam solvedExam=new SolvedExam();
+    private String theCode;
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
         assert doneBTN != null : "fx:id=\"doneBTN\" was not injected: check your FXML file 'doExam.fxml'.";
-        assert forthDCode != null : "fx:id=\"forthDCode\" was not injected: check your FXML file 'doExam.fxml'.";
+        //assert forthDCode != null : "fx:id=\"forthDCode\" was not injected: check your FXML file 'doExam.fxml'.";
         assert idStudent != null : "fx:id=\"idStudent\" was not injected: check your FXML file 'doExam.fxml'.";
         assert nextBtn != null : "fx:id=\"nextBtn\" was not injected: check your FXML file 'doExam.fxml'.";
         assert startBtn != null : "fx:id=\"startBtn\" was not injected: check your FXML file 'doExam.fxml'.";
+        first.requestFocus();
+    }
+
+    @FXML
+    void FirstCode(KeyEvent event) {
+        theCode = first.getText();
+        second.setDisable(false);
+        second.requestFocus();
+    }
+
+    @FXML
+    void SecondCode(KeyEvent event) {
+        theCode += second.getText();
+        third.setDisable(false);
+        third.requestFocus();
+    }
+
+    @FXML
+    void ThirdCode(KeyEvent event) {
+        theCode += third.getText();
+        forth.setDisable(false);
+        forth.requestFocus();
+    }
+
+    @FXML
+    void ForthCode(KeyEvent event) {
+        theCode += forth.getText();
     }
     @FXML
     void donePressed(ActionEvent event) {
@@ -83,8 +123,11 @@ public class DoExam {
             }
             idStudent.setDisable(false);
             doneBTN.setDisable(false);
-            forthDCode.setDisable(true);
             nextBtn.setDisable(true);
+            first.setDisable(true);
+            second.setDisable(true);
+            third.setDisable(true);
+            forth.setDisable(true);
         }
         else if (request.equals("didn't find exam"))
             wrongFourDigitsCode();
@@ -102,11 +145,10 @@ public class DoExam {
     }
     @FXML
     void nextPressed(ActionEvent event) {
-        //exam=null;
-        if (forthDCode.getText().length() != 4)
+        if (theCode.length() != 4)
             wrongFourDigitsCode();
+
         else {
-            String theCode = forthDCode.getText();
             sendMessage("get list of codes", theCode);
         }
     }
@@ -140,7 +182,7 @@ public class DoExam {
         }
     }
     private void wrongFourDigitsCode() {
-        forthDCode.clear();
+        //forthDCode.clear();
         Platform.runLater(new Runnable() {
             public void run() {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

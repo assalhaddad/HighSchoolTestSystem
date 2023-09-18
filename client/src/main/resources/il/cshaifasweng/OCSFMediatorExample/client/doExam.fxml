@@ -1,53 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.66666666667" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.DoExam">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.666666667" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.DoExam">
     <children>
-        <VBox layoutX="88.0" layoutY="71.0" prefHeight="236.0" prefWidth="306.0" spacing="7.0">
-            <children>
-                <Label alignment="CENTER" prefHeight="0.0" prefWidth="157.0" text="Insert a 4 digit code:">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                    <VBox.margin>
-                        <Insets />
-                    </VBox.margin>
-                </Label>
-                <TextField fx:id="forthDCode" layoutX="10.0" layoutY="254.0" minWidth="43.333333333333" prefHeight="21.0" prefWidth="306.0" />
-            <Label alignment="CENTER" prefHeight="21.0" prefWidth="82.0" text="Insert ID:">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <TextField fx:id="idStudent" disable="true" minWidth="43.3333333333333" prefHeight="21.0" prefWidth="306.0" />
-            </children>
-        </VBox>
-        <Button fx:id="nextBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="411.0" layoutY="100.0" mnemonicParsing="false" onAction="#nextPressed" prefHeight="21.0" prefWidth="43.0" style="-fx-background-color: #70879d;" text="Next" textFill="WHITE">
+        <Button fx:id="nextBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="385.0" layoutY="100.0" mnemonicParsing="false" onAction="#nextPressed" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #70879d;" text="Confirm code" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="12.0" />
+                <Font name="System Bold Italic" size="12.0" />
             </font>
         </Button>
-        <Label alignment="CENTER" prefHeight="26.0" prefWidth="500.0" style="-fx-background-color: #70879d;" text="Do Exam" textFill="WHITE">
+        <Button fx:id="doneBTN" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="367.0" layoutY="150.0" mnemonicParsing="false" onAction="#donePressed" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #70879d;" text="Confirm ID" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="17.0" />
+                <Font name="System Bold Italic" size="12.0" />
+            </font>
+        </Button>
+        <Button fx:id="startBtn" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="385.0" layoutY="193.0" mnemonicParsing="false" onAction="#startExamPressed" style="-fx-background-color: #70879d;" text="Start Exam" textFill="WHITE">
+            <font>
+                <Font name="System Bold Italic" size="12.0" />
+            </font>
+        </Button>
+        <Label alignment="CENTER" layoutX="71.0" layoutY="102.0" prefHeight="0.0" prefWidth="157.0" text="Insert a 4 digit code:" textFill="WHITE">
+            <font>
+                <Font name="System Bold Italic" size="15.0" />
             </font>
         </Label>
-        <Button fx:id="doneBTN" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="410.0" layoutY="163.0" mnemonicParsing="false" onAction="#donePressed" prefHeight="25.0" prefWidth="46.0" style="-fx-background-color: #70879d;" text="Done" textFill="WHITE">
+        <TextField fx:id="idStudent" disable="true" layoutX="189.0" layoutY="150.0" minWidth="43.3333333333333" prefHeight="25.0" prefWidth="166.0" style="-fx-font-family: 'Arial Black';" />
+        <Label alignment="CENTER" layoutX="99.0" layoutY="152.0" prefHeight="21.0" prefWidth="82.0" text="Insert ID:" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="12.0" />
+                <Font name="System Bold Italic" size="15.0" />
             </font>
-        </Button>
-      <Button fx:id="startBtn" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="394.0" layoutY="230.0" mnemonicParsing="false" onAction="#startExamPressed" style="-fx-background-color: #70879d;" text="Start Exam" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
+        </Label>
+        <TextField fx:id="first" layoutX="228.0" layoutY="92.0" onKeyTyped="#FirstCode" prefHeight="41.0" prefWidth="27.0" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="second" layoutX="264.0" layoutY="92.0" onKeyTyped="#SecondCode" prefHeight="41.0" prefWidth="27.0" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="third" layoutX="300.0" layoutY="92.0" onKeyTyped="#ThirdCode" prefHeight="41.0" prefWidth="27.0" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="forth" layoutX="339.0" layoutY="92.0" onKeyTyped="#ForthCode" prefHeight="41.0" prefWidth="27.0" style="-fx-font-family: 'Arial Black';" />
     </children>
 </AnchorPane>

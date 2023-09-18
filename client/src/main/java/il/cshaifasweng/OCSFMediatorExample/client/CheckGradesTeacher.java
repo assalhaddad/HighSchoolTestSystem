@@ -61,13 +61,13 @@ public class CheckGradesTeacher {
         getTeacherRequest();
         //sendMessage("get teacher", (Object)null);
         hide();
-        freeText.setVisible(false);
+        //freeText.setVisible(false);
     }
 
     @FXML
     void chooseExam(ActionEvent event) {
         String exam = idCMB.getValue().toString();
-        freeText.setVisible(false);
+        //freeText.setVisible(false);
         sendMessage("get exam", exam);
     }
 

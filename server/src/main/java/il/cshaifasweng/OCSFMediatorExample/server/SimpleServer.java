@@ -1556,6 +1556,25 @@ public class SimpleServer extends AbstractServer {
 					session.close();
 					client.sendToClient(new Message("exams list is ready for exam principal", exams1));
 				}
+				else if(request.equals("get exams for request extra time")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					Teacher currentTeacher = (Teacher)message.getObject();
+					ArrayList<String> examsIdList = new ArrayList();
+					int count = 0;
+					for(int i=0; i<currentTeacher.getSubjects().size(); i++){
+						Subject subject = currentTeacher.getSubjects().get(i);
+						for(int j=0; j<subject.getCourses().size(); j++){
+							Course course = subject.getCourses().get(j);
+							for(int k=0; k<course.getExams().size(); k++){
+								examsIdList.add(count, course.getExams().get(k).getId_exam());
+								count++;
+							}
+						}
+					}
+					session.close();
+					client.sendToClient(new Message("exams list for request extra time is ready", examsIdList));
+				}
 				session.flush();
 				session.close();
 			}

@@ -5,41 +5,55 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ExamPage">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="420" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ExamPage">
     <children>
-        <Label alignment="CENTER" prefHeight="26.0" prefWidth="608.0" style="-fx-background-color: #70879d;" text="Exam" textFill="WHITE">
+        <Button fx:id="doneBTN" disable="true" layoutX="316.0" layoutY="369.0" mnemonicParsing="false" onAction="#done" prefHeight="26.0" prefWidth="118.0" style="-fx-background-color: #70879d;" text="Done" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="17.0" />
-            </font>
-        </Label>
-        <Button fx:id="doneBTN" disable="true" layoutX="245.0" layoutY="420.0" mnemonicParsing="false" onAction="#done" prefHeight="26.0" prefWidth="118.0" style="-fx-background-color: #70879d;" text="Done" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="12.0" />
+                <Font name="System Bold Italic" size="12.0" />
             </font>
         </Button>
-        <Button fx:id="prevBtn" disable="true" layoutX="14.0" layoutY="414.0" mnemonicParsing="false" onAction="#prevPressed" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #70879d;" text="Previous Question" textFill="WHITE">
+        <Button fx:id="prevBtn" disable="true" layoutX="24.0" layoutY="363.0" mnemonicParsing="false" onAction="#prevPressed" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #70879d;" text="Previous Question" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="12.0" />
+                <Font name="System Bold Italic" size="12.0" />
             </font>
         </Button>
-        <Button fx:id="answer3" layoutX="31.0" layoutY="313.0" mnemonicParsing="false" onAction="#answer3Selected" prefHeight="90.0" prefWidth="271.0" style="-fx-background-color: #E0E0E0;" text="Button" />
-        <Button fx:id="answer4" layoutX="312.0" layoutY="313.0" mnemonicParsing="false" onAction="#answer4Selected" prefHeight="90.0" prefWidth="271.0" style="-fx-background-color: #E0E0E0;" text="Button" />
-        <Button fx:id="answer1" layoutX="32.0" layoutY="213.0" mnemonicParsing="false" onAction="#answer1Selected" prefHeight="90.0" prefWidth="271.0" style="-fx-background-color: #E0E0E0;" text="Button" />
-        <Button fx:id="answer2" layoutX="312.0" layoutY="213.0" mnemonicParsing="false" onAction="#answer2Selected" prefHeight="90.0" prefWidth="271.0" style="-fx-background-color: #E0E0E0;" text="Button" />
-        <Button fx:id="nextBtn" layoutX="456.0" layoutY="414.0" mnemonicParsing="false" onAction="#nextPressed" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #70879d;" text="Next Question" textFill="WHITE">
+        <Button fx:id="answer3" layoutX="127.0" layoutY="251.0" mnemonicParsing="false" onAction="#answer3Selected" prefHeight="99.0" prefWidth="199.0" style="-fx-background-color: #08FF00;">
             <font>
-                <Font name="System Bold" size="12.0" />
+                <Font name="Arial Black" size="12.0" />
             </font>
         </Button>
-        <Label fx:id="questionText" layoutX="12.0" layoutY="116.0" prefHeight="74.0" prefWidth="584.0" style="-fx-background-color: #E0E0E0;" text="Label" />
-        <Button fx:id="aboutBtn" layoutX="475.0" layoutY="50.0" mnemonicParsing="false" onAction="#aboutPressed" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #70879d;" text="About" textFill="WHITE">
+        <Button fx:id="answer4" layoutX="416.0" layoutY="251.0" mnemonicParsing="false" onAction="#answer4Selected" prefHeight="99.0" prefWidth="199.0" style="-fx-background-color: #FFFB00;">
             <font>
-                <Font name="System Bold" size="12.0" />
+                <Font name="Arial Black" size="12.0" />
             </font>
         </Button>
-        <Label layoutX="209.0" layoutY="46.0" prefHeight="58.0" prefWidth="206.0" text="Good Luck !" textAlignment="CENTER">
+        <Button fx:id="answer1" layoutX="127.0" layoutY="142.0" mnemonicParsing="false" onAction="#answer1Selected" prefHeight="99.0" prefWidth="199.0" style="-fx-background-color: #FA0000;">
             <font>
-                <Font size="36.0" />
+                <Font name="Arial Black" size="12.0" />
+            </font>
+        </Button>
+        <Button fx:id="answer2" layoutX="416.0" layoutY="142.0" mnemonicParsing="false" onAction="#answer2Selected" prefHeight="99.0" prefWidth="199.0" style="-fx-background-color: #008FFF;">
+            <font>
+                <Font name="Arial Black" size="12.0" />
+            </font>
+        </Button>
+        <Button fx:id="nextBtn" layoutX="527.0" layoutY="363.0" mnemonicParsing="false" onAction="#nextPressed" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #70879d;" text="Next Question" textFill="WHITE">
+            <font>
+                <Font name="System Bold Italic" size="12.0" />
+            </font>
+        </Button>
+        <Label fx:id="questionText" layoutX="83.0" layoutY="75.0" prefHeight="58.0" prefWidth="584.0" style="-fx-background-color: #E0E0E0;">
+            <font>
+                <Font name="Arial Black" size="12.0" />
+            </font></Label>
+        <Button fx:id="aboutBtn" layoutX="569.0" layoutY="17.0" mnemonicParsing="false" onAction="#aboutPressed" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #70879d;" text="Notes" textFill="WHITE">
+            <font>
+                <Font name="System Bold Italic" size="12.0" />
+            </font>
+        </Button>
+        <Label layoutX="14.0" layoutY="17.0" prefHeight="58.0" prefWidth="206.0" text="Good Luck !" textAlignment="CENTER">
+            <font>
+                <Font name="System Bold Italic" size="36.0" />
             </font>
         </Label>
     </children>
