@@ -183,7 +183,7 @@ public class BuildExam {
             sendMessage("get list of codes 2.0",digitcode.getText());
         else if(request.equals("found exam 2.0"))
             duplicate4DigitsError();
-        else if(request.equals("didn't find exam"))
+        else if(request.equals("didn't find exam 2.0"))
         {
             String free1 = "", free2 = "";
             if(!freeText1.getText().isEmpty())

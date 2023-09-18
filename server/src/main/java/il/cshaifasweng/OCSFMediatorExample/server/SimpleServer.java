@@ -1404,7 +1404,7 @@ public class SimpleServer extends AbstractServer {
 							return;
 						}
 					}
-					client.sendToClient(new Message("didn't find exam", null));
+					client.sendToClient(new Message("didn't find exam 2.0", null));
 					session.close();
 				}
 

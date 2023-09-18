@@ -15,7 +15,7 @@
       <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="#d4e0eb" height="143.0" layoutX="294.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="276.0" />
       <ComboBox fx:id="idCMB" layoutX="14.0" layoutY="42.0" onAction="#chooseExam" prefHeight="25.0" prefWidth="103.0" promptText="Exam ID" style="-fx-font-family: 'Arial Black';" />
       <TextField fx:id="subjectTF" editable="false" layoutX="139.0" layoutY="42.0" prefHeight="25.0" prefWidth="83.0" promptText="Subject" style="-fx-font-family: 'Arial Black';" />
-      <TextField fx:id="courseTF" editable="false" layoutX="235.0" layoutY="42.0" prefHeight="25.0" prefWidth="121.0" promptText="Course" style="-fx-font-family: 'Arial Black';" />
+      <TextField fx:id="courseTF" editable="false" layoutX="235.0" layoutY="42.0" prefHeight="25.0" prefWidth="128.0" promptText="Course" style="-fx-font-family: 'Arial Black';" />
       <TableView fx:id="tableView" layoutX="47.0" layoutY="105.0" onMouseClicked="#makeVisible" prefHeight="182.0" prefWidth="212.0" style="-fx-font-family: 'Arial Black';">
          <columns>
             <TableColumn fx:id="nameCol" editable="false" prefWidth="150.0" text="Student Name" />
