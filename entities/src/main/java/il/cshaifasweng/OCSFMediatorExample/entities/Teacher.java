@@ -85,8 +85,11 @@ public class Teacher implements Serializable {
 
     public void setSubjects(List<Subject> subjects){
         if(subjects!=null){
-            this.subjects = subjects;
+            //this.subjects = new ArrayList();
             for(Subject subject : subjects){
+                Subject temp = new Subject();
+                temp.copy(subject);
+                this.subjects.add(temp);
                 subject.getTeachers().add(this);
             }
         }

@@ -132,9 +132,6 @@ public class SimpleServer extends AbstractServer {
 	public void generateStaff(){
 		ArrayList<Subject> list = new ArrayList();
 		list.add(subjects.get(0)); // Math
-		list.add(subjects.get(1)); // English
-		list.add(subjects.get(2)); // Science
-		list.add(subjects.get(3)); // Geography
 		Teacher teacher = new Teacher("Shir Sneh","shirSneh","shir132");
 		teacher.setSubjects(list);
 		teachersList.add(teacher);
@@ -146,21 +143,27 @@ public class SimpleServer extends AbstractServer {
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
+		list.add(subjects.get(1)); //Math + English
 		teacher = new Teacher("Or Meir","orMeir","or88");
 		teacher.setSubjects(list);
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
+		list.clear();
+		list.add(subjects.get(2)); //Science
 		teacher = new Teacher("Moran Feldman","moranFeldman","moran2");
 		teacher.setSubjects(list);
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
+		list.add(subjects.get(3)); //Science + Geography
 		teacher = new Teacher("Norit Cohen","noritCohen","norit77");
 		teacher.setSubjects(list);
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
+		list.clear();
+		list.add(subjects.get(3)); //Geography
 		teacher = new Teacher("Bill Gates","billGates","bill5");
 		teacher.setSubjects(list);
 		teachersList.add(teacher);
@@ -171,6 +174,8 @@ public class SimpleServer extends AbstractServer {
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
+		list.add(subjects.get(0));
+		list.add(subjects.get(2)); //Geography + Math + Science
 		teacher = new Teacher("Merav Michaeli","meravMichaeli","merav46");
 		teacher.setSubjects(list);
 		teachersList.add(teacher);
@@ -1115,7 +1120,8 @@ public class SimpleServer extends AbstractServer {
 				if(request.equals("get list of subjects for add question")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					ArrayList<String> subjectList = new ArrayList(currentTeacher.getSubjects().size());
+					currentTeacher.copy((Teacher)message.getObject());
+					ArrayList<String> subjectList = new ArrayList();
 					for(int i=0; i<currentTeacher.getSubjects().size(); i++)
 						subjectList.add(i, currentTeacher.getSubjects().get(i).getName());
 					session.close();
@@ -1124,7 +1130,8 @@ public class SimpleServer extends AbstractServer {
 				else if(request.equals("get list of subjects for build exam")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					ArrayList<String> subjectList = new ArrayList(currentTeacher.getSubjects().size());
+					ArrayList<String> subjectList = new ArrayList();
+					currentTeacher.copy((Teacher)message.getObject());
 					for(int i=0; i<currentTeacher.getSubjects().size(); i++)
 						subjectList.add(i, currentTeacher.getSubjects().get(i).getName());
 					session.close();
@@ -1316,18 +1323,6 @@ public class SimpleServer extends AbstractServer {
 							break;
 						}
 					}
-				}
-				else if(request.equals("get teacher")){
-					session = sessionFactory.openSession();
-					session.beginTransaction();
-					client.sendToClient(new Message("found teacher", currentTeacher));
-					session.close();
-				}
-				else if(request.equals("get teacher for build exam")){
-					session = sessionFactory.openSession();
-					session.beginTransaction();
-					client.sendToClient(new Message("found teacher for build exam", currentTeacher));
-					session.close();
 				}
 				else if(request.equals("get exam")) {
 					session = sessionFactory.openSession();

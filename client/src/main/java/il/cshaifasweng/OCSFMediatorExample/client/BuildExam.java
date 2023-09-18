@@ -137,7 +137,7 @@ public class BuildExam {
         EventBus.getDefault().register(this);
         courseCMB.setDisable(true);
         totalTF.setText(String.valueOf(totalPoints));
-        sendMessage("get list of subjects for build exam", (Object)null);
+        sendMessage("get list of subjects for build exam", Login.teacher);
         pointsTF.setVisible(false);
         addBTN.setVisible(false);
         chosenTeacher.copy(Login.teacher);

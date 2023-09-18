@@ -54,7 +54,7 @@ public class AddQuestion {
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
-        sendMessage("get list of subjects for add question", (Object)null);
+        sendMessage("get list of subjects for add question", Login.teacher);
         courseCMB.setDisable(true);
     }
 
