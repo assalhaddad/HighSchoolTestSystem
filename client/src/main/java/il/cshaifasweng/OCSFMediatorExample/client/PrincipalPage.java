@@ -55,6 +55,7 @@ public class PrincipalPage {
     @FXML
     private Button menuBtn;
 
+
     @FXML
     void ApproveRequestsEvent(ActionEvent event) {
         Menu.setVisible(false);
@@ -67,6 +68,8 @@ public class PrincipalPage {
 
     @FXML
     void initialize() {
+        Menu.setVisible(true);
+        menuBtn.setVisible(false);
     }
     @FXML
     void ViewQuestionsEvent(ActionEvent event) {

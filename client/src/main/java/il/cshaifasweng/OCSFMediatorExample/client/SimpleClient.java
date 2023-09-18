@@ -7,7 +7,7 @@ import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
 
 public class SimpleClient extends AbstractClient {
-	
+
 	private static SimpleClient client = null;
 
 	private SimpleClient(String host, int port) {
@@ -18,10 +18,13 @@ public class SimpleClient extends AbstractClient {
 	protected void handleMessageFromServer(Object msg) {
 		System.out.println("inside handleMessageFromServer:");
 		System.out.println(((Message)msg).getMessage());
-		EventBus.getDefault().post(msg);
+		EventBus.getDefault().post((Message)msg);
 
 	}
-	
+
+
+
+
 	public static SimpleClient getClient() {
 		if (client == null) {
 			client = new SimpleClient("localhost", 3003);

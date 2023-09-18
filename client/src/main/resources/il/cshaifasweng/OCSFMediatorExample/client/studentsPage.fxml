@@ -11,7 +11,7 @@
     <children>
         <BorderPane fx:id="BorderPane" prefHeight="420.0" prefWidth="700.0">
             <left>
-                <VBox fx:id="Menu" prefHeight="200.0" prefWidth="100.0" spacing="15.0" visible="false" BorderPane.alignment="CENTER" style="-fx-border-color: white; -fx-border-width: 5px;">
+                <VBox fx:id="Menu" prefHeight="200.0" prefWidth="100.0" spacing="15.0" style="-fx-border-color: white; -fx-border-width: 5px;" BorderPane.alignment="CENTER">
                     <children>
                         <Button fx:id="doExamBtn" mnemonicParsing="false" onAction="#DoExamAction" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: transparent;" text="Do Exam" textFill="WHITE">
                             <font>
@@ -33,7 +33,7 @@
                 <VBox fx:id="detailVBox" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
             </center>
         </BorderPane>
-      <Button fx:id="menuBtn" mnemonicParsing="false" onAction="#OpenMenu" style="-fx-background-color: transparent; -fx-border-color: white;" text="Menu" textFill="WHITE">
+      <Button fx:id="menuBtn" mnemonicParsing="false" onAction="#OpenMenu" style="-fx-background-color: transparent; -fx-border-color: white;" text="Menu" textFill="WHITE" visible="false">
          <font>
             <Font name="System Bold Italic" size="15.0" />
          </font>

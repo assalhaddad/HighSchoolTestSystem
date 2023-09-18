@@ -12,8 +12,8 @@
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.66666666667" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ViewExamsPrincipal">
    <children>
       <ComboBox fx:id="idCMB" layoutX="14.0" layoutY="42.0" onAction="#chooseExam" prefHeight="25.0" prefWidth="120.0" promptText="Exam ID" style="-fx-font-family: 'Arial Black';" />
-      <TextField fx:id="subjectTF" editable="false" layoutX="166.0" layoutY="42.0" prefHeight="25.0" prefWidth="112.0" style="-fx-font-family: 'Arial Black';" />
-      <TextField fx:id="courseTF" editable="false" layoutX="300.0" layoutY="42.0" prefHeight="25.0" prefWidth="131.0" style="-fx-font-family: 'Arial Black';" />
+      <TextField fx:id="subjectTF" editable="false" layoutX="166.0" layoutY="42.0" prefHeight="25.0" prefWidth="112.0" promptText="Subject" style="-fx-font-family: 'Arial Black';" />
+      <TextField fx:id="courseTF" editable="false" layoutX="300.0" layoutY="42.0" prefHeight="25.0" prefWidth="131.0" promptText="Course" style="-fx-font-family: 'Arial Black';" />
       <TableView fx:id="tableView" layoutX="38.0" layoutY="87.0" onMouseClicked="#makeVisible" prefHeight="214.0" prefWidth="239.0" style="-fx-font-family: 'Arial Black';">
          <columns>
             <TableColumn fx:id="questionCol" editable="false" prefWidth="190.0" text="Question" />
@@ -45,6 +45,6 @@
             <Image url="@../../../../images/check.png" />
          </image>
       </ImageView>
-      <TextField fx:id="authorTF" editable="false" layoutX="454.0" layoutY="42.0" prefHeight="25.0" prefWidth="131.0" style="-fx-font-family: 'Arial Black';" />
+      <TextField fx:id="authorTF" editable="false" layoutX="454.0" layoutY="42.0" prefHeight="25.0" prefWidth="131.0" promptText="Author" style="-fx-font-family: 'Arial Black';" />
    </children>
 </AnchorPane>

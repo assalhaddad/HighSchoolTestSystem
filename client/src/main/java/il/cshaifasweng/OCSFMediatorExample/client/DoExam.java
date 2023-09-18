@@ -66,6 +66,7 @@ public class DoExam {
         third.setDisable(true);
         forth.setDisable(true);
         theCode = "";
+        first.requestFocus();
     }
 
     @FXML
@@ -149,10 +150,8 @@ public class DoExam {
 
             SolvedExam temp =new SolvedExam(exam.getTime(), exam);
             solvedExam.copy(temp);
-            //System.out.println("exam id: "+exam.getId_exam());
             System.out.println("temp id " + temp.getId());
             sendMessage("new solvedExam",solvedExam);
-            //System.out.println(solvedExam.getId());
         }
         else
             solvedExam.copy(exam.getSolvedExam());
@@ -207,20 +206,22 @@ public class DoExam {
     @FXML
     void FirstCode(KeyEvent event) {
         theCode = first.getText();
-        System.out.println(theCode);
         second.setDisable(false);
+        second.requestFocus();
     }
 
     @FXML
     void SecondCode(KeyEvent event) {
         theCode += second.getText();
         third.setDisable(false);
+        third.requestFocus();
     }
 
     @FXML
     void ThirdCode(KeyEvent event) {
         theCode += third.getText();
         forth.setDisable(false);
+        forth.requestFocus();
     }
 
     @FXML

@@ -38,6 +38,12 @@ public class StudentsPage {
     private Button menuBtn;
 
     @FXML
+    void initialize() {
+        Menu.setVisible(true);
+        menuBtn.setVisible(false);
+    }
+
+    @FXML
     void DoExamAction(ActionEvent event)  {
         Menu.setVisible(false);
         menuBtn.setVisible(true);

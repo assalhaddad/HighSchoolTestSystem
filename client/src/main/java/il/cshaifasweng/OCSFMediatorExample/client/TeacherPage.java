@@ -4,9 +4,7 @@
 
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.Message;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,6 +52,12 @@ public class TeacherPage {
 
     @FXML
     private Button menuBtn;
+
+    @FXML
+    void initialize() {
+        Menu.setVisible(true);
+        menuBtn.setVisible(false);
+    }
 
     @FXML
     void AddQuestionEvent(ActionEvent event) {

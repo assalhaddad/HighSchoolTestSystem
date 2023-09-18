@@ -48,7 +48,9 @@ public class ApproveRequests {
 
     @FXML
     void Approve(ActionEvent event) {
-        sendMessage("approve this request",currentRequest);
+        System.out.println("inside approve");
+        sendMessage("hi",currentRequest);
+        //sendMessage("approve this request",currentRequest);
     }
 
     @FXML
@@ -74,6 +76,7 @@ public class ApproveRequests {
 
     private void sendMessage(String op, Object obj) {
         try {
+            System.out.println("s");
             Message message = new Message(op, obj);
             SimpleClient.getClient().sendToServer(message);
         } catch (IOException var4) {
@@ -89,6 +92,8 @@ public class ApproveRequests {
            getRequests(obj);
         else if(request.equals("request approved successfully"))
             UpdateAll();
+        else if(request.equals("hi back"))
+            System.out.println("hi back");
     }
     private void getRequests(Object obj){
         requestsList = FXCollections.observableArrayList((ArrayList)obj);

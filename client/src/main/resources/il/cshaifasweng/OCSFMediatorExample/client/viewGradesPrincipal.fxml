@@ -9,8 +9,8 @@
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.66666666667" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ViewGradesPrincipal">
    <children>
       <ComboBox fx:id="idCMB" layoutX="14.0" layoutY="29.0" onAction="#chooseExam" prefHeight="25.0" prefWidth="127.0" promptText="Exam ID" style="-fx-font-family: 'Arial Black';" />
-      <TextField fx:id="subjectTF" editable="false" layoutX="169.0" layoutY="29.0" prefHeight="25.0" prefWidth="107.0" style="-fx-font-family: 'Arial Black';" />
-      <TextField fx:id="courseTF" editable="false" layoutX="309.0" layoutY="29.0" prefHeight="25.0" prefWidth="149.0" style="-fx-font-family: 'Arial Black';" />
+      <TextField fx:id="subjectTF" editable="false" layoutX="169.0" layoutY="29.0" prefHeight="25.0" prefWidth="107.0" promptText="Subject" style="-fx-font-family: 'Arial Black';" />
+      <TextField fx:id="courseTF" editable="false" layoutX="309.0" layoutY="29.0" prefHeight="25.0" prefWidth="149.0" promptText="Course" style="-fx-font-family: 'Arial Black';" />
       <TableView fx:id="tableView" layoutX="225.0" layoutY="97.0" prefHeight="214.0" prefWidth="161.0" style="-fx-font-family: 'Arial Black';">
          <columns>
             <TableColumn fx:id="nameCol" editable="false" prefWidth="110.0" text="Student Name" />

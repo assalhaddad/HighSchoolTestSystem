@@ -12,12 +12,12 @@
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.66666666667" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ViewQuestionsPrincipal">
    <children>
       <ComboBox fx:id="idCMB" layoutX="14.0" layoutY="28.0" onAction="#IdChosen" prefHeight="25.0" prefWidth="132.0" promptText="Question ID" style="-fx-font-family: 'Arial Black';" />
-      <TextField fx:id="subjectTF" editable="false" layoutX="177.0" layoutY="28.0" prefHeight="25.0" prefWidth="93.0" style="-fx-font-family: 'Arial Black';" />
-      <TextArea fx:id="textTF" layoutX="161.0" layoutY="105.0" prefHeight="55.0" prefWidth="273.0" style="-fx-font-family: 'Arial Black';" />
-      <TextField fx:id="answer4TF" editable="false" layoutX="328.0" layoutY="219.0" prefHeight="25.0" prefWidth="120.0" style="-fx-font-family: 'Arial Black';" />
-      <TextField fx:id="answer3TF" editable="false" layoutX="328.0" layoutY="181.0" prefHeight="25.0" prefWidth="120.0" style="-fx-font-family: 'Arial Black';" />
-      <TextField fx:id="answer2TF" editable="false" layoutX="124.0" layoutY="216.0" prefHeight="25.0" prefWidth="120.0" style="-fx-font-family: 'Arial Black';" />
-      <TextField fx:id="answer1TF" editable="false" layoutX="124.0" layoutY="179.0" prefHeight="25.0" prefWidth="120.0" style="-fx-font-family: 'Arial Black';" />
+      <TextField fx:id="subjectTF" editable="false" layoutX="177.0" layoutY="28.0" prefHeight="25.0" prefWidth="93.0" promptText="Subject" style="-fx-font-family: 'Arial Black';" />
+      <TextArea fx:id="textTF" layoutX="161.0" layoutY="105.0" prefHeight="55.0" prefWidth="273.0" promptText="Question" style="-fx-font-family: 'Arial Black';" />
+      <TextField fx:id="answer4TF" editable="false" layoutX="328.0" layoutY="219.0" prefHeight="25.0" prefWidth="120.0" promptText="Answer 4" style="-fx-font-family: 'Arial Black';" />
+      <TextField fx:id="answer3TF" editable="false" layoutX="328.0" layoutY="181.0" prefHeight="25.0" prefWidth="120.0" promptText="Answer 3" style="-fx-font-family: 'Arial Black';" />
+      <TextField fx:id="answer2TF" editable="false" layoutX="124.0" layoutY="216.0" prefHeight="25.0" prefWidth="120.0" promptText="Answer 2" style="-fx-font-family: 'Arial Black';" />
+      <TextField fx:id="answer1TF" editable="false" layoutX="124.0" layoutY="179.0" prefHeight="25.0" prefWidth="120.0" promptText="Answer 1" style="-fx-font-family: 'Arial Black';" />
       <TableView fx:id="tableView" layoutX="475.0" layoutY="25.0" prefHeight="97.0" prefWidth="112.0">
         <columns>
           <TableColumn fx:id="courseCol" minWidth="11.0" prefWidth="110.0" style="-fx-font-family: 'Arial Black';" text="Courses" />
