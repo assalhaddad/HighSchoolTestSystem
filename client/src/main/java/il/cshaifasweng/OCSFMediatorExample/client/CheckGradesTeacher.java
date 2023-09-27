@@ -12,11 +12,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
+
+import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
 
 public class CheckGradesTeacher {
 
@@ -54,6 +57,26 @@ public class CheckGradesTeacher {
     private TableColumn<StudentData, Integer> gradeCol;
     @FXML
     private TableColumn<StudentData, String> nameCol;
+
+    @FXML
+    private VBox Menu;
+
+    @FXML
+    private Button addQuestionBtn;
+
+    @FXML
+    private Button buildExamBtn;
+
+    @FXML
+    private Button checkGradesBtn;
+    @FXML
+    private Button logOutBtn;
+
+    @FXML
+    private Button menuBtn;
+
+    @FXML
+    private Button requestTimeBtn;
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
@@ -196,5 +219,46 @@ public class CheckGradesTeacher {
         explainTF.clear();
         hide();
     }
+
+    @FXML
+    void OpenMenu(ActionEvent event) {
+        menuBtn.setVisible(false);
+        Menu.setVisible(true);
+    }
+    @FXML
+    void AddQuestionEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("addQuestion");
+    }
+
+    @FXML
+    void CheckGradesEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("checkGradesTeacher");
+    }
+
+    @FXML
+    void CreateExamEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("buildExam");
+    }
+
+    @FXML
+    void RequestTimeEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("requestExtraTime");
+    }
+    @FXML
+    void LogOut(ActionEvent event) {
+        EventBus.getDefault().unregister(this);
+        switchScreen("Login");}
 
 }

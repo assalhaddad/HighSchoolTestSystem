@@ -45,19 +45,16 @@ public class StudentsPage {
     }
 
     @FXML
-    void DoExamAction(ActionEvent event)  {
+    void DoExamAction(ActionEvent event) throws IOException {
         EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("doExam.fxml");
+        App.setRoot("doExam");
     }
 
     @FXML
     void LogOutEvent(ActionEvent event) {
         EventBus.getDefault().unregister(this);
-        Login.teacher=null;
-        Login.student=null;
-        Login.principal=null;
         switchScreen("Login");}
 
 

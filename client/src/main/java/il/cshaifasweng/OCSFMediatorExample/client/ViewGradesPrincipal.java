@@ -13,14 +13,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
 
 public class ViewGradesPrincipal {
 
@@ -47,6 +47,22 @@ public class ViewGradesPrincipal {
 
     @FXML
     private TableView<StudentData> tableView;
+
+    @FXML
+    private Button ViewExamsBtn;
+
+    @FXML
+    private Button ViewGradesBtn;
+
+    @FXML
+    private Button ViewQuestionsBtn;
+    @FXML
+    private Button ApproveBtn;
+    @FXML
+    private Button menuBtn;
+    @FXML
+    private VBox Menu;
+
     ObservableList<Exam> exams;
     Exam chosenExam = new Exam();
 
@@ -90,6 +106,51 @@ public class ViewGradesPrincipal {
             for(int i = 0; i< exams.size(); i++)
                 idCMB.getItems().add(exams.get(i).getId_exam());
         }
+    }
+
+    @FXML
+    void ApproveRequestsEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        //loadSceneForButton("approveRequests.fxml");
+        App.setRoot("approveRequests");
+    }
+
+    @FXML
+    void LogOut(ActionEvent event) {
+        EventBus.getDefault().unregister(this);
+        switchScreen("Login");
+    }
+
+    @FXML
+    void ViewQuestionsEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("viewQuestionsPrincipal");
+    }
+
+    @FXML
+    void ViewGradesEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("viewGradesPrincipal");
+    }
+
+    @FXML
+    void ViewExamsEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("viewExamsPrincipal");
+    }
+
+    @FXML
+    void OpenMenu(ActionEvent event) {
+        menuBtn.setVisible(false);
+        Menu.setVisible(true);
     }
 
 }

@@ -61,13 +61,14 @@ public class PrincipalPage {
         EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("approveRequests.fxml");
-       // App.setRoot("approveRequests");
+        //loadSceneForButton("approveRequests.fxml");
+       App.setRoot("approveRequests");
     }
     @FXML
     void LogOut(ActionEvent event) {
         EventBus.getDefault().unregister(this);
-        switchScreen("Login");}
+        switchScreen("Login");
+    }
 
     @FXML
     void initialize() {
@@ -76,27 +77,27 @@ public class PrincipalPage {
         menuBtn.setVisible(false);
     }
     @FXML
-    void ViewQuestionsEvent(ActionEvent event) {
+    void ViewQuestionsEvent(ActionEvent event) throws IOException {
         EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("viewQuestionsPrincipal.fxml");
+        App.setRoot("viewQuestionsPrincipal");
     }
 
     @FXML
-    void ViewGradesEvent(ActionEvent event) {
+    void ViewGradesEvent(ActionEvent event) throws IOException {
         EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("viewGradesPrincipal.fxml");
+        App.setRoot("viewGradesPrincipal");
     }
 
     @FXML
-    void ViewExamsEvent(ActionEvent event) {
+    void ViewExamsEvent(ActionEvent event) throws IOException {
         EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("viewExamsPrincipal.fxml");
+        App.setRoot("viewExamsPrincipal");
     }
 
     private void loadSceneForButton(String fxmlPath) {

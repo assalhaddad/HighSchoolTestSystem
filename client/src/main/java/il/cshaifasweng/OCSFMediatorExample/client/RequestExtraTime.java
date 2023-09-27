@@ -18,8 +18,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
 
 public class RequestExtraTime {
 
@@ -39,6 +42,26 @@ public class RequestExtraTime {
     private Button sendBTN;
     @FXML
     private ComboBox<String> idCMB;
+
+    @FXML
+    private VBox Menu;
+
+    @FXML
+    private Button addQuestionBtn;
+
+    @FXML
+    private Button buildExamBtn;
+
+    @FXML
+    private Button checkGradesBtn;
+    @FXML
+    private Button logOutBtn;
+
+    @FXML
+    private Button menuBtn;
+
+    @FXML
+    private Button requestTimeBtn;
 
     private String explain = "";
     private int extraMinutes;
@@ -101,5 +124,46 @@ public class RequestExtraTime {
         });
        // idCMB.setPromptText("Exam ID");
     }
+
+    @FXML
+    void OpenMenu(ActionEvent event) {
+        menuBtn.setVisible(false);
+        Menu.setVisible(true);
+    }
+    @FXML
+    void AddQuestionEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("addQuestion");
+    }
+
+    @FXML
+    void CheckGradesEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("checkGradesTeacher");
+    }
+
+    @FXML
+    void CreateExamEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("buildExam");
+    }
+
+    @FXML
+    void RequestTimeEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("requestExtraTime");
+    }
+    @FXML
+    void LogOut(ActionEvent event) {
+        EventBus.getDefault().unregister(this);
+        switchScreen("Login");}
 
 }

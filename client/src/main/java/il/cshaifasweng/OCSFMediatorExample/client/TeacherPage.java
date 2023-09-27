@@ -63,42 +63,39 @@ public class TeacherPage {
     }
 
     @FXML
-    void AddQuestionEvent(ActionEvent event) {
+    void AddQuestionEvent(ActionEvent event) throws IOException {
         EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("addQuestion.fxml");
+        App.setRoot("addQuestion");
     }
 
     @FXML
-    void CheckGradesEvent(ActionEvent event) {
+    void CheckGradesEvent(ActionEvent event) throws IOException {
         EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("checkGradesTeacher.fxml");
+        App.setRoot("checkGradesTeacher");
     }
 
     @FXML
-    void CreateExamEvent(ActionEvent event) {
+    void CreateExamEvent(ActionEvent event) throws IOException {
         EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("buildExam.fxml");
+        App.setRoot("buildExam");
     }
 
     @FXML
-    void RequestTimeEvent(ActionEvent event) {
+    void RequestTimeEvent(ActionEvent event) throws IOException {
         EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("requestExtraTime.fxml");
+        App.setRoot("requestExtraTime");
     }
     @FXML
     void LogOut(ActionEvent event) {
         EventBus.getDefault().unregister(this);
-        Login.teacher=null;
-        Login.student=null;
-        Login.principal=null;
         switchScreen("Login");}
 
     private void loadSceneForButton(String fxmlPath) {

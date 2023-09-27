@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
@@ -44,6 +45,16 @@ public class DoExam {
     private TextField third;
     @FXML
     private TextField forth;
+    @FXML
+    private Button doExamBtn;
+
+    @FXML
+    private Button logOutBtn;
+
+    @FXML
+    private Button menuBtn;
+    @FXML
+    private VBox Menu;
 
     protected static Exam exam=new Exam();
     protected static Student student;
@@ -208,5 +219,22 @@ public class DoExam {
     }
     private void updateSolvedExam(Object obj){
         solvedExam.copy((SolvedExam) obj);
+    }
+    @FXML
+    void DoExamAction(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("doExam");
+    }
+
+    @FXML
+    void LogOutEvent(ActionEvent event) {
+        EventBus.getDefault().unregister(this);
+        switchScreen("Login");}
+    @FXML
+    void OpenMenu(ActionEvent event) {
+        menuBtn.setVisible(false);
+        Menu.setVisible(true);
     }
 }
