@@ -364,6 +364,7 @@ public class BuildExam {
                 alert.showAndWait();
             }
         });
+        digitcode.clear();
     }
     private void pointsError(){
         Platform.runLater(new Runnable() {

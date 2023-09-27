@@ -1251,13 +1251,21 @@ public class SimpleServer extends AbstractServer {
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					exam.copy((Exam)message.getObject());
-					exams.add(exam);
-					session.save(exam);
+					Exam temp = new Exam();
+					temp.copy(exam);
+					exams.add(temp);
+					for(int i=0; i< courses.size(); i++){
+						if(temp.getCourse().getName().equals(courses.get(i).getName())){
+							courses.get(i).getExams().add(temp);
+							session.update(courses.get(i));
+							//break;
+						}
+					}
+					session.save(temp);
 					session.flush();
 					session.getTransaction().commit(); //just added
 					session.close();
 					client.sendToClient(new Message("exam added successfully",(Object)null));
-
 				}
 				else if(request.equals("get subject for add question")){
 					session = sessionFactory.openSession();
