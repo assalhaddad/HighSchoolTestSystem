@@ -18,6 +18,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import static il.cshaifasweng.OCSFMediatorExample.client.App.setRoot;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
 import javafx.scene.input.KeyEvent;
 public class DoExam {
@@ -165,8 +167,7 @@ public class DoExam {
         }
     }
     @FXML
-    void startExamPressed(ActionEvent event)
-    {
+    void startExamPressed(ActionEvent event) throws IOException {
         if(!(exam.getSolvedExam().GetIsBuild()))
         {
 
@@ -182,7 +183,7 @@ public class DoExam {
             solvedExam.copy(exam.getSolvedExam());
 
 
-        switchScreen("ExamPage");
+        App.setRoot("examPage");
     }
 
     private void sendMessage(String op, Object obj) {

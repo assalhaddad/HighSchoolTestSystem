@@ -5,15 +5,15 @@
 package il.cshaifasweng.OCSFMediatorExample.server.ocsf;
 
 /**
-* The <code> AdaptableServer </code> is an adapter class
-* that extends the <code> AbstractServer </code> class in place of
-* the <code> AbstractObservableServer </code>.<p>
-*
-* Project Name: OCSF (Object Client-Server Framework)<p>
-*
-* @author Dr. Robert Lagani&egrave;re
-* @version Febuary 2001
-*/
+ * The <code> AdaptableServer </code> is an adapter class
+ * that extends the <code> AbstractServer </code> class in place of
+ * the <code> AbstractObservableServer </code>.<p>
+ *
+ * Project Name: OCSF (Object Client-Server Framework)<p>
+ *
+ * @author Dr. Robert Lagani&egrave;re
+ * @version Febuary 2001
+ */
 class AdaptableServer extends AbstractServer
 {
   //Instance variables **********************************************
@@ -68,7 +68,7 @@ class AdaptableServer extends AbstractServer
    * @param exception the exception raised.
    */
   final protected void clientException(ConnectionToClient client,
-                                        Throwable exception)
+                                       Throwable exception)
   {
     server.clientException(client, exception);
   }
@@ -102,6 +102,30 @@ class AdaptableServer extends AbstractServer
     server.serverStarted();
   }
 
+  /**
+   * Sends a message to every client connected to the server.
+   * This is merely a utility; a subclass may want to do some checks
+   * before actually sending messages to all clients.
+   * This method can be overriden, but if so it should still perform
+   * the general function of sending to all clients, perhaps after some kind
+   * of filtering is done. Any exception thrown while
+   * sending the message to a particular client is ignored.
+   *
+   * @param msg   Object The message to be sent
+   */
+  public void sendToAllClients(Object msg)
+  {
+    Thread[] clientThreadList = getClientConnections();
+
+    for (int i=0; i<clientThreadList.length; i++)
+    {
+      try
+      {
+        ((ConnectionToClient)clientThreadList[i]).sendToClient(msg);
+      }
+      catch (Exception ex) {}
+    }
+  }
   /**
    * Hook method called when the server is closed.
    */

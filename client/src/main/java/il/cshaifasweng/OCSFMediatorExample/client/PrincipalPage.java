@@ -72,7 +72,6 @@ public class PrincipalPage {
 
     @FXML
     void initialize() {
-        //EventBus.getDefault().register(this);
         Menu.setVisible(true);
         menuBtn.setVisible(false);
     }

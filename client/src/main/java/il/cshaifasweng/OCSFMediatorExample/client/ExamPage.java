@@ -1,12 +1,20 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import java.io.IOException;
@@ -17,7 +25,7 @@ import java.util.List;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
 
-public class ExamPage extends DoExam{
+public class ExamPage extends DoExam {
 
     @FXML
     private Button aboutBtn;
@@ -46,8 +54,15 @@ public class ExamPage extends DoExam{
     @FXML
     private Label questionText;
 
-    public static int i = 0;
+    private static int g=0;
+    @FXML
+    private Label timerLabel;
 
+    public static int i = 0;
+    static int additionalTime = 0;
+    protected static long mills=0;
+    protected static int seconds=0;
+    protected static int minutes=0;
 
     public static List<Integer> chosenAnswers;
 
@@ -56,16 +71,55 @@ public class ExamPage extends DoExam{
     private static long startTimeMillis;
     private static long remainingDelayMillis;
 
+    protected boolean firstTime = true;
+    protected static Timeline timeline;
+    protected static Timeline timelineInFreeText;
+    protected static long millsInFreeText=0;
+    protected static int secondsinFreeText=0;
+    protected static int minutesInFreeText=0;
+    protected int sum=exam.getTime();
+
+
+
     @FXML
     void initialize() {
 
         if (!DoExam.isOn) {
+
+            mills=0;
+            seconds = 0;
+            minutes = 0;
+            millsInFreeText=0;
+            secondsinFreeText=0;
+            minutesInFreeText=0;
+
             chosenAnswers = new ArrayList<Integer>(Collections.nCopies(DoExam.exam.getQuestions().size(), 0));
             scheduleTask();
             EventBus.getDefault().register(this);
         }
-
         DoExam.isOn = true;
+
+        if (firstTime) {
+            timeline = new Timeline(new KeyFrame(Duration.millis(1), event -> {
+                mills++;
+                if(mills+millsInFreeText == 1000) {
+                    mills = 0;
+                    millsInFreeText=0;
+                    seconds++;
+                }
+                if (seconds+secondsinFreeText == 60) {
+                    seconds = 0;
+                    secondsinFreeText=0;
+                    minutes++;
+                }
+                String time = String.format("%02d:%02d", minutesInFreeText+minutes, secondsinFreeText+seconds);
+                timerLabel.setText(time);
+            }));
+
+            timeline.setCycleCount(Animation.INDEFINITE);
+            timeline.play();
+        }
+        firstTime = false;
 
         assert answer1 != null : "fx:id=\"answer1\" was not injected: check your FXML file 'examPage.fxml'.";
         assert answer2 != null : "fx:id=\"answer2\" was not injected: check your FXML file 'examPage.fxml'.";
@@ -87,7 +141,6 @@ public class ExamPage extends DoExam{
             nextBtn.setDisable(true);
         else
             nextBtn.setDisable(false);
-
 
         answer1.setText(DoExam.exam.getQuestions().get(i).getAnswer1());
         answer2.setText(DoExam.exam.getQuestions().get(i).getAnswer2());
@@ -130,16 +183,28 @@ public class ExamPage extends DoExam{
             answer3.setStyle("-fx-background-color:  #08FF00; ");
             answer4.setStyle("-fx-background-color:  #FFFD7A; ");
         }
-        checkIfDone();
 
+        checkIfDone();
 
 
     }
 
     @FXML
-    void aboutPressed(ActionEvent event) {
-        switchScreen("FreeText");
+    void aboutPressed(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("freeText.fxml"));
+        Parent root = loader.load();
+        FreeText freeText = loader.getController();
+        timeline.pause();
+
+        // Pass the current timer values to the second page
+        freeText.setTimer(minutes, seconds,mills);
+
+        Stage stage = (Stage) timerLabel.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
+
+
 
     @FXML
     void answer1Selected(ActionEvent event) {
@@ -197,17 +262,24 @@ public class ExamPage extends DoExam{
     }
 
     @FXML
-    void done(ActionEvent event) {
+    void done(ActionEvent event) throws Exception {
 
         long endTimeMillis = System.currentTimeMillis();
         long totalTimeMillis = endTimeMillis - startTimeMillis;
         long totalTimeSeconds = totalTimeMillis / 1000;
-        StudentData studentD = new StudentData(student,LocalDateTime.now().toString(), (int) (totalTimeSeconds/60), true, chosenAnswers, solvedExam);
+        StudentData studentD = new StudentData(student, LocalDateTime.now().toString(), (int) (totalTimeSeconds / 60), true, chosenAnswers, solvedExam);
         solvedExam.calculateGrades();
         timerThread.interrupt();
+        timeline.stop();
+        if(timelineInFreeText!=null)
+        {
+            timelineInFreeText.stop();
+            timelineInFreeText=null;
+        }
+
         sendMessage("new studentData", studentD);
 
-        switchScreen("StudentsPage");
+        App.setRoot("studentsPage");
     }
 
     private static void sendMessage(String op, Object obj) {
@@ -224,11 +296,12 @@ public class ExamPage extends DoExam{
         String request = message.getMessage();
         if (request.equals("studentData added successfully"))
             addedNewStudentData();
-        else if(request.equals("studentData added successfully 2.0"))
+        else if (request.equals("studentData added successfully 2.0"))
             addedNewStudentData2();
-        else if(request.equals("request approved successfully")) {
-            System.out.println("hereeeeeeeeee12");
+        else if (request.equals("request approved successfully")) {
+            additionalTime = (int) message.getObject();
             extendDelay();
+
         }
     }
 
@@ -267,6 +340,7 @@ public class ExamPage extends DoExam{
             }
         });
     }
+
     private void addedNewStudentData2() {
         Platform.runLater(new Runnable() {
             public void run() {
@@ -284,7 +358,7 @@ public class ExamPage extends DoExam{
             public void run() {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Extra Time!");
-                alert.setHeaderText("Another "+solvedExam.getUpdatedTime()+" minutes were added!");
+                alert.setHeaderText("Another " + additionalTime + " minutes were added!");
                 alert.setContentText(null);
                 alert.showAndWait();
             }
@@ -293,17 +367,22 @@ public class ExamPage extends DoExam{
 
     private static void scheduleTask() {
         task = () -> {
-            StudentData studentD = new StudentData(student,LocalDateTime.now().toString(), solvedExam.getUpdatedTime(), false, chosenAnswers, solvedExam);
+            StudentData studentD = new StudentData(student, LocalDateTime.now().toString(), solvedExam.getUpdatedTime(), false, chosenAnswers, solvedExam);
             solvedExam.calculateGrades();
-            sendMessage("new studentData 2.0", studentD);
-
-            switchScreen("StudentsPage");
+            timeline.stop();
+            if(timelineInFreeText!=null)
+            {
+                timelineInFreeText.stop();
+                timelineInFreeText=null;
+            }
             timerThread.interrupt(); // Interrupt the timer thread after the task is executed
+            sendMessage("new studentData 2.0", studentD);
+            switchScreen("StudentPage");
         };
 
         timerThread = new Thread(() -> {
             try {
-                Thread.sleep((long) exam.getTime() *60*1000); // Delay for the time of the exam
+                Thread.sleep((long) exam.getTime() * 60 * 1000); // Delay for the time of the exam
                 task.run();
             } catch (InterruptedException e) {
                 // Timer interrupted, do nothing
@@ -311,16 +390,17 @@ public class ExamPage extends DoExam{
         });
 
         startTimeMillis = System.currentTimeMillis();
-        remainingDelayMillis = (long) exam.getTime() *60*1000; // Initial delay in millis
-
+        remainingDelayMillis = (long) exam.getTime() * 60 * 1000; // Initial delay in millis
         timerThread.start();
     }
-    private static void extendDelay() {
+
+    protected static void extendDelay() {
         timerThread.interrupt();
 
         // Calculate new remaining delay with an additional 5 seconds
-        remainingDelayMillis += (long)(solvedExam.getUpdatedTime())*60*1000;
-
+        //remainingDelayMillis +=  ((((additionalTime) * 60 * 1000)-((minutes+minutesInFreeText)*60*1000)+((seconds+secondsinFreeText)*1000)+mills+millsInFreeText));
+        remainingDelayMillis += (long) (((additionalTime) * 60 * 1000)-(System.currentTimeMillis()-startTimeMillis));
+        System.out.println(remainingDelayMillis);
         timerThread = new Thread(() -> {
             try {
                 Thread.sleep(remainingDelayMillis);
@@ -335,4 +415,13 @@ public class ExamPage extends DoExam{
 
         System.out.println("Delay extended.");
     }
+
+    public void setTimer(int minutes, int seconds,long mills) {
+        this.minutesInFreeText = minutes;
+        this.secondsinFreeText = seconds;
+        this.millsInFreeText=mills;
+        timerLabel.setText(String.format("%02d:%02d", minutes, seconds));
+        timeline.play();
+    }
+
 }
