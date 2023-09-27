@@ -103,6 +103,30 @@ class AdaptableServer extends AbstractServer
   }
 
   /**
+   * Sends a message to every client connected to the server.
+   * This is merely a utility; a subclass may want to do some checks
+   * before actually sending messages to all clients.
+   * This method can be overriden, but if so it should still perform
+   * the general function of sending to all clients, perhaps after some kind
+   * of filtering is done. Any exception thrown while
+   * sending the message to a particular client is ignored.
+   *
+   * @param msg   Object The message to be sent
+   */
+  public void sendToAllClients(Object msg)
+  {
+    Thread[] clientThreadList = getClientConnections();
+
+    for (int i=0; i<clientThreadList.length; i++)
+    {
+      try
+      {
+        ((ConnectionToClient)clientThreadList[i]).sendToClient(msg);
+      }
+      catch (Exception ex) {}
+    }
+  }
+  /**
    * Hook method called when the server is closed.
    */
   final protected void serverClosed()

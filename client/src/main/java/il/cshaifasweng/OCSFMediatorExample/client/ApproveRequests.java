@@ -117,7 +117,10 @@ public class ApproveRequests {
                 alert.showAndWait();
             }
         });
-        requestCmb.getItems().clear();
+        //requestCmb.getItems().clear();
+        Platform.runLater(() -> {
+            requestCmb.getItems().clear();
+        });
         sendMessage("get list of requests", (Object)null);
     }
 }

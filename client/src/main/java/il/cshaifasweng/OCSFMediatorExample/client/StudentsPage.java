@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 
@@ -36,6 +38,7 @@ public class StudentsPage {
 
     @FXML
     private Button menuBtn;
+    private boolean firstTime=true;
 
     @FXML
     void initialize() {
@@ -47,6 +50,13 @@ public class StudentsPage {
     void DoExamAction(ActionEvent event)  {
         Menu.setVisible(false);
         menuBtn.setVisible(true);
+         if(!firstTime)
+         {
+             EventBus.getDefault().unregister(this);
+             firstTime=false;
+         }
+         DoExam.solvedExam=null;
+         DoExam.exam=null;
         loadSceneForButton("doExam.fxml");
     }
 
@@ -77,6 +87,11 @@ public class StudentsPage {
     void OpenMenu(ActionEvent event) {
         menuBtn.setVisible(false);
         Menu.setVisible(true);
+    }
+
+    void cleanup()
+    {
+
     }
 
 }

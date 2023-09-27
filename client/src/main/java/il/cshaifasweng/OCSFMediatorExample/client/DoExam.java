@@ -44,15 +44,19 @@ public class DoExam {
     private TextField third;
     @FXML
     private TextField forth;
-
-    protected static Exam exam=new Exam();
+    protected static Exam exam;
     protected static Student student;
     public static boolean isOn=false;
-    protected static SolvedExam solvedExam=new SolvedExam();
+    protected static SolvedExam solvedExam;
     private String theCode;
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
+        exam = new Exam();
+        solvedExam = new SolvedExam();
+
+
+
         assert doneBTN != null : "fx:id=\"doneBTN\" was not injected: check your FXML file 'doExam.fxml'.";
         //assert forthDCode != null : "fx:id=\"forthDCode\" was not injected: check your FXML file 'doExam.fxml'.";
         assert idStudent != null : "fx:id=\"idStudent\" was not injected: check your FXML file 'doExam.fxml'.";
@@ -85,6 +89,7 @@ public class DoExam {
     @FXML
     void ForthCode(KeyEvent event) {
         theCode += forth.getText();
+        nextBtn.requestFocus();
     }
     @FXML
     void donePressed(ActionEvent event) {

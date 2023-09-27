@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 
+import com.mysql.cj.protocol.x.XMessage;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import il.cshaifasweng.OCSFMediatorExample.entities.Question;
 import il.cshaifasweng.OCSFMediatorExample.entities.Student;
@@ -477,7 +478,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(questions.get(18));
 		list.add(questions.get(21));
 		list.add(questions.get(22));
-		exam = new Exam("64",list,70,"","",teachersList.get(4),courses.get(4),"6789");
+		exam = new Exam("64",list,1,"","",teachersList.get(4),courses.get(4),"6789");
 		for(int i=0; i<4; i++)
 			exam.setPoints(exam.getQuestions().get(i),25 );
 		exams.add(exam);
@@ -546,7 +547,7 @@ public class SimpleServer extends AbstractServer {
 	}
 
 	public void generateSolutions(){
-		SolvedExam solvedExam = new SolvedExam( 90, exams.get(0));  // exam1
+		SolvedExam solvedExam = new SolvedExam( exams.get(0).getTime(), exams.get(0));  // exam1
 		solvedExamList.add(solvedExam);
 		session.save(solvedExam);
 		session.flush();
@@ -592,7 +593,7 @@ public class SimpleServer extends AbstractServer {
 		session.flush();
 		list.clear();
 		solvedExam.calculateGrades();
-		solvedExam = new SolvedExam(20, exams.get(1)); //exam2
+		solvedExam = new SolvedExam(exams.get(1).getTime(), exams.get(1)); //exam2
 		solvedExamList.add(solvedExam);
 		session.save(solvedExam);
 		session.flush();
@@ -637,7 +638,7 @@ public class SimpleServer extends AbstractServer {
 		session.flush();
 		list.clear();
 		solvedExam.calculateGrades();
-		solvedExam = new SolvedExam(20, exams.get(2)); //exam3
+		solvedExam = new SolvedExam(exams.get(2).getTime(), exams.get(2)); //exam3
 		solvedExamList.add(solvedExam);
 		session.save(solvedExam);
 		session.flush();
@@ -682,7 +683,7 @@ public class SimpleServer extends AbstractServer {
 		session.flush();
 		list.clear();
 		solvedExam.calculateGrades();
-		solvedExam = new SolvedExam( 90, exams.get(3));  // exam4
+		solvedExam = new SolvedExam( exams.get(3).getTime(), exams.get(3));  // exam4
 		solvedExamList.add(solvedExam);
 		session.save(solvedExam);
 		session.flush();
@@ -727,7 +728,7 @@ public class SimpleServer extends AbstractServer {
 		session.flush();
 		list.clear();
 		solvedExam.calculateGrades();
-		solvedExam = new SolvedExam( 90, exams.get(4));  // exam5
+		solvedExam = new SolvedExam( exams.get(4).getTime(), exams.get(4));  // exam5
 		solvedExamList.add(solvedExam);
 		session.save(solvedExam);
 		session.flush();
@@ -772,7 +773,7 @@ public class SimpleServer extends AbstractServer {
 		session.flush();
 		list.clear();
 		solvedExam.calculateGrades();
-		solvedExam = new SolvedExam( 90, exams.get(5));  // exam6
+		solvedExam = new SolvedExam( exams.get(5).getTime(), exams.get(5));  // exam6
 		solvedExamList.add(solvedExam);
 		session.save(solvedExam);
 		session.flush();
@@ -817,7 +818,7 @@ public class SimpleServer extends AbstractServer {
 		session.flush();
 		list.clear();
 		solvedExam.calculateGrades();
-		solvedExam = new SolvedExam(90, exams.get(6));  // exam7
+		solvedExam = new SolvedExam(exams.get(6).getTime(), exams.get(6));  // exam7
 		solvedExamList.add(solvedExam);
 		session.save(solvedExam);
 		session.flush();
@@ -862,7 +863,7 @@ public class SimpleServer extends AbstractServer {
 		session.flush();
 		list.clear();
 		solvedExam.calculateGrades();
-		solvedExam = new SolvedExam(90, exams.get(7));  // exam8
+		solvedExam = new SolvedExam(exams.get(7).getTime(), exams.get(7));  // exam8
 		solvedExamList.add(solvedExam);
 		session.save(solvedExam);
 		session.flush();
@@ -907,7 +908,7 @@ public class SimpleServer extends AbstractServer {
 		session.flush();
 		list.clear();
 		solvedExam.calculateGrades();
-		solvedExam = new SolvedExam(90, exams.get(8));  // exam9
+		solvedExam = new SolvedExam(exams.get(8).getTime(), exams.get(8));  // exam9
 		solvedExamList.add(solvedExam);
 		session.save(solvedExam);
 		session.flush();
@@ -952,7 +953,7 @@ public class SimpleServer extends AbstractServer {
 		session.flush();
 		list.clear();
 		solvedExam.calculateGrades();
-		solvedExam = new SolvedExam( 90, exams.get(9));  // exam10
+		solvedExam = new SolvedExam( exams.get(9).getTime(), exams.get(9));  // exam10
 		solvedExamList.add(solvedExam);
 		session.save(solvedExam);
 		session.flush();
@@ -997,7 +998,7 @@ public class SimpleServer extends AbstractServer {
 		session.flush();
 		list.clear();
 		solvedExam.calculateGrades();
-		solvedExam = new SolvedExam( 90, exams.get(10));  // exam11
+		solvedExam = new SolvedExam( exams.get(10).getTime(), exams.get(10));  // exam11
 		solvedExamList.add(solvedExam);
 		session.save(solvedExam);
 		session.flush();
@@ -1484,42 +1485,47 @@ public class SimpleServer extends AbstractServer {
 					session.close();
 				}
 				else if(request.equals("approve this request")){
-					System.out.println("1");
 					session=sessionFactory.openSession();
-					System.out.println("2");
 					session.beginTransaction();
-					System.out.println("3");
 					requestExtraTime.copy((Request)message.getObject());
-					System.out.println("4");
 					requests.remove(requestExtraTime);
-					System.out.println("5");
 					session.remove(requestExtraTime);
-					System.out.println("6");
 					requestExtraTime.copy((Request)message.getObject());
-					System.out.println("7");
 					requestExtraTime.setIsDone();
-					System.out.println("8");
 					requests.add(requestExtraTime);
-					System.out.println("9");
 					session.save(requestExtraTime);
-					System.out.println("10");
 					session.flush();
-					System.out.println("11");
+
 
 					for (int i = 0; i < exams.size(); i++) {
 						if (exams.get(i).getId_exam().equals(requestExtraTime.getExamId())) {
-							exams.get(i).getSolvedExam().setUpdatedTime(requestExtraTime.getMinutes()+exams.get(i).getTime());
-							session.save(exams.get(i).getSolvedExam());
+
+							exams.get(i).getSolvedExam().setUpdatedTime(requestExtraTime.getMinutes()+ exams.get(i).getTime());
+							//System.out.println("updated time: "+exams.get(i).getSolvedExam().getUpdatedTime());
+							//session.save(exams.get(i).getSolvedExam());
+							session.update(exams.get(i).getSolvedExam());
 							session.flush();
 						}
 					}
-					System.out.println("12");
-					client.sendToClient(new Message("request approved successfully", null));
-					System.out.println("13");
+					//System.out.println("12");
+					sendToAllClients(new Message("request approved successfully", requestExtraTime.getMinutes()));
+					//System.out.println("13");
 					session.close();
-
-
 				}
+				else if(request.equals("get updated time")){
+
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					exam.copy((Exam) message.getObject());
+
+					for (int i = 0; i < exams.size(); i++) {
+						if (exams.get(i).getId_exam().equals(exam.getId_exam())) {
+							client.sendToClient(new Message("updated time", exams.get(i).getSolvedExam().getUpdatedTime()));
+							return;
+						}
+					}
+				}
+
 				else if(request.equals("get questions for principal")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
