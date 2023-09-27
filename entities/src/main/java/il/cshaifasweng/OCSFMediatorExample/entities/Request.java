@@ -20,6 +20,7 @@ public class Request implements Serializable {
 
     public Request(){}
     public Request(Teacher teacher, int minutes, String explaination, String examId){
+        super();
         this.teacherName = teacher.getName();
         this.minutes = minutes;
         this.explaination = explaination;
@@ -74,4 +75,5 @@ public class Request implements Serializable {
     public void setExamId(String examId) {
         this.examId = examId;
     }
+
 }

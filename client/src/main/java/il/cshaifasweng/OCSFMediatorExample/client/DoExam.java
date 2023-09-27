@@ -85,6 +85,7 @@ public class DoExam {
     @FXML
     void ForthCode(KeyEvent event) {
         theCode += forth.getText();
+        nextBtn.requestFocus();
     }
     @FXML
     void donePressed(ActionEvent event) {

@@ -1461,8 +1461,10 @@ public class SimpleServer extends AbstractServer {
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					requestExtraTime.copy((Request)message.getObject());
-					requests.add(requestExtraTime);
-					session.save(requestExtraTime);
+					Request temp = new Request();
+					temp.copy(requestExtraTime);
+					requests.add(temp);
+					session.save(temp);
 					session.flush();
 					client.sendToClient(new Message("request added successfully",(Object)null));
 					session.close();
@@ -1470,36 +1472,56 @@ public class SimpleServer extends AbstractServer {
 				else if(request.equals("get list of requests")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					ArrayList<Request> requests1 = new ArrayList<Request>();
+					ArrayList<Request> requests1 = new ArrayList();
+					int count =0;
 					for(int i=0; i<requests.size(); i++){
-						if(!requests.get(i).getIsDone())
-							requests1.add(i, requests.get(i));
+						if(!(requests.get(i).getIsDone())){
+							System.out.println(i);
+							requests1.add(count, requests.get(i));
+							count++;
+						}
+
 					}
 					client.sendToClient(new Message("requests list is ready", requests1));
 					session.close();
 				}
-				else if(request.equals("approve this request")){
-					System.out.println("1");
+				else if(request.equals("get list of requests to update")){
+					System.out.println("update");
 					session=sessionFactory.openSession();
-					System.out.println("2");
 					session.beginTransaction();
-					System.out.println("3");
+					ArrayList<Request> requests1 = new ArrayList();
+					int count =0;
+					for(int i=0; i<requests.size(); i++){
+						if(!(requests.get(i).getIsDone())){
+							System.out.println(i);
+							requests1.add(count, requests.get(i));
+							count++;
+						}
+
+					}
+					session.close();
+					client.sendToClient(new Message("requests list is ready to update", requests1));
+				}
+				else if(request.equals("approve this request")){
+					System.out.println("approve");
+					session=sessionFactory.openSession();
+					session.beginTransaction();
 					requestExtraTime.copy((Request)message.getObject());
-					System.out.println("4");
-					requests.remove(requestExtraTime);
-					System.out.println("5");
-					session.remove(requestExtraTime);
-					System.out.println("6");
-					requestExtraTime.copy((Request)message.getObject());
-					System.out.println("7");
+					//requests.remove(requestExtraTime);
+					//session.remove(requestExtraTime);
+					//requestExtraTime.copy((Request)message.getObject());
+					//requestExtraTime.setIsDone();
+					//requests.add(requestExtraTime);
+					//session.save(requestExtraTime);
+					//session.flush();
+
+					for(int j=0; j<requests.size(); j++){
+						if(requests.get(j).getId() == requestExtraTime.getId())
+							requests.get(j).setIsDone();
+					}
 					requestExtraTime.setIsDone();
-					System.out.println("8");
-					requests.add(requestExtraTime);
-					System.out.println("9");
-					session.save(requestExtraTime);
-					System.out.println("10");
+					session.update(requestExtraTime);
 					session.flush();
-					System.out.println("11");
 
 					for (int i = 0; i < exams.size(); i++) {
 						if (exams.get(i).getId_exam().equals(requestExtraTime.getExamId())) {
@@ -1508,12 +1530,8 @@ public class SimpleServer extends AbstractServer {
 							session.flush();
 						}
 					}
-					System.out.println("12");
-					client.sendToClient(new Message("request approved successfully", null));
-					System.out.println("13");
 					session.close();
-
-
+					client.sendToClient(new Message("request approved successfully", null));
 				}
 				else if(request.equals("get questions for principal")){
 					session=sessionFactory.openSession();

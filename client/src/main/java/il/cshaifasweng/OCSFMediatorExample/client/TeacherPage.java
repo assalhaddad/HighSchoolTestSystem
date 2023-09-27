@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
@@ -63,7 +64,7 @@ public class TeacherPage {
 
     @FXML
     void AddQuestionEvent(ActionEvent event) {
-
+        EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
         loadSceneForButton("addQuestion.fxml");
@@ -71,6 +72,7 @@ public class TeacherPage {
 
     @FXML
     void CheckGradesEvent(ActionEvent event) {
+        EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
         loadSceneForButton("checkGradesTeacher.fxml");
@@ -78,6 +80,7 @@ public class TeacherPage {
 
     @FXML
     void CreateExamEvent(ActionEvent event) {
+        EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
         loadSceneForButton("buildExam.fxml");
@@ -85,12 +88,14 @@ public class TeacherPage {
 
     @FXML
     void RequestTimeEvent(ActionEvent event) {
+        EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
         loadSceneForButton("requestExtraTime.fxml");
     }
     @FXML
     void LogOut(ActionEvent event) {
+        EventBus.getDefault().unregister(this);
         Login.teacher=null;
         Login.student=null;
         Login.principal=null;

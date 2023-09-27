@@ -89,10 +89,20 @@ public class ApproveRequests {
         Object obj = message.getObject();
         if(request.equals("requests list is ready"))
             getRequests(obj);
-        else if(request.equals("request approved successfully"))
+        else if(request.equals("request approved successfully")){
+            System.out.println("bla bla");
             UpdateAll();
-
+        }
+        else if(request.equals("requests list is ready to update"))
+            getRequestsUpdated(obj);
     }
+
+    private void getRequestsUpdated(Object obj) {
+        requestsList = FXCollections.observableArrayList((ArrayList)obj);
+        for(int i = 0; i <requestsList.size(); i++)
+            requestCmb.getItems().add(String.valueOf(requestsList.get(i).getId()));
+    }
+
     private void getRequests(Object obj){
         requestsList = FXCollections.observableArrayList((ArrayList)obj);
         for(int i = 0; i <requestsList.size(); i++)
@@ -100,7 +110,7 @@ public class ApproveRequests {
     }
 
     private void UpdateAll(){
-
+        System.out.println("inside update");
         Platform.runLater(() -> {
             requestCmb.getSelectionModel().clearSelection();
         });
@@ -110,6 +120,7 @@ public class ApproveRequests {
         explanationTA.clear();
         Platform.runLater(new Runnable() {
             public void run() {
+                System.out.println("print");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success!");
                 alert.setHeaderText("Request approved successfully");
@@ -117,7 +128,9 @@ public class ApproveRequests {
                 alert.showAndWait();
             }
         });
-        requestCmb.getItems().clear();
-        sendMessage("get list of requests", (Object)null);
+        sendMessage("get list of requests to update", (Object)null);
+        Platform.runLater(() -> {
+            requestCmb.getItems().clear();
+        });
     }
 }
