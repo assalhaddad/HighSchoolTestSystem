@@ -1248,22 +1248,47 @@ public class SimpleServer extends AbstractServer {
 					client.sendToClient(new Message("solvedExam added successfully",solvedExam));
 				}
 				else if(request.equals("new exam")){
+					Exam temp = new Exam();
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					exam.copy((Exam)message.getObject());
-					Exam temp = new Exam();
+					exam.copy((Exam) message.getObject());
 					temp.copy(exam);
-					exams.add(temp);
-					for(int i=0; i< courses.size(); i++){
-						if(temp.getCourse().getName().equals(courses.get(i).getName())){
+					//for(int i=0; i<courses.size(); i++)
+						//if(courses.get(i).getName().equals(exam.getCourse().getName())) {
+							//courses.get(i).getExams().add(temp);
+							//teachersList.get(2).getSubjects().get(0).getCourses().get(0).getExams().add(temp);
+							//session.update(teachersList.get(2));
+							//teachersList.get(2).getExams().add(temp);
+							//session.update(courses.get(i));
+						//}
+					//for(int i=0; i<teachersList.get(2).getExams().size(); i++){
+						//System.out.println("hi" +teachersList.get(2).getExams().get(i).getId_exam());
+					//}
+
+					for(int i=0; i<teachersList.size(); i++)
+						if(teachersList.get(i).getName().equals(temp.getAuthor().getName()))
+							teachersList.get(i).getExams().add(temp);
+
+					for(int i=0; i<courses.size(); i++)
+						if(courses.get(i).getName().equals(temp.getCourse().getName()))
 							courses.get(i).getExams().add(temp);
-							session.update(courses.get(i));
-							//break;
+
+					for(int i=0; i<teachersList.size(); i++)
+						for(int j=0; j<teachersList.get(i).getSubjects().size(); j++)
+							for(int h=0; h<teachersList.get(i).getSubjects().get(j).getCourses().size(); h++)
+								for(int k=0; k<courses.size(); k++)
+									if(teachersList.get(i).getSubjects().get(j).getCourses().get(h).getName().equals(courses.get(k).getName())) {
+										teachersList.get(i).getSubjects().get(j).getCourses().remove(h);
+										teachersList.get(i).getSubjects().get(j).getCourses().add(courses.get(k));
+									}
+
+					for(int i=0; i<teachersList.get(2).getSubjects().get(0).getCourses().get(0).getExams().size(); i++){
+						System.out.println("hi " +teachersList.get(2).getSubjects().get(0).getCourses().get(0).getExams().get(i).getId_exam());
 						}
-					}
+					exams.add(temp);
 					session.save(temp);
 					session.flush();
-					session.getTransaction().commit(); //just added
+					session.getTransaction().commit();
 					session.close();
 					client.sendToClient(new Message("exam added successfully",(Object)null));
 				}
@@ -1407,7 +1432,7 @@ public class SimpleServer extends AbstractServer {
 							return;
 						}
 					}
-					client.sendToClient(new Message("didn't find exam", null));
+					client.sendToClient(new Message("didn't find exam 2.0", null));
 					session.close();
 				}
 
@@ -1575,13 +1600,21 @@ public class SimpleServer extends AbstractServer {
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					Teacher currentTeacher = (Teacher)message.getObject();
+					for(int i=0; i<teachersList.size(); i++)
+						if(teachersList.get(i).getName().equals(currentTeacher.getName())) {
+							currentTeacher.copy(teachersList.get(i));
+							break;
+						}
 					ArrayList<String> examsIdList = new ArrayList();
 					int count = 0;
+					Subject subject = new Subject();
+					Course course = new Course();
 					for(int i=0; i<currentTeacher.getSubjects().size(); i++){
-						Subject subject = currentTeacher.getSubjects().get(i);
+						subject.copy(currentTeacher.getSubjects().get(i));
 						for(int j=0; j<subject.getCourses().size(); j++){
-							Course course = subject.getCourses().get(j);
+							course.copy(subject.getCourses().get(j));
 							for(int k=0; k<course.getExams().size(); k++){
+								System.out.println(course.getExams().get(k).getId_exam());
 								examsIdList.add(count, course.getExams().get(k).getId_exam());
 								count++;
 							}

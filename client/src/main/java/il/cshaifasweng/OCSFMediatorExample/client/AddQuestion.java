@@ -173,7 +173,10 @@ public class AddQuestion {
 
     private void getSubjectsRequest(Object obj){
         ObservableList<String> subjectList = FXCollections.observableArrayList((ArrayList)obj);
-        subjectCMB.setItems(subjectList);
+        Platform.runLater(() -> {
+            subjectCMB.setItems(subjectList);
+        });
+        //subjectCMB.setItems(subjectList);
     }
     private void getCoursesRequest(Object obj){
         courseCMB.setDisable(false);

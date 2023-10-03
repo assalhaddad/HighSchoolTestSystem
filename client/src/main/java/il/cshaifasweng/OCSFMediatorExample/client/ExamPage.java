@@ -377,7 +377,7 @@ public class ExamPage extends DoExam {
             }
             timerThread.interrupt(); // Interrupt the timer thread after the task is executed
             sendMessage("new studentData 2.0", studentD);
-            switchScreen("StudentPage");
+            switchScreen("StudentsPage");
         };
 
         timerThread = new Thread(() -> {
