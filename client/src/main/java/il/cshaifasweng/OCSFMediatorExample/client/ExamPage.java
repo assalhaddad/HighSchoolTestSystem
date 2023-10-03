@@ -263,6 +263,7 @@ public class ExamPage extends DoExam {
 
     @FXML
     void done(ActionEvent event) throws Exception {
+        System.out.println("inside done");
         long endTimeMillis = System.currentTimeMillis();
         long totalTimeMillis = endTimeMillis - startTimeMillis;
         long totalTimeSeconds = totalTimeMillis / 1000;
@@ -327,6 +328,7 @@ public class ExamPage extends DoExam {
     }
 
     private void addedNewStudentData() throws IOException {
+        System.out.println("inside the other thing");
         Platform.runLater(new Runnable() {
             public void run() {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -340,7 +342,7 @@ public class ExamPage extends DoExam {
         App.setRoot("studentsPage");
     }
 
-    private void addedNewStudentData2() {
+    private void addedNewStudentData2() throws IOException {
         Platform.runLater(new Runnable() {
             public void run() {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -350,6 +352,8 @@ public class ExamPage extends DoExam {
                 alert.showAndWait();
             }
         });
+        EventBus.getDefault().unregister(this);
+        App.setRoot("studentsPage");
     }
 
     private static void addedTime() {
@@ -376,7 +380,7 @@ public class ExamPage extends DoExam {
             }
             timerThread.interrupt(); // Interrupt the timer thread after the task is executed
             sendMessage("new studentData 2.0", studentD);
-            switchScreen("StudentsPage");
+            //switchScreen("StudentsPage");
         };
 
         timerThread = new Thread(() -> {
@@ -399,6 +403,7 @@ public class ExamPage extends DoExam {
         // Calculate new remaining delay with an additional 5 seconds
         //remainingDelayMillis +=  ((((additionalTime) * 60 * 1000)-((minutes+minutesInFreeText)*60*1000)+((seconds+secondsinFreeText)*1000)+mills+millsInFreeText));
         remainingDelayMillis += (long) (((additionalTime) * 60 * 1000)-(System.currentTimeMillis()-startTimeMillis));
+        startTimeMillis=System.currentTimeMillis();
         System.out.println(remainingDelayMillis);
         timerThread = new Thread(() -> {
             try {

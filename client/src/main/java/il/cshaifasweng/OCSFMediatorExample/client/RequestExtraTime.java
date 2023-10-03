@@ -72,8 +72,18 @@ public class RequestExtraTime {
 
     @FXML
     void sendExtraTimeRequest(ActionEvent event) {
-        extraMinutes = Integer.parseInt(extraTimeTF.getText());
-        if(extraMinutes > 60){
+        if(extraTimeTF.getText().isEmpty()){
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("time is missing" + "\n" + "Please enter the time you want to request");
+                    alert.setContentText(null);
+                    alert.showAndWait();
+                }
+            });
+        }
+        else if(Integer.parseInt(extraTimeTF.getText()) > 60){
             Platform.runLater(new Runnable() {
                 public void run() {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -83,10 +93,10 @@ public class RequestExtraTime {
                     alert.showAndWait();
                 }
             });
-            extraMinutes = 0;
             extraTimeTF.clear();
         }
         else{
+            extraMinutes = Integer.parseInt(extraTimeTF.getText());
             explain = explainTF.getText();
             examId = idCMB.getValue();
             request = new Request(teacher,extraMinutes,explain,examId);
