@@ -1,7 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -38,7 +37,6 @@ public class StudentsPage {
 
     @FXML
     private Button menuBtn;
-    private boolean firstTime=true;
 
     @FXML
     void initialize() {
@@ -47,24 +45,16 @@ public class StudentsPage {
     }
 
     @FXML
-    void DoExamAction(ActionEvent event)  {
+    void DoExamAction(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-         if(!firstTime)
-         {
-             EventBus.getDefault().unregister(this);
-             firstTime=false;
-         }
-         DoExam.solvedExam=null;
-         DoExam.exam=null;
-        loadSceneForButton("doExam.fxml");
+        App.setRoot("doExam");
     }
 
     @FXML
     void LogOutEvent(ActionEvent event) {
-        Login.teacher=null;
-        Login.student=null;
-        Login.principal=null;
+        EventBus.getDefault().unregister(this);
         switchScreen("Login");}
 
 
@@ -87,11 +77,6 @@ public class StudentsPage {
     void OpenMenu(ActionEvent event) {
         menuBtn.setVisible(false);
         Menu.setVisible(true);
-    }
-
-    void cleanup()
-    {
-
     }
 
 }

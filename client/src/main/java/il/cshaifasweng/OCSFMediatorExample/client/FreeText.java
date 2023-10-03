@@ -118,13 +118,12 @@ public class FreeText extends ExamPage {
     @Subscribe
     public void handleMessage(Message message) {
         String request = message.getMessage();
-         if (request.equals("updated time")) {
-             sum=(int)message.getObject();
+        if (request.equals("updated time")) {
+            sum=(int)message.getObject();
 
 
         }
     }
 }
-
 
 

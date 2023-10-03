@@ -85,6 +85,7 @@ public class ExamPage extends DoExam {
     void initialize() {
 
         if (!DoExam.isOn) {
+
             mills=0;
             seconds = 0;
             minutes = 0;
@@ -140,7 +141,6 @@ public class ExamPage extends DoExam {
             nextBtn.setDisable(true);
         else
             nextBtn.setDisable(false);
-
 
         answer1.setText(DoExam.exam.getQuestions().get(i).getAnswer1());
         answer2.setText(DoExam.exam.getQuestions().get(i).getAnswer2());
@@ -279,7 +279,7 @@ public class ExamPage extends DoExam {
 
         sendMessage("new studentData", studentD);
 
-        switchScreen("StudentsPage");
+        App.setRoot("studentsPage");
     }
 
     private static void sendMessage(String op, Object obj) {
@@ -377,7 +377,7 @@ public class ExamPage extends DoExam {
             }
             timerThread.interrupt(); // Interrupt the timer thread after the task is executed
             sendMessage("new studentData 2.0", studentD);
-            switchScreen("StudentsPage");
+            switchScreen("StudentPage");
         };
 
         timerThread = new Thread(() -> {
@@ -425,4 +425,3 @@ public class ExamPage extends DoExam {
     }
 
 }
-

@@ -1,6 +1,5 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
-
 import com.mysql.cj.protocol.x.XMessage;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import il.cshaifasweng.OCSFMediatorExample.entities.Question;
@@ -133,9 +132,6 @@ public class SimpleServer extends AbstractServer {
 	public void generateStaff(){
 		ArrayList<Subject> list = new ArrayList();
 		list.add(subjects.get(0)); // Math
-		list.add(subjects.get(1)); // English
-		list.add(subjects.get(2)); // Science
-		list.add(subjects.get(3)); // Geography
 		Teacher teacher = new Teacher("Shir Sneh","shirSneh","shir132");
 		teacher.setSubjects(list);
 		teachersList.add(teacher);
@@ -147,21 +143,27 @@ public class SimpleServer extends AbstractServer {
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
+		list.add(subjects.get(1)); //Math + English
 		teacher = new Teacher("Or Meir","orMeir","or88");
 		teacher.setSubjects(list);
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
+		list.clear();
+		list.add(subjects.get(2)); //Science
 		teacher = new Teacher("Moran Feldman","moranFeldman","moran2");
 		teacher.setSubjects(list);
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
+		list.add(subjects.get(3)); //Science + Geography
 		teacher = new Teacher("Norit Cohen","noritCohen","norit77");
 		teacher.setSubjects(list);
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
+		list.clear();
+		list.add(subjects.get(3)); //Geography
 		teacher = new Teacher("Bill Gates","billGates","bill5");
 		teacher.setSubjects(list);
 		teachersList.add(teacher);
@@ -172,6 +174,8 @@ public class SimpleServer extends AbstractServer {
 		teachersList.add(teacher);
 		session.save(teacher);
 		session.flush();
+		list.add(subjects.get(0));
+		list.add(subjects.get(2)); //Geography + Math + Science
 		teacher = new Teacher("Merav Michaeli","meravMichaeli","merav46");
 		teacher.setSubjects(list);
 		teachersList.add(teacher);
@@ -1116,7 +1120,8 @@ public class SimpleServer extends AbstractServer {
 				if(request.equals("get list of subjects for add question")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					ArrayList<String> subjectList = new ArrayList(currentTeacher.getSubjects().size());
+					currentTeacher.copy((Teacher)message.getObject());
+					ArrayList<String> subjectList = new ArrayList();
 					for(int i=0; i<currentTeacher.getSubjects().size(); i++)
 						subjectList.add(i, currentTeacher.getSubjects().get(i).getName());
 					session.close();
@@ -1125,7 +1130,8 @@ public class SimpleServer extends AbstractServer {
 				else if(request.equals("get list of subjects for build exam")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					ArrayList<String> subjectList = new ArrayList(currentTeacher.getSubjects().size());
+					ArrayList<String> subjectList = new ArrayList();
+					currentTeacher.copy((Teacher)message.getObject());
 					for(int i=0; i<currentTeacher.getSubjects().size(); i++)
 						subjectList.add(i, currentTeacher.getSubjects().get(i).getName());
 					session.close();
@@ -1245,13 +1251,21 @@ public class SimpleServer extends AbstractServer {
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					exam.copy((Exam)message.getObject());
-					exams.add(exam);
-					session.save(exam);
+					Exam temp = new Exam();
+					temp.copy(exam);
+					exams.add(temp);
+					for(int i=0; i< courses.size(); i++){
+						if(temp.getCourse().getName().equals(courses.get(i).getName())){
+							courses.get(i).getExams().add(temp);
+							session.update(courses.get(i));
+							//break;
+						}
+					}
+					session.save(temp);
 					session.flush();
 					session.getTransaction().commit(); //just added
 					session.close();
 					client.sendToClient(new Message("exam added successfully",(Object)null));
-
 				}
 				else if(request.equals("get subject for add question")){
 					session = sessionFactory.openSession();
@@ -1317,18 +1331,6 @@ public class SimpleServer extends AbstractServer {
 							break;
 						}
 					}
-				}
-				else if(request.equals("get teacher")){
-					session = sessionFactory.openSession();
-					session.beginTransaction();
-					client.sendToClient(new Message("found teacher", currentTeacher));
-					session.close();
-				}
-				else if(request.equals("get teacher for build exam")){
-					session = sessionFactory.openSession();
-					session.beginTransaction();
-					client.sendToClient(new Message("found teacher for build exam", currentTeacher));
-					session.close();
 				}
 				else if(request.equals("get exam")) {
 					session = sessionFactory.openSession();
@@ -1405,7 +1407,7 @@ public class SimpleServer extends AbstractServer {
 							return;
 						}
 					}
-					client.sendToClient(new Message("didn't find exam 2.0", null));
+					client.sendToClient(new Message("didn't find exam", null));
 					session.close();
 				}
 
@@ -1467,8 +1469,10 @@ public class SimpleServer extends AbstractServer {
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					requestExtraTime.copy((Request)message.getObject());
-					requests.add(requestExtraTime);
-					session.save(requestExtraTime);
+					Request temp = new Request();
+					temp.copy(requestExtraTime);
+					requests.add(temp);
+					session.save(temp);
 					session.flush();
 					client.sendToClient(new Message("request added successfully",(Object)null));
 					session.close();
@@ -1476,56 +1480,61 @@ public class SimpleServer extends AbstractServer {
 				else if(request.equals("get list of requests")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					ArrayList<Request> requests1 = new ArrayList<Request>();
+					ArrayList<Request> requests1 = new ArrayList();
+					int count =0;
 					for(int i=0; i<requests.size(); i++){
-						if(!requests.get(i).getIsDone())
-							requests1.add(i, requests.get(i));
+						if(!(requests.get(i).getIsDone())){
+							System.out.println(i);
+							requests1.add(count, requests.get(i));
+							count++;
+						}
+
 					}
 					client.sendToClient(new Message("requests list is ready", requests1));
 					session.close();
 				}
+				else if(request.equals("get list of requests to update")){
+					System.out.println("update");
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					ArrayList<Request> requests1 = new ArrayList();
+					int count =0;
+					for(int i=0; i<requests.size(); i++){
+						if(!(requests.get(i).getIsDone())){
+							System.out.println(i);
+							requests1.add(count, requests.get(i));
+							count++;
+						}
+
+					}
+					session.close();
+					client.sendToClient(new Message("requests list is ready to update", requests1));
+				}
 				else if(request.equals("approve this request")){
+					System.out.println("approve");
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					requestExtraTime.copy((Request)message.getObject());
-					requests.remove(requestExtraTime);
-					session.remove(requestExtraTime);
-					requestExtraTime.copy((Request)message.getObject());
-					requestExtraTime.setIsDone();
-					requests.add(requestExtraTime);
-					session.save(requestExtraTime);
-					session.flush();
 
+					for(int j=0; j<requests.size(); j++){
+						if(requests.get(j).getId() == requestExtraTime.getId())
+							requests.get(j).setIsDone();
+					}
+					requestExtraTime.setIsDone();
+					session.update(requestExtraTime);
+					session.flush();
 
 					for (int i = 0; i < exams.size(); i++) {
 						if (exams.get(i).getId_exam().equals(requestExtraTime.getExamId())) {
 
 							exams.get(i).getSolvedExam().setUpdatedTime(requestExtraTime.getMinutes()+ exams.get(i).getTime());
-							//System.out.println("updated time: "+exams.get(i).getSolvedExam().getUpdatedTime());
-							//session.save(exams.get(i).getSolvedExam());
 							session.update(exams.get(i).getSolvedExam());
 							session.flush();
 						}
 					}
-					//System.out.println("12");
 					sendToAllClients(new Message("request approved successfully", requestExtraTime.getMinutes()));
-					//System.out.println("13");
 					session.close();
 				}
-				else if(request.equals("get updated time")){
-
-					session=sessionFactory.openSession();
-					session.beginTransaction();
-					exam.copy((Exam) message.getObject());
-
-					for (int i = 0; i < exams.size(); i++) {
-						if (exams.get(i).getId_exam().equals(exam.getId_exam())) {
-							client.sendToClient(new Message("updated time", exams.get(i).getSolvedExam().getUpdatedTime()));
-							return;
-						}
-					}
-				}
-
 				else if(request.equals("get questions for principal")){
 					session=sessionFactory.openSession();
 					session.beginTransaction();
@@ -1580,6 +1589,19 @@ public class SimpleServer extends AbstractServer {
 					}
 					session.close();
 					client.sendToClient(new Message("exams list for request extra time is ready", examsIdList));
+				}
+				else if(request.equals("get updated time")){
+
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					exam.copy((Exam) message.getObject());
+
+					for (int i = 0; i < exams.size(); i++) {
+						if (exams.get(i).getId_exam().equals(exam.getId_exam())) {
+							client.sendToClient(new Message("updated time", exams.get(i).getSolvedExam().getUpdatedTime()));
+							return;
+						}
+					}
 				}
 				session.flush();
 				session.close();

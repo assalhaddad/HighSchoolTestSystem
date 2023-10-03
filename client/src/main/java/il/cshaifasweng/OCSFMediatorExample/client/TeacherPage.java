@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
@@ -62,38 +63,39 @@ public class TeacherPage {
     }
 
     @FXML
-    void AddQuestionEvent(ActionEvent event) {
-
+    void AddQuestionEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("addQuestion.fxml");
+        App.setRoot("addQuestion");
     }
 
     @FXML
-    void CheckGradesEvent(ActionEvent event) {
+    void CheckGradesEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("checkGradesTeacher.fxml");
+        App.setRoot("checkGradesTeacher");
     }
 
     @FXML
-    void CreateExamEvent(ActionEvent event) {
+    void CreateExamEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("buildExam.fxml");
+        App.setRoot("buildExam");
     }
 
     @FXML
-    void RequestTimeEvent(ActionEvent event) {
+    void RequestTimeEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("requestExtraTime.fxml");
+        App.setRoot("requestExtraTime");
     }
     @FXML
     void LogOut(ActionEvent event) {
-        Login.teacher=null;
-        Login.student=null;
-        Login.principal=null;
+        EventBus.getDefault().unregister(this);
         switchScreen("Login");}
 
     private void loadSceneForButton(String fxmlPath) {

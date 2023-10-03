@@ -13,11 +13,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.hibernate.sql.Update;
 
 import javax.xml.bind.SchemaOutputResolver;
+
+import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
 
 public class ApproveRequests {
 
@@ -44,6 +47,20 @@ public class ApproveRequests {
 
     @FXML
     private TextField testIdTF;
+    @FXML
+    private Button ViewExamsBtn;
+
+    @FXML
+    private Button ViewGradesBtn;
+
+    @FXML
+    private Button ViewQuestionsBtn;
+    @FXML
+    private Button ApproveBtn;
+    @FXML
+    private Button menuBtn;
+    @FXML
+    private VBox Menu;
 
     Request currentRequest = new Request();
     ObservableList<Request> requestsList;
@@ -89,10 +106,20 @@ public class ApproveRequests {
         Object obj = message.getObject();
         if(request.equals("requests list is ready"))
             getRequests(obj);
-        else if(request.equals("request approved successfully"))
+        else if(request.equals("request approved successfully")){
+            System.out.println("bla bla");
             UpdateAll();
-
+        }
+        else if(request.equals("requests list is ready to update"))
+            getRequestsUpdated(obj);
     }
+
+    private void getRequestsUpdated(Object obj) {
+        requestsList = FXCollections.observableArrayList((ArrayList)obj);
+        for(int i = 0; i <requestsList.size(); i++)
+            requestCmb.getItems().add(String.valueOf(requestsList.get(i).getId()));
+    }
+
     private void getRequests(Object obj){
         requestsList = FXCollections.observableArrayList((ArrayList)obj);
         for(int i = 0; i <requestsList.size(); i++)
@@ -100,7 +127,7 @@ public class ApproveRequests {
     }
 
     private void UpdateAll(){
-
+        System.out.println("inside update");
         Platform.runLater(() -> {
             requestCmb.getSelectionModel().clearSelection();
         });
@@ -110,6 +137,7 @@ public class ApproveRequests {
         explanationTA.clear();
         Platform.runLater(new Runnable() {
             public void run() {
+                System.out.println("print");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success!");
                 alert.setHeaderText("Request approved successfully");
@@ -117,10 +145,54 @@ public class ApproveRequests {
                 alert.showAndWait();
             }
         });
-        //requestCmb.getItems().clear();
+        sendMessage("get list of requests to update", (Object)null);
         Platform.runLater(() -> {
             requestCmb.getItems().clear();
         });
-        sendMessage("get list of requests", (Object)null);
+    }
+
+    @FXML
+    void ApproveRequestsEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        //loadSceneForButton("approveRequests.fxml");
+        App.setRoot("approveRequests");
+    }
+
+    @FXML
+    void LogOut(ActionEvent event) {
+        EventBus.getDefault().unregister(this);
+        switchScreen("Login");
+    }
+
+    @FXML
+    void ViewQuestionsEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("viewQuestionsPrincipal");
+    }
+
+    @FXML
+    void ViewGradesEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("viewGradesPrincipal");
+    }
+
+    @FXML
+    void ViewExamsEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("viewExamsPrincipal");
+    }
+
+    @FXML
+    void OpenMenu(ActionEvent event) {
+        menuBtn.setVisible(false);
+        Menu.setVisible(true);
     }
 }

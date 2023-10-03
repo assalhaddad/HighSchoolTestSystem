@@ -15,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.greenrobot.eventbus.EventBus;
 
+import static il.cshaifasweng.OCSFMediatorExample.client.App.setRoot;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
 
 public class PrincipalPage {
@@ -56,14 +57,18 @@ public class PrincipalPage {
     private Button menuBtn;
 
     @FXML
-    void ApproveRequestsEvent(ActionEvent event) {
+    void ApproveRequestsEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("approveRequests.fxml");
+        //loadSceneForButton("approveRequests.fxml");
+       App.setRoot("approveRequests");
     }
     @FXML
     void LogOut(ActionEvent event) {
-        switchScreen("Login");}
+        EventBus.getDefault().unregister(this);
+        switchScreen("Login");
+    }
 
     @FXML
     void initialize() {
@@ -71,24 +76,27 @@ public class PrincipalPage {
         menuBtn.setVisible(false);
     }
     @FXML
-    void ViewQuestionsEvent(ActionEvent event) {
+    void ViewQuestionsEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("viewQuestionsPrincipal.fxml");
+        App.setRoot("viewQuestionsPrincipal");
     }
 
     @FXML
-    void ViewGradesEvent(ActionEvent event) {
+    void ViewGradesEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("viewGradesPrincipal.fxml");
+        App.setRoot("viewGradesPrincipal");
     }
 
     @FXML
-    void ViewExamsEvent(ActionEvent event) {
+    void ViewExamsEvent(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        loadSceneForButton("viewExamsPrincipal.fxml");
+        App.setRoot("viewExamsPrincipal");
     }
 
     private void loadSceneForButton(String fxmlPath) {

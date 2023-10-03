@@ -5,15 +5,15 @@
 package il.cshaifasweng.OCSFMediatorExample.server.ocsf;
 
 /**
-* The <code> AdaptableServer </code> is an adapter class
-* that extends the <code> AbstractServer </code> class in place of
-* the <code> AbstractObservableServer </code>.<p>
-*
-* Project Name: OCSF (Object Client-Server Framework)<p>
-*
-* @author Dr. Robert Lagani&egrave;re
-* @version Febuary 2001
-*/
+ * The <code> AdaptableServer </code> is an adapter class
+ * that extends the <code> AbstractServer </code> class in place of
+ * the <code> AbstractObservableServer </code>.<p>
+ *
+ * Project Name: OCSF (Object Client-Server Framework)<p>
+ *
+ * @author Dr. Robert Lagani&egrave;re
+ * @version Febuary 2001
+ */
 class AdaptableServer extends AbstractServer
 {
   //Instance variables **********************************************
@@ -68,7 +68,7 @@ class AdaptableServer extends AbstractServer
    * @param exception the exception raised.
    */
   final protected void clientException(ConnectionToClient client,
-                                        Throwable exception)
+                                       Throwable exception)
   {
     server.clientException(client, exception);
   }

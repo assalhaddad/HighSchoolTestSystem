@@ -1,42 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.666666667" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.DoExam">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="700.0" style="-fx-background-image: url('images/back.jpg')" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.DoExam">
     <children>
-        <Button fx:id="nextBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="385.0" layoutY="100.0" mnemonicParsing="false" onAction="#nextPressed" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #70879d;" text="Confirm code" textFill="WHITE">
+        <Button fx:id="nextBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="450.0" layoutY="99.0" mnemonicParsing="false" onAction="#nextPressed" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #70879d;" text="Confirm code" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="12.0" />
             </font>
         </Button>
-        <Button fx:id="doneBTN" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="367.0" layoutY="150.0" mnemonicParsing="false" onAction="#donePressed" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #70879d;" text="Confirm ID" textFill="WHITE">
+        <Button fx:id="doneBTN" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="432.0" layoutY="149.0" mnemonicParsing="false" onAction="#donePressed" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #70879d;" text="Confirm ID" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="12.0" />
             </font>
         </Button>
-        <Button fx:id="startBtn" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="385.0" layoutY="193.0" mnemonicParsing="false" onAction="#startExamPressed" style="-fx-background-color: #70879d;" text="Start Exam" textFill="WHITE">
+        <Button fx:id="startBtn" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="450.0" layoutY="192.0" mnemonicParsing="false" onAction="#startExamPressed" style="-fx-background-color: #70879d;" text="Start Exam" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="12.0" />
             </font>
         </Button>
-        <Label alignment="CENTER" layoutX="71.0" layoutY="102.0" prefHeight="0.0" prefWidth="157.0" text="Insert a 4 digit code:" textFill="WHITE">
+        <Label alignment="CENTER" layoutX="136.0" layoutY="101.0" prefHeight="0.0" prefWidth="157.0" text="Insert a 4 digit code:" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="15.0" />
             </font>
         </Label>
-        <TextField fx:id="idStudent" disable="true" layoutX="189.0" layoutY="150.0" minWidth="43.3333333333333" prefHeight="25.0" prefWidth="166.0" style="-fx-font-family: 'Arial Black';" />
-        <Label alignment="CENTER" layoutX="99.0" layoutY="152.0" prefHeight="21.0" prefWidth="82.0" text="Insert ID:" textFill="WHITE">
+        <TextField fx:id="idStudent" disable="true" layoutX="254.0" layoutY="149.0" minWidth="43.3333333333333" prefHeight="25.0" prefWidth="166.0" style="-fx-font-family: 'Arial Black';" />
+        <Label alignment="CENTER" layoutX="164.0" layoutY="151.0" prefHeight="21.0" prefWidth="82.0" text="Insert ID:" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="15.0" />
             </font>
         </Label>
-        <TextField fx:id="first" layoutX="228.0" layoutY="92.0" onKeyTyped="#FirstCode" prefHeight="41.0" prefWidth="27.0" style="-fx-font-family: 'Arial Black';" />
-        <TextField fx:id="second" layoutX="264.0" layoutY="92.0" onKeyTyped="#SecondCode" prefHeight="41.0" prefWidth="27.0" style="-fx-font-family: 'Arial Black';" />
-        <TextField fx:id="third" layoutX="300.0" layoutY="92.0" onKeyTyped="#ThirdCode" prefHeight="41.0" prefWidth="27.0" style="-fx-font-family: 'Arial Black';" />
-        <TextField fx:id="forth" layoutX="339.0" layoutY="92.0" onKeyTyped="#ForthCode" prefHeight="41.0" prefWidth="27.0" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="first" layoutX="293.0" layoutY="91.0" onKeyTyped="#FirstCode" prefHeight="41.0" prefWidth="27.0" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="second" layoutX="329.0" layoutY="91.0" onKeyTyped="#SecondCode" prefHeight="41.0" prefWidth="27.0" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="third" layoutX="365.0" layoutY="91.0" onKeyTyped="#ThirdCode" prefHeight="41.0" prefWidth="27.0" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="forth" layoutX="404.0" layoutY="91.0" onKeyTyped="#ForthCode" prefHeight="41.0" prefWidth="27.0" style="-fx-font-family: 'Arial Black';" />
+      <VBox fx:id="Menu" prefHeight="420.0" prefWidth="100.0" spacing="15.0" style="-fx-border-color: white; -fx-border-width: 5px;" visible="false">
+         <children>
+            <Button fx:id="doExamBtn" mnemonicParsing="false" onAction="#DoExamAction" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: transparent;" text="Do Exam" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="logOutBtn" mnemonicParsing="false" onAction="#LogOutEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: trasparent;" text="Log Out" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <Button fx:id="menuBtn" mnemonicParsing="false" onAction="#OpenMenu" style="-fx-background-color: transparent; -fx-border-color: white;" text="Menu" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

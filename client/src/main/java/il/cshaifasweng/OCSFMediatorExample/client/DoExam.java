@@ -15,8 +15,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import static il.cshaifasweng.OCSFMediatorExample.client.App.setRoot;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
 import javafx.scene.input.KeyEvent;
 public class DoExam {
@@ -44,19 +47,25 @@ public class DoExam {
     private TextField third;
     @FXML
     private TextField forth;
-    protected static Exam exam;
+    @FXML
+    private Button doExamBtn;
+
+    @FXML
+    private Button logOutBtn;
+
+    @FXML
+    private Button menuBtn;
+    @FXML
+    private VBox Menu;
+
+    protected static Exam exam=new Exam();
     protected static Student student;
     public static boolean isOn=false;
-    protected static SolvedExam solvedExam;
+    protected static SolvedExam solvedExam=new SolvedExam();
     private String theCode;
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
-        exam = new Exam();
-        solvedExam = new SolvedExam();
-
-
-
         assert doneBTN != null : "fx:id=\"doneBTN\" was not injected: check your FXML file 'doExam.fxml'.";
         //assert forthDCode != null : "fx:id=\"forthDCode\" was not injected: check your FXML file 'doExam.fxml'.";
         assert idStudent != null : "fx:id=\"idStudent\" was not injected: check your FXML file 'doExam.fxml'.";
@@ -158,8 +167,7 @@ public class DoExam {
         }
     }
     @FXML
-    void startExamPressed(ActionEvent event)
-    {
+    void startExamPressed(ActionEvent event) throws IOException {
         if(!(exam.getSolvedExam().GetIsBuild()))
         {
 
@@ -175,7 +183,7 @@ public class DoExam {
             solvedExam.copy(exam.getSolvedExam());
 
 
-        switchScreen("ExamPage");
+        App.setRoot("examPage");
     }
 
     private void sendMessage(String op, Object obj) {
@@ -212,5 +220,22 @@ public class DoExam {
     }
     private void updateSolvedExam(Object obj){
         solvedExam.copy((SolvedExam) obj);
+    }
+    @FXML
+    void DoExamAction(ActionEvent event) throws IOException {
+        EventBus.getDefault().unregister(this);
+        Menu.setVisible(false);
+        menuBtn.setVisible(true);
+        App.setRoot("doExam");
+    }
+
+    @FXML
+    void LogOutEvent(ActionEvent event) {
+        EventBus.getDefault().unregister(this);
+        switchScreen("Login");}
+    @FXML
+    void OpenMenu(ActionEvent event) {
+        menuBtn.setVisible(false);
+        Menu.setVisible(true);
     }
 }
