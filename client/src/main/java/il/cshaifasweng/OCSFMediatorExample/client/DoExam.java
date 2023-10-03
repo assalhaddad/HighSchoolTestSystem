@@ -121,7 +121,7 @@ public class DoExam {
 
     }
     @Subscribe
-    public void handleMessage(Message message) {
+    public void handleMessage(Message message) throws IOException {
         String request = message.getMessage();
         Object obj = message.getObject();
         System.out.println(request);
@@ -182,7 +182,7 @@ public class DoExam {
         else
             solvedExam.copy(exam.getSolvedExam());
 
-
+        EventBus.getDefault().unregister(this);
         App.setRoot("examPage");
     }
 

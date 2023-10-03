@@ -122,7 +122,6 @@ public class ApproveRequests {
     private void getRequestsUpdated(Object obj) {
         requestCmb.getItems().clear();
         requestsList = FXCollections.observableArrayList((ArrayList)obj);
-        System.out.println(requestsList.size());
         for(int i = 0; i <requestsList.size(); i++)
             requestCmb.getItems().add(String.valueOf(requestsList.get(i).getId()));
     }
