@@ -76,6 +76,42 @@ public class BuildExam {
             pointsError();
         else if(idTF.getText().isEmpty()||timeTF.getText().isEmpty()||digitcode.getText().isEmpty())
             missingInfo();
+        else if(idTF.getText().length() != 2){
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("the exam's id's length is 2" + "\n" + "Please enter a new id");
+                    alert.setContentText(null);
+                    alert.showAndWait();
+                }
+            });
+            idTF.clear();
+        }
+        else if(Integer.parseInt(timeTF.getText()) > 180){
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Exam can be only 3 hours long" + "\n" + "Please enter a new time");
+                    alert.setContentText(null);
+                    alert.showAndWait();
+                }
+            });
+            timeTF.clear();
+        }
+        else if(digitcode.getText().length() != 4){
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("The code can only be 4 digits" + "\n" + "Please enter a new code");
+                    alert.setContentText(null);
+                    alert.showAndWait();
+                }
+            });
+            digitcode.clear();
+        }
         else
         {
             String temp=idTF.getText();
@@ -201,12 +237,11 @@ public class BuildExam {
             getChosenQuestionRequest(obj);
         else if(request.equals("found duplicate exam id"))
             duplicateIDError();
-
         else if(request.equals("didnt find duplicate exam id"))
             sendMessage("get list of codes 2.0",digitcode.getText());
         else if(request.equals("found exam 2.0"))
             duplicate4DigitsError();
-        else if(request.equals("didn't find exam"))
+        else if(request.equals("didn't find exam 2.0"))
         {
             String free1 = "", free2 = "";
             if(!freeText1.getText().isEmpty())
@@ -220,17 +255,11 @@ public class BuildExam {
         }
         else if(request.equals("exam added successfully"))
             buildExam();
-        //else if(request.equals("found teacher for build exam"))
-            //getTeacherRequest(obj);
 
-    }
-    private void getTeacherRequest(Object obj){
-        chosenTeacher.copy((Teacher) obj);
     }
     private void getChosenQuestionRequest(Object obj){
         chosenQuestion.copy((Question) obj);
     }
-
 
     private void getChosenCourseRequest(Object obj){
         chosenCourse.copy((Course) obj);
@@ -240,8 +269,6 @@ public class BuildExam {
         Platform.runLater(() -> {
             temp.setAll(list);
         });
-        //questionsList.getItems().setAll(list);
-        //questionsList.setItems(temp);
     }
     private void getChosenSubjectRequest(Object obj){
         chosenSubject.copy((Subject) obj);
@@ -251,11 +278,9 @@ public class BuildExam {
     ObservableList<String> courseList = FXCollections.observableArrayList();
     private void getCoursesRequest(Object obj){
         courseCMB.setDisable(false);
-        //ObservableList<String> courseList = FXCollections.observableArrayList((ArrayList)obj);
         Platform.runLater(() -> {
                 courseList.setAll((ArrayList) obj);
                 });
-        //courseCMB.setItems(courseList);
         System.out.println("setting courses in build exam");
     }
 

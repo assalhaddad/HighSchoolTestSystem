@@ -15,7 +15,7 @@ public class Request implements Serializable {
     private String teacherName;
     private int minutes;
     private String explaination;
-    private boolean isDone;
+    private int isDone;
     private String examId;
 
     public Request(){}
@@ -24,7 +24,7 @@ public class Request implements Serializable {
         this.teacherName = teacher.getName();
         this.minutes = minutes;
         this.explaination = explaination;
-        this.isDone = false;
+        this.isDone = 0;
         this.examId = examId;
     }
 
@@ -41,39 +41,22 @@ public class Request implements Serializable {
         return this.id;
     }
 
-    public boolean getIsDone(){return this.isDone;}
-    public void setIsDone(){this.isDone = !(this.isDone); }
+    public int getIsDone(){return this.isDone;}
+    public void setIsDone(int newValue){this.isDone = newValue; }
 
     public String getTeacherName() {
         return teacherName;
-    }
-
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
     }
 
     public int getMinutes() {
         return minutes;
     }
 
-    public void setMinutes(int minutes) {
-        this.minutes = minutes;
-    }
-
     public String getExplaination() {
         return explaination;
-    }
-
-    public void setExplaination(String explaination) {
-        this.explaination = explaination;
     }
 
     public String getExamId() {
         return examId;
     }
-
-    public void setExamId(String examId) {
-        this.examId = examId;
-    }
-
 }

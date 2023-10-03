@@ -73,10 +73,25 @@ public class RequestExtraTime {
     @FXML
     void sendExtraTimeRequest(ActionEvent event) {
         extraMinutes = Integer.parseInt(extraTimeTF.getText());
-        explain = explainTF.getText();
-        examId = idCMB.getValue();
-        request = new Request(teacher,extraMinutes,explain,examId);
-        sendMessage("new extra time request",request);
+        if(extraMinutes > 60){
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("extra minutes can't be more than 60 minutes" + "\n" + "Please enter a new time");
+                    alert.setContentText(null);
+                    alert.showAndWait();
+                }
+            });
+            extraMinutes = 0;
+            extraTimeTF.clear();
+        }
+        else{
+            explain = explainTF.getText();
+            examId = idCMB.getValue();
+            request = new Request(teacher,extraMinutes,explain,examId);
+            sendMessage("new extra time request",request);
+        }
     }
 
     @FXML
@@ -122,7 +137,6 @@ public class RequestExtraTime {
         Platform.runLater(() -> {
             idCMB.getSelectionModel().clearSelection();
         });
-       // idCMB.setPromptText("Exam ID");
     }
 
     @FXML

@@ -1407,7 +1407,7 @@ public class SimpleServer extends AbstractServer {
 							return;
 						}
 					}
-					client.sendToClient(new Message("didn't find exam", null));
+					client.sendToClient(new Message("didn't find exam 2.0", null));
 					session.close();
 				}
 
@@ -1483,7 +1483,7 @@ public class SimpleServer extends AbstractServer {
 					ArrayList<Request> requests1 = new ArrayList();
 					int count =0;
 					for(int i=0; i<requests.size(); i++){
-						if(!(requests.get(i).getIsDone())){
+						if(requests.get(i).getIsDone() == 0){
 							System.out.println(i);
 							requests1.add(count, requests.get(i));
 							count++;
@@ -1500,12 +1500,10 @@ public class SimpleServer extends AbstractServer {
 					ArrayList<Request> requests1 = new ArrayList();
 					int count =0;
 					for(int i=0; i<requests.size(); i++){
-						if(!(requests.get(i).getIsDone())){
-							System.out.println(i);
+						if(requests.get(i).getIsDone() == 0){
 							requests1.add(count, requests.get(i));
 							count++;
 						}
-
 					}
 					session.close();
 					client.sendToClient(new Message("requests list is ready to update", requests1));
@@ -1518,9 +1516,9 @@ public class SimpleServer extends AbstractServer {
 
 					for(int j=0; j<requests.size(); j++){
 						if(requests.get(j).getId() == requestExtraTime.getId())
-							requests.get(j).setIsDone();
+							requests.get(j).setIsDone(1);
 					}
-					requestExtraTime.setIsDone();
+					requestExtraTime.setIsDone(1);
 					session.update(requestExtraTime);
 					session.flush();
 
@@ -1591,7 +1589,6 @@ public class SimpleServer extends AbstractServer {
 					client.sendToClient(new Message("exams list for request extra time is ready", examsIdList));
 				}
 				else if(request.equals("get updated time")){
-
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					exam.copy((Exam) message.getObject());
@@ -1602,6 +1599,31 @@ public class SimpleServer extends AbstractServer {
 							return;
 						}
 					}
+				}
+				else if(request.equals("get list of Questions Id")){
+					session = sessionFactory.openSession();
+					session.beginTransaction();
+					ArrayList<String> questionsIds = new ArrayList();
+					for(int i=0; i<questions.size(); i++)
+						questionsIds.add(i, questions.get(i).getId_question());
+					session.close();
+					client.sendToClient(new Message("list of Questions Id is ready", questionsIds));
+				}
+				else if(request.equals("decline this request")){
+					session = sessionFactory.openSession();
+					session.beginTransaction();
+					requestExtraTime.copy((Request)message.getObject());
+
+					for(int j=0; j<requests.size(); j++){
+						if(requests.get(j).getId() == requestExtraTime.getId())
+							requests.get(j).setIsDone(-1);
+					}
+					requestExtraTime.setIsDone(-1);
+					session.update(requestExtraTime);
+					session.flush();
+
+					sendToAllClients(new Message("request declined successfully", -1));
+					session.close();
 				}
 				session.flush();
 				session.close();
