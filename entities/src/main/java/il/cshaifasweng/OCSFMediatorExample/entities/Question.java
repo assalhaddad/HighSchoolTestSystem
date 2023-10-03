@@ -79,7 +79,7 @@ public class Question implements Serializable {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -95,7 +95,7 @@ public class Question implements Serializable {
     }
 
     public String getText() {
-        return text;
+        return this.text;
     }
 
     public void setText(String text) {
@@ -103,26 +103,26 @@ public class Question implements Serializable {
     }
 
     public String getAnswer1() {
-        return answer1;
+        return this.answer1;
     }
 
 
     public String getAnswer2() {
-        return answer2;
+        return this.answer2;
     }
 
 
     public String getAnswer3() {
-        return answer3;
+        return this.answer3;
     }
 
 
     public String getAnswer4() {
-        return answer4;
+        return this.answer4;
     }
 
     public int getCorrect() {
-        return correct;
+        return this.correct;
     }
 
     public void setCorrect(int correct) {
@@ -130,7 +130,7 @@ public class Question implements Serializable {
     }
 
     public Subject getSubject() {
-        return subject;
+        return this.subject;
     }
 
     public void setSubject(Subject subject) {
@@ -141,7 +141,7 @@ public class Question implements Serializable {
     }
 
     public int getPoints() {
-        return points;
+        return this.points;
     }
 
     public void setPoints(int points) {
@@ -149,7 +149,7 @@ public class Question implements Serializable {
     }
 
     public List<Course> getCourses() {
-        return courses;
+        return this.courses;
     }
 
     public void setCourses(List<Course> courses) {
@@ -165,7 +165,7 @@ public class Question implements Serializable {
     }
 
     public List<Exam> getExams() {
-        return exams;
+        return this.exams;
     }
 
     public void setExams(List<Exam> exams) {

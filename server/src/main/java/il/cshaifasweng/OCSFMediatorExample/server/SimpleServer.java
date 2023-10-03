@@ -1200,10 +1200,7 @@ public class SimpleServer extends AbstractServer {
 					studentData.copy((StudentData)message.getObject());
 					studentDataList.add(studentData);
 					session.save(studentData);
-					System.out.println(studentData.getSolvedExam().getId());
-					System.out.println("before flush");
 					session.flush();
-					System.out.println("after flush");
 					session.getTransaction().commit();
 					session.close();
 					client.sendToClient(new Message("studentData added successfully 2.0",(Object)null));
@@ -1241,6 +1238,11 @@ public class SimpleServer extends AbstractServer {
 					session.beginTransaction();
 					solvedExam.copy((SolvedExam) message.getObject());
 					solvedExamList.add(solvedExam);
+					for(int i=0; i<exams.size(); i++)
+						if(exams.get(i).getId_exam().equals(solvedExam.getExam().getId_exam())){
+							exams.get(i).setSolvedExam(solvedExam);
+							break;
+						}
 					session.save(solvedExam);
 					session.flush();
 					session.getTransaction().commit();
@@ -1253,17 +1255,6 @@ public class SimpleServer extends AbstractServer {
 					session.beginTransaction();
 					exam.copy((Exam) message.getObject());
 					temp.copy(exam);
-					//for(int i=0; i<courses.size(); i++)
-						//if(courses.get(i).getName().equals(exam.getCourse().getName())) {
-							//courses.get(i).getExams().add(temp);
-							//teachersList.get(2).getSubjects().get(0).getCourses().get(0).getExams().add(temp);
-							//session.update(teachersList.get(2));
-							//teachersList.get(2).getExams().add(temp);
-							//session.update(courses.get(i));
-						//}
-					//for(int i=0; i<teachersList.get(2).getExams().size(); i++){
-						//System.out.println("hi" +teachersList.get(2).getExams().get(i).getId_exam());
-					//}
 
 					for(int i=0; i<teachersList.size(); i++)
 						if(teachersList.get(i).getName().equals(temp.getAuthor().getName()))
@@ -1282,9 +1273,6 @@ public class SimpleServer extends AbstractServer {
 										teachersList.get(i).getSubjects().get(j).getCourses().add(courses.get(k));
 									}
 
-					for(int i=0; i<teachersList.get(2).getSubjects().get(0).getCourses().get(0).getExams().size(); i++){
-						System.out.println("hi " +teachersList.get(2).getSubjects().get(0).getCourses().get(0).getExams().get(i).getId_exam());
-						}
 					exams.add(temp);
 					session.save(temp);
 					session.flush();
@@ -1408,7 +1396,7 @@ public class SimpleServer extends AbstractServer {
 					for(int i=0; i<exams.size(); i++){
 						if(exams.get(i).getCode4Digits().equals(examMessage)) {
 							Exam chosenExam = exams.get(i);
-							System.out.println(chosenExam.getId_exam());
+							//System.out.println(chosenExam.getId_exam());
 							client.sendToClient(new Message("found exam for do exam", chosenExam));
 							session.close();
 							return;
@@ -1426,7 +1414,7 @@ public class SimpleServer extends AbstractServer {
 					for(int i=0; i<exams.size(); i++){
 						if(exams.get(i).getCode4Digits().equals(examMessage)) {
 							Exam chosenExam = exams.get(i);
-							System.out.println(chosenExam.getId_exam());
+							//System.out.println(chosenExam.getId_exam());
 							client.sendToClient(new Message("found exam 2.0", chosenExam));
 							session.close();
 							return;
@@ -1508,8 +1496,7 @@ public class SimpleServer extends AbstractServer {
 					ArrayList<Request> requests1 = new ArrayList();
 					int count =0;
 					for(int i=0; i<requests.size(); i++){
-						if(!(requests.get(i).getIsDone())){
-							System.out.println(i);
+						if(requests.get(i).getIsDone() == 0){
 							requests1.add(count, requests.get(i));
 							count++;
 						}
@@ -1525,8 +1512,8 @@ public class SimpleServer extends AbstractServer {
 					ArrayList<Request> requests1 = new ArrayList();
 					int count =0;
 					for(int i=0; i<requests.size(); i++){
-						if(!(requests.get(i).getIsDone())){
-							System.out.println(i);
+						if(requests.get(i).getIsDone() == 0){
+							//System.out.println(i);
 							requests1.add(count, requests.get(i));
 							count++;
 						}
@@ -1543,17 +1530,31 @@ public class SimpleServer extends AbstractServer {
 
 					for(int j=0; j<requests.size(); j++){
 						if(requests.get(j).getId() == requestExtraTime.getId())
-							requests.get(j).setIsDone();
+						{
+							requests.get(j).setIsDone(1);
+						}
+
 					}
-					requestExtraTime.setIsDone();
+					requestExtraTime.setIsDone(1);
 					session.update(requestExtraTime);
 					session.flush();
-
+					//Exam temp = new Exam();
 					for (int i = 0; i < exams.size(); i++) {
 						if (exams.get(i).getId_exam().equals(requestExtraTime.getExamId())) {
-
 							exams.get(i).getSolvedExam().setUpdatedTime(requestExtraTime.getMinutes()+ exams.get(i).getTime());
-							session.update(exams.get(i).getSolvedExam());
+							System.out.println("after updating: "+exams.get(i).getSolvedExam().getUpdatedTime());
+							for(int k=0; k<solvedExamList.size(); k++) {
+								System.out.println("comparing between:");
+								System.out.println(solvedExamList.get(k).getId());
+								System.out.println(exams.get(i).getSolvedExam().getId());
+								if (solvedExamList.get(k).getId() == exams.get(i).getSolvedExam().getId()) {
+									solvedExamList.get(k).copy(exams.get(i).getSolvedExam());
+									System.out.println("updated time: " + solvedExamList.get(k).getUpdatedTime());
+									session.update(solvedExamList.get(k));
+									session.flush();
+									break;
+								}
+							}
 							session.flush();
 						}
 					}
@@ -1614,7 +1615,7 @@ public class SimpleServer extends AbstractServer {
 						for(int j=0; j<subject.getCourses().size(); j++){
 							course.copy(subject.getCourses().get(j));
 							for(int k=0; k<course.getExams().size(); k++){
-								System.out.println(course.getExams().get(k).getId_exam());
+								//System.out.println(course.getExams().get(k).getId_exam());
 								examsIdList.add(count, course.getExams().get(k).getId_exam());
 								count++;
 							}

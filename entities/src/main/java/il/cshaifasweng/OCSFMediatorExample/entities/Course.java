@@ -44,11 +44,11 @@ public class Course implements Serializable {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -56,7 +56,7 @@ public class Course implements Serializable {
     }
 
     public Subject getSubject() {
-        return subject;
+        return this.subject;
     }
 
     public void setSubject(Subject subject) {
@@ -66,7 +66,7 @@ public class Course implements Serializable {
         }
     }
     public List<Question> getQuestions() {
-        return questions;
+        return this.questions;
     }
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
@@ -76,7 +76,7 @@ public class Course implements Serializable {
     }
 
     public List<Exam> getExams() {
-        return exams;
+        return this.exams;
     }
 
     public void setExams(List<Exam> exams) {
