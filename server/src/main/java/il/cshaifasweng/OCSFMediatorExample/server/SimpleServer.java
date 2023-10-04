@@ -1223,7 +1223,7 @@ public class SimpleServer extends AbstractServer {
 					session.flush();
 					session.getTransaction().commit();
 					session.close();
-					client.sendToClient(new Message("studentData added successfully",(Object)null));
+					client.sendToClient(new Message("studentData added successfully 2.0",(Object)null));
 				}
 				else if(request.equals("new studentData")){
 					session=sessionFactory.openSession();
