@@ -62,7 +62,7 @@ public class PrincipalPage {
         Menu.setVisible(false);
         menuBtn.setVisible(true);
         //loadSceneForButton("approveRequests.fxml");
-       App.setRoot("approveRequests");
+        App.setRoot("approveRequests");
     }
     @FXML
     void LogOut(ActionEvent event) {

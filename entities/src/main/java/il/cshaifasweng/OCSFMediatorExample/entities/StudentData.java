@@ -46,11 +46,11 @@ public class StudentData implements Serializable {
    }
 
    public int getId() {
-      return id;
+      return this.id;
    }
 
    public int getGrade() {
-      return grade;
+      return this.grade;
    }
 
    public void addToGrade(int x){
@@ -62,7 +62,7 @@ public class StudentData implements Serializable {
    }
 
    public List<Integer> getStudentSolution() {
-      return studentSolution;
+      return this.studentSolution;
    }
 
    public void setStudentSolution(List<Integer> studentSolution) {
@@ -70,7 +70,7 @@ public class StudentData implements Serializable {
    }
 
    public Student getStudent() {
-      return student;
+      return this.student;
    }
 
    public void setStudent(Student student) {
@@ -81,7 +81,7 @@ public class StudentData implements Serializable {
    }
 
    public SolvedExam getSolvedExam() {
-      return solvedExam;
+      return this.solvedExam;
    }
 
    public void setSolvedExam(SolvedExam solvedExam) {
@@ -93,7 +93,7 @@ public class StudentData implements Serializable {
    }
 
    public String getName() {
-      return name;
+      return this.name;
    }
 
    public void setName(String name) {
@@ -101,15 +101,15 @@ public class StudentData implements Serializable {
    }
 
    public int getTimePassed() {
-      return timePassed;
+      return this.timePassed;
    }
 
    public boolean isFinished() {
-      return isFinished;
+      return this.isFinished;
    }
 
    public String getDate() {
-      return date;
+      return this.date;
    }
 
    public void setDate(String date) {
@@ -121,11 +121,11 @@ public class StudentData implements Serializable {
    }
 
    public boolean getIsFinished() {
-      return isFinished;
+      return this.isFinished;
    }
 
    public void setFinished(boolean finished) {
-      isFinished = finished;
+      this.isFinished = finished;
    }
 
    public void copy(StudentData object) {

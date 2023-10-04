@@ -45,18 +45,18 @@ public class Request implements Serializable {
     public void setIsDone(int newValue){this.isDone = newValue; }
 
     public String getTeacherName() {
-        return teacherName;
+        return this.teacherName;
     }
 
     public int getMinutes() {
-        return minutes;
+        return this.minutes;
     }
 
     public String getExplaination() {
-        return explaination;
+        return this.explaination;
     }
 
     public String getExamId() {
-        return examId;
+        return this.examId;
     }
 }

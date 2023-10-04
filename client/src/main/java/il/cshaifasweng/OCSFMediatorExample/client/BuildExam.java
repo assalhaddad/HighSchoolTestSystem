@@ -255,11 +255,17 @@ public class BuildExam {
         }
         else if(request.equals("exam added successfully"))
             buildExam();
+        //else if(request.equals("found teacher for build exam"))
+        //getTeacherRequest(obj);
 
+    }
+    private void getTeacherRequest(Object obj){
+        chosenTeacher.copy((Teacher) obj);
     }
     private void getChosenQuestionRequest(Object obj){
         chosenQuestion.copy((Question) obj);
     }
+
 
     private void getChosenCourseRequest(Object obj){
         chosenCourse.copy((Course) obj);
@@ -269,6 +275,8 @@ public class BuildExam {
         Platform.runLater(() -> {
             temp.setAll(list);
         });
+        //questionsList.getItems().setAll(list);
+        //questionsList.setItems(temp);
     }
     private void getChosenSubjectRequest(Object obj){
         chosenSubject.copy((Subject) obj);
@@ -278,9 +286,11 @@ public class BuildExam {
     ObservableList<String> courseList = FXCollections.observableArrayList();
     private void getCoursesRequest(Object obj){
         courseCMB.setDisable(false);
+        //ObservableList<String> courseList = FXCollections.observableArrayList((ArrayList)obj);
         Platform.runLater(() -> {
-                courseList.setAll((ArrayList) obj);
-                });
+            courseList.setAll((ArrayList) obj);
+        });
+        //courseCMB.setItems(courseList);
         System.out.println("setting courses in build exam");
     }
 

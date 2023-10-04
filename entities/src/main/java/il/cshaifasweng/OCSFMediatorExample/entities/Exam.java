@@ -74,7 +74,7 @@ public class Exam implements Serializable {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -86,7 +86,7 @@ public class Exam implements Serializable {
     }
 
     public SolvedExam getSolvedExam() {
-        return solvedExam;
+        return this.solvedExam;
     }
 
     public void setSolvedExam(SolvedExam solvedExam) {
@@ -114,7 +114,7 @@ public class Exam implements Serializable {
     }
 
     public List<Question> getQuestions() {
-        return questions;
+        return this.questions;
     }
 
     public void setQuestions(List<Question> questions) {
@@ -132,7 +132,7 @@ public class Exam implements Serializable {
     }
 
     public String getFreeTextStudent() {
-        return freeTextStudent;
+        return this.freeTextStudent;
     }
 
     public void setFreeTextStudent(String freeTextStudent) {
@@ -140,7 +140,7 @@ public class Exam implements Serializable {
     }
 
     public String getFreeTextTeacher() {
-        return freeTextTeacher;
+        return this.freeTextTeacher;
     }
 
     public void setFreeTextTeacher(String freeTextTeacher) {
@@ -148,7 +148,7 @@ public class Exam implements Serializable {
     }
 
     public Teacher getAuthor() {
-        return author;
+        return this.author;
     }
     public void setAuthor(Teacher author) {
         if(author!=null) {
@@ -158,7 +158,7 @@ public class Exam implements Serializable {
     }
 
     public Course getCourse() {
-        return course;
+        return this.course;
     }
 
     public void setCourse(Course course) {
@@ -169,7 +169,7 @@ public class Exam implements Serializable {
     }
 
     public int getMoreTime() {
-        return moreTime;
+        return this.moreTime;
     }
 
     public void setMoreTime(int moreTime) {
@@ -177,7 +177,7 @@ public class Exam implements Serializable {
     }
 
     public String getCode4Digits() {
-        return code4Digits;
+        return this.code4Digits;
     }
 
     public void setCode4Digits(String code4Digits) {

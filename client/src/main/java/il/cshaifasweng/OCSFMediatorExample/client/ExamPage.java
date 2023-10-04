@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
+
 public class ExamPage extends DoExam {
 
     @FXML
@@ -276,6 +278,7 @@ public class ExamPage extends DoExam {
         }
 
         sendMessage("new studentData", studentD);
+
     }
 
     private static void sendMessage(String op, Object obj) {
@@ -326,7 +329,6 @@ public class ExamPage extends DoExam {
     }
 
     private void addedNewStudentData() throws IOException {
-        System.out.println("inside the other thing");
         Platform.runLater(new Runnable() {
             public void run() {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -337,7 +339,7 @@ public class ExamPage extends DoExam {
             }
         });
         EventBus.getDefault().unregister(this);
-        App.setRoot("studentsPage");
+        switchScreen("StudentsPage");
     }
 
     private void addedNewStudentData2() throws IOException {
@@ -351,7 +353,7 @@ public class ExamPage extends DoExam {
             }
         });
         EventBus.getDefault().unregister(this);
-        App.setRoot("studentsPage");
+        switchScreen("StudentsPage");
     }
 
     private static void addedTime() {
@@ -378,7 +380,7 @@ public class ExamPage extends DoExam {
             }
             timerThread.interrupt(); // Interrupt the timer thread after the task is executed
             sendMessage("new studentData 2.0", studentD);
-            //switchScreen("StudentsPage");
+
         };
 
         timerThread = new Thread(() -> {

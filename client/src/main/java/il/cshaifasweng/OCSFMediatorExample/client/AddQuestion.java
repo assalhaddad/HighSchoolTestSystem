@@ -179,7 +179,8 @@ public class AddQuestion {
         else if(request.equals("found course for add question"))
             getChosenCourseRequest(obj);
         else if(request.equals("list of Questions Id is ready"))
-            getQuestionsId(obj);
+             getQuestionsId(obj);
+
     }
 
     private void getChosenSubjectRequest(Object obj){
@@ -193,7 +194,10 @@ public class AddQuestion {
 
     private void getSubjectsRequest(Object obj){
         ObservableList<String> subjectList = FXCollections.observableArrayList((ArrayList)obj);
-        subjectCMB.setItems(subjectList);
+        Platform.runLater(() -> {
+            subjectCMB.setItems(subjectList);
+        });
+        //subjectCMB.setItems(subjectList);
     }
     private void getCoursesRequest(Object obj){
         courseCMB.setDisable(false);
@@ -268,22 +272,22 @@ public class AddQuestion {
     @FXML
     void LogOut(ActionEvent event) {
         EventBus.getDefault().unregister(this);
-        switchScreen("Login");
-    }
-    private void getQuestionsId(Object obj){
+        switchScreen("Login");}
+
+    private void getQuestionsId(Object obj) {
         setID();
         System.out.println("here");
-        ObservableList<String> questionsIds = FXCollections.observableArrayList((ArrayList)obj);
+        ObservableList<String> questionsIds = FXCollections.observableArrayList((ArrayList) obj);
         System.out.println(questionsIds.size());
         System.out.println(idTF.getText());
-        for(int i=0; i< questionsIds.size(); i++){
-            if(questionsIds.get(i).equals(id)){
+        for (int i = 0; i < questionsIds.size(); i++) {
+            if (questionsIds.get(i).equals(id)) {
                 System.out.println("here as well");
                 Platform.runLater(new Runnable() {
                     public void run() {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Error!");
-                        alert.setHeaderText("Question Id is taken!" +"\n" + "Enter a new id");
+                        alert.setHeaderText("Question Id is taken!" + "\n" + "Enter a new id");
                         alert.setContentText(null);
                         alert.showAndWait();
                     }

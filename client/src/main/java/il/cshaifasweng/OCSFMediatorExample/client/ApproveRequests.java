@@ -61,7 +61,6 @@ public class ApproveRequests {
     private Button menuBtn;
     @FXML
     private VBox Menu;
-
     @FXML
     private Button declineBtn;
 
@@ -166,6 +165,7 @@ public class ApproveRequests {
             });
         }
         sendMessage("get list of requests to update", (Object)null);
+
     }
 
     @FXML
@@ -211,7 +211,6 @@ public class ApproveRequests {
         menuBtn.setVisible(false);
         Menu.setVisible(true);
     }
-
     @FXML
     void Decline(ActionEvent event) {sendMessage("decline this request",currentRequest);}
 }

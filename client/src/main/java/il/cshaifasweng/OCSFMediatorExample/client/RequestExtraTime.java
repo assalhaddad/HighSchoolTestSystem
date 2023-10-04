@@ -142,11 +142,16 @@ public class RequestExtraTime {
                 alert.showAndWait();
             }
         });
-        extraTimeTF.clear();
-        explainTF.clear();
+        Platform.runLater(() -> {
+            extraTimeTF.clear();
+        });
+        Platform.runLater(() -> {
+            explainTF.clear();
+        });
         Platform.runLater(() -> {
             idCMB.getSelectionModel().clearSelection();
         });
+        // idCMB.setPromptText("Exam ID");
     }
 
     @FXML

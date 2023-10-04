@@ -37,7 +37,7 @@ public class Subject implements Serializable {
     }
 
     public List<Question> getQuestions() {
-        return questions;
+        return this.questions;
     }
 
     public void setQuestions(List<Question> questions) {
@@ -55,11 +55,11 @@ public class Subject implements Serializable {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -67,14 +67,14 @@ public class Subject implements Serializable {
     }
 
     public List<Course> getCourses() {
-        return courses;
+        return this.courses;
     }
 
     public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
     public List<Teacher> getTeachers() {
-        return teachers;
+        return this.teachers;
     }
     public void setTeachers(List<Teacher> teachers) {
         if(teachers!=null) {

@@ -52,7 +52,7 @@ public class Student implements Serializable {
     }
 
     public List<StudentData> getData() {
-        return data;
+        return this.data;
     }
 
     public void setData(List<StudentData> data) {
@@ -60,7 +60,7 @@ public class Student implements Serializable {
     }
 
     public String getId_student() {
-        return id_student;
+        return this.id_student;
     }
 
     public void setId_student(String id_student) {
@@ -68,7 +68,7 @@ public class Student implements Serializable {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -76,7 +76,7 @@ public class Student implements Serializable {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(String username) {
@@ -84,7 +84,7 @@ public class Student implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -92,7 +92,7 @@ public class Student implements Serializable {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {

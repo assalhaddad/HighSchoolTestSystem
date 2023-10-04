@@ -41,14 +41,14 @@ public class LoginInfo implements Serializable {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public String getType() {
-        return type;
+        return this.type;
     }
 }
