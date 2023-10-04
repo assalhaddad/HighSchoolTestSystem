@@ -61,6 +61,8 @@ public class ApproveRequests {
     private Button menuBtn;
     @FXML
     private VBox Menu;
+    @FXML
+    private Button declineBtn;
 
     Request currentRequest = new Request();
     ObservableList<Request> requestsList;
@@ -108,13 +110,16 @@ public class ApproveRequests {
             getRequests(obj);
         else if(request.equals("request approved successfully")){
             System.out.println("bla bla");
-            UpdateAll();
+            UpdateAll(obj);
         }
         else if(request.equals("requests list is ready to update"))
             getRequestsUpdated(obj);
+        else if(request.equals("request declined successfully"))
+            UpdateAll(obj);
     }
 
     private void getRequestsUpdated(Object obj) {
+        requestCmb.getItems().clear();
         requestsList = FXCollections.observableArrayList((ArrayList)obj);
         for(int i = 0; i <requestsList.size(); i++)
             requestCmb.getItems().add(String.valueOf(requestsList.get(i).getId()));
@@ -126,7 +131,7 @@ public class ApproveRequests {
             requestCmb.getItems().add(String.valueOf(requestsList.get(i).getId()));
     }
 
-    private void UpdateAll(){
+    private void UpdateAll(Object obj){
         System.out.println("inside update");
         Platform.runLater(() -> {
             requestCmb.getSelectionModel().clearSelection();
@@ -135,20 +140,32 @@ public class ApproveRequests {
         testIdTF.clear();
         extraTimeTF.clear();
         explanationTA.clear();
-        Platform.runLater(new Runnable() {
-            public void run() {
-                System.out.println("print");
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success!");
-                alert.setHeaderText("Request approved successfully");
-                alert.setContentText(null);
-                alert.showAndWait();
-            }
-        });
+        if((Integer)obj > 0){
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    System.out.println("print");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success!");
+                    alert.setHeaderText("Request approved successfully");
+                    alert.setContentText(null);
+                    alert.showAndWait();
+                }
+            });
+        }
+        else{
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    System.out.println("print");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success!");
+                    alert.setHeaderText("Request declined successfully");
+                    alert.setContentText(null);
+                    alert.showAndWait();
+                }
+            });
+        }
         sendMessage("get list of requests to update", (Object)null);
-        Platform.runLater(() -> {
-            requestCmb.getItems().clear();
-        });
+
     }
 
     @FXML
@@ -156,7 +173,6 @@ public class ApproveRequests {
         EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
         menuBtn.setVisible(true);
-        //loadSceneForButton("approveRequests.fxml");
         App.setRoot("approveRequests");
     }
 
@@ -195,4 +211,6 @@ public class ApproveRequests {
         menuBtn.setVisible(false);
         Menu.setVisible(true);
     }
+    @FXML
+    void Decline(ActionEvent event) {sendMessage("decline this request",currentRequest);}
 }

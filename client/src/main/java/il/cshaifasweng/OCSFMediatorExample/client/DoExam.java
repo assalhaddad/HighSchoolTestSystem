@@ -121,7 +121,7 @@ public class DoExam {
 
     }
     @Subscribe
-    public void handleMessage(Message message) {
+    public void handleMessage(Message message) throws IOException {
         String request = message.getMessage();
         Object obj = message.getObject();
         System.out.println(request);
@@ -158,7 +158,7 @@ public class DoExam {
             updateSolvedExam(obj);
     }
     @FXML
-    void nextPressed(ActionEvent event) {
+    void nextPressed(ActionEvent event) throws IOException {
         if (theCode.length() != 4)
             wrongFourDigitsCode();
 
@@ -173,7 +173,7 @@ public class DoExam {
 
             SolvedExam temp =new SolvedExam(exam.getTime(), exam);
             solvedExam.copy(temp);
-            //System.out.println("exam id: "+exam.getId_exam());
+
             System.out.println("temp id " + temp.getId());
             sendMessage("new solvedExam",solvedExam);
             //System.out.println(solvedExam.getId());
@@ -182,7 +182,7 @@ public class DoExam {
         else
             solvedExam.copy(exam.getSolvedExam());
 
-
+       // EventBus.getDefault().unregister(this);
         App.setRoot("examPage");
     }
 
@@ -194,7 +194,7 @@ public class DoExam {
             var4.printStackTrace();
         }
     }
-    private void wrongFourDigitsCode() {
+    private void wrongFourDigitsCode()  {
         //forthDCode.clear();
         Platform.runLater(new Runnable() {
             public void run() {

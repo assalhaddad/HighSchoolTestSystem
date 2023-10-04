@@ -72,11 +72,36 @@ public class RequestExtraTime {
 
     @FXML
     void sendExtraTimeRequest(ActionEvent event) {
-        extraMinutes = Integer.parseInt(extraTimeTF.getText());
-        explain = explainTF.getText();
-        examId = idCMB.getValue();
-        request = new Request(teacher,extraMinutes,explain,examId);
-        sendMessage("new extra time request",request);
+        if(extraTimeTF.getText().isEmpty()){
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("time is missing" + "\n" + "Please enter the time you want to request");
+                    alert.setContentText(null);
+                    alert.showAndWait();
+                }
+            });
+        }
+        else if(Integer.parseInt(extraTimeTF.getText()) > 60){
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("extra minutes can't be more than 60 minutes" + "\n" + "Please enter a new time");
+                    alert.setContentText(null);
+                    alert.showAndWait();
+                }
+            });
+            extraTimeTF.clear();
+        }
+        else{
+            extraMinutes = Integer.parseInt(extraTimeTF.getText());
+            explain = explainTF.getText();
+            examId = idCMB.getValue();
+            request = new Request(teacher,extraMinutes,explain,examId);
+            sendMessage("new extra time request",request);
+        }
     }
 
     @FXML
@@ -126,7 +151,7 @@ public class RequestExtraTime {
         Platform.runLater(() -> {
             idCMB.getSelectionModel().clearSelection();
         });
-       // idCMB.setPromptText("Exam ID");
+        // idCMB.setPromptText("Exam ID");
     }
 
     @FXML

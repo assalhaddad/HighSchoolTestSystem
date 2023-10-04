@@ -1358,17 +1358,17 @@ public class SimpleServer extends AbstractServer {
 						}
 					}
 				}
-					else if(request.equals("check exam id")){
-						session = sessionFactory.openSession();
-						session.beginTransaction();
-						String name = (String)message.getObject();
-						for(int i=0; i<exams.size(); i++){
-							if(exams.get(i).getId_exam().equals(name)) {
-								client.sendToClient(new Message("found duplicate exam id", null));
-								session.close();
-								return;
-							}
+				else if(request.equals("check exam id")){
+					session = sessionFactory.openSession();
+					session.beginTransaction();
+					String name = (String)message.getObject();
+					for(int i=0; i<exams.size(); i++){
+						if(exams.get(i).getId_exam().equals(name)) {
+							client.sendToClient(new Message("found duplicate exam id", null));
+							session.close();
+							return;
 						}
+					}
 					client.sendToClient(new Message("didnt find duplicate exam id", null));
 					session.close();
 				}
@@ -1636,6 +1636,31 @@ public class SimpleServer extends AbstractServer {
 							return;
 						}
 					}
+				}
+				else if(request.equals("get list of Questions Id")){
+					session = sessionFactory.openSession();
+					session.beginTransaction();
+					ArrayList<String> questionsIds = new ArrayList();
+					for(int i=0; i<questions.size(); i++)
+						questionsIds.add(i, questions.get(i).getId_question());
+					session.close();
+					client.sendToClient(new Message("list of Questions Id is ready", questionsIds));
+				}
+				else if(request.equals("decline this request")){
+					session = sessionFactory.openSession();
+					session.beginTransaction();
+					requestExtraTime.copy((Request)message.getObject());
+
+					for(int j=0; j<requests.size(); j++){
+						if(requests.get(j).getId() == requestExtraTime.getId())
+							requests.get(j).setIsDone(-1);
+					}
+					requestExtraTime.setIsDone(-1);
+					session.update(requestExtraTime);
+					session.flush();
+
+					sendToAllClients(new Message("request declined successfully", -1));
+					session.close();
 				}
 				session.flush();
 				session.close();

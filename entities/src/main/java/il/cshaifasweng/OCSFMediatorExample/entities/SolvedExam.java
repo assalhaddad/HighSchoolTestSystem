@@ -23,6 +23,7 @@ public class SolvedExam implements Serializable {
     private Exam exam;
 
     private boolean isBuild=false;
+    private static int lastAssignedId=0;
     public SolvedExam()
     {
         //super();
@@ -30,6 +31,7 @@ public class SolvedExam implements Serializable {
     }
     public SolvedExam( int updatedTime, Exam exam){
         super();
+        this.id=++lastAssignedId;
         this.updatedTime = updatedTime;
         this.isBuild=true;
         this.data=new ArrayList();
@@ -96,6 +98,7 @@ public class SolvedExam implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
 
     public void copy(SolvedExam solvedExam) {
         this.exam=solvedExam.getExam();

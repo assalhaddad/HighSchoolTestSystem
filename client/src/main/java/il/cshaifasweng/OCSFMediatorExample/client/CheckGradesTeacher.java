@@ -123,8 +123,8 @@ public class CheckGradesTeacher {
     public void handleMessage(Message message){
         String request = message.getMessage();
         Object obj = message.getObject();
-       // if(request.equals("found teacher"))
-           // getTeacherRequest(obj);
+        // if(request.equals("found teacher"))
+        // getTeacherRequest(obj);
         if(request.equals("found exam"))
             getExamRequest(obj);
         else if(request.equals("grade updated successfully"))
