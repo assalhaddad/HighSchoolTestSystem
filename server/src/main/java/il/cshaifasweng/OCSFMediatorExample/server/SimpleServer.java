@@ -416,7 +416,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(questions.get(1));
 		list.add(questions.get(3));
 		list.add(questions.get(4));
-		Exam exam = new Exam("24",list,90,"","",teachersList.get(0),courses.get(0),"a1cd");
+		Exam exam = new Exam("24",list,3,"","",teachersList.get(0),courses.get(0),"a1cd");
 		for(int i=0; i<4; i++)
 			exam.setPoints(exam.getQuestions().get(i),25 );
 		exams.add(exam);
@@ -426,7 +426,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(questions.get(0));	//exam for Basic Math
 		list.add(questions.get(2));
 		list.add(questions.get(4));
-		exam = new Exam("93",list,90,"","",teachersList.get(0),courses.get(0),"1234");
+		exam = new Exam("93",list,2,"","",teachersList.get(0),courses.get(0),"1234");
 		exam.setPoints(exam.getQuestions().get(0),40 );
 		exam.setPoints(exam.getQuestions().get(1),40 );
 		exam.setPoints(exam.getQuestions().get(2),20 );
@@ -437,7 +437,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(questions.get(6));	//exam for Advanced Math
 		list.add(questions.get(5));
 		list.add(questions.get(7));
-		exam = new Exam("68",list,60,"","",teachersList.get(1),courses.get(1),"1311");
+		exam = new Exam("68",list,3,"","",teachersList.get(1),courses.get(1),"1311");
 		exam.setPoints(exam.getQuestions().get(0),30 );
 		exam.setPoints(exam.getQuestions().get(1),40 );
 		exam.setPoints(exam.getQuestions().get(2),30 );
@@ -449,7 +449,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(questions.get(9));
 		list.add(questions.get(10));
 		list.add(questions.get(11));
-		exam = new Exam("84",list,75,"","",teachersList.get(2),courses.get(2),"A1A2");
+		exam = new Exam("84",list,1,"","",teachersList.get(2),courses.get(2),"A1A2");
 		for(int i=0; i<4; i++)
 			exam.setPoints(exam.getQuestions().get(i),25 );
 		exams.add(exam);
@@ -460,7 +460,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(questions.get(14));
 		list.add(questions.get(15));
 		list.add(questions.get(16));
-		exam = new Exam("52",list,60,"","",teachersList.get(2),courses.get(3),"7897");
+		exam = new Exam("52",list,2,"","",teachersList.get(2),courses.get(3),"7897");
 		for(int i=0; i<4; i++)
 			exam.setPoints(exam.getQuestions().get(i),25 );
 		exams.add(exam);
@@ -471,7 +471,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(questions.get(18));
 		list.add(questions.get(19));
 		list.add(questions.get(20));
-		exam = new Exam("73",list,60,"","",teachersList.get(3),courses.get(4),"9999");
+		exam = new Exam("73",list,1,"","",teachersList.get(3),courses.get(4),"9999");
 		for(int i=0; i<4; i++)
 			exam.setPoints(exam.getQuestions().get(i),25 );
 		exams.add(exam);
@@ -493,7 +493,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(questions.get(23));
 		list.add(questions.get(24));
 		list.add(questions.get(25));
-		exam = new Exam("51",list,70,"","",teachersList.get(4),courses.get(5),"1555");
+		exam = new Exam("51",list,2,"","",teachersList.get(4),courses.get(5),"1555");
 		for(int i=0; i<4; i++)
 			exam.setPoints(exam.getQuestions().get(i),25 );
 		exams.add(exam);
@@ -504,7 +504,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(questions.get(29));
 		list.add(questions.get(30));
 		list.add(questions.get(31));
-		exam = new Exam("03",list,80,"","",teachersList.get(5),courses.get(6),"1964");
+		exam = new Exam("03",list,2,"","",teachersList.get(5),courses.get(6),"1964");
 		for(int i=0; i<4; i++)
 			exam.setPoints(exam.getQuestions().get(i),25 );
 		exams.add(exam);
@@ -515,7 +515,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(questions.get(29));
 		list.add(questions.get(31));
 		list.add(questions.get(32));
-		exam = new Exam("37",list,80,"","",teachersList.get(5),courses.get(6),"1965");
+		exam = new Exam("38",list,3,"","",teachersList.get(5),courses.get(6),"1965");
 		for(int i=0; i<4; i++)
 			exam.setPoints(exam.getQuestions().get(i),25 );
 		exams.add(exam);
@@ -528,7 +528,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(questions.get(29));
 		list.add(questions.get(31));
 		list.add(questions.get(32));
-		exam = new Exam("37",list,80,"","",teachersList.get(5),courses.get(6),"2580");
+		exam = new Exam("37",list,2,"","",teachersList.get(5),courses.get(6),"2580");
 		for(int i=0; i<4; i++)
 			exam.setPoints(exam.getQuestions().get(i),25 );
 		exams.add(exam);
@@ -541,7 +541,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(questions.get(33));
 		list.add(questions.get(34));
 		list.add(questions.get(36));
-		exam = new Exam("81",list,60,"","",teachersList.get(6),courses.get(7),"2001");
+		exam = new Exam("81",list,1,"","",teachersList.get(6),courses.get(7),"2001");
 		for(int i=0; i<4; i++)
 			exam.setPoints(exam.getQuestions().get(i),25 );
 		exams.add(exam);
@@ -1198,36 +1198,59 @@ public class SimpleServer extends AbstractServer {
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					studentData.copy((StudentData)message.getObject());
-					studentDataList.add(studentData);
-					session.save(studentData);
-					session.flush();
-					session.getTransaction().commit();
-					session.close();
-					client.sendToClient(new Message("studentData added successfully 2.0",(Object)null));
-
-				}
-				else if(request.equals("new studentData")){
-					session=sessionFactory.openSession();
-					session.beginTransaction();
-					studentData.copy((StudentData)message.getObject());
+					StudentData temp = new StudentData();
+					temp.copy(studentData);
 					for(int i=0; i<solvedExamList.size(); i++){
-						if(solvedExamList.get(i).getId() == studentData.getSolvedExam().getId())
+						if(solvedExamList.get(i).getId() == temp.getSolvedExam().getId())
 							for(int k=0; k<solvedExamList.get(i).getData().size(); k++){
-								if(solvedExamList.get(i).getData().get(k).getStudent().getId_student().equals(studentData.getStudent().getId_student())){
+								if(solvedExamList.get(i).getData().get(k).getStudent().getId_student().equals(temp.getStudent().getId_student())){
 									session.remove(solvedExamList.get(i).getData().get(k));
+									//System.out.println("Removing "+solvedExamList.get(i).getData().get(k).getName()+" from solved exam list");
 									solvedExamList.get(i).getData().remove(k);
 									break;
 								}
 							}
 					}
 					for(int i=0; i<solvedExamList.size(); i++){
-						if(solvedExamList.get(i).getId() == studentData.getSolvedExam().getId()){
-							solvedExamList.get(i).getData().add(studentData);
+						if(solvedExamList.get(i).getId() == temp.getSolvedExam().getId()){
+							solvedExamList.get(i).getData().add(temp);
+							//System.out.println("adding "+temp.getName()+" to solved exam list");
 							break;
 						}
 					}
-					studentDataList.add(studentData);
-					session.save(studentData);
+					studentDataList.add(temp);
+					session.save(temp);
+					session.flush();
+					session.getTransaction().commit();
+					session.close();
+					client.sendToClient(new Message("studentData added successfully 2.0",(Object)null));
+				}
+				else if(request.equals("new studentData")){
+					session=sessionFactory.openSession();
+					session.beginTransaction();
+					studentData.copy((StudentData)message.getObject());
+					StudentData temp = new StudentData();
+					temp.copy(studentData);
+					for(int i=0; i<solvedExamList.size(); i++){
+						if(solvedExamList.get(i).getId() == temp.getSolvedExam().getId())
+							for(int k=0; k<solvedExamList.get(i).getData().size(); k++){
+								if(solvedExamList.get(i).getData().get(k).getStudent().getId_student().equals(temp.getStudent().getId_student())){
+									session.remove(solvedExamList.get(i).getData().get(k));
+									//System.out.println("Removing "+solvedExamList.get(i).getData().get(k).getName()+" from solved exam list");
+									solvedExamList.get(i).getData().remove(k);
+									break;
+								}
+							}
+					}
+					for(int i=0; i<solvedExamList.size(); i++){
+						if(solvedExamList.get(i).getId() == temp.getSolvedExam().getId()){
+							solvedExamList.get(i).getData().add(temp);
+							//System.out.println("adding "+temp.getName()+" to solved exam list");
+							break;
+						}
+					}
+					studentDataList.add(temp);
+					session.save(temp);
 					session.flush();
 					session.getTransaction().commit();
 					session.close();
@@ -1558,7 +1581,10 @@ public class SimpleServer extends AbstractServer {
 							session.flush();
 						}
 					}
-					sendToAllClients(new Message("request approved successfully", requestExtraTime.getMinutes()));
+					String[] myArray = new String[2];
+					myArray[0] = String.valueOf(requestExtraTime.getMinutes());
+					myArray[1] = requestExtraTime.getExamId();
+					sendToAllClients(new Message("request approved successfully", myArray)); // first node is the time, second is the exam's id
 					session.close();
 				}
 				else if(request.equals("get questions for principal")){

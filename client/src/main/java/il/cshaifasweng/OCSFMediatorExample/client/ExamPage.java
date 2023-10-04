@@ -298,9 +298,12 @@ public class ExamPage extends DoExam {
         else if (request.equals("studentData added successfully 2.0"))
             addedNewStudentData2();
         else if (request.equals("request approved successfully")) {
-            additionalTime = (int) message.getObject();
-            extendDelay();
-
+            Object[] objectArray = (Object[])message.getObject();
+            String[] myArray = (String[])objectArray;
+            if(exam.getId_exam().equals(myArray[1])){
+                additionalTime = Integer.parseInt(myArray[0]);
+                extendDelay();
+            }
         }
     }
 
