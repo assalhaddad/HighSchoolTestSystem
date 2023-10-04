@@ -76,5 +76,6 @@
             <Font name="System Bold Italic" size="15.0" />
          </font>
       </Button>
+      <TextField fx:id="freeTextTeacher" editable="false" layoutX="152.0" layoutY="315.0" prefHeight="25.0" prefWidth="524.0" promptText="Free text for teacher" style="-fx-font-family: 'Arial Black';" />
    </children>
 </AnchorPane>

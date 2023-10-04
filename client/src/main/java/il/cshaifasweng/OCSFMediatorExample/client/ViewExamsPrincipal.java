@@ -93,6 +93,11 @@ public class ViewExamsPrincipal {
     private Button menuBtn;
     @FXML
     private VBox Menu;
+    @FXML
+    private TextField freeTextStudent;
+
+    @FXML
+    private TextField freeTextTeacher;
 
     ObservableList<Exam> exams;
     Exam chosenExam = new Exam();
@@ -145,6 +150,8 @@ public class ViewExamsPrincipal {
         subjectTF.setText(chosenExam.getCourse().getSubject().getName());
         courseTF.setText(chosenExam.getCourse().getName());
         authorTF.setText(chosenExam.getAuthor().getName());
+        freeTextStudent.setText(chosenExam.getFreeTextStudent());
+        freeTextTeacher.setText(chosenExam.getFreeTextTeacher());
 
         ObservableList<Question> data = FXCollections.observableArrayList(chosenExam.getQuestions());
         questionCol.setCellValueFactory(new PropertyValueFactory<Exam, String>("text"));
