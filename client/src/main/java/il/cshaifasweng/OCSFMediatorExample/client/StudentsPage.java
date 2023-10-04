@@ -37,11 +37,14 @@ public class StudentsPage {
 
     @FXML
     private Button menuBtn;
+    @FXML
+    private Label welcome;
 
     @FXML
     void initialize() {
         Menu.setVisible(true);
         menuBtn.setVisible(false);
+        welcome.setText("Welcome "+Login.student.getName());
     }
 
     @FXML

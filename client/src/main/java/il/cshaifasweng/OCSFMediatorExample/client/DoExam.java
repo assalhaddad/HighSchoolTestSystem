@@ -182,8 +182,8 @@ public class DoExam {
         else
             solvedExam.copy(exam.getSolvedExam());
 
-       // EventBus.getDefault().unregister(this); //this line
-        App.setRoot("examPage");
+      // EventBus.getDefault().unregister(this);
+       App.setRoot("examPage");
     }
 
     private void sendMessage(String op, Object obj) {

@@ -140,7 +140,9 @@ public class ApproveRequests {
         testIdTF.clear();
         extraTimeTF.clear();
         explanationTA.clear();
-        if((Integer)obj > 0){
+        Object[] objectArray = (Object[])obj;
+        String[] myArray = (String[])objectArray;
+        if((Integer.parseInt(myArray[0])) >0){
             Platform.runLater(new Runnable() {
                 public void run() {
                     System.out.println("print");

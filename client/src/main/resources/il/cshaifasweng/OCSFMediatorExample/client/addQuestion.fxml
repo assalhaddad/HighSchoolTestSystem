@@ -48,7 +48,7 @@
             </TextField>
          </children>
       </VBox>
-      <Button layoutX="441.0" layoutY="66.0" mnemonicParsing="false" onAction="#selectCourse" prefHeight="25.0" prefWidth="56.0" style="-fx-background-color: #70879d;" text="Update" textFill="WHITE">
+      <Button fx:id="updateBTN" layoutX="441.0" layoutY="66.0" mnemonicParsing="false" onAction="#selectCourse" prefHeight="25.0" prefWidth="56.0" style="-fx-background-color: #70879d;" text="Update" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="9.0" />
          </font>

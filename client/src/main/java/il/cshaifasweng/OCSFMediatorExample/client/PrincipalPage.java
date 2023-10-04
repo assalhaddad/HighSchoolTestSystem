@@ -57,6 +57,9 @@ public class PrincipalPage {
     private Button menuBtn;
 
     @FXML
+    private Label welcome;
+
+    @FXML
     void ApproveRequestsEvent(ActionEvent event) throws IOException {
         EventBus.getDefault().unregister(this);
         Menu.setVisible(false);
@@ -74,6 +77,7 @@ public class PrincipalPage {
     void initialize() {
         Menu.setVisible(true);
         menuBtn.setVisible(false);
+        welcome.setText("Welcome "+Login.principal.getName());
     }
     @FXML
     void ViewQuestionsEvent(ActionEvent event) throws IOException {

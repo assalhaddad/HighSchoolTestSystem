@@ -75,6 +75,9 @@ public class AddQuestion {
     private Button requestTimeBtn;
 
     @FXML
+    private Button updateBTN;
+
+    @FXML
     void initialize() {
         EventBus.getDefault().register(this);
         sendMessage("get list of subjects for add question", Login.teacher);
@@ -116,6 +119,7 @@ public class AddQuestion {
 
     @FXML
     void selectCourse(ActionEvent event) {
+        chosenCourses.clear();
         ObservableList<String> list = courseCMB.getCheckModel().getCheckedItems();
         int i = 0;
         for(Object obj : list){

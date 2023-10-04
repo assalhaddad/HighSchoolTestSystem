@@ -515,7 +515,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(questions.get(29));
 		list.add(questions.get(31));
 		list.add(questions.get(32));
-		exam = new Exam("37",list,3,"","",teachersList.get(5),courses.get(6),"1965");
+		exam = new Exam("38",list,3,"","",teachersList.get(5),courses.get(6),"1965");
 		for(int i=0; i<4; i++)
 			exam.setPoints(exam.getQuestions().get(i),25 );
 		exams.add(exam);
@@ -1581,7 +1581,10 @@ public class SimpleServer extends AbstractServer {
 							session.flush();
 						}
 					}
-					sendToAllClients(new Message("request approved successfully", requestExtraTime.getMinutes()));
+					String[] myArray = new String[2];
+					myArray[0] = String.valueOf(requestExtraTime.getMinutes());
+					myArray[1] = requestExtraTime.getExamId();
+					sendToAllClients(new Message("request approved successfully", myArray)); // first node is the time, second is the exam's id
 					session.close();
 				}
 				else if(request.equals("get questions for principal")){
