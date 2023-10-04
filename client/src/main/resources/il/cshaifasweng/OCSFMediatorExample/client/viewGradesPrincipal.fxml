@@ -15,7 +15,7 @@
         <ComboBox fx:id="idCMB" layoutX="210.0" layoutY="30.0" onAction="#chooseExam" prefHeight="25.0" prefWidth="127.0" promptText="Exam ID" style="-fx-font-family: 'Arial Black';" />
         <TextField fx:id="subjectTF" editable="false" layoutX="365.0" layoutY="30.0" prefHeight="25.0" prefWidth="107.0" promptText="Subject" style="-fx-font-family: 'Arial Black';" />
         <TextField fx:id="courseTF" editable="false" layoutX="505.0" layoutY="30.0" prefHeight="25.0" prefWidth="149.0" promptText="Course" style="-fx-font-family: 'Arial Black';" />
-        <TableView fx:id="tableView" layoutX="421.0" layoutY="98.0" prefHeight="214.0" prefWidth="161.0" style="-fx-font-family: 'Arial Black';">
+        <TableView fx:id="tableView" layoutX="343.0" layoutY="103.0" prefHeight="214.0" prefWidth="161.0" style="-fx-font-family: 'Arial Black';">
             <columns>
                 <TableColumn fx:id="nameCol" editable="false" prefWidth="110.0" text="Student Name" />
                 <TableColumn fx:id="gradeCol" editable="false" prefWidth="48.666656494140625" text="Grade" />
