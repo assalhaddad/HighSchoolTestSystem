@@ -55,11 +55,14 @@ public class TeacherPage {
 
     @FXML
     private Button menuBtn;
+    @FXML
+    private Label welcome;
 
     @FXML
     void initialize() {
         Menu.setVisible(true);
         menuBtn.setVisible(false);
+        welcome.setText("Welcome "+Login.teacher.getName());
     }
 
     @FXML
