@@ -15,9 +15,9 @@
 
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="700.0" style="-fx-background-image: url('images/exam1.jpg')" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ViewExamsPrincipal">
     <children>
-        <ComboBox fx:id="idCMB" layoutX="150.0" layoutY="39.0" onAction="#chooseExam" prefHeight="25.0" prefWidth="120.0" promptText="Exam ID" style="-fx-font-family: 'Arial Black';" />
-        <TextField fx:id="subjectTF" editable="false" layoutX="279.0" layoutY="39.0" prefHeight="25.0" prefWidth="112.0" promptText="Subject" style="-fx-font-family: 'Arial Black';" />
-        <TextField fx:id="courseTF" editable="false" layoutX="401.0" layoutY="39.0" prefHeight="25.0" prefWidth="131.0" promptText="Course" style="-fx-font-family: 'Arial Black';" />
+        <ComboBox fx:id="idCMB" layoutX="138.0" layoutY="40.0" onAction="#chooseExam" prefHeight="25.0" prefWidth="120.0" promptText="Exam ID" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="subjectTF" editable="false" layoutX="267.0" layoutY="40.0" prefHeight="25.0" prefWidth="112.0" promptText="Subject" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="courseTF" editable="false" layoutX="389.0" layoutY="40.0" prefHeight="25.0" prefWidth="131.0" promptText="Course" style="-fx-font-family: 'Arial Black';" />
         <TableView fx:id="tableView" layoutX="138.0" layoutY="85.0" onMouseClicked="#makeVisible" prefHeight="214.0" prefWidth="239.0" style="-fx-font-family: 'Arial Black';">
             <columns>
                 <TableColumn fx:id="questionCol" editable="false" prefWidth="190.0" text="Question" />
@@ -49,7 +49,7 @@
                 <Image url="@../../../../images/check.png" />
             </image>
         </ImageView>
-        <TextField fx:id="authorTF" editable="false" layoutX="543.0" layoutY="39.0" prefHeight="25.0" prefWidth="131.0" promptText="Author" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="authorTF" editable="false" layoutX="531.0" layoutY="40.0" prefHeight="25.0" prefWidth="131.0" promptText="Author" style="-fx-font-family: 'Arial Black';" />
       <VBox fx:id="Menu" layoutX="-2.0" layoutY="1.0" prefHeight="426.0" prefWidth="100.0" spacing="15.0" style="-fx-border-color: white; -fx-border-width: 0; -fx-background-color: #D3E7F9;" visible="false">
          <children>
             <Button fx:id="ApproveBtn" mnemonicParsing="false" onAction="#ApproveRequestsEvent" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Approve Requests" textAlignment="CENTER" textFill="#70879d" wrapText="true">
@@ -87,5 +87,7 @@
             <Font name="System Bold Italic" size="15.0" />
          </font>
       </Button>
+        <TextField fx:id="freeTextStudent" editable="false" layoutX="136.0" layoutY="313.0" prefHeight="25.0" prefWidth="519.0" promptText="Free text for student" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="freeTextTeacher" editable="false" layoutX="136.0" layoutY="346.0" prefHeight="25.0" prefWidth="519.0" promptText="Free text for teacher" style="-fx-font-family: 'Arial Black';" />
     </children>
 </AnchorPane>

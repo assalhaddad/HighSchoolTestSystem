@@ -60,6 +60,8 @@ public class CheckGradesTeacher {
 
     @FXML
     private VBox Menu;
+    @FXML
+    private TextField freeTextTeacher;
 
     @FXML
     private Button addQuestionBtn;
@@ -90,6 +92,7 @@ public class CheckGradesTeacher {
     @FXML
     void chooseExam(ActionEvent event) {
         String exam = idCMB.getValue().toString();
+        hide();
         //freeText.setVisible(false);
         sendMessage("get exam", exam);
     }
@@ -140,6 +143,7 @@ public class CheckGradesTeacher {
         chosenExam.copy((Exam)obj);
         subjectTF.setText(chosenExam.getCourse().getSubject().getName());
         courseTF.setText((chosenExam.getCourse().getName()));
+        freeTextTeacher.setText(chosenExam.getFreeTextTeacher());
         displayInfo();
     }
     public void displayInfo(){
@@ -160,8 +164,10 @@ public class CheckGradesTeacher {
         //String chosenStudent = tableView.getSelectionModel().getSelectedItem().getName();
         StudentData chosenStudent = tableView.getSelectionModel().getSelectedItem();
         int newGrade = Integer.parseInt(changeTF.getText());
-        chosenStudent.setGrade(newGrade);
-        sendMessage("update grade", chosenStudent);
+        if(chosenStudent!=null) {
+            chosenStudent.setGrade(newGrade);
+            sendMessage("update grade", chosenStudent);
+        }
     }
     public void hide(){
         changeLBL.setVisible(false);
