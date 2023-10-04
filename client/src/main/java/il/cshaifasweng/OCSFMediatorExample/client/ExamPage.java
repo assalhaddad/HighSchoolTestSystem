@@ -23,8 +23,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.App.switchScreen;
-
 public class ExamPage extends DoExam {
 
     @FXML

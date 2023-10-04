@@ -1210,6 +1210,7 @@ public class SimpleServer extends AbstractServer {
 
 				}
 				else if(request.equals("new studentData")){
+					System.out.println("inside studentData");
 					session=sessionFactory.openSession();
 					session.beginTransaction();
 					studentData.copy((StudentData)message.getObject());
@@ -1231,7 +1232,12 @@ public class SimpleServer extends AbstractServer {
 					}
 					studentDataList.add(studentData);
 					session.save(studentData);
+					System.out.println(studentData.getName());
+					System.out.println(studentData.getStudent().getName());
+					System.out.println(studentData.getId());
+					System.out.println("before flush");
 					session.flush();
+					System.out.println("after flush");
 					session.getTransaction().commit();
 					session.close();
 					client.sendToClient(new Message("studentData added successfully",(Object)null));
@@ -1248,22 +1254,33 @@ public class SimpleServer extends AbstractServer {
 					client.sendToClient(new Message("solvedExam added successfully",solvedExam));
 				}
 				else if(request.equals("new exam")){
+					Exam temp = new Exam();
 					session=sessionFactory.openSession();
 					session.beginTransaction();
-					exam.copy((Exam)message.getObject());
-					Exam temp = new Exam();
+					exam.copy((Exam) message.getObject());
 					temp.copy(exam);
-					exams.add(temp);
-					for(int i=0; i< courses.size(); i++){
-						if(temp.getCourse().getName().equals(courses.get(i).getName())){
+
+					for(int i=0; i<teachersList.size(); i++)
+						if(teachersList.get(i).getName().equals(temp.getAuthor().getName()))
+							teachersList.get(i).getExams().add(temp);
+
+					for(int i=0; i<courses.size(); i++)
+						if(courses.get(i).getName().equals(temp.getCourse().getName()))
 							courses.get(i).getExams().add(temp);
-							session.update(courses.get(i));
-							//break;
-						}
-					}
+
+					for(int i=0; i<teachersList.size(); i++)
+						for(int j=0; j<teachersList.get(i).getSubjects().size(); j++)
+							for(int h=0; h<teachersList.get(i).getSubjects().get(j).getCourses().size(); h++)
+								for(int k=0; k<courses.size(); k++)
+									if(teachersList.get(i).getSubjects().get(j).getCourses().get(h).getName().equals(courses.get(k).getName())) {
+										teachersList.get(i).getSubjects().get(j).getCourses().remove(h);
+										teachersList.get(i).getSubjects().get(j).getCourses().add(courses.get(k));
+									}
+
+					exams.add(temp);
 					session.save(temp);
 					session.flush();
-					session.getTransaction().commit(); //just added
+					session.getTransaction().commit();
 					session.close();
 					client.sendToClient(new Message("exam added successfully",(Object)null));
 				}
