@@ -148,40 +148,40 @@ public class ExamPage extends DoExam {
         answer4.setText(DoExam.exam.getQuestions().get(i).getAnswer4());
         questionText.setText(DoExam.exam.getQuestions().get(i).getText());
 
-        answer1.setStyle("-fx-background-color: #FA0000; ");
-        answer2.setStyle("-fx-background-color:  #008FFF; ");
-        answer3.setStyle("-fx-background-color:  #08FF00; ");
-        answer4.setStyle("-fx-background-color:  #FFFB00; ");
+        answer1.setStyle("-fx-background-color: #70879d; ");
+        answer2.setStyle("-fx-background-color:  #70879d; ");
+        answer3.setStyle("-fx-background-color:  #70879d; ");
+        answer4.setStyle("-fx-background-color:  #70879d; ");
 
 
         if (chosenAnswers.get(i) == 1) {
 
-            answer1.setStyle("-fx-background-color: #FF5C5C; ");
-            answer2.setStyle("-fx-background-color:  #008FFF; ");
-            answer3.setStyle("-fx-background-color:  #08FF00; ");
-            answer4.setStyle("-fx-background-color:  #FFFB00; ");
+            answer1.setStyle("-fx-background-color: #A2C5E7; ");
+            answer2.setStyle("-fx-background-color:  #70879d; ");
+            answer3.setStyle("-fx-background-color:  #70879d; ");
+            answer4.setStyle("-fx-background-color:  #70879d; ");
         }
 
         if (chosenAnswers.get(i) == 2) {
 
-            answer1.setStyle("-fx-background-color: #FA0000; ");
-            answer2.setStyle("-fx-background-color:  #79C4FF; ");
-            answer3.setStyle("-fx-background-color:  #08FF00; ");
-            answer4.setStyle("-fx-background-color:  #FFFB00; ");
+            answer1.setStyle("-fx-background-color: #70879d; ");
+            answer2.setStyle("-fx-background-color:  #A2C5E7; ");
+            answer3.setStyle("-fx-background-color:  #70879d; ");
+            answer4.setStyle("-fx-background-color:  #70879d; ");
         }
         if (chosenAnswers.get(i) == 3) {
 
-            answer1.setStyle("-fx-background-color: #FA0000; ");
-            answer2.setStyle("-fx-background-color:  #008FFF; ");
-            answer3.setStyle("-fx-background-color:  #77FF73; ");
-            answer4.setStyle("-fx-background-color:  #FFFB00; ");
+            answer1.setStyle("-fx-background-color: #70879d; ");
+            answer2.setStyle("-fx-background-color:  #70879d; ");
+            answer3.setStyle("-fx-background-color:  #A2C5E7; ");
+            answer4.setStyle("-fx-background-color:  #70879d; ");
         }
         if (chosenAnswers.get(i) == 4) {
 
-            answer1.setStyle("-fx-background-color: #FA0000; ");
-            answer2.setStyle("-fx-background-color:  #008FFF; ");
-            answer3.setStyle("-fx-background-color:  #08FF00; ");
-            answer4.setStyle("-fx-background-color:  #FFFD7A; ");
+            answer1.setStyle("-fx-background-color: #70879d; ");
+            answer2.setStyle("-fx-background-color:  #70879d; ");
+            answer3.setStyle("-fx-background-color:  #70879d; ");
+            answer4.setStyle("-fx-background-color:  #A2C5E7; ");
         }
 
         checkIfDone();
@@ -210,10 +210,10 @@ public class ExamPage extends DoExam {
     void answer1Selected(ActionEvent event) {
 
 
-        answer1.setStyle("-fx-background-color: #FF5C5C; ");
-        answer2.setStyle("-fx-background-color:  #008FFF; ");
-        answer3.setStyle("-fx-background-color:  #08FF00; ");
-        answer4.setStyle("-fx-background-color:  #FFFB00; ");
+        answer1.setStyle("-fx-background-color: #A2C5E7; ");
+        answer2.setStyle("-fx-background-color:  #70879d; ");
+        answer3.setStyle("-fx-background-color:  #70879d; ");
+        answer4.setStyle("-fx-background-color:  #70879d; ");
 
         chosenAnswers.set(i, 1);
         checkIfDone();
@@ -224,10 +224,10 @@ public class ExamPage extends DoExam {
     void answer2Selected(ActionEvent event) {
 
 
-        answer1.setStyle("-fx-background-color:  #FA0000; ");
-        answer2.setStyle("-fx-background-color:  #79C4FF; ");
-        answer3.setStyle("-fx-background-color:  #08FF00; ");
-        answer4.setStyle("-fx-background-color:  #FFFB00; ");
+        answer1.setStyle("-fx-background-color:  #70879d; ");
+        answer2.setStyle("-fx-background-color:  #A2C5E7; ");
+        answer3.setStyle("-fx-background-color:  #70879d; ");
+        answer4.setStyle("-fx-background-color:  #70879d; ");
 
 
         chosenAnswers.set(i, 2);
@@ -238,10 +238,10 @@ public class ExamPage extends DoExam {
     @FXML
     void answer3Selected(ActionEvent event) {
 
-        answer1.setStyle("-fx-background-color:  #FA0000; ");
-        answer2.setStyle("-fx-background-color:  #008FFF; ");
-        answer3.setStyle("-fx-background-color:  #77FF73; ");
-        answer4.setStyle("-fx-background-color:  #FFFB00; ");
+        answer1.setStyle("-fx-background-color:  #70879d; ");
+        answer2.setStyle("-fx-background-color:  #70879d; ");
+        answer3.setStyle("-fx-background-color:  #A2C5E7; ");
+        answer4.setStyle("-fx-background-color:  #70879d; ");
 
         chosenAnswers.set(i, 3);
         checkIfDone();
@@ -251,10 +251,10 @@ public class ExamPage extends DoExam {
     @FXML
     void answer4Selected(ActionEvent event) {
 
-        answer1.setStyle("-fx-background-color:  #FA0000; ");
-        answer2.setStyle("-fx-background-color:  #008FFF; ");
-        answer3.setStyle("-fx-background-color:  #08FF00; ");
-        answer4.setStyle("-fx-background-color:  #FFFD7A; ");
+        answer1.setStyle("-fx-background-color:  #70879d; ");
+        answer2.setStyle("-fx-background-color:  #70879d; ");
+        answer3.setStyle("-fx-background-color:  #70879d; ");
+        answer4.setStyle("-fx-background-color:  #A2C5E7; ");
 
         chosenAnswers.set(i, 4);
         checkIfDone();

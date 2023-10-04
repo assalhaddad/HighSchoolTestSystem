@@ -13,43 +13,43 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="700.0" style="-fx-background-image: url('images/back.jpg')" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ViewQuestionsPrincipal">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="700.0" style="-fx-background-image: url('images/exam1.jpg')" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ViewQuestionsPrincipal">
     <children>
-        <ComboBox fx:id="idCMB" layoutX="128.0" layoutY="30.0" onAction="#IdChosen" prefHeight="25.0" prefWidth="132.0" promptText="Question ID" style="-fx-font-family: 'Arial Black';" />
-        <TextField fx:id="subjectTF" editable="false" layoutX="291.0" layoutY="30.0" prefHeight="25.0" prefWidth="93.0" promptText="Subject" style="-fx-font-family: 'Arial Black';" />
-        <TextArea fx:id="textTF" layoutX="248.0" layoutY="104.0" prefHeight="55.0" prefWidth="273.0" promptText="Question" style="-fx-font-family: 'Arial Black';" />
-        <TextField fx:id="answer4TF" editable="false" layoutX="415.0" layoutY="218.0" prefHeight="25.0" prefWidth="120.0" promptText="Answer 4" style="-fx-font-family: 'Arial Black';" />
-        <TextField fx:id="answer3TF" editable="false" layoutX="415.0" layoutY="180.0" prefHeight="25.0" prefWidth="120.0" promptText="Answer 3" style="-fx-font-family: 'Arial Black';" />
-        <TextField fx:id="answer2TF" editable="false" layoutX="211.0" layoutY="215.0" prefHeight="25.0" prefWidth="120.0" promptText="Answer 2" style="-fx-font-family: 'Arial Black';" />
-        <TextField fx:id="answer1TF" editable="false" layoutX="211.0" layoutY="178.0" prefHeight="25.0" prefWidth="120.0" promptText="Answer 1" style="-fx-font-family: 'Arial Black';" />
-        <TableView fx:id="tableView" layoutX="562.0" layoutY="24.0" prefHeight="97.0" prefWidth="112.0">
+        <ComboBox fx:id="idCMB" layoutX="116.0" layoutY="94.0" onAction="#IdChosen" prefHeight="25.0" prefWidth="132.0" promptText="Question ID" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="subjectTF" editable="false" layoutX="279.0" layoutY="94.0" prefHeight="25.0" prefWidth="93.0" promptText="Subject" style="-fx-font-family: 'Arial Black';" />
+        <TextArea fx:id="textTF" layoutX="237.0" layoutY="147.0" prefHeight="55.0" prefWidth="273.0" promptText="Question" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="answer4TF" editable="false" layoutX="404.0" layoutY="261.0" prefHeight="25.0" prefWidth="120.0" promptText="Answer 4" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="answer3TF" editable="false" layoutX="404.0" layoutY="223.0" prefHeight="25.0" prefWidth="120.0" promptText="Answer 3" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="answer2TF" editable="false" layoutX="200.0" layoutY="258.0" prefHeight="25.0" prefWidth="120.0" promptText="Answer 2" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="answer1TF" editable="false" layoutX="200.0" layoutY="221.0" prefHeight="25.0" prefWidth="120.0" promptText="Answer 1" style="-fx-font-family: 'Arial Black';" />
+        <TableView fx:id="tableView" layoutX="540.0" layoutY="88.0" prefHeight="97.0" prefWidth="132.0">
             <columns>
-                <TableColumn fx:id="courseCol" minWidth="11.0" prefWidth="110.0" style="-fx-font-family: 'Arial Black';" text="Courses" />
+                <TableColumn fx:id="courseCol" minWidth="11.0" prefWidth="130.66668701171875" style="-fx-font-family: 'Arial Black';" text="Courses" />
             </columns>
         </TableView>
-        <ImageView fx:id="v1" fitHeight="33.0" fitWidth="46.0" layoutX="339.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="v1" fitHeight="33.0" fitWidth="46.0" layoutX="328.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../../images/check.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="v2" fitHeight="33.0" fitWidth="46.0" layoutX="339.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="v2" fitHeight="33.0" fitWidth="46.0" layoutX="328.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../../images/check.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="v3" fitHeight="33.0" fitWidth="46.0" layoutX="543.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="v3" fitHeight="33.0" fitWidth="46.0" layoutX="532.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../../images/check.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="v4" fitHeight="33.0" fitWidth="46.0" layoutX="543.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="v4" fitHeight="33.0" fitWidth="46.0" layoutX="532.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../../images/check.png" />
             </image>
         </ImageView>
-      <VBox fx:id="Menu" layoutX="-6.0" layoutY="-2.0" prefHeight="426.0" prefWidth="100.0" spacing="15.0" style="-fx-border-color: white; -fx-border-width: 5px;" visible="false">
+      <VBox fx:id="Menu" layoutX="-6.0" layoutY="-2.0" prefHeight="426.0" prefWidth="100.0" spacing="15.0" style="-fx-border-color: white; -fx-border-width: 0; -fx-background-color: #D3E7F9;" visible="false">
          <children>
-            <Button fx:id="ApproveBtn" mnemonicParsing="false" onAction="#ApproveRequestsEvent" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Approve Requests" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="ApproveBtn" mnemonicParsing="false" onAction="#ApproveRequestsEvent" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Approve Requests" textAlignment="CENTER" textFill="#70879d" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -57,29 +57,29 @@
                   <Insets top="5.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="ViewGradesBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ViewGradesEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: transparent;" text="View Grades" textFill="WHITE">
+            <Button fx:id="ViewGradesBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ViewGradesEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: transparent;" text="View Grades" textFill="#70879d">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="ViewExamsBtn" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" onAction="#ViewExamsEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: transparent;" text="View Exams" textFill="WHITE">
+            <Button fx:id="ViewExamsBtn" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" onAction="#ViewExamsEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: transparent;" text="View Exams" textFill="#70879d">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="ViewQuestionsBtn" layoutX="10.0" layoutY="81.0" mnemonicParsing="false" onAction="#ViewQuestionsEvent" prefHeight="52.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="View Questions" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="ViewQuestionsBtn" layoutX="10.0" layoutY="81.0" mnemonicParsing="false" onAction="#ViewQuestionsEvent" prefHeight="52.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="View Questions" textAlignment="CENTER" textFill="#70879d" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="logOutBtn" layoutX="10.0" layoutY="178.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="37.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Log Out" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="logOutBtn" layoutX="10.0" layoutY="178.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="37.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Log Out" textAlignment="CENTER" textFill="#70879d" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
          </children>
       </VBox>
-      <Button fx:id="menuBtn" layoutX="-6.0" layoutY="-3.0" mnemonicParsing="false" onAction="#OpenMenu" style="-fx-background-color: transparent; -fx-border-color: white;" text="Menu" textFill="WHITE">
+      <Button fx:id="menuBtn" layoutX="-6.0" layoutY="-3.0" mnemonicParsing="false" onAction="#OpenMenu" style="-fx-background-color: transparent; -fx-border-color: #70879d;" text="Menu" textFill="#70879d">
          <font>
             <Font name="System Bold Italic" size="15.0" />
          </font>

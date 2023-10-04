@@ -10,20 +10,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="700.0" style="-fx-background-image: url('images/back.jpg')" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ViewGradesPrincipal">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="700.0" style="-fx-background-image: url('images/exam1.jpg')" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ViewGradesPrincipal">
     <children>
-        <ComboBox fx:id="idCMB" layoutX="210.0" layoutY="30.0" onAction="#chooseExam" prefHeight="25.0" prefWidth="127.0" promptText="Exam ID" style="-fx-font-family: 'Arial Black';" />
-        <TextField fx:id="subjectTF" editable="false" layoutX="365.0" layoutY="30.0" prefHeight="25.0" prefWidth="107.0" promptText="Subject" style="-fx-font-family: 'Arial Black';" />
-        <TextField fx:id="courseTF" editable="false" layoutX="505.0" layoutY="30.0" prefHeight="25.0" prefWidth="149.0" promptText="Course" style="-fx-font-family: 'Arial Black';" />
-        <TableView fx:id="tableView" layoutX="343.0" layoutY="103.0" prefHeight="214.0" prefWidth="161.0" style="-fx-font-family: 'Arial Black';">
+        <ComboBox fx:id="idCMB" layoutX="157.0" layoutY="50.0" onAction="#chooseExam" prefHeight="25.0" prefWidth="127.0" promptText="Exam ID" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="subjectTF" editable="false" layoutX="312.0" layoutY="50.0" prefHeight="25.0" prefWidth="107.0" promptText="Subject" style="-fx-font-family: 'Arial Black';" />
+        <TextField fx:id="courseTF" editable="false" layoutX="452.0" layoutY="50.0" prefHeight="25.0" prefWidth="149.0" promptText="Course" style="-fx-font-family: 'Arial Black';" />
+        <TableView fx:id="tableView" layoutX="290.0" layoutY="123.0" prefHeight="214.0" prefWidth="161.0" style="-fx-font-family: 'Arial Black';">
             <columns>
                 <TableColumn fx:id="nameCol" editable="false" prefWidth="110.0" text="Student Name" />
                 <TableColumn fx:id="gradeCol" editable="false" prefWidth="48.666656494140625" text="Grade" />
             </columns>
         </TableView>
-      <VBox fx:id="Menu" layoutX="-4.0" layoutY="1.0" prefHeight="426.0" prefWidth="100.0" spacing="15.0" style="-fx-border-color: white; -fx-border-width: 5px;" visible="false">
+      <VBox fx:id="Menu" layoutX="-4.0" layoutY="1.0" prefHeight="426.0" prefWidth="100.0" spacing="15.0" style="-fx-border-color: white; -fx-border-width: 0; -fx-background-color: #D3E7F9;" visible="false">
          <children>
-            <Button fx:id="ApproveBtn" mnemonicParsing="false" onAction="#ApproveRequestsEvent" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Approve Requests" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="ApproveBtn" mnemonicParsing="false" onAction="#ApproveRequestsEvent" prefHeight="46.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Approve Requests" textAlignment="CENTER" textFill="#70879d" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -31,29 +31,29 @@
                   <Insets top="5.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="ViewGradesBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ViewGradesEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: transparent;" text="View Grades" textFill="WHITE">
+            <Button fx:id="ViewGradesBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ViewGradesEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: transparent;" text="View Grades" textFill="#70879d">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="ViewExamsBtn" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" onAction="#ViewExamsEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: transparent;" text="View Exams" textFill="WHITE">
+            <Button fx:id="ViewExamsBtn" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" onAction="#ViewExamsEvent" prefHeight="35.0" prefWidth="108.0" style="-fx-background-color: transparent;" text="View Exams" textFill="#70879d">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="ViewQuestionsBtn" layoutX="10.0" layoutY="81.0" mnemonicParsing="false" onAction="#ViewQuestionsEvent" prefHeight="52.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="View Questions" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="ViewQuestionsBtn" layoutX="10.0" layoutY="81.0" mnemonicParsing="false" onAction="#ViewQuestionsEvent" prefHeight="52.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="View Questions" textAlignment="CENTER" textFill="#70879d" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="logOutBtn" layoutX="10.0" layoutY="178.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="37.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Log Out" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="logOutBtn" layoutX="10.0" layoutY="178.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="37.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Log Out" textAlignment="CENTER" textFill="#70879d" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
          </children>
       </VBox>
-      <Button fx:id="menuBtn" layoutY="1.0" mnemonicParsing="false" onAction="#OpenMenu" style="-fx-background-color: transparent; -fx-border-color: white;" text="Menu" textFill="WHITE">
+      <Button fx:id="menuBtn" layoutY="1.0" mnemonicParsing="false" onAction="#OpenMenu" style="-fx-background-color: transparent; -fx-border-color: #70879d;" text="Menu" textFill="#70879d">
          <font>
             <Font name="System Bold Italic" size="15.0" />
          </font>
