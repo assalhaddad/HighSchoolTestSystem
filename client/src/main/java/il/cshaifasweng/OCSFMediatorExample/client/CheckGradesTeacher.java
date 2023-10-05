@@ -99,11 +99,33 @@ public class CheckGradesTeacher {
 
     @FXML
     void changeGrade(ActionEvent event) {
-        if(changeTF.getText().isEmpty()||explainTF.getText().isEmpty())
-            missingInfo();
-        else if(Integer.parseInt(changeTF.getText()) > 100 || Integer.parseInt(changeTF.getText()) < 0)
-            invalidError();
-        else updateGrade();
+        try {
+            if (changeTF.getText().isEmpty() || explainTF.getText().isEmpty())
+                missingInfo();
+            else if (Integer.parseInt(changeTF.getText()) > 100 || Integer.parseInt(changeTF.getText()) < 0)
+                invalidError();
+            else updateGrade();
+        }
+        catch (NumberFormatException e) {
+            illegalGrade();
+            return;
+        }
+    }
+
+    private void illegalGrade() {
+
+        changeTF.clear();
+            Platform.runLater(new Runnable() {
+                public void run() {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Error!");
+                    alert.setHeaderText("The grade has to be a number, please try again.");
+                    alert.setContentText(null);
+                    alert.showAndWait();
+                }
+            });
+
+
     }
 
     @FXML
@@ -126,8 +148,6 @@ public class CheckGradesTeacher {
     public void handleMessage(Message message){
         String request = message.getMessage();
         Object obj = message.getObject();
-        // if(request.equals("found teacher"))
-        // getTeacherRequest(obj);
         if(request.equals("found exam"))
             getExamRequest(obj);
         else if(request.equals("grade updated successfully"))
@@ -138,6 +158,7 @@ public class CheckGradesTeacher {
         for(int i = 0; i<currentTeacher.getExams().size(); i++){
             idCMB.getItems().add(currentTeacher.getExams().get(i).getId_exam());
         }
+
     }
     public void getExamRequest(Object obj){
         chosenExam.copy((Exam)obj);
@@ -148,6 +169,7 @@ public class CheckGradesTeacher {
     }
     public void displayInfo(){
         if(!(chosenExam.getSolvedExam().getData() == null)) {
+            tableView.setDisable(false);
             ObservableList<StudentData> data = FXCollections.observableArrayList(chosenExam.getSolvedExam().getData());
             nameCol.setCellValueFactory(new PropertyValueFactory<StudentData, String>("name"));
             gradeCol.setCellValueFactory(new PropertyValueFactory<StudentData, Integer>("grade"));
@@ -158,7 +180,11 @@ public class CheckGradesTeacher {
             }
         }
         else
+        {
             tableView.getItems().clear();
+            tableView.setDisable(true);
+        }
+
     }
     public void updateGrade(){
         //String chosenStudent = tableView.getSelectionModel().getSelectedItem().getName();

@@ -182,7 +182,7 @@ public class DoExam {
         else
             solvedExam.copy(exam.getSolvedExam());
 
-      // EventBus.getDefault().unregister(this);
+       //EventBus.getDefault().unregister(this);
        App.setRoot("examPage");
     }
 

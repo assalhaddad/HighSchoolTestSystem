@@ -69,6 +69,7 @@ public class ExamPage extends DoExam {
     private static Runnable task;
     private static Thread timerThread;
     private static long startTimeMillis;
+    private static long startTimeMillisFr;
     private static long remainingDelayMillis;
 
     protected boolean firstTime = true;
@@ -264,10 +265,10 @@ public class ExamPage extends DoExam {
     @FXML
     void done(ActionEvent event) throws Exception {
         System.out.println("inside done");
-        long endTimeMillis = System.currentTimeMillis();
-        long totalTimeMillis = endTimeMillis - startTimeMillis;
-        long totalTimeSeconds = totalTimeMillis / 1000;
-        StudentData studentD = new StudentData(student, LocalDateTime.now().toString(), (int) (totalTimeSeconds / 60), true, chosenAnswers, solvedExam);
+        double endTimeMillis = System.currentTimeMillis();
+        double totalTimeMillis = endTimeMillis - startTimeMillisFr;
+        double totalTimeSeconds = totalTimeMillis / 1000;
+        StudentData studentD = new StudentData(student, LocalDateTime.now().toString(),  (totalTimeSeconds / 60), false, chosenAnswers, solvedExam);
         solvedExam.calculateGrades();
         timerThread.interrupt();
         timeline.stop();
@@ -373,7 +374,7 @@ public class ExamPage extends DoExam {
 
     private static void scheduleTask() {
         task = () -> {
-            StudentData studentD = new StudentData(student, LocalDateTime.now().toString(), solvedExam.getUpdatedTime(), false, chosenAnswers, solvedExam);
+            StudentData studentD = new StudentData(student, LocalDateTime.now().toString(), solvedExam.getUpdatedTime(), true, chosenAnswers, solvedExam);
             solvedExam.calculateGrades();
             timeline.stop();
             if(timelineInFreeText!=null)
@@ -396,6 +397,7 @@ public class ExamPage extends DoExam {
         });
 
         startTimeMillis = System.currentTimeMillis();
+        startTimeMillisFr=System.currentTimeMillis();
         remainingDelayMillis = (long) exam.getTime() * 60 * 1000; // Initial delay in millis
         timerThread.start();
     }
@@ -404,7 +406,6 @@ public class ExamPage extends DoExam {
         timerThread.interrupt();
 
         // Calculate new remaining delay with an additional 5 seconds
-        //remainingDelayMillis +=  ((((additionalTime) * 60 * 1000)-((minutes+minutesInFreeText)*60*1000)+((seconds+secondsinFreeText)*1000)+mills+millsInFreeText));
         remainingDelayMillis += (long) (((additionalTime) * 60 * 1000)-(System.currentTimeMillis()-startTimeMillis));
         startTimeMillis=System.currentTimeMillis();
         System.out.println(remainingDelayMillis);
@@ -424,10 +425,19 @@ public class ExamPage extends DoExam {
     }
 
     public void setTimer(int minutes, int seconds,long mills) {
+
         this.minutesInFreeText = minutes;
         this.secondsinFreeText = seconds;
         this.millsInFreeText=mills;
-        timerLabel.setText(String.format("%02d:%02d", minutes, seconds));
+        if(mills == 1000) {
+            this.millsInFreeText=0;
+            this.secondsinFreeText++;
+        }
+        if (seconds == 60) {
+            this.secondsinFreeText=0;
+            this.minutesInFreeText++;
+        }
+        timerLabel.setText(String.format("%02d:%02d", this.minutesInFreeText, this.secondsinFreeText));
         timeline.play();
     }
 

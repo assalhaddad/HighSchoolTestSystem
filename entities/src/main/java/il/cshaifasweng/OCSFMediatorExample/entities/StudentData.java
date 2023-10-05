@@ -19,7 +19,7 @@ public class StudentData implements Serializable {
    @JoinColumn(name = "student_id")
    private Student student;
    private String name;
-   private int timePassed;
+   private double timePassed;
    private boolean isFinished;
    private int grade;
    private String date;
@@ -29,7 +29,7 @@ public class StudentData implements Serializable {
    @JoinColumn(name = "solvedExam_id")
    private SolvedExam solvedExam;
 
-   public StudentData(Student student,String date ,int timePassed, boolean isFinished, List<Integer> studentSolution, SolvedExam solvedExam){
+   public StudentData(Student student,String date ,double timePassed, boolean isFinished, List<Integer> studentSolution, SolvedExam solvedExam){
       super();
       setStudent(student);
       this.date=date;
@@ -100,7 +100,7 @@ public class StudentData implements Serializable {
       this.name = name;
    }
 
-   public int getTimePassed() {
+   public double getTimePassed() {
       return this.timePassed;
    }
 
@@ -116,7 +116,7 @@ public class StudentData implements Serializable {
       this.date = date;
    }
 
-   public void setTimePassed(int timePassed) {
+   public void setTimePassed(double timePassed) {
       this.timePassed = timePassed;
    }
 

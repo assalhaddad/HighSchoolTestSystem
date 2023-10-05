@@ -130,6 +130,12 @@ public class AddQuestion {
 
     @FXML
     void done(ActionEvent event) {
+        if(firstTF.getText()==""||secondTF.getText()==""||thirdTF.getText()==""||fourthTF.getText()==""||correctTF.getText()==""||questionTF.getText()==""||(!((courseCMB.getCheckModel().isChecked(0))||((courseCMB.getCheckModel().isChecked(1)))))||(!(subjectCMB.getSelectionModel().isSelected(0))))
+        {
+            illegalQuestion();
+            return;
+        }
+
         if(idTF.getText().length() !=3){
             Platform.runLater(new Runnable() {
                 public void run() {
@@ -147,7 +153,28 @@ public class AddQuestion {
             answer2 = secondTF.getText();
             answer3 = thirdTF.getText();
             answer4 = fourthTF.getText();
-            correct = Integer.parseInt(correctTF.getText());
+            try {
+                if (Integer.parseInt(correctTF.getText()) == 1 || Integer.parseInt(correctTF.getText()) == 2 || Integer.parseInt(correctTF.getText()) == 3 || Integer.parseInt(correctTF.getText()) == 4)
+                    correct = Integer.parseInt(correctTF.getText());
+                else
+                {
+                    illegalCorrectAnswer();
+                    return;
+                }
+            }
+            catch (NumberFormatException e) {
+                illegalCorrectAnswer2();
+                return;
+            }
+            try {
+                id = String.valueOf(Integer.parseInt(idTF.getText()));
+            }
+            catch (NumberFormatException e) {
+                illegalID();
+                return;
+            }
+
+
             setID();
             text = questionTF.getText();
             subject = chosenSubject;
@@ -156,8 +183,64 @@ public class AddQuestion {
         }
     }
 
+    private void illegalID() {
+        idTF.clear();
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error!");
+                alert.setHeaderText("The ID has to be 3 digits, please try again");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
+
+    }
+
+    private void illegalQuestion() {
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error!");
+                alert.setHeaderText("You didn't fill something, please try again");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
+    }
+
+    private void illegalCorrectAnswer2() {
+
+        correctTF.clear();
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error!");
+                alert.setHeaderText("You didn't enter an integer, please try again");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
+
+    }
+
+    private void illegalCorrectAnswer() {
+
+        correctTF.clear();
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error!");
+                alert.setHeaderText("You didn't enter a number from 1-4, please try again");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
+
+    }
+
     void setID(){
-        id = idTF.getText();
+
         if(chosenSubject.getName().equals("Math"))
             id+="01";
         if(chosenSubject.getName().equals("English"))
@@ -279,6 +362,7 @@ public class AddQuestion {
         switchScreen("Login");}
 
     private void getQuestionsId(Object obj) {
+        id = idTF.getText();
         setID();
         System.out.println("here");
         ObservableList<String> questionsIds = FXCollections.observableArrayList((ArrayList) obj);

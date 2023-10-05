@@ -560,11 +560,11 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(1);
 		list.add(3);
-		StudentData s1= new StudentData(studentsList.get(0),"16.07.23 16:02:30",90,false,list, solvedExam);
+		StudentData s1= new StudentData(studentsList.get(0),"16.07.23 16:02:30",1.5,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
-		s1= new StudentData(studentsList.get(1),"11.07.23 16:43:20",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(1),"11.07.23 16:43:20",2.35,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -573,7 +573,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(2),"21.06.23 10:07:20",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(2),"21.06.23 10:07:20",2.9,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -582,7 +582,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(3),"30.06.23 13:07:30",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(3),"30.06.23 13:07:30",1.86,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -591,7 +591,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(12),"27.07.23 10:08:40",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(12),"27.07.23 10:08:40",1.37,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -604,7 +604,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(3);
 		list.add(1);
 		list.add(3);
-		s1= new StudentData(studentsList.get(1),"03.08.23 13:06:40",20,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(1),"03.08.23 13:06:40",1.2,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -612,7 +612,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(3);
 		list.add(2);
 		list.add(3);
-		s1= new StudentData(studentsList.get(4),"07.07.23 16:26:43",20,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(4),"07.07.23 16:26:43",1.7,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -620,7 +620,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(1);
 		list.add(3);
-		s1= new StudentData(studentsList.get(6),"08.07.23 16:10:43",20,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(6),"08.07.23 16:10:43",0.35,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -628,7 +628,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(3);
 		list.add(2);
 		list.add(4);
-		s1= new StudentData(studentsList.get(7),"01.07.23 16:20:43",20,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(7),"01.07.23 16:20:43",1.38,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -636,7 +636,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(3);
 		list.add(1);
 		list.add(3);
-		s1= new StudentData(studentsList.get(10),"19.06.23 09:20:43",20,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(10),"19.06.23 09:20:43",1.29,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -649,7 +649,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(3);
 		list.add(1);
 		list.add(3);
-		s1= new StudentData(studentsList.get(3),"17.06.23 09:20:43",20,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(3),"17.06.23 09:20:43",2.5,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -657,7 +657,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(3);
 		list.add(2);
 		list.add(3);
-		s1= new StudentData(studentsList.get(2),"10.06.23 09:20:43",20,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(2),"10.06.23 09:20:43",2.52,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -665,7 +665,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(1);
 		list.add(3);
-		s1= new StudentData(studentsList.get(7),"13.06.23 09:20:43",20,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(7),"13.06.23 09:20:43",2.1,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -673,7 +673,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(3);
 		list.add(2);
 		list.add(4);
-		s1= new StudentData(studentsList.get(8),"11.06.23 09:20:43",20,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(8),"11.06.23 09:20:43",2.542,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -681,7 +681,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(3);
 		list.add(1);
 		list.add(3);
-		s1= new StudentData(studentsList.get(11),"15.06.23 09:20:43",20,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(11),"15.06.23 09:20:43",2.586,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -695,11 +695,11 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(1);
 		list.add(3);
-		s1= new StudentData(studentsList.get(0),"28.06.23 09:20:43",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(0),"28.06.23 09:20:43",0.35,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
-		s1= new StudentData(studentsList.get(3),"24.06.23 09:20:43",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(3),"24.06.23 09:20:43",0.37,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -708,7 +708,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(6),"25.06.23 09:20:43",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(6),"25.06.23 09:20:43",0.39,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -717,7 +717,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(8),"26.06.23 09:20:43",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(8),"26.06.23 09:20:43",0.291,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -726,7 +726,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(12),"27.06.23 09:20:43",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(12),"27.06.23 09:20:43",0.97,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -740,11 +740,11 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(1);
 		list.add(3);
-		s1= new StudentData(studentsList.get(0),"29.06.23 09:20:43",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(0),"29.06.23 09:20:43",1.46,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
-		s1= new StudentData(studentsList.get(10),"30.06.23 09:20:43",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(10),"30.06.23 09:20:43",1.486,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -753,7 +753,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(11),"01.06.23 09:20:43",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(11),"01.06.23 09:20:43",1.92,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -762,7 +762,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(12),"02.06.23 09:20:43",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(12),"02.06.23 09:20:43",1.67,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -771,7 +771,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(15),"03.06.23 09:20:43",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(15),"03.06.23 09:20:43",0.39,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -785,11 +785,11 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(1);
 		list.add(3);
-		s1= new StudentData(studentsList.get(2),"04.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(2),"04.06.23 09:20:43",1,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
-		s1= new StudentData(studentsList.get(5),"05.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(5),"05.06.23 09:20:43",1,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -798,7 +798,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(13),"06.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(13),"06.06.23 09:20:43",1,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -807,7 +807,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(14),"07.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(14),"07.06.23 09:20:43",1,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -816,7 +816,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(15),"08.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(15),"08.06.23 09:20:43",1,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -830,11 +830,11 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(1);
 		list.add(3);
-		s1= new StudentData(studentsList.get(0),"09.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(0),"09.06.23 09:20:43",1,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
-		s1= new StudentData(studentsList.get(1),"10.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(1),"10.06.23 09:20:43",1,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -843,7 +843,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(6),"01.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(6),"01.06.23 09:20:43",1,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -852,7 +852,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(13),"02.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(13),"02.06.23 09:20:43",1,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -861,7 +861,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(15),"03.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(15),"03.06.23 09:20:43",1,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -875,11 +875,11 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(1);
 		list.add(3);
-		s1= new StudentData(studentsList.get(1),"04.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(1),"04.06.23 09:20:43",2,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
-		s1= new StudentData(studentsList.get(5),"05.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(5),"05.06.23 09:20:43",2,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -888,7 +888,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(7),"06.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(7),"06.06.23 09:20:43",2,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -897,7 +897,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(8),"07.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(8),"07.06.23 09:20:43",2,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -906,7 +906,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(9),"08.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(9),"08.06.23 09:20:43",2,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -920,11 +920,11 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(1);
 		list.add(3);
-		s1= new StudentData(studentsList.get(0),"09.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(0),"09.06.23 09:20:43",2,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
-		s1= new StudentData(studentsList.get(5),"10.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(5),"10.06.23 09:20:43",2,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -933,7 +933,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(10),"11.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(10),"11.06.23 09:20:43",2,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -942,7 +942,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(14),"12.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(14),"12.06.23 09:20:43",2,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -951,7 +951,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(9),"13.06.23 09:20:43",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(9),"13.06.23 09:20:43",1.32,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -965,11 +965,11 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(1);
 		list.add(3);
-		s1= new StudentData(studentsList.get(2),"14.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(2),"14.06.23 09:20:43",2.78,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
-		s1= new StudentData(studentsList.get(7),"15.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(7),"15.06.23 09:20:43",2.21,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -978,7 +978,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(10),"16.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(10),"16.06.23 09:20:43",2.3682,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -987,7 +987,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(13),"17.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(13),"17.06.23 09:20:43",2.63,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -996,7 +996,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(9),"18.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(9),"18.06.23 09:20:43",2.212,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -1010,11 +1010,11 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(1);
 		list.add(3);
-		s1= new StudentData(studentsList.get(0),"01.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(0),"01.06.23 09:20:43",2,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
-		s1= new StudentData(studentsList.get(4),"02.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(4),"02.06.23 09:20:43",2,true,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -1023,7 +1023,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(4);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(12),"03.06.23 09:20:43",90,true,list, solvedExam);
+		s1= new StudentData(studentsList.get(12),"03.06.23 09:20:43",1.34,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -1032,7 +1032,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(8),"04.06.23 09:20:43",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(8),"04.06.23 09:20:43",1.254,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();
@@ -1041,7 +1041,7 @@ public class SimpleServer extends AbstractServer {
 		list.add(2);
 		list.add(3);
 		list.add(3);
-		s1= new StudentData(studentsList.get(14),"05.06.23 09:20:43",90,false,list, solvedExam);
+		s1= new StudentData(studentsList.get(14),"05.06.23 09:20:43",1.43,false,list, solvedExam);
 		studentDataList.add(s1);
 		session.save(s1);
 		session.flush();

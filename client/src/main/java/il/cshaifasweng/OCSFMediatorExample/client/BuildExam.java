@@ -72,53 +72,96 @@ public class BuildExam {
 
     @FXML
     void done(ActionEvent event) {
-        if(totalPoints!=0)
-            pointsError();
-        else if(idTF.getText().isEmpty()||timeTF.getText().isEmpty()||digitcode.getText().isEmpty())
-            missingInfo();
-        else if(idTF.getText().length() != 2){
-            Platform.runLater(new Runnable() {
-                public void run() {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("the exam's id's length is 2" + "\n" + "Please enter a new id");
-                    alert.setContentText(null);
-                    alert.showAndWait();
-                }
-            });
-            idTF.clear();
+        try {
+            if (totalPoints != 0) {
+                pointsError();
+                return;
+            }
+            else if (idTF.getText().isEmpty() || timeTF.getText().isEmpty() || digitcode.getText().isEmpty()) {
+                missingInfo();
+                return;
+            }
+            else if (idTF.getText().length() != 2) {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("the exam's id's length is 2" + "\n" + "Please enter a new id");
+                        alert.setContentText(null);
+                        alert.showAndWait();
+                    }
+                });
+                idTF.clear();
+                return;
+            }
+            else if (Integer.parseInt(timeTF.getText()) > 180) {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Exam can be only 3 hours long" + "\n" + "Please enter a new time");
+                        alert.setContentText(null);
+                        alert.showAndWait();
+                    }
+                });
+                timeTF.clear();
+                return;
+            }
         }
-        else if(Integer.parseInt(timeTF.getText()) > 180){
-            Platform.runLater(new Runnable() {
-                public void run() {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("Exam can be only 3 hours long" + "\n" + "Please enter a new time");
-                    alert.setContentText(null);
-                    alert.showAndWait();
-                }
-            });
-            timeTF.clear();
+        catch (NumberFormatException e) {
+            illegalTime();
+            return;
         }
-        else if(digitcode.getText().length() != 4){
-            Platform.runLater(new Runnable() {
-                public void run() {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("The code can only be 4 digits" + "\n" + "Please enter a new code");
-                    alert.setContentText(null);
-                    alert.showAndWait();
-                }
-            });
-            digitcode.clear();
+        try {
+            if (digitcode.getText().length() != 4) {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("The code can only be 4 digits" + "\n" + "Please enter a new code");
+                        alert.setContentText(null);
+                        alert.showAndWait();
+                    }
+                });
+                digitcode.clear();
+
+            } else {
+                String temp = String.valueOf(Integer.parseInt(idTF.getText()));
+                temp = setId_exam(temp);
+                System.out.println(temp);
+                sendMessage("check exam id", temp);
+            }
         }
-        else
-        {
-            String temp=idTF.getText();
-            temp = setId_exam(temp);
-            System.out.println(temp);
-            sendMessage("check exam id",temp);
+        catch (NumberFormatException e) {
+            illegalID();
         }
+
+    }
+
+    private void illegalID() {
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText("the ID can only be an Integer number" + "\n" + "Please enter a new time");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
+        idTF.clear();
+    }
+
+    private void illegalTime() {
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText("Time can only be an Integer number" + "\n" + "Please enter a new time");
+                alert.setContentText(null);
+                alert.showAndWait();
+            }
+        });
+        timeTF.clear();
     }
 
     @FXML

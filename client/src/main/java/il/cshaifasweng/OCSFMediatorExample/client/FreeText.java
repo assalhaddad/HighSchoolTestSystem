@@ -95,7 +95,15 @@ public class FreeText extends ExamPage {
         this.minutes = minutes;
         this.seconds = seconds;
         this.mills=mills;
-        timerLabel.setText(String.format("%02d:%02d", minutes, seconds));
+        if(mills == 1000) {
+            this.mills=0;
+            this.seconds++;
+        }
+        if (seconds == 60) {
+            this.seconds=0;
+            this.minutes++;
+        }
+        timerLabel.setText(String.format("%02d:%02d", this.minutes, this.seconds));
 
         if(!firstTime)
             timelineInFreeText.play();
