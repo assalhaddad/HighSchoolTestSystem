@@ -175,8 +175,11 @@ public class CheckGradesTeacher {
             gradeCol.setCellValueFactory(new PropertyValueFactory<StudentData, Integer>("grade"));
             tableView.setItems(data);
             if(!chosenExam.getFreeTextTeacher().equals("")) {
-                freeText.setText(chosenExam.getFreeTextTeacher());
-                freeText.setVisible(true);
+                Platform.runLater(() -> {
+                    freeText.setText(chosenExam.getFreeTextTeacher());
+                    freeText.setVisible(true);
+                });
+
             }
         }
         else

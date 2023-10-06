@@ -73,12 +73,11 @@ public class FreeText extends ExamPage {
         }
         firstTime=false;
 
-        if(sum==1)
-            examTime.setText(examTime.getText()+sum+" minute long .");
+        if(exam.getTime()+extraInFreeText==1)
+            examTime.setText("The exam is "+(exam.getTime()+extraInFreeText)+" minute long.");
         else
-            examTime.setText(examTime.getText()+sum+" minutes long .");
+            examTime.setText("The exam is "+(exam.getTime()+extraInFreeText)+" minutes long.");
 
-        sendMessage("get updated time",exam);
 
     }
 
@@ -91,10 +90,11 @@ public class FreeText extends ExamPage {
         }
     }
 
-    public void setTimer(int minutes, int seconds,long mills) {
+    public void setTimer(int minutes, int seconds,long mills,int extra) {
         this.minutes = minutes;
         this.seconds = seconds;
         this.mills=mills;
+        this.extra=extra;
         if(mills == 1000) {
             this.mills=0;
             this.seconds++;
@@ -109,6 +109,7 @@ public class FreeText extends ExamPage {
             timelineInFreeText.play();
     }
 
+
     @FXML
     void done(ActionEvent event) throws Exception
     {
@@ -118,18 +119,10 @@ public class FreeText extends ExamPage {
         timelineInFreeText.pause();
 
         // Pass the current timer values to the first page
-        examPage.setTimer(minutesInFreeText, secondsinFreeText,millsInFreeText);
+        examPage.setTimer(minutesInFreeText, secondsinFreeText,millsInFreeText,extraInFreeText);
 
         Stage stage = (Stage) timerLabel.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
-    @Subscribe
-    public void handleMessage(Message message) {
-        String request = message.getMessage();
-        if (request.equals("updated time")) {
-            sum=(int)message.getObject();
 
-
-        }
-    }
 }

@@ -43,7 +43,7 @@
             </font>
 
         </Button>
-        <Label fx:id="questionText" alignment="CENTER" layoutX="83.0" layoutY="75.0" prefHeight="58.0" prefWidth="584.0" style="-fx-background-color: #E0E0E0;">
+        <Label fx:id="questionText" alignment="CENTER" layoutX="83.0" layoutY="95.0" prefHeight="38.0" prefWidth="584.0" style="-fx-background-color: #E0E0E0;">
             <font>
                 <Font name="System Bold Italic" size="20.0" />
             </font></Label>
@@ -57,10 +57,15 @@
                 <Font name="System Bold Italic" size="36.0" />
             </font>
         </Label>
-        <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="BOTTOM" layoutX="316.0" layoutY="29.0" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #E0E0E0;" text="00:00">
+        <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="BOTTOM" layoutX="316.0" layoutY="62.0" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #E0E0E0;" text="00:00">
             <font>
                 <Font name="Arial Black" size="12.0" />
             </font>
         </Label>
+      <Label fx:id="timeLabel" alignment="CENTER" contentDisplay="BOTTOM" layoutX="257.0" layoutY="29.0" prefHeight="25.0" prefWidth="236.0" style="-fx-background-color: #E0E0E0;" text="The exam is ">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

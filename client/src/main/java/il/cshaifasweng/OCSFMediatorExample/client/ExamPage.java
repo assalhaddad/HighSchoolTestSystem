@@ -57,6 +57,8 @@ public class ExamPage extends DoExam {
     private static int g=0;
     @FXML
     private Label timerLabel;
+    @FXML
+    private Label timeLabel;
 
     public static int i = 0;
     static int additionalTime = 0;
@@ -78,7 +80,10 @@ public class ExamPage extends DoExam {
     protected static long millsInFreeText=0;
     protected static int secondsinFreeText=0;
     protected static int minutesInFreeText=0;
-    protected int sum=exam.getTime();
+    protected static int extra=0;
+    protected static int extraInFreeText=0;
+
+
 
 
 
@@ -93,10 +98,13 @@ public class ExamPage extends DoExam {
             millsInFreeText=0;
             secondsinFreeText=0;
             minutesInFreeText=0;
-
+            extra=0;
+            extraInFreeText=0;
+            solvedExam.setUpdatedTime(exam.getTime());
             chosenAnswers = new ArrayList<Integer>(Collections.nCopies(DoExam.exam.getQuestions().size(), 0));
             scheduleTask();
             EventBus.getDefault().register(this);
+
         }
         DoExam.isOn = true;
 
@@ -187,6 +195,10 @@ public class ExamPage extends DoExam {
 
         checkIfDone();
 
+        if(extra+exam.getTime()==1)
+            timeLabel.setText("The exam is 1 minute long.");
+        else
+            timeLabel.setText("The exam is "+(extra+exam.getTime())+" minutes long.");
 
     }
 
@@ -199,7 +211,8 @@ public class ExamPage extends DoExam {
         timeline.pause();
 
         // Pass the current timer values to the second page
-        freeText.setTimer(minutes, seconds,mills);
+        freeText.setTimer(minutes, seconds,mills,extra);
+
 
         Stage stage = (Stage) timerLabel.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -302,6 +315,8 @@ public class ExamPage extends DoExam {
             Object[] objectArray = (Object[])message.getObject();
             String[] myArray = (String[])objectArray;
             if(exam.getId_exam().equals(myArray[1])){
+                extra+=Integer.parseInt(myArray[0]);
+                extraInFreeText+=Integer.parseInt(myArray[0]);
                 additionalTime = Integer.parseInt(myArray[0]);
                 extendDelay();
             }
@@ -374,7 +389,7 @@ public class ExamPage extends DoExam {
 
     private static void scheduleTask() {
         task = () -> {
-            StudentData studentD = new StudentData(student, LocalDateTime.now().toString(), solvedExam.getUpdatedTime(), true, chosenAnswers, solvedExam);
+            StudentData studentD = new StudentData(student, LocalDateTime.now().toString(), exam.getTime()+extra, true, chosenAnswers, solvedExam);
             solvedExam.calculateGrades();
             timeline.stop();
             if(timelineInFreeText!=null)
@@ -422,13 +437,16 @@ public class ExamPage extends DoExam {
         addedTime();
 
         System.out.println("Delay extended.");
+
     }
 
-    public void setTimer(int minutes, int seconds,long mills) {
+    public void setTimer(int minutes, int seconds,long mills,int extra) {
 
         this.minutesInFreeText = minutes;
         this.secondsinFreeText = seconds;
         this.millsInFreeText=mills;
+        this.extraInFreeText=extra;
+
         if(mills == 1000) {
             this.millsInFreeText=0;
             this.secondsinFreeText++;
@@ -440,5 +458,7 @@ public class ExamPage extends DoExam {
         timerLabel.setText(String.format("%02d:%02d", this.minutesInFreeText, this.secondsinFreeText));
         timeline.play();
     }
+
+
 
 }

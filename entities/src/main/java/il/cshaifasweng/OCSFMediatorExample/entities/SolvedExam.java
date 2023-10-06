@@ -16,7 +16,7 @@ public class SolvedExam implements Serializable {
     @OneToMany (mappedBy = "solvedExam",cascade = CascadeType.ALL)
     private List<StudentData> data;
 
-    private int updatedTime;
+    private  int updatedTime;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="exam_id")
