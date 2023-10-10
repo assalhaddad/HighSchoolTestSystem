@@ -80,6 +80,16 @@ public class AddQuestion {
     @FXML
     void initialize() {
         EventBus.getDefault().register(this);
+
+        idTF.setEditable(false);
+        questionTF.setEditable(false);
+        firstTF.setEditable(false);
+        secondTF.setEditable(false);
+        thirdTF.setEditable(false);
+        fourthTF.setEditable(false);
+        correctTF.setEditable(false);
+        updateBTN.setDisable(true);
+
         sendMessage("get list of subjects for add question", Login.teacher);
         courseCMB.setDisable(true);
         idTF.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -109,17 +119,29 @@ public class AddQuestion {
     String answer4;
     Subject chosenSubject = new Subject();
     ArrayList<Course> chosenCourses = new ArrayList();
+    String subject1=null;
     @FXML
     void selectSubject(ActionEvent event) {
         //String subject = this.subjectCMB.getValue().toString();
-        String subject = this.subjectCMB.getSelectionModel().getSelectedItem();
+         subject1= this.subjectCMB.getSelectionModel().getSelectedItem();
         courseCMB.getItems().clear();
-        sendMessage("get subject for add question", subject);
+        updateBTN.setDisable(false);
+        sendMessage("get subject for add question", subject1);
     }
 
     @FXML
     void selectCourse(ActionEvent event) {
         chosenCourses.clear();
+
+        idTF.setEditable(true);
+        questionTF.setEditable(true);
+        firstTF.setEditable(true);
+        secondTF.setEditable(true);
+        thirdTF.setEditable(true);
+        fourthTF.setEditable(true);
+        correctTF.setEditable(true);
+        courseCMB.setDisable(true);
+
         ObservableList<String> list = courseCMB.getCheckModel().getCheckedItems();
         int i = 0;
         for(Object obj : list){
@@ -167,7 +189,14 @@ public class AddQuestion {
                 return;
             }
             try {
-                id = String.valueOf(Integer.parseInt(idTF.getText()));
+
+                String temp1 = String.valueOf(Integer.parseInt(idTF.getText()));
+                if(Integer.parseInt(temp1)<0)
+                {
+                    illegalID();
+                    return;
+                }
+                id = idTF.getText();
             }
             catch (NumberFormatException e) {
                 illegalID();
@@ -318,6 +347,16 @@ public class AddQuestion {
         thirdTF.clear();
         fourthTF.clear();
         correctTF.clear();
+
+        idTF.setEditable(false);
+        questionTF.setEditable(false);
+        firstTF.setEditable(false);
+        secondTF.setEditable(false);
+        thirdTF.setEditable(false);
+        fourthTF.setEditable(false);
+        correctTF.setEditable(false);
+        updateBTN.setDisable(true);
+        subject1=null;
     }
 
     @FXML
@@ -362,6 +401,8 @@ public class AddQuestion {
         switchScreen("Login");}
 
     private void getQuestionsId(Object obj) {
+        if(subject1==null)
+            return;
         id = idTF.getText();
         setID();
         System.out.println("here");

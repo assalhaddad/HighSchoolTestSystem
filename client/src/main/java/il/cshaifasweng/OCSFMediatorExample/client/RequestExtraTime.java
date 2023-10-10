@@ -117,6 +117,18 @@ public class RequestExtraTime {
                 });
 
             }
+            else if (Integer.parseInt(extraTimeTF.getText()) <= 0) {
+                extraTimeTF.clear();
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("extra minutes can't be 0 minutes or a negative number" + "\n" + "Please enter a new time");
+                        alert.setContentText(null);
+                        alert.showAndWait();
+                    }
+                });
+            }
             else {
                 extraMinutes = Integer.parseInt(extraTimeTF.getText());
                 explain = explainTF.getText();

@@ -107,6 +107,19 @@ public class BuildExam {
                 timeTF.clear();
                 return;
             }
+            else if (Integer.parseInt(timeTF.getText()) <= 0) {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Exam's time should be a positive number" + "\n" + "Please enter a new time");
+                        alert.setContentText(null);
+                        alert.showAndWait();
+                    }
+                });
+                timeTF.clear();
+                return;
+            }
         }
         catch (NumberFormatException e) {
             illegalTime();
@@ -126,10 +139,28 @@ public class BuildExam {
                 digitcode.clear();
 
             } else {
+                String send="";
+                if(idTF.getText().equals("00")||idTF.getText().equals("01")||idTF.getText().equals("02")||idTF.getText().equals("03")||idTF.getText().equals("04")||idTF.getText().equals("05")||idTF.getText().equals("06")||idTF.getText().equals("07")||idTF.getText().equals("08")||idTF.getText().equals("09"))
+                    send="0";
                 String temp = String.valueOf(Integer.parseInt(idTF.getText()));
-                temp = setId_exam(temp);
-                System.out.println(temp);
-                sendMessage("check exam id", temp);
+                send+=temp;
+
+                send = setId_exam(send);
+                if (Integer.parseInt(send) < 0) {
+                    Platform.runLater(new Runnable() {
+                        public void run() {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Error");
+                            alert.setHeaderText("The exam ID should be 2 POSITIVE digits" + "\n" + "Please enter a new time");
+                            alert.setContentText(null);
+                            alert.showAndWait();
+                        }
+                    });
+                    idTF.clear();
+                    return;
+                }
+                System.out.println(send);
+                sendMessage("check exam id", send);
             }
         }
         catch (NumberFormatException e) {
@@ -431,6 +462,7 @@ public class BuildExam {
                 alert.showAndWait();
             }
         });
+        idTF.clear();
     }
     private void duplicate4DigitsError(){
         Platform.runLater(new Runnable() {
